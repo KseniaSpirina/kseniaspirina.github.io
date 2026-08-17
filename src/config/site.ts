@@ -2,8 +2,8 @@
 // Update these values with your own details.
 
 export const siteConfig = {
-  name: 'Your Name',
-  title: 'Your Name — Portfolio',
+  name: 'Ksenia Spirina',
+  title: 'Ksenia Spirina — Portfolio',
   description: 'Design portfolio showcasing selected works.',
   url: 'https://example.com',
   

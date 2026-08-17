@@ -1,13 +1,16 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import ProjectHeader from '@components/project/ProjectHeader.astro';
+import ProjectNav from '@components/project/ProjectNav.astro';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   project: CollectionEntry<'projects'>;
+  prev?: CollectionEntry<'projects'>;
+  next?: CollectionEntry<'projects'>;
 }
 
-const { project } = Astro.props;
+const { project, prev, next } = Astro.props;
 const { title, description, cover, role, date, tools, tags } = project.data;
 ---
 
@@ -16,6 +19,7 @@ const { title, description, cover, role, date, tools, tags } = project.data;
     <ProjectHeader {title} {description} {cover} {role} {date} {tools} {tags} />
     <div class="container project-content">
       <slot />
+      <ProjectNav {prev} {next} />
     </div>
   </article>
 </BaseLayout>
