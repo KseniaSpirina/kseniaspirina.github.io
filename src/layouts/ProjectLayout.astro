@@ -1,0 +1,44 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ProjectHeader from '@components/project/ProjectHeader.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, description, cover, role, date, tools, tags } = project.data;
+---
+
+<BaseLayout title={`${title} — Portfolio`} description={description}>
+  <article>
+    <ProjectHeader {title} {description} {cover} {role} {date} {tools} {tags} />
+    <div class="container project-content">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .project-content {
+    padding: var(--space-xl) 0 var(--space-2xl);
+    max-width: 48rem;
+  }
+
+  .project-content :global(p) {
+    margin-bottom: var(--space-md);
+    line-height: 1.75;
+  }
+
+  .project-content :global(img) {
+    width: 100%;
+    border-radius: var(--border-radius);
+    margin: var(--space-lg) 0;
+  }
+
+  .project-content :global(h2) {
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-md);
+  }
+</style>

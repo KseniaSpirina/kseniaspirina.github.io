@@ -1,0 +1,81 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ProjectCard from '@components/project/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '@config/site';
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order || b.data.date.valueOf() - a.data.date.valueOf());
+
+const featured = projects.filter(p => p.data.featured);
+const other = projects.filter(p => !p.data.featured);
+---
+
+<BaseLayout title={`Work — ${siteConfig.name}`} description="Selected projects and case studies.">
+  <section class="work">
+    <div class="container">
+      <h1>Work</h1>
+      <p class="work-intro">Selected projects and case studies.</p>
+
+      {featured.length > 0 && (
+        <div class="work-section">
+          <h2 class="section-label">Featured</h2>
+          <div class="project-grid featured-grid">
+            {featured.map(project => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {other.length > 0 && (
+        <div class="work-section">
+          <h2 class="section-label">More Work</h2>
+          <div class="project-grid">
+            {other.map(project => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .work {
+    padding: var(--space-2xl) 0;
+  }
+
+  .work h1 {
+    margin-bottom: var(--space-sm);
+  }
+
+  .work-intro {
+    color: var(--color-text-secondary);
+    font-size: 1.125rem;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .work-section {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .section-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr));
+    gap: var(--space-lg);
+  }
+
+  .featured-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 500px), 1fr));
+  }
+</style>

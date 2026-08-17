@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, description, tags, cover } = project.data;
+const href = project.data.externalUrl || `/projects/${project.id}`;
+---
+
+<a href={href} class="project-card" target={project.data.externalUrl ? "_blank" : undefined}>
+  <div class="card-image">
+    <Image src={cover} alt={title} widths={[400, 800]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
+  </div>
+  <div class="card-content">
+    <h3 class="card-title">{title}</h3>
+    <p class="card-desc">{description}</p>
+    <div class="card-tags">
+      {tags.map(tag => <span class="tag">{tag}</span>)}
+    </div>
+  </div>
+</a>
+
+<style>
+  .project-card {
+    display: block;
+    text-decoration: none;
+    color: var(--color-text);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .card-image {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+  }
+
+  .project-card:hover .card-image img {
+    transform: scale(1.03);
+  }
+
+  .card-content {
+    padding: var(--space-lg);
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .card-desc {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-md);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    padding: 0.2em 0.6em;
+    border-radius: 999px;
+    background: var(--color-bg);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+  }
+</style>

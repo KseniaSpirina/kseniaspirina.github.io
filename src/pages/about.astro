@@ -1,0 +1,151 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { siteConfig } from '@config/site';
+---
+
+<BaseLayout title={`About — ${siteConfig.name}`} description={`About ${siteConfig.name}`}>
+  <section class="about">
+    <div class="container">
+
+      <div class="about-hero">
+        <div class="about-text">
+          <h1>About</h1>
+          <p class="about-intro">
+            <!-- Replace with your intro — 1-2 sentences about who you are -->
+            Designer based in [city], focused on [your focus area].
+          </p>
+        </div>
+        <div class="about-portrait">
+          <!-- Replace with your photo:
+          <Image src={import('@assets/portrait.jpg')} alt="Portrait of [name]" /> -->
+          <div class="portrait-placeholder"></div>
+        </div>
+      </div>
+
+      <div class="about-body">
+        <div class="about-section">
+          <h2>Background</h2>
+          <p>
+            <!-- Your story: education, experience, what brought you here -->
+            Write about your background, studies, and creative journey.
+          </p>
+        </div>
+
+        <div class="about-section">
+          <h2>What I Do</h2>
+          <p>
+            <!-- Your skills and what you offer -->
+            Describe the type of work you do and what excites you about it.
+          </p>
+        </div>
+
+        <div class="about-section">
+          <h2>Get in Touch</h2>
+          <p>
+            <!-- Contact info / CTA -->
+            Interested in working together? Reach out at
+            <a href="mailto:hello@example.com">hello@example.com</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="about-skills">
+        <h2>Skills & Tools</h2>
+        <ul class="skills-list">
+          <li>Figma</li>
+          <li>Illustrator</li>
+          <li>Photoshop</li>
+          <li>After Effects</li>
+          <!-- Add or remove as needed -->
+        </ul>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about {
+    padding: var(--space-2xl) 0;
+  }
+
+  .about-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  @media (max-width: 768px) {
+    .about-hero {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .about-hero h1 {
+    margin-bottom: var(--space-md);
+  }
+
+  .about-intro {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+
+  .portrait-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--color-border);
+    border-radius: var(--border-radius);
+  }
+
+  .about-portrait img {
+    width: 100%;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+  }
+
+  .about-body {
+    display: grid;
+    gap: var(--space-xl);
+    max-width: 60ch;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .about-section h2 {
+    margin-bottom: var(--space-sm);
+  }
+
+  .about-section p {
+    color: var(--color-text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .about-skills {
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .about-skills h2 {
+    margin-bottom: var(--space-md);
+  }
+
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    list-style: none;
+    padding: 0;
+  }
+
+  .skills-list li {
+    padding: 0.4em 1em;
+    border-radius: 999px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+</style>
