@@ -6,7 +6,7 @@ import SectionHeading from './SectionHeading.astro';
 // percentage of its own canvas (content width 1200px, canvas height as noted).
 const IDLE_CANVAS_H = 1346;
 const idle = [
-  { name: 'Engineer', src: '/sanctuary/characters/engineer-idle.webm', x: 502, y: 0, w: 197.8, h: 464 },
+  { name: 'Engineer', src: '/sanctuary/characters/engineer-idle.webm', x: 502, y: 0, w: 197.8, h: 464, mirror: true },
   { name: 'Elder', src: '/sanctuary/characters/elder-idle.webm', x: 121, y: 39, w: 269, h: 400 },
   { name: 'Miren', src: '/sanctuary/characters/miren-idle.webm', x: 763, y: 109, w: 171, h: 330 },
   { name: 'Builder', src: '/sanctuary/characters/builder-idle.webm', x: 997, y: 90, w: 314, h: 349 },
@@ -22,7 +22,7 @@ const walking = [
   { name: 'Miren', src: '/sanctuary/characters/miren-walking.webm', x: 984, y: 85, w: 243, h: 379 },
   { name: 'Guard', src: '/sanctuary/characters/guard-1-walking.webm', x: 112, y: 588, w: 711, h: 421 },
   { name: 'Elder', src: '/sanctuary/characters/elder-walking.webm', x: 130, y: 0, w: 337, h: 464 },
-  { name: 'Engineer', src: '/sanctuary/characters/engineer-walking.webm', x: 602, y: 28, w: 236, h: 480 },
+  { name: 'Engineer', src: '/sanctuary/characters/engineer-walking.webm', x: 602, y: 28, w: 236, h: 480, mirror: true },
   { name: 'MC', src: '/sanctuary/characters/mc-walking.webm', x: 188, y: 1134, w: 310, h: 415 },
   { name: 'Medium Vivaki', src: '/sanctuary/characters/medium-vivaki-walking.webm', x: 1070, y: 1295, w: 193, h: 171 },
   { name: 'Builder', src: '/sanctuary/characters/builder-walking.webm', x: 645, y: 1161, w: 339, h: 362 },
@@ -53,7 +53,7 @@ function pos(item: { x: number; y: number; w: number; h: number }, canvasH: numb
             loop
             muted
             playsinline
-            class:list={[{ rotated: item.rotate }]}
+            class:list={[{ mirrored: item.mirror }]}
           ></video>
           <p class="name">{item.name}</p>
         </div>
@@ -72,7 +72,7 @@ function pos(item: { x: number; y: number; w: number; h: number }, canvasH: numb
             loop
             muted
             playsinline
-            class:list={[{ rotated: item.rotate }]}
+            class:list={[{ mirrored: item.mirror }]}
           ></video>
           <p class="name">{item.name}</p>
         </div>
@@ -118,8 +118,8 @@ function pos(item: { x: number; y: number; w: number; h: number }, canvasH: numb
     object-fit: contain;
   }
 
-  .item video.rotated {
-    transform: scaleY(-1);
+  .item video.mirrored {
+    transform: scaleX(-1);
   }
 
   .item .name {
