@@ -1,99 +1,134 @@
 ---
 import SectionHeading from './SectionHeading.astro';
 
-const walking = [
-  { name: 'Miren', src: '/sanctuary/characters/miren-walking.webm' },
-  { name: 'Medium Vivaki', src: '/sanctuary/characters/medium-vivaki-walking.webm' },
-  { name: 'MC', src: '/sanctuary/characters/mc-walking.webm' },
-  { name: 'Guard', src: '/sanctuary/characters/guard-1-walking.webm' },
-  { name: 'Engineer', src: '/sanctuary/characters/engineer-walking.webm' },
-  { name: 'Elder', src: '/sanctuary/characters/elder-walking.webm' },
-  { name: 'Builder', src: '/sanctuary/characters/builder-walking.webm' },
+// Exact positions/sizes verified in Figma (Page 4). Each gif was placed
+// individually — not on a grid — so every item is positioned as a
+// percentage of its own canvas (content width 1200px, canvas height as noted).
+const IDLE_CANVAS_H = 1346;
+const idle = [
+  { name: 'Engineer', src: '/sanctuary/characters/engineer-idle.webm', x: 502, y: 0, w: 197.8, h: 464, rotate: true },
+  { name: 'Elder', src: '/sanctuary/characters/elder-idle.webm', x: 121, y: 39, w: 269, h: 400 },
+  { name: 'Miren', src: '/sanctuary/characters/miren-idle.webm', x: 763, y: 109, w: 171, h: 330 },
+  { name: 'Builder', src: '/sanctuary/characters/builder-idle.webm', x: 997, y: 90, w: 314, h: 349 },
+  { name: 'Guard', src: '/sanctuary/characters/guard-1-idle.webm', x: 147, y: 464, w: 263, h: 612 },
+  { name: 'MC', src: '/sanctuary/characters/mc-idle.webm', x: 502, y: 665, w: 315, h: 421 },
+  { name: 'Medium Vivaki', src: '/sanctuary/characters/medium-vivaki-idle.webm', x: 467, y: 1165, w: 190, h: 181 },
+  { name: 'Small Vivaki', src: '/sanctuary/characters/small-vivaki.webm', x: 322, y: 1225, w: 73, h: 74 },
+  { name: 'Ill Vivaki', src: '/sanctuary/characters/ill-vivaki.webm', x: 163, y: 1224, w: 78, h: 75 },
 ];
 
-const idle = [
-  { name: 'Ill Vivaki', src: '/sanctuary/characters/ill-vivaki.webm' },
-  { name: 'MC', src: '/sanctuary/characters/mc-idle.webm' },
-  { name: 'Medium Vivaki', src: '/sanctuary/characters/medium-vivaki-idle.webm' },
-  { name: 'Small Vivaki', src: '/sanctuary/characters/small-vivaki.webm' },
-  { name: 'Guard', src: '/sanctuary/characters/guard-1-idle.webm' },
-  { name: 'Builder', src: '/sanctuary/characters/builder-idle.webm' },
-  { name: 'Miren', src: '/sanctuary/characters/miren-idle.webm' },
-  { name: 'Engineer', src: '/sanctuary/characters/engineer-idle.webm' },
-  { name: 'Elder', src: '/sanctuary/characters/elder-idle.webm' },
+const WALKING_CANVAS_H = 1549;
+const walking = [
+  { name: 'Miren', src: '/sanctuary/characters/miren-walking.webm', x: 984, y: 85, w: 243, h: 379 },
+  { name: 'Guard', src: '/sanctuary/characters/guard-1-walking.webm', x: 112, y: 588, w: 711, h: 421 },
+  { name: 'Elder', src: '/sanctuary/characters/elder-walking.webm', x: 130, y: 0, w: 337, h: 464 },
+  { name: 'Engineer', src: '/sanctuary/characters/engineer-walking.webm', x: 602, y: 28, w: 236, h: 480, rotate: true },
+  { name: 'MC', src: '/sanctuary/characters/mc-walking.webm', x: 188, y: 1134, w: 310, h: 415 },
+  { name: 'Medium Vivaki', src: '/sanctuary/characters/medium-vivaki-walking.webm', x: 1070, y: 1295, w: 193, h: 171 },
+  { name: 'Builder', src: '/sanctuary/characters/builder-walking.webm', x: 645, y: 1161, w: 339, h: 362 },
 ];
+
+const CONTENT_W = 1200;
+
+function pos(item: { x: number; y: number; w: number; h: number }, canvasH: number) {
+  const left = ((item.x - 120) / CONTENT_W) * 100;
+  const top = (item.y / canvasH) * 100;
+  const width = (item.w / CONTENT_W) * 100;
+  const height = (item.h / canvasH) * 100;
+  return `left:${left}%; top:${top}%; width:${width}%; height:${height}%;`;
+}
 ---
 
 <section class="animation grid-1440" id="animation">
   <SectionHeading title="Animation" />
 
-  <h3>Walking</h3>
-  <div class="video-grid">
-    {walking.map(v => (
-      <div class="video-card">
-        <video src={v.src} autoplay loop muted playsinline></video>
-        <p>{v.name}</p>
-      </div>
-    ))}
+  <div class="full">
+    <p class="caption">Idle</p>
+    <div class="canvas" style={`aspect-ratio: ${CONTENT_W} / ${IDLE_CANVAS_H};`}>
+      {idle.map(item => (
+        <div class="item" style={pos(item, IDLE_CANVAS_H)}>
+          <video
+            src={item.src}
+            autoplay
+            loop
+            muted
+            playsinline
+            class:list={[{ rotated: item.rotate }]}
+          ></video>
+          <p class="name">{item.name}</p>
+        </div>
+      ))}
+    </div>
   </div>
 
-  <h3 class="second">Idle</h3>
-  <div class="video-grid">
-    {idle.map(v => (
-      <div class="video-card">
-        <video src={v.src} autoplay loop muted playsinline></video>
-        <p>{v.name}</p>
-      </div>
-    ))}
+  <div class="full">
+    <p class="caption">Walking</p>
+    <div class="canvas" style={`aspect-ratio: ${CONTENT_W} / ${WALKING_CANVAS_H};`}>
+      {walking.map(item => (
+        <div class="item" style={pos(item, WALKING_CANVAS_H)}>
+          <video
+            src={item.src}
+            autoplay
+            loop
+            muted
+            playsinline
+            class:list={[{ rotated: item.rotate }]}
+          ></video>
+          <p class="name">{item.name}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
   .animation {
     padding: 4rem 0;
+    row-gap: 3rem;
   }
 
-  .animation > :global(*) {
+  .full {
     grid-column: 1 / -1;
   }
 
-  h3 {
+  .caption {
     font-family: var(--font-body);
     font-weight: 700;
-    color: #e8e8e8;
     font-size: 1.125rem;
     text-transform: uppercase;
+    color: #e8e8e8;
     margin: 0 0 1.5rem;
   }
 
-  h3.second {
-    margin-top: 3rem;
-  }
-
-  .video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .video-card {
-    text-align: center;
-  }
-
-  .video-card video {
+  .canvas {
+    position: relative;
     width: 100%;
-    aspect-ratio: 1;
-    object-fit: contain;
-    background: #121212;
-    border-radius: 4px;
   }
 
-  .video-card p {
-    margin: 0.5rem 0 0;
+  .item {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .item video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .item video.rotated {
+    transform: rotate(180deg);
+  }
+
+  .item .name {
+    margin: 0.4rem 0 0;
     font-family: var(--font-body);
-    font-weight: 700;
+    font-weight: 400;
     font-size: 1.125rem;
-    text-transform: uppercase;
-    color: #e8e8e8;
+    color: #c9c9c9;
+    text-align: center;
+    white-space: nowrap;
   }
 </style>
