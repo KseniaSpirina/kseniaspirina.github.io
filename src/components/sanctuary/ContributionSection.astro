@@ -22,20 +22,23 @@ const row2 = [g5, g6, g9];
 
     <div class="span-4">
       <p class="caption">My Role</p>
-      <p class="running">
-        World and visual language design. Character art, environment art, UI, full-screen
-        illustrations. Animation. Contributed to worldbuilding, quest writing, and UX. Assembled and
-        staged assets in-scene, handed off to programmers for integration and scripting.
-      </p>
+      <ul class="running list">
+        <li>World and visual language design</li>
+        <li>Character art, environment art, UI, full-screen illustrations</li>
+        <li>Animation</li>
+        <li>Contributed to worldbuilding, quest writing, and UX</li>
+        <li>Assembled and staged assets in-scene, handed off to programmers for integration and scripting</li>
+      </ul>
     </div>
     <div class="span-4">
       <p class="caption">Challenge</p>
-      <p class="running">
-        Sole designer and artist on a 3-person team. Create a visual language for the project.
-        Establish a full world identity: environment, characters, UI, animation, and illustration.
-        Required a visual system that could clearly distinguish two groups within one cohesive world.
-        Large creative scope to cover within a tight 3-month production timeline.
-      </p>
+      <ul class="running list">
+        <li>Sole designer and artist on a 3-person team</li>
+        <li>Create a visual language for the project</li>
+        <li>Establish a full world identity: environment, characters, UI, animation, and illustration</li>
+        <li>Required a visual system that could clearly distinguish two groups within one cohesive world</li>
+        <li>Large creative scope to cover within a tight 3-month production timeline</li>
+      </ul>
     </div>
 
     <div class="full gallery-row">
@@ -116,6 +119,14 @@ const row2 = [g5, g6, g9];
     font-size: 1.125rem;
     color: #c9c9c9;
     line-height: 1.7;
+  }
+
+  .running.list {
+    list-style: disc;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .gallery-row :global(img) {
