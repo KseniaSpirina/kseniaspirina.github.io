@@ -8,110 +8,177 @@ import archiveColor from '@assets/sanctuary/environment/archive-color-1.png';
 import galleryOfGoblets from '@assets/sanctuary/environment/gallery-2.png';
 import laboratory from '@assets/sanctuary/environment/fixing-room-all-together.png';
 import enteringRoom from '@assets/sanctuary/environment/tutorial-room-for-unity-1.png';
-import sketches1 from '@assets/sanctuary/environment/sketches-environment.jpg';
-import sketches2 from '@assets/sanctuary/environment/sketches-environment-1.jpg';
+import sketches from '@assets/sanctuary/environment/sketches-environment-1.jpg';
 import blockout from '@assets/sanctuary/environment/fixing-room-3d-blockout.jpg';
 import lineArt from '@assets/sanctuary/environment/fixing-room-line.jpg';
 import references from '@assets/sanctuary/environment/references-environment.png';
+import finalColorRender from '@assets/sanctuary/environment/fixing-room-all-together.png';
 ---
 
 <section class="environment-design grid-1440" id="environment-design">
   <SectionHeading title="Environment Design" />
   <p class="caption">Environment Design Approach</p>
 
-  <p class="running">
+  <p class="running narrow">
     Environment design faces the same core challenge as character design: dividing space stylistically
     between the two factions, while resolving how those two spaces meet and collide. The central theme
     is coexistence with nature versus its conquest and transformation.
   </p>
 
-  <div class="hall">
-    <p class="caption">Hall</p>
-    <ul class="running list">
-      <li>The heart of the Sanctuary, where Mind and Spirit styles blend and bleed into one another</li>
-      <li>Right side leans toward Spirit, left side toward Mind — the center of the hall is designed like an altar, underscoring its significance to the Sanctuary as a whole</li>
-    </ul>
+  <p class="caption">Hall</p>
+  <div class="row">
+    <div class="c3-2">
+      <p class="running">The heart of the Sanctuary, where Mind and Spirit styles blend and bleed into one another</p>
+    </div>
+    <div class="c5-2">
+      <p class="running">Right side leans toward Spirit, left side toward Mind — the center of the hall is designed like an altar, underscoring its significance to the Sanctuary as a whole</p>
+    </div>
+  </div>
+  <div class="full media">
     <LightboxImage src={hallFinal} alt="Hall of the Sanctuary" widths={[600, 1200, 1800]} sizes="100vw" />
   </div>
 
-  <div class="rooms two-col">
-    <div>
-      <p class="caption accent">Rooms · Spirit</p>
-      <div class="room">
-        <p class="caption small">Archive</p>
-        <ul class="running list">
-          <li>Made in synergy with nature</li>
-          <li>Walls and columns left largely unworked stone</li>
-          <li>Decorated with carved ornaments and drawings referencing ancient civilizations</li>
-        </ul>
-        <LightboxImage src={archiveColor} alt="Archive room" />
-      </div>
-      <div class="room">
-        <p class="caption small">Hall of Goblets</p>
-        <ul class="running list">
-          <li>Warm palette, softly lit by candlelight</li>
-          <li>Materials: stone, wood, glass</li>
-        </ul>
-        <LightboxImage src={galleryOfGoblets} alt="Hall of Goblets" />
-      </div>
+  <p class="caption accent">Rooms · Spirit</p>
+  <div class="row">
+    <div class="c3-2">
+      <p class="running">Made in synergy with nature. Walls and columns left largely unworked stone. Decorated with carved ornaments and drawings referencing ancient civilizations.</p>
     </div>
-    <div>
-      <p class="caption accent">Rooms · Mind</p>
-      <div class="room">
-        <p class="caption small">Laboratory</p>
-        <ul class="running list">
-          <li>Nature is absent</li>
-          <li>Inspired by laboratories and manufacturing facilities</li>
-          <li>Filled with machinery and futuristic technology</li>
-        </ul>
-        <LightboxImage src={laboratory} alt="Laboratory room" />
-      </div>
-      <div class="room">
-        <p class="caption small">Sanctuary Entering Room</p>
-        <ul class="running list">
-          <li>Cold blue-green palette, creating an alienating, uncomfortable atmosphere</li>
-          <li>Materials: concrete, metal, tile, glass</li>
-        </ul>
-        <LightboxImage src={enteringRoom} alt="Sanctuary entering room" />
-      </div>
+    <div class="c5-2">
+      <p class="running">Warm palette, softly lit by candlelight. Materials: stone, wood, glass.</p>
     </div>
   </div>
 
-  <div class="process">
-    <p class="process-heading">Process Breakdown</p>
-    <div class="process-grid">
-      <div>
-        <p class="caption small">References</p>
-        <Image src={references} alt="Environment references" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
-      </div>
-      <div>
-        <p class="caption small">Sketches</p>
-        <Image src={sketches1} alt="Environment sketches" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
-      </div>
-      <div>
-        <p class="caption small">Sketches</p>
-        <Image src={sketches2} alt="Environment sketches" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
-      </div>
-      <div>
-        <p class="caption small">3D Blockout</p>
-        <Image src={blockout} alt="3D blockout" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
-      </div>
-      <div>
-        <p class="caption small">Final Line</p>
-        <Image src={lineArt} alt="Final line art" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
-      </div>
+  <p class="caption">Archive</p>
+  <div class="full media">
+    <LightboxImage src={archiveColor} alt="Archive room" widths={[600, 1200, 1800]} sizes="100vw" />
+  </div>
+
+  <p class="caption">Hall of Goblets</p>
+  <div class="full media">
+    <LightboxImage src={galleryOfGoblets} alt="Hall of Goblets" widths={[600, 1200, 1800]} sizes="100vw" />
+  </div>
+
+  <p class="caption accent">Rooms · Mind</p>
+  <div class="row">
+    <div class="c3-2">
+      <p class="running">Nature is absent. Inspired by laboratories and manufacturing facilities. Filled with machinery and futuristic technology.</p>
     </div>
+    <div class="c5-2">
+      <p class="running">Cold blue-green palette, creating an alienating, uncomfortable atmosphere. Materials: concrete, metal, tile, glass.</p>
+    </div>
+  </div>
+
+  <p class="caption">Laboratory</p>
+  <div class="c2-6 media">
+    <LightboxImage src={laboratory} alt="Laboratory room" widths={[500, 900, 1400]} sizes="(max-width: 768px) 100vw, 892px" />
+  </div>
+
+  <p class="caption">Sanctuary Entering Room</p>
+  <div class="c2-6 media">
+    <LightboxImage src={enteringRoom} alt="Sanctuary entering room" widths={[500, 900, 1400]} sizes="(max-width: 768px) 100vw, 892px" />
+  </div>
+
+  <p class="process-heading">Process Breakdown</p>
+
+  <div class="c1-2">
+    <p class="caption small">References</p>
+    <Image src={references} alt="Environment references" widths={[300, 560]} sizes="282px" loading="lazy" />
+  </div>
+  <div class="c5-4">
+    <p class="caption small">Sketches</p>
+    <Image src={sketches} alt="Environment sketches" widths={[600, 1176]} sizes="588px" loading="lazy" />
+  </div>
+
+  <div class="c1-3">
+    <p class="caption small">3D Blockout</p>
+    <Image src={blockout} alt="3D blockout" widths={[400, 870]} sizes="435px" loading="lazy" />
+  </div>
+  <div class="c5-3">
+    <p class="caption small">Final Line</p>
+    <Image src={lineArt} alt="Final line art" widths={[400, 870]} sizes="435px" loading="lazy" />
+  </div>
+
+  <div class="c1-3">
+    <p class="caption small">Final Color and Render</p>
+    <Image src={finalColorRender} alt="Final color and render" widths={[400, 870]} sizes="435px" loading="lazy" />
   </div>
 </section>
 
 <style>
   .environment-design {
     padding: 4rem 0;
-    row-gap: 0;
+    row-gap: 2.5rem;
   }
 
   .environment-design > :global(*) {
     grid-column: 1 / -1;
+  }
+
+  .full {
+    grid-column: 1 / -1;
+  }
+
+  .row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 24px;
+  }
+
+  .c3-2 {
+    grid-column: 3 / span 2;
+  }
+
+  .c5-2 {
+    grid-column: 5 / span 2;
+  }
+
+  .c1-2 {
+    grid-column: 1 / span 2;
+  }
+
+  .c1-3 {
+    grid-column: 1 / span 3;
+  }
+
+  .c5-3 {
+    grid-column: 5 / span 3;
+  }
+
+  .c5-4 {
+    grid-column: 5 / span 4;
+  }
+
+  .c2-6 {
+    grid-column: 2 / span 6;
+  }
+
+  @media (max-width: 1024px) {
+    .c3-2,
+    .c5-2,
+    .c1-2,
+    .c1-3,
+    .c5-3,
+    .c5-4 {
+      grid-column: span 4;
+    }
+    .c2-6 {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .row {
+      grid-template-columns: 1fr;
+    }
+    .c3-2,
+    .c5-2,
+    .c1-2,
+    .c1-3,
+    .c5-3,
+    .c5-4 {
+      grid-column: 1 / -1;
+    }
   }
 
   .caption {
@@ -129,7 +196,6 @@ import references from '@assets/sanctuary/environment/references-environment.png
 
   .caption.accent {
     color: #4361ee;
-    margin: 0 0 1rem;
   }
 
   .process-heading {
@@ -138,7 +204,7 @@ import references from '@assets/sanctuary/environment/references-environment.png
     font-size: 1.5rem;
     text-transform: uppercase;
     color: #e8e8e8;
-    margin: 0 0 1.5rem;
+    margin: 0;
   }
 
   .running {
@@ -147,54 +213,24 @@ import references from '@assets/sanctuary/environment/references-environment.png
     font-size: 1.125rem;
     color: #c9c9c9;
     line-height: 1.7;
-    margin: 0 0 1rem;
-    max-width: 60ch;
+    margin: 0;
   }
 
-  .running.list {
-    list-style: disc;
-    padding-left: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  .running.narrow {
+    grid-column: span 3;
   }
 
-  .hall {
-    margin-bottom: 3rem;
-  }
-
-  .hall :global(img) {
-    border-radius: 4px;
-  }
-
-  .rooms.two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 3rem;
-  }
-
-  @media (max-width: 768px) {
-    .rooms.two-col {
-      grid-template-columns: 1fr;
+  @media (max-width: 1024px) {
+    .running.narrow {
+      grid-column: 1 / -1;
     }
   }
 
-  .room {
-    margin-bottom: 2rem;
-  }
-
-  .room :global(img) {
-    border-radius: 4px;
-  }
-
-  .process-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .process-grid :global(img) {
+  .media :global(img),
+  .c1-2 :global(img),
+  .c1-3 :global(img),
+  .c5-3 :global(img),
+  .c5-4 :global(img) {
     width: 100%;
     border-radius: 4px;
     display: block;
