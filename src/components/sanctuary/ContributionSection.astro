@@ -21,16 +21,16 @@ const row2 = [g5, g6, g9];
     </div>
 
     <div class="span-4">
-      <p class="label">My Role</p>
-      <p class="body">
+      <p class="caption">My Role</p>
+      <p class="running">
         World and visual language design. Character art, environment art, UI, full-screen
         illustrations. Animation. Contributed to worldbuilding, quest writing, and UX. Assembled and
         staged assets in-scene, handed off to programmers for integration and scripting.
       </p>
     </div>
     <div class="span-4">
-      <p class="label">Challenge</p>
-      <p class="body">
+      <p class="caption">Challenge</p>
+      <p class="running">
         Sole designer and artist on a 3-person team. Create a visual language for the project.
         Establish a full world identity: environment, characters, UI, animation, and illustration.
         Required a visual system that could clearly distinguish two groups within one cohesive world.
@@ -100,17 +100,20 @@ const row2 = [g5, g6, g9];
     }
   }
 
-  .label {
+  .caption {
     margin: 0 0 0.75rem;
     font-family: var(--font-body);
-    font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    color: #4361ee;
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    color: #e8e8e8;
   }
 
-  .body {
+  .running {
     margin: 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 1.125rem;
     color: #c9c9c9;
     line-height: 1.7;
   }

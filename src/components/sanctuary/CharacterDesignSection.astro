@@ -20,8 +20,9 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
 <section class="character-design" id="character-design">
   <div class="grid-1440">
     <div class="full">
-      <SectionHeading eyebrow="Character Design Approach" title="Character Design" />
-      <p class="intro">
+      <SectionHeading title="Character Design" />
+      <p class="caption">Character Design Approach</p>
+      <p class="running">
         The core challenge was designing three distinct character identities: two settlement groups
         shaped by different values, and an outsider protagonist. Each needed to read as clearly
         different at a glance. At the same time, all three had to feel like they belong to the same
@@ -34,8 +35,8 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
     </div>
 
     <div class="full">
-      <h3>Mind Group</h3>
-      <p class="body">
+      <p class="caption">Mind Group</p>
+      <p class="running">
         Cold blue palette, sharp geometric forms. Functional, tech-driven design. Materials: metal,
         polymers, plastic. Defining trait: a head suspended by a thick cable.
       </p>
@@ -48,8 +49,8 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
     </div>
 
     <div class="full">
-      <h3>Spirit Group</h3>
-      <p class="body">
+      <p class="caption">Spirit Group</p>
+      <p class="running">
         Warm, natural palette with purple accents that intensify with status. Rounded, organic forms
         with growing ornamentation by rank. Natural materials: fabric, wood, occasional tech elements
         tied to profession.
@@ -63,9 +64,9 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
     </div>
 
     <div class="full">
-      <h3>Main Character</h3>
+      <p class="caption">Main Character</p>
       <p class="quote">"When I need to design something unusual, I like to rely on nature."</p>
-      <p class="body">
+      <p class="running">
         Unique palette and materials, unused by either group — visually marks them as an outsider
         arriving from beyond the settlement.
       </p>
@@ -75,34 +76,40 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
     </div>
 
     <div class="full">
-      <h3>Process Breakdown</h3>
+      <p class="process-heading">Process Breakdown</p>
     </div>
 
-    <div class="span-2">
-      <p class="label">References</p>
-      <Image src={referencesTogether} alt="Character references" widths={[300, 560]} sizes="282px" loading="lazy" />
-    </div>
-    <div class="span-4 col-start-4">
-      <p class="label">Silhouette Search</p>
-      <Image src={silhouettes} alt="Silhouette exploration" widths={[600, 1176]} sizes="588px" loading="lazy" />
-    </div>
-
-    <div class="span-2">
-      <p class="label">Final Sketch</p>
-      <Image src={finalSketch} alt="Final sketch" widths={[300, 560]} sizes="282px" loading="lazy" />
-    </div>
-    <div class="span-3 col-start-6">
-      <p class="label">Final Line</p>
-      <Image src={finalLine} alt="Final line art" widths={[400, 870]} sizes="435px" loading="lazy" />
+    <div class="full pb-row">
+      <div class="pb-item" style={`flex-basis:282px; aspect-ratio:282/256;`}>
+        <p class="caption small">References</p>
+        <Image src={referencesTogether} alt="Character references" widths={[300, 560]} sizes="282px" loading="lazy" />
+      </div>
+      <div class="pb-item" style={`flex-basis:588px; aspect-ratio:588/284;`}>
+        <p class="caption small">Silhouette Search</p>
+        <Image src={silhouettes} alt="Silhouette exploration" widths={[600, 1176]} sizes="588px" loading="lazy" />
+      </div>
     </div>
 
-    <div class="span-3">
-      <p class="label">Color Search</p>
-      <Image src={mcColorVariation} alt="Color variation exploration" widths={[400, 870]} sizes="435px" loading="lazy" />
+    <div class="full pb-row">
+      <div class="pb-item" style={`flex-basis:282px; aspect-ratio:282/453;`}>
+        <p class="caption small">Final Sketch</p>
+        <Image src={finalSketch} alt="Final sketch" widths={[300, 560]} sizes="282px" loading="lazy" />
+      </div>
+      <div class="pb-item" style={`flex-basis:417px; aspect-ratio:417/453;`}>
+        <p class="caption small">Final Line</p>
+        <Image src={finalLine} alt="Final line art" widths={[400, 834]} sizes="417px" loading="lazy" />
+      </div>
     </div>
-    <div class="span-4 col-start-5">
-      <p class="label">Final</p>
-      <Image src={mcFinal} alt="Main character final design" widths={[600, 1176]} sizes="588px" loading="lazy" />
+
+    <div class="full pb-row">
+      <div class="pb-item" style={`flex-basis:436px; aspect-ratio:436/316;`}>
+        <p class="caption small">Color Search</p>
+        <Image src={mcColorVariation} alt="Color variation exploration" widths={[400, 872]} sizes="436px" loading="lazy" />
+      </div>
+      <div class="pb-item" style={`flex-basis:588px; aspect-ratio:588/379;`}>
+        <p class="caption small">Final</p>
+        <Image src={mcFinal} alt="Main character final design" widths={[600, 1176]} sizes="588px" loading="lazy" />
+      </div>
     </div>
   </div>
 </section>
@@ -120,48 +127,20 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
     grid-column: 1 / -1;
   }
 
-  .span-2 {
-    grid-column: span 2;
-  }
-
   .span-3 {
     grid-column: span 3;
-  }
-
-  .span-4 {
-    grid-column: span 4;
   }
 
   .col-start-4 {
     grid-column-start: 4;
   }
 
-  .col-start-5 {
-    grid-column-start: 5;
-  }
-
-  .col-start-6 {
-    grid-column-start: 6;
-  }
-
   @media (max-width: 1024px) {
-    .span-2,
-    .span-3,
-    .span-4 {
+    .span-3 {
       grid-column: span 2;
     }
-    .col-start-4,
-    .col-start-5,
-    .col-start-6 {
+    .col-start-4 {
       grid-column-start: auto;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .span-2,
-    .span-3,
-    .span-4 {
-      grid-column: span 2;
     }
   }
 
@@ -171,40 +150,70 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
     display: block;
   }
 
-  .intro {
-    max-width: 60ch;
-    color: #c9c9c9;
-    line-height: 1.7;
-    margin: 0;
-  }
-
-  h3 {
+  .caption {
     font-family: var(--font-body);
     font-weight: 700;
-    color: #e8e8e8;
     font-size: 1.125rem;
+    text-transform: uppercase;
+    color: #e8e8e8;
     margin: 0 0 0.75rem;
+  }
+
+  .caption.small {
+    margin: 0 0 0.5rem;
+  }
+
+  .process-heading {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: #e8e8e8;
+    margin: 0;
   }
 
   .quote {
+    font-family: var(--font-body);
     font-style: italic;
+    font-size: 1.125rem;
     color: #9a9a9a;
     margin: 0 0 0.75rem;
   }
 
-  .body {
+  .running {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 1.125rem;
     color: #c9c9c9;
     line-height: 1.7;
     margin: 0;
     max-width: 60ch;
   }
 
-  .label {
-    margin: 0 0 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: #9a9a9a;
+  .pb-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .pb-item {
+    flex-shrink: 0;
+    max-width: 100%;
+  }
+
+  .pb-item :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+  }
+
+  @media (max-width: 640px) {
+    .pb-item {
+      flex-basis: 100% !important;
+      aspect-ratio: auto !important;
+    }
   }
 
   [class*='span-'] :global(img) {

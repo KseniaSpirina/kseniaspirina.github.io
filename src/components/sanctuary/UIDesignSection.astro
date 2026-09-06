@@ -12,16 +12,17 @@ const cursors = [
 ---
 
 <section class="ui-design grid-1440" id="ui-design">
-  <SectionHeading eyebrow="UI Design Approach" title="UI Design" />
+  <SectionHeading title="UI Design" />
+  <p class="caption">UI Design Approach</p>
 
-  <p class="intro">
+  <p class="running">
     A more minimalist style was chosen for the user interface, making the dialogue text easier to read
     against the game's rich illustrations, while still echoing some of the game's visual elements.
   </p>
 
   <div class="block">
-    <h3>Cursor</h3>
-    <p class="body">
+    <p class="caption">Cursor</p>
+    <p class="running">
       Thin corner frames echo the game's fine linework, and originated as a stylized rendering of water
       ripples.
     </p>
@@ -33,15 +34,15 @@ const cursors = [
           ) : (
             <Image src={cursorRegular} alt="Regular cursor" widths={[200]} sizes="140px" loading="lazy" />
           )}
-          <p>{c.label}</p>
+          <p class="cursor-label">{c.label}</p>
         </div>
       ))}
     </div>
   </div>
 
   <div class="block">
-    <h3>Speech UI</h3>
-    <p class="body">
+    <p class="caption">Speech UI</p>
+    <p class="running">
       Black backgrounds tie the interface to black accents used in character and environment design —
       the in-game dialogue typeface was chosen for readability and a literary tone matching the game's
       lore.
@@ -58,26 +59,23 @@ const cursors = [
     grid-column: 1 / -1;
   }
 
-  .intro {
-    max-width: 60ch;
-    color: #c9c9c9;
-    line-height: 1.7;
-    margin-bottom: 3rem;
-  }
-
   .block {
     margin-bottom: 3rem;
   }
 
-  h3 {
+  .caption {
     font-family: var(--font-body);
     font-weight: 700;
-    color: #e8e8e8;
     font-size: 1.125rem;
+    text-transform: uppercase;
+    color: #e8e8e8;
     margin: 0 0 0.75rem;
   }
 
-  .body {
+  .running {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 1.125rem;
     color: #c9c9c9;
     line-height: 1.7;
     max-width: 60ch;
@@ -106,9 +104,12 @@ const cursors = [
     display: block;
   }
 
-  .cursor-card p {
+  .cursor-card p.cursor-label {
     margin: 0.75rem 0 0;
-    font-size: 0.75rem;
-    color: #9a9a9a;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    color: #e8e8e8;
   }
 </style>
