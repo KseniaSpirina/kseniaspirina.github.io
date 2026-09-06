@@ -21,13 +21,6 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
   <div class="grid-1440">
     <div class="full">
       <SectionHeading title="Character Design" />
-      <p class="caption">Character Design Approach</p>
-      <p class="running">
-        The core challenge was designing three distinct character identities: two settlement groups
-        shaped by different values, and an outsider protagonist. Each needed to read as clearly
-        different at a glance. At the same time, all three had to feel like they belong to the same
-        visual world.
-      </p>
     </div>
 
     <div class="full banner">
@@ -35,80 +28,100 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
     </div>
 
     <div class="full">
+      <p class="caption">Character Design Approach</p>
+    </div>
+    <p class="running narrow">
+      The core challenge was designing three distinct character identities: two settlement groups
+      shaped by different values, and an outsider protagonist. Each needed to read as clearly
+      different at a glance. At the same time, all three had to feel like they belong to the same
+      visual world.
+    </p>
+
+    <div class="full">
       <p class="caption">Mind Group</p>
-      <p class="running">
-        Cold blue palette, sharp geometric forms. Functional, tech-driven design. Materials: metal,
-        polymers, plastic. Defining trait: a head suspended by a thick cable.
-      </p>
     </div>
-    <div class="span-3">
-      <LightboxImage src={engineerArin} alt="Engineer Arin — Mind group character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
-    </div>
-    <div class="span-3 col-start-4">
-      <LightboxImage src={builderRovan} alt="Builder Rovan — Mind group character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
+    <div class="row">
+      <div class="col-3">
+        <LightboxImage src={engineerArin} alt="Engineer Arin — Mind group character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
+      </div>
+      <div class="col-3">
+        <LightboxImage src={builderRovan} alt="Builder Rovan — Mind group character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
+      </div>
+      <div class="col-2">
+        <ul class="running list">
+          <li>Cold blue palette, sharp geometric forms</li>
+          <li>Functional, tech-driven design.</li>
+          <li>Materials: metal, polymers, plastic</li>
+          <li>Defining trait: a head suspended by a thick cable</li>
+        </ul>
+      </div>
     </div>
 
     <div class="full">
       <p class="caption">Spirit Group</p>
-      <p class="running">
-        Warm, natural palette with purple accents that intensify with status. Rounded, organic forms
-        with growing ornamentation by rank. Natural materials: fabric, wood, occasional tech elements
-        tied to profession.
-      </p>
     </div>
-    <div class="span-3">
-      <LightboxImage src={collectorMiren} alt="Collector Miren — Spirit group character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
-    </div>
-    <div class="span-3 col-start-4">
-      <LightboxImage src={elderThalin} alt="Elder Thalin — Spirit group character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
+    <div class="row">
+      <div class="col-3">
+        <LightboxImage src={collectorMiren} alt="Collector Miren — Spirit group character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
+      </div>
+      <div class="col-3">
+        <LightboxImage src={elderThalin} alt="Elder Thalin — Spirit group character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
+      </div>
+      <div class="col-2">
+        <ul class="running list">
+          <li>Warm, natural palette with purple accents that intensify with status</li>
+          <li>Rounded, organic forms with growing ornamentation by rank</li>
+          <li>Natural materials: fabric, wood, occasional tech elements tied to profession</li>
+        </ul>
+      </div>
     </div>
 
     <div class="full">
       <p class="caption">Main Character</p>
-      <p class="quote">"When I need to design something unusual, I like to rely on nature."</p>
-      <p class="running">
-        Unique palette and materials, unused by either group — visually marks them as an outsider
-        arriving from beyond the settlement.
-      </p>
     </div>
-    <div class="span-3">
-      <LightboxImage src={mainCharacterSheet} alt="Main character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
+    <div class="row">
+      <div class="col-3">
+        <LightboxImage src={mainCharacterSheet} alt="Main character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
+      </div>
+      <div class="col-2">
+        <ul class="running list">
+          <li>Unique palette and materials, unused by either group</li>
+          <li>Visually marks them as an outsider arriving from beyond the settlement</li>
+        </ul>
+      </div>
     </div>
 
     <div class="full">
       <p class="process-heading">Process Breakdown</p>
     </div>
 
-    <div class="full pb-row">
-      <div class="pb-item" style={`flex-basis:282px; aspect-ratio:282/256;`}>
+    <div class="full pb-grid">
+      <div class="pb-col-2">
         <p class="caption small">References</p>
-        <Image src={referencesTogether} alt="Character references" widths={[300, 560]} sizes="282px" loading="lazy" />
+        <Image src={referencesTogether} alt="Character references" widths={[300, 560]} sizes="282px" loading="lazy" style="aspect-ratio: 282/256;" />
+        <p class="running quote">"When I need to design something unusual, I like to rely on nature."</p>
       </div>
-      <div class="pb-item" style={`flex-basis:588px; aspect-ratio:588/284;`}>
+      <div class="pb-col-4">
         <p class="caption small">Silhouette Search</p>
-        <Image src={silhouettes} alt="Silhouette exploration" widths={[600, 1176]} sizes="588px" loading="lazy" />
+        <Image src={silhouettes} alt="Silhouette exploration" widths={[600, 1176]} sizes="588px" loading="lazy" style="aspect-ratio: 588/284;" />
       </div>
-    </div>
 
-    <div class="full pb-row">
-      <div class="pb-item" style={`flex-basis:282px; aspect-ratio:282/453;`}>
+      <div class="pb-col-2 pb-newrow">
         <p class="caption small">Final Sketch</p>
-        <Image src={finalSketch} alt="Final sketch" widths={[300, 560]} sizes="282px" loading="lazy" />
+        <Image src={finalSketch} alt="Final sketch" widths={[300, 560]} sizes="282px" loading="lazy" style="aspect-ratio: 282/453;" />
       </div>
-      <div class="pb-item" style={`flex-basis:417px; aspect-ratio:417/453;`}>
+      <div class="pb-col-3">
         <p class="caption small">Final Line</p>
-        <Image src={finalLine} alt="Final line art" widths={[400, 834]} sizes="417px" loading="lazy" />
+        <Image src={finalLine} alt="Final line art" widths={[400, 834]} sizes="417px" loading="lazy" style="aspect-ratio: 417/453;" />
       </div>
-    </div>
 
-    <div class="full pb-row">
-      <div class="pb-item" style={`flex-basis:436px; aspect-ratio:436/316;`}>
+      <div class="pb-col-3 pb-newrow">
         <p class="caption small">Color Search</p>
-        <Image src={mcColorVariation} alt="Color variation exploration" widths={[400, 872]} sizes="436px" loading="lazy" />
+        <Image src={mcColorVariation} alt="Color variation exploration" widths={[400, 872]} sizes="436px" loading="lazy" style="aspect-ratio: 436/316;" />
       </div>
-      <div class="pb-item" style={`flex-basis:588px; aspect-ratio:588/379;`}>
+      <div class="pb-col-4">
         <p class="caption small">Final</p>
-        <Image src={mcFinal} alt="Main character final design" widths={[600, 1176]} sizes="588px" loading="lazy" />
+        <Image src={mcFinal} alt="Main character final design" widths={[600, 1176]} sizes="588px" loading="lazy" style="aspect-ratio: 588/379;" />
       </div>
     </div>
   </div>
@@ -125,23 +138,6 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
 
   .full {
     grid-column: 1 / -1;
-  }
-
-  .span-3 {
-    grid-column: span 3;
-  }
-
-  .col-start-4 {
-    grid-column-start: 4;
-  }
-
-  @media (max-width: 1024px) {
-    .span-3 {
-      grid-column: span 2;
-    }
-    .col-start-4 {
-      grid-column-start: auto;
-    }
   }
 
   .banner :global(img) {
@@ -172,14 +168,6 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
     margin: 0;
   }
 
-  .quote {
-    font-family: var(--font-body);
-    font-style: italic;
-    font-size: 1.125rem;
-    color: #9a9a9a;
-    margin: 0 0 0.75rem;
-  }
-
   .running {
     font-family: var(--font-body);
     font-weight: 400;
@@ -187,38 +175,124 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
     color: #c9c9c9;
     line-height: 1.7;
     margin: 0;
-    max-width: 60ch;
   }
 
-  .pb-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-  }
-
-  .pb-item {
-    flex-shrink: 0;
+  .running.narrow {
+    grid-column: span 3;
     max-width: 100%;
   }
 
-  .pb-item :global(img) {
+  .running.quote {
+    margin-top: 0.75rem;
+    font-style: italic;
+    color: #9a9a9a;
+  }
+
+  .running.list {
+    list-style: disc;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* --- Mind / Spirit / Main Character rows --- */
+  .row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .col-2 {
+    grid-column: span 2;
+  }
+
+  .col-3 {
+    grid-column: span 3;
+  }
+
+  .col-2 :global(img),
+  .col-3 :global(img) {
     width: 100%;
-    height: 100%;
+    border-radius: 4px;
+    display: block;
+  }
+
+  @media (max-width: 1024px) {
+    .row {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .col-2,
+    .col-3 {
+      grid-column: span 2;
+    }
+    .running.narrow {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .row {
+      grid-template-columns: 1fr;
+    }
+    .col-2,
+    .col-3 {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* --- Process Breakdown --- */
+  .pb-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 24px;
+  }
+
+  .pb-col-2 {
+    grid-column: span 2;
+  }
+
+  .pb-col-3 {
+    grid-column: span 3;
+  }
+
+  .pb-col-4 {
+    grid-column: span 4;
+  }
+
+  .pb-newrow {
+    grid-column-start: 1;
+  }
+
+  .pb-grid :global(img) {
+    width: 100%;
+    height: auto;
     object-fit: cover;
     border-radius: 4px;
     display: block;
   }
 
-  @media (max-width: 640px) {
-    .pb-item {
-      flex-basis: 100% !important;
-      aspect-ratio: auto !important;
+  @media (max-width: 1024px) {
+    .pb-col-2,
+    .pb-col-3,
+    .pb-col-4 {
+      grid-column: span 4;
+    }
+    .pb-newrow {
+      grid-column-start: 1;
     }
   }
 
-  [class*='span-'] :global(img) {
-    width: 100%;
-    border-radius: 4px;
-    display: block;
+  @media (max-width: 640px) {
+    .pb-grid {
+      grid-template-columns: 1fr;
+    }
+    .pb-col-2,
+    .pb-col-3,
+    .pb-col-4 {
+      grid-column: 1 / -1;
+    }
   }
 </style>
