@@ -30,7 +30,7 @@ const row2 = [g5, g6, g9];
         <li>Assembled and staged assets in-scene, handed off to programmers for integration and scripting</li>
       </ul>
     </div>
-    <div class="span-2">
+    <div class="span-2 challenge">
       <p class="caption">Challenge</p>
       <ul class="running list">
         <li>Sole designer and artist on a 3-person team</li>
@@ -77,6 +77,22 @@ const row2 = [g5, g6, g9];
 
   .span-2 {
     grid-column: span 2;
+  }
+
+  .challenge {
+    grid-column: 5 / span 2;
+  }
+
+  @media (max-width: 1024px) {
+    .challenge {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .challenge {
+      grid-column: 1 / -1;
+    }
   }
 
   .gallery-row {
