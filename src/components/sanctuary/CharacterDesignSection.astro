@@ -96,30 +96,30 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
     </div>
 
     <div class="full pb-grid">
-      <div class="pb-col-2">
+      <div class="pb-c1-2">
         <p class="caption small">References</p>
         <Image src={referencesTogether} alt="Character references" widths={[300, 560]} sizes="282px" loading="lazy" style="aspect-ratio: 282/256;" />
         <p class="running quote">"When I need to design something unusual, I like to rely on nature."</p>
       </div>
-      <div class="pb-col-4">
+      <div class="pb-c4-4">
         <p class="caption small">Silhouette Search</p>
         <Image src={silhouettes} alt="Silhouette exploration" widths={[600, 1176]} sizes="588px" loading="lazy" style="aspect-ratio: 588/284;" />
       </div>
 
-      <div class="pb-col-2 pb-newrow">
+      <div class="pb-c1-2">
         <p class="caption small">Final Sketch</p>
         <Image src={finalSketch} alt="Final sketch" widths={[300, 560]} sizes="282px" loading="lazy" style="aspect-ratio: 282/453;" />
       </div>
-      <div class="pb-col-3">
+      <div class="pb-c6-3">
         <p class="caption small">Final Line</p>
         <Image src={finalLine} alt="Final line art" widths={[400, 834]} sizes="417px" loading="lazy" style="aspect-ratio: 417/453;" />
       </div>
 
-      <div class="pb-col-3 pb-newrow">
+      <div class="pb-c1-3">
         <p class="caption small">Color Search</p>
         <Image src={mcColorVariation} alt="Color variation exploration" widths={[400, 872]} sizes="436px" loading="lazy" style="aspect-ratio: 436/316;" />
       </div>
-      <div class="pb-col-4">
+      <div class="pb-c5-4">
         <p class="caption small">Final</p>
         <Image src={mcFinal} alt="Main character final design" widths={[600, 1176]} sizes="588px" loading="lazy" style="aspect-ratio: 588/379;" />
       </div>
@@ -250,20 +250,24 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
     gap: 24px;
   }
 
-  .pb-col-2 {
-    grid-column: span 2;
+  .pb-c1-2 {
+    grid-column: 1 / span 2;
   }
 
-  .pb-col-3 {
-    grid-column: span 3;
+  .pb-c1-3 {
+    grid-column: 1 / span 3;
   }
 
-  .pb-col-4 {
-    grid-column: span 4;
+  .pb-c4-4 {
+    grid-column: 4 / span 4;
   }
 
-  .pb-newrow {
-    grid-column-start: 1;
+  .pb-c5-4 {
+    grid-column: 5 / span 4;
+  }
+
+  .pb-c6-3 {
+    grid-column: 6 / span 3;
   }
 
   .pb-grid :global(img) {
@@ -275,13 +279,14 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
   }
 
   @media (max-width: 1024px) {
-    .pb-col-2,
-    .pb-col-3,
-    .pb-col-4 {
-      grid-column: span 4;
+    .pb-c1-2,
+    .pb-c1-3 {
+      grid-column: 1 / span 4;
     }
-    .pb-newrow {
-      grid-column-start: 1;
+    .pb-c4-4,
+    .pb-c5-4,
+    .pb-c6-3 {
+      grid-column: 5 / span 4;
     }
   }
 
@@ -289,9 +294,11 @@ import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
     .pb-grid {
       grid-template-columns: 1fr;
     }
-    .pb-col-2,
-    .pb-col-3,
-    .pb-col-4 {
+    .pb-c1-2,
+    .pb-c1-3,
+    .pb-c4-4,
+    .pb-c5-4,
+    .pb-c6-3 {
       grid-column: 1 / -1;
     }
   }
