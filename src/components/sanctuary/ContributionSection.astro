@@ -1,8 +1,6 @@
 ---
-import { Image } from 'astro:assets';
+import LightboxImage from './LightboxImage.astro';
 import SectionHeading from './SectionHeading.astro';
-import bigPhoto from '@assets/sanctuary/characters/all-characters-together.png';
-import g2 from '@assets/sanctuary/gallery/2.png';
 import g3 from '@assets/sanctuary/gallery/3.png';
 import g4 from '@assets/sanctuary/gallery/4.png';
 import g5 from '@assets/sanctuary/gallery/5.png';
@@ -11,76 +9,93 @@ import g7 from '@assets/sanctuary/gallery/7.png';
 import g8 from '@assets/sanctuary/gallery/8.png';
 import g9 from '@assets/sanctuary/gallery/9.png';
 
-const gallery = [g2, g3, g4, g5, g6, g7, g8, g9];
+// Verified layout from Figma (Page 2): row1 = 8,4,3,7 / row2 = 5,6,9
+const row1 = [g8, g4, g3, g7];
+const row2 = [g5, g6, g9];
 ---
 
 <section class="contribution" id="contribution">
-  <SectionHeading title="Contribution" />
+  <div class="grid-1440">
+    <div class="full">
+      <SectionHeading title="Contribution" />
+    </div>
 
-  <div class="big-photo">
-    <Image src={bigPhoto} alt="Sanctuary — world overview" widths={[600, 1200, 1800]} sizes="100vw" loading="lazy" />
-  </div>
-
-  <div class="columns">
-    <div class="col">
-      <p class="label">MY ROLE</p>
-      <p>
-        World and visual language design
-        Character art, environment art, UI, Full-screen illustrations
-        Animation
-        Contributed to worldbuilding, quest writing, and UX
-        Assembled and staged assets in-scene handed off to programmers for integration and scripting
+    <div class="span-4">
+      <p class="label">My Role</p>
+      <p class="body">
+        World and visual language design. Character art, environment art, UI, full-screen
+        illustrations. Animation. Contributed to worldbuilding, quest writing, and UX. Assembled and
+        staged assets in-scene, handed off to programmers for integration and scripting.
       </p>
     </div>
-    <div class="col">
-      <p class="label">CHALLENGE</p>
-      <p>
-        Sole designer and artist on a 3-person team
-        Create a visual language for the project
-        Establish a full world identity: environment, characters, UI, animation, and illustration
-        Required a visual system that could clearly distinguish two groups within one cohesive world
-        Large creative scope to cover within a tight 3-month production timeline
+    <div class="span-4">
+      <p class="label">Challenge</p>
+      <p class="body">
+        Sole designer and artist on a 3-person team. Create a visual language for the project.
+        Establish a full world identity: environment, characters, UI, animation, and illustration.
+        Required a visual system that could clearly distinguish two groups within one cohesive world.
+        Large creative scope to cover within a tight 3-month production timeline.
       </p>
     </div>
-  </div>
 
-  <div class="gallery-scroller">
-    {gallery.map((img, i) => (
-      <div class="gallery-item">
-        <Image src={img} alt={`Sanctuary gallery ${i + 2}`} widths={[300, 600]} sizes="300px" loading="lazy" />
-      </div>
-    ))}
+    <div class="full gallery-row">
+      {row1.map((img, i) => (
+        <div class="span-2">
+          <LightboxImage src={img} alt={`Sanctuary gallery image ${i + 1}`} widths={[300, 560]} sizes="282px" />
+        </div>
+      ))}
+    </div>
+    <div class="full gallery-row">
+      {row2.map((img, i) => (
+        <div class="span-2">
+          <LightboxImage src={img} alt={`Sanctuary gallery image ${i + 5}`} widths={[300, 560]} sizes="282px" />
+        </div>
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
   .contribution {
-    max-width: 1200px;
-    margin-inline: auto;
-    padding: 4rem 2rem;
+    padding: 4rem 0;
   }
 
-  .big-photo {
-    margin-bottom: 3rem;
-    border-radius: 4px;
-    overflow: hidden;
+  .grid-1440 {
+    row-gap: 2.5rem;
   }
 
-  .big-photo :global(img) {
-    width: 100%;
-    height: auto;
-    display: block;
+  .full {
+    grid-column: 1 / -1;
   }
 
-  .columns {
+  .span-4 {
+    grid-column: span 4;
+  }
+
+  .span-2 {
+    grid-column: span 2;
+  }
+
+  .gallery-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 3rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
   }
 
-  @media (max-width: 768px) {
-    .columns {
+  @media (max-width: 1024px) {
+    .span-4 {
+      grid-column: span 4;
+    }
+    .gallery-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .span-4 {
+      grid-column: 1 / -1;
+    }
+    .gallery-row {
       grid-template-columns: 1fr;
     }
   }
@@ -94,31 +109,17 @@ const gallery = [g2, g3, g4, g5, g6, g7, g8, g9];
     color: #4361ee;
   }
 
-  .col p:not(.label) {
+  .body {
     margin: 0;
     color: #c9c9c9;
     line-height: 1.7;
-    white-space: pre-line;
   }
 
-  .gallery-scroller {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    padding-bottom: 0.5rem;
-  }
-
-  .gallery-item {
-    flex: 0 0 auto;
-    width: 260px;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .gallery-item :global(img) {
+  .gallery-row :global(img) {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 282 / 159;
     object-fit: cover;
+    border-radius: 4px;
     display: block;
   }
 </style>

@@ -7,40 +7,35 @@ interface Props {
 const { prevHref, nextHref } = Astro.props;
 ---
 
-<div class="nav-arrows">
-  {prevHref && (
-    <a class="nav-arrow nav-arrow-prev" href={prevHref} aria-label="Previous project">
-      <span class="arrow">←</span>
-      <span class="label">Previous project</span>
-    </a>
-  )}
-  {nextHref && (
-    <a class="nav-arrow nav-arrow-next" href={nextHref} aria-label="Next project">
-      <span class="label">Next project</span>
-      <span class="arrow">→</span>
-    </a>
-  )}
-</div>
+{prevHref && (
+  <a class="nav-arrow nav-arrow-prev" href={prevHref} aria-label="Previous project">
+    <svg width="40" height="80" viewBox="0 0 40 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 4 L8 40 L32 76" stroke="currentColor" stroke-width="2" />
+    </svg>
+    <span class="label">Previous project</span>
+  </a>
+)}
+
+{nextHref && (
+  <a class="nav-arrow nav-arrow-next" href={nextHref} aria-label="Next project">
+    <svg width="40" height="80" viewBox="0 0 40 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 4 L32 40 L8 76" stroke="currentColor" stroke-width="2" />
+    </svg>
+    <span class="label">Next project</span>
+  </a>
+)}
 
 <style>
-  .nav-arrows {
+  .nav-arrow {
     position: fixed;
-    top: calc(var(--nav-height) + 1.25rem);
-    right: 2rem;
+    top: 39.4rem;
     z-index: 210;
     display: flex;
-    gap: 1.5rem;
-  }
-
-  .nav-arrow {
-    display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 0.5rem;
     color: #9a9a9a;
     text-decoration: none;
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.85rem;
     transition: color 150ms ease;
   }
 
@@ -48,16 +43,30 @@ const { prevHref, nextHref } = Astro.props;
     color: #e8e8e8;
   }
 
-  .arrow {
-    font-size: 1.1rem;
+  .nav-arrow-prev {
+    left: 2.4rem;
+  }
+
+  .nav-arrow-next {
+    right: 2.7rem;
+  }
+
+  .label {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.75rem;
   }
 
   @media (max-width: 640px) {
-    .nav-arrows {
+    .nav-arrow-prev {
+      left: 1rem;
+    }
+    .nav-arrow-next {
       right: 1rem;
     }
-    .label {
-      display: none;
+    .nav-arrow svg {
+      width: 24px;
+      height: 48px;
     }
   }
 </style>

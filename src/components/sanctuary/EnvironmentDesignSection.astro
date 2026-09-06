@@ -15,7 +15,7 @@ import lineArt from '@assets/sanctuary/environment/fixing-room-line.jpg';
 import references from '@assets/sanctuary/environment/references-environment.png';
 ---
 
-<section class="environment-design" id="environment-design">
+<section class="environment-design grid-1440" id="environment-design">
   <SectionHeading eyebrow="Environment Design Approach" title="Environment Design" />
 
   <p class="intro">
@@ -101,9 +101,12 @@ import references from '@assets/sanctuary/environment/references-environment.png
 
 <style>
   .environment-design {
-    max-width: 1200px;
-    margin-inline: auto;
-    padding: 4rem 2rem;
+    padding: 4rem 0;
+    row-gap: 0;
+  }
+
+  .environment-design > :global(*) {
+    grid-column: 1 / -1;
   }
 
   .intro {
@@ -114,16 +117,18 @@ import references from '@assets/sanctuary/environment/references-environment.png
   }
 
   h3 {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
+    font-weight: 700;
     color: #e8e8e8;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     margin: 0 0 0.75rem;
   }
 
   h4 {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
+    font-weight: 700;
     color: #e8e8e8;
-    font-size: 1.05rem;
+    font-size: 1.125rem;
     margin: 0 0 0.5rem;
   }
 

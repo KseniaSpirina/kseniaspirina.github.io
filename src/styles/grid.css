@@ -1,0 +1,25 @@
+/* Figma reference grid: 1440 canvas, 8 columns, 24px gutter, 120px margins */
+.grid-1440 {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 24px;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 120px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .grid-1440 {
+    padding-inline: 48px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-1440 {
+    padding-inline: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}

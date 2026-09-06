@@ -11,7 +11,7 @@ const cursors = [
 ];
 ---
 
-<section class="ui-design" id="ui-design">
+<section class="ui-design grid-1440" id="ui-design">
   <SectionHeading eyebrow="UI Design Approach" title="UI Design" />
 
   <p class="intro">
@@ -51,9 +51,11 @@ const cursors = [
 
 <style>
   .ui-design {
-    max-width: 1200px;
-    margin-inline: auto;
-    padding: 4rem 2rem 6rem;
+    padding: 4rem 0 6rem;
+  }
+
+  .ui-design > :global(*) {
+    grid-column: 1 / -1;
   }
 
   .intro {
@@ -68,9 +70,10 @@ const cursors = [
   }
 
   h3 {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
+    font-weight: 700;
     color: #e8e8e8;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     margin: 0 0 0.75rem;
   }
 

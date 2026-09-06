@@ -3,121 +3,186 @@ import LightboxImage from './LightboxImage.astro';
 import SectionHeading from './SectionHeading.astro';
 import { Image } from 'astro:assets';
 
-import character1 from '@assets/sanctuary/characters/character.png';
-import character2 from '@assets/sanctuary/characters/character2.png';
-import character3 from '@assets/sanctuary/characters/character3.png';
-import character4 from '@assets/sanctuary/characters/character4.png';
-import character5 from '@assets/sanctuary/characters/character5.png';
-import character6 from '@assets/sanctuary/characters/character6.png';
-import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
-import mcColorVariation from '@assets/sanctuary/characters/mc-color-variation.png';
+import engineerArin from '@assets/sanctuary/characters/character.png';
+import builderRovan from '@assets/sanctuary/characters/character6.png';
+import collectorMiren from '@assets/sanctuary/characters/character3.png';
+import elderThalin from '@assets/sanctuary/characters/character4.png';
+import mainCharacterSheet from '@assets/sanctuary/characters/character5.png';
+import allCharacters from '@assets/sanctuary/characters/all-characters-together.png';
 import referencesTogether from '@assets/sanctuary/characters/references-together.png';
 import silhouettes from '@assets/sanctuary/characters/silhoettes.png';
 import finalSketch from '@assets/sanctuary/characters/final-sketch-web.jpg';
 import finalLine from '@assets/sanctuary/characters/final-line.png';
+import mcColorVariation from '@assets/sanctuary/characters/mc-color-variation.png';
+import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
 ---
 
 <section class="character-design" id="character-design">
-  <SectionHeading eyebrow="Character Design Approach" title="Character Design" />
-
-  <p class="intro">
-    The core challenge was designing three distinct character identities: two settlement groups shaped
-    by different values, and an outsider protagonist. Each needed to read as clearly different at a
-    glance. At the same time, all three had to feel like they belong to the same visual world.
-  </p>
-
-  <div class="group-block">
-    <h3>Main Character</h3>
-    <p class="quote">"When I need to design something unusual, I like to rely on nature."</p>
-    <p class="body">
-      Unique palette and materials, unused by either group — visually marks them as an outsider
-      arriving from beyond the settlement.
-    </p>
-    <div class="image-row">
-      <LightboxImage src={mcFinal} alt="Main character final design" />
+  <div class="grid-1440">
+    <div class="full">
+      <SectionHeading eyebrow="Character Design Approach" title="Character Design" />
+      <p class="intro">
+        The core challenge was designing three distinct character identities: two settlement groups
+        shaped by different values, and an outsider protagonist. Each needed to read as clearly
+        different at a glance. At the same time, all three had to feel like they belong to the same
+        visual world.
+      </p>
     </div>
-  </div>
 
-  <div class="group-block two-col">
-    <div>
+    <div class="full banner">
+      <Image src={allCharacters} alt="All Sanctuary characters together" widths={[600, 1200, 1800]} sizes="100vw" loading="lazy" />
+    </div>
+
+    <div class="full">
+      <h3>Mind Group</h3>
+      <p class="body">
+        Cold blue palette, sharp geometric forms. Functional, tech-driven design. Materials: metal,
+        polymers, plastic. Defining trait: a head suspended by a thick cable.
+      </p>
+    </div>
+    <div class="span-3">
+      <LightboxImage src={engineerArin} alt="Engineer Arin — Mind group character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
+    </div>
+    <div class="span-3 col-start-4">
+      <LightboxImage src={builderRovan} alt="Builder Rovan — Mind group character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
+    </div>
+
+    <div class="full">
       <h3>Spirit Group</h3>
       <p class="body">
         Warm, natural palette with purple accents that intensify with status. Rounded, organic forms
         with growing ornamentation by rank. Natural materials: fabric, wood, occasional tech elements
         tied to profession.
       </p>
-      <div class="image-row two">
-        <LightboxImage src={character3} alt="Spirit group character study" />
-        <LightboxImage src={character4} alt="Spirit group character study" />
-      </div>
     </div>
-    <div>
-      <h3>Mind Group</h3>
-      <p class="body">
-        Cold blue palette, sharp geometric forms. Functional, tech-driven design. Materials: metal,
-        polymers, plastic. Defining trait: a head suspended by a thick cable.
-      </p>
-      <div class="image-row two">
-        <LightboxImage src={character5} alt="Mind group character study" />
-        <LightboxImage src={character6} alt="Mind group character study" />
-      </div>
+    <div class="span-3">
+      <LightboxImage src={collectorMiren} alt="Collector Miren — Spirit group character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
     </div>
-  </div>
+    <div class="span-3 col-start-4">
+      <LightboxImage src={elderThalin} alt="Elder Thalin — Spirit group character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
+    </div>
 
-  <div class="process-grid">
-    <div class="process-item">
+    <div class="full">
+      <h3>Main Character</h3>
+      <p class="quote">"When I need to design something unusual, I like to rely on nature."</p>
+      <p class="body">
+        Unique palette and materials, unused by either group — visually marks them as an outsider
+        arriving from beyond the settlement.
+      </p>
+    </div>
+    <div class="span-3">
+      <LightboxImage src={mainCharacterSheet} alt="Main character sheet" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
+    </div>
+
+    <div class="full">
+      <h3>Process Breakdown</h3>
+    </div>
+
+    <div class="span-2">
       <p class="label">References</p>
-      <Image src={referencesTogether} alt="Character references" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
+      <Image src={referencesTogether} alt="Character references" widths={[300, 560]} sizes="282px" loading="lazy" />
     </div>
-    <div class="process-item">
+    <div class="span-4 col-start-4">
       <p class="label">Silhouette Search</p>
-      <Image src={silhouettes} alt="Silhouette exploration" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
+      <Image src={silhouettes} alt="Silhouette exploration" widths={[600, 1176]} sizes="588px" loading="lazy" />
     </div>
-    <div class="process-item">
-      <p class="label">Color Search</p>
-      <Image src={mcColorVariation} alt="Color variation exploration" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
-    </div>
-    <div class="process-item">
-      <p class="label">Faces</p>
-      <LightboxImage src={character1} alt="Face studies" />
-    </div>
-    <div class="process-item">
+
+    <div class="span-2">
       <p class="label">Final Sketch</p>
-      <Image src={finalSketch} alt="Final sketch" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
+      <Image src={finalSketch} alt="Final sketch" widths={[300, 560]} sizes="282px" loading="lazy" />
     </div>
-    <div class="process-item">
+    <div class="span-3 col-start-6">
       <p class="label">Final Line</p>
-      <Image src={finalLine} alt="Final line art" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
+      <Image src={finalLine} alt="Final line art" widths={[400, 870]} sizes="435px" loading="lazy" />
     </div>
-    <div class="process-item">
+
+    <div class="span-3">
+      <p class="label">Color Search</p>
+      <Image src={mcColorVariation} alt="Color variation exploration" widths={[400, 870]} sizes="435px" loading="lazy" />
+    </div>
+    <div class="span-4 col-start-5">
       <p class="label">Final</p>
-      <LightboxImage src={character2} alt="Final character render" />
+      <Image src={mcFinal} alt="Main character final design" widths={[600, 1176]} sizes="588px" loading="lazy" />
     </div>
   </div>
 </section>
 
 <style>
   .character-design {
-    max-width: 1200px;
-    margin-inline: auto;
-    padding: 4rem 2rem;
+    padding: 4rem 0;
+  }
+
+  .grid-1440 {
+    row-gap: 2.5rem;
+  }
+
+  .full {
+    grid-column: 1 / -1;
+  }
+
+  .span-2 {
+    grid-column: span 2;
+  }
+
+  .span-3 {
+    grid-column: span 3;
+  }
+
+  .span-4 {
+    grid-column: span 4;
+  }
+
+  .col-start-4 {
+    grid-column-start: 4;
+  }
+
+  .col-start-5 {
+    grid-column-start: 5;
+  }
+
+  .col-start-6 {
+    grid-column-start: 6;
+  }
+
+  @media (max-width: 1024px) {
+    .span-2,
+    .span-3,
+    .span-4 {
+      grid-column: span 2;
+    }
+    .col-start-4,
+    .col-start-5,
+    .col-start-6 {
+      grid-column-start: auto;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .span-2,
+    .span-3,
+    .span-4 {
+      grid-column: span 2;
+    }
+  }
+
+  .banner :global(img) {
+    width: 100%;
+    border-radius: 4px;
+    display: block;
   }
 
   .intro {
     max-width: 60ch;
     color: #c9c9c9;
     line-height: 1.7;
-    margin-bottom: 3rem;
+    margin: 0;
   }
 
-  .group-block {
-    margin-bottom: 3rem;
-  }
-
-  .group-block h3 {
-    font-family: var(--font-display);
+  h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
     color: #e8e8e8;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     margin: 0 0 0.75rem;
   }
 
@@ -130,43 +195,11 @@ import finalLine from '@assets/sanctuary/characters/final-line.png';
   .body {
     color: #c9c9c9;
     line-height: 1.7;
-    margin: 0 0 1.25rem;
+    margin: 0;
     max-width: 60ch;
   }
 
-  .image-row {
-    border-radius: 4px;
-    overflow: hidden;
-    max-width: 500px;
-  }
-
-  .image-row.two {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    max-width: none;
-  }
-
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-  }
-
-  @media (max-width: 768px) {
-    .two-col {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .process-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-
-  .process-item .label {
+  .label {
     margin: 0 0 0.5rem;
     font-size: 0.75rem;
     font-weight: 700;
@@ -174,7 +207,7 @@ import finalLine from '@assets/sanctuary/characters/final-line.png';
     color: #9a9a9a;
   }
 
-  .process-item :global(img) {
+  [class*='span-'] :global(img) {
     width: 100%;
     border-radius: 4px;
     display: block;

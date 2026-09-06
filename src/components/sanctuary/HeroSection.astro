@@ -2,7 +2,7 @@
 import SideMenu from './SideMenu.astro';
 ---
 
-<section class="hero" id="top">
+<section class="hero grid-1440" id="top">
   <SideMenu />
 
   <div class="hero-content">
@@ -24,10 +24,14 @@ import SideMenu from './SideMenu.astro';
 <style>
   .hero {
     position: relative;
-    padding: 9rem 2rem 4rem;
-    max-width: 1200px;
-    margin-inline: auto;
+    padding-top: 9rem;
+    padding-bottom: 4rem;
     scroll-margin-top: calc(var(--nav-height) + 1rem);
+  }
+
+  .hero-content,
+  .trailer {
+    grid-column: 1 / -1;
   }
 
   .hero-content {
