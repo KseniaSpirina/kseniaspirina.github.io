@@ -27,11 +27,10 @@ import references from '@assets/sanctuary/environment/references-environment.png
 
   <div class="hall">
     <p class="caption">Hall</p>
-    <p class="running">
-      The heart of the Sanctuary, where Mind and Spirit styles blend and bleed into one another. Right
-      side leans toward Spirit, left side toward Mind — the center of the hall is designed like an
-      altar, underscoring its significance to the Sanctuary as a whole.
-    </p>
+    <ul class="running list">
+      <li>The heart of the Sanctuary, where Mind and Spirit styles blend and bleed into one another</li>
+      <li>Right side leans toward Spirit, left side toward Mind — the center of the hall is designed like an altar, underscoring its significance to the Sanctuary as a whole</li>
+    </ul>
     <LightboxImage src={hallFinal} alt="Hall of the Sanctuary" widths={[600, 1200, 1800]} sizes="100vw" />
   </div>
 
@@ -40,15 +39,19 @@ import references from '@assets/sanctuary/environment/references-environment.png
       <p class="caption accent">Rooms · Spirit</p>
       <div class="room">
         <p class="caption small">Archive</p>
-        <p class="running">
-          Made in synergy with nature. Walls and columns left largely unworked stone, decorated with
-          carved ornaments and drawings referencing ancient civilizations.
-        </p>
+        <ul class="running list">
+          <li>Made in synergy with nature</li>
+          <li>Walls and columns left largely unworked stone</li>
+          <li>Decorated with carved ornaments and drawings referencing ancient civilizations</li>
+        </ul>
         <LightboxImage src={archiveColor} alt="Archive room" />
       </div>
       <div class="room">
         <p class="caption small">Hall of Goblets</p>
-        <p class="running">Warm palette, softly lit by candlelight. Materials: stone, wood, glass.</p>
+        <ul class="running list">
+          <li>Warm palette, softly lit by candlelight</li>
+          <li>Materials: stone, wood, glass</li>
+        </ul>
         <LightboxImage src={galleryOfGoblets} alt="Hall of Goblets" />
       </div>
     </div>
@@ -56,18 +59,19 @@ import references from '@assets/sanctuary/environment/references-environment.png
       <p class="caption accent">Rooms · Mind</p>
       <div class="room">
         <p class="caption small">Laboratory</p>
-        <p class="running">
-          Nature is absent — inspired by laboratories and manufacturing facilities, filled with
-          machinery and futuristic technology.
-        </p>
+        <ul class="running list">
+          <li>Nature is absent</li>
+          <li>Inspired by laboratories and manufacturing facilities</li>
+          <li>Filled with machinery and futuristic technology</li>
+        </ul>
         <LightboxImage src={laboratory} alt="Laboratory room" />
       </div>
       <div class="room">
         <p class="caption small">Sanctuary Entering Room</p>
-        <p class="running">
-          Cold blue-green palette, creating an alienating, uncomfortable atmosphere. Materials:
-          concrete, metal, tile, glass.
-        </p>
+        <ul class="running list">
+          <li>Cold blue-green palette, creating an alienating, uncomfortable atmosphere</li>
+          <li>Materials: concrete, metal, tile, glass</li>
+        </ul>
         <LightboxImage src={enteringRoom} alt="Sanctuary entering room" />
       </div>
     </div>
@@ -145,6 +149,14 @@ import references from '@assets/sanctuary/environment/references-environment.png
     line-height: 1.7;
     margin: 0 0 1rem;
     max-width: 60ch;
+  }
+
+  .running.list {
+    list-style: disc;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .hall {
