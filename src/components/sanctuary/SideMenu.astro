@@ -1,10 +1,10 @@
 ---
 const links = [
-  { label: 'UI DESIGN', href: '#ui-design' },
-  { label: 'ENVIRONMENT DESIGN', href: '#environment-design' },
-  { label: 'ANIMATION', href: '#animation' },
-  { label: 'CHARACTER DESIGN', href: '#character-design' },
   { label: 'CONTRIBUTION', href: '#contribution' },
+  { label: 'CHARACTER DESIGN', href: '#character-design' },
+  { label: 'ANIMATION', href: '#animation' },
+  { label: 'ENVIRONMENT DESIGN', href: '#environment-design' },
+  { label: 'UI DESIGN', href: '#ui-design' },
 ];
 ---
 
@@ -30,7 +30,7 @@ const links = [
 <style>
   .menu-icon {
     position: fixed;
-    top: 19.7rem;
+    top: var(--menu-align-top, 19.7rem);
     right: 2.7rem;
     z-index: 210;
     width: 2.25rem;
@@ -59,7 +59,7 @@ const links = [
 
   .side-menu {
     position: fixed;
-    top: 12.7rem;
+    top: var(--menu-align-top, 12.7rem);
     right: 7.5rem;
     z-index: 200;
     width: 282px;
@@ -84,11 +84,10 @@ const links = [
 
   .side-menu-title {
     margin: 0 0 1rem;
-    font-family: var(--font-body);
-    font-size: 0.75rem;
+    font-family: var(--font-display);
+    font-size: 2rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    color: #9a9a9a;
+    color: #4361ee;
   }
 
   .side-menu ul {
@@ -166,6 +165,24 @@ const links = [
     });
 
     render();
+  }
+
+  function alignToTrailer() {
+    const trailer = document.querySelector<HTMLElement>('.trailer');
+    if (!trailer) return;
+    const docTop = trailer.getBoundingClientRect().top + window.scrollY;
+    document.documentElement.style.setProperty('--menu-align-top', `${docTop}px`);
+  }
+
+  function initMenuAlign() {
+    alignToTrailer();
+    window.addEventListener('resize', alignToTrailer);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMenuAlign);
+  } else {
+    initMenuAlign();
   }
 
   if (document.readyState === 'loading') {
