@@ -1,0 +1,69 @@
+---
+import SideMenu from './SideMenu.astro';
+---
+
+<section class="hero" id="top">
+  <SideMenu />
+
+  <div class="hero-content">
+    <p class="eyebrow">Graduation project. 2026</p>
+    <h1>SANCTUARY</h1>
+  </div>
+
+  <div class="trailer">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/7YBvlEBDXPg"
+      title="Sanctuary trailer"
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 9rem 2rem 4rem;
+    max-width: 1200px;
+    margin-inline: auto;
+    scroll-margin-top: calc(var(--nav-height) + 1rem);
+  }
+
+  .hero-content {
+    margin-bottom: 2rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    color: #9a9a9a;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: #4361ee;
+  }
+
+  .trailer {
+    position: relative;
+    width: 100%;
+    max-width: 894px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .trailer iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>

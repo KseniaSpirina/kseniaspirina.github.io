@@ -1,0 +1,176 @@
+---
+const links = [
+  { label: 'UI DESIGN', href: '#ui-design' },
+  { label: 'ENVIRONMENT DESIGN', href: '#environment-design' },
+  { label: 'ANIMATION', href: '#animation' },
+  { label: 'CHARACTER DESIGN', href: '#character-design' },
+  { label: 'CONTRIBUTION', href: '#contribution' },
+];
+---
+
+<button class="menu-icon" type="button" data-menu-toggle aria-label="Toggle contents menu" aria-expanded="false">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<span data-menu-sentinel></span>
+
+<nav class="side-menu" data-side-menu aria-label="Page contents">
+  <p class="side-menu-title">CONTENTS</p>
+  <ul>
+    {links.map(link => (
+      <li>
+        <a href={link.href} data-menu-link>{link.label}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .menu-icon {
+    position: fixed;
+    top: calc(var(--nav-height) + 1.25rem);
+    left: 2rem;
+    z-index: 210;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .menu-icon span {
+    display: block;
+    width: 1.5rem;
+    height: 2px;
+    background: #e8e8e8;
+    transition: background 150ms ease;
+  }
+
+  .menu-icon:hover span {
+    background: #4361ee;
+  }
+
+  .side-menu {
+    position: fixed;
+    top: calc(var(--nav-height) + 4rem);
+    left: 2rem;
+    z-index: 200;
+    width: 282px;
+    padding: 1.5rem;
+    background: #121212;
+    border-radius: 4px;
+    transform-origin: top center;
+    transition: transform 400ms ease, opacity 300ms ease;
+  }
+
+  .side-menu.is-collapsed {
+    transform: scaleY(0);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .side-menu.is-open-forced {
+    transform: scaleY(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .side-menu-title {
+    margin: 0 0 1rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #9a9a9a;
+  }
+
+  .side-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .side-menu a {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    color: #e8e8e8;
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+
+  .side-menu a:hover {
+    color: #4361ee;
+  }
+
+  @media (max-width: 640px) {
+    .side-menu {
+      left: 1rem;
+      right: 1rem;
+      width: auto;
+    }
+    .menu-icon {
+      left: 1rem;
+    }
+  }
+</style>
+
+<script>
+  function initSideMenu() {
+    const menu = document.querySelector<HTMLElement>('[data-side-menu]');
+    const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+    const sentinel = document.querySelector<HTMLElement>('[data-menu-sentinel]');
+    if (!menu || !toggle || !sentinel) return;
+
+    let collapsedByScroll = false;
+    let forcedOpen = false;
+
+    function render() {
+      menu!.classList.toggle('is-collapsed', collapsedByScroll && !forcedOpen);
+      menu!.classList.toggle('is-open-forced', forcedOpen);
+      toggle!.setAttribute('aria-expanded', String(collapsedByScroll ? forcedOpen : true));
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        collapsedByScroll = !entry.isIntersecting;
+        if (collapsedByScroll === false) forcedOpen = false;
+        render();
+      },
+      { threshold: 0 }
+    );
+    observer.observe(sentinel);
+
+    toggle.addEventListener('click', () => {
+      forcedOpen = !forcedOpen;
+      render();
+    });
+
+    menu.querySelectorAll('[data-menu-link]').forEach(link => {
+      link.addEventListener('click', () => {
+        forcedOpen = false;
+        render();
+      });
+    });
+
+    render();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSideMenu);
+  } else {
+    initSideMenu();
+  }
+</script>

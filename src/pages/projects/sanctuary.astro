@@ -1,0 +1,36 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Lightbox from '@components/sanctuary/Lightbox.astro';
+import ProjectNavArrows from '@components/sanctuary/ProjectNavArrows.astro';
+import HeroSection from '@components/sanctuary/HeroSection.astro';
+import ContributionSection from '@components/sanctuary/ContributionSection.astro';
+import CharacterDesignSection from '@components/sanctuary/CharacterDesignSection.astro';
+import AnimationSection from '@components/sanctuary/AnimationSection.astro';
+import EnvironmentDesignSection from '@components/sanctuary/EnvironmentDesignSection.astro';
+import UIDesignSection from '@components/sanctuary/UIDesignSection.astro';
+---
+
+<BaseLayout
+  title="Sanctuary — Ksenia Spirina"
+  description="Graduation project. World and visual language design for Sanctuary: character art, environment art, UI, and animation."
+>
+  <div class="sanctuary">
+    <ProjectNavArrows nextHref="/work" prevHref="/work" />
+
+    <HeroSection />
+    <ContributionSection />
+    <CharacterDesignSection />
+    <AnimationSection />
+    <EnvironmentDesignSection />
+    <UIDesignSection />
+
+    <Lightbox />
+  </div>
+</BaseLayout>
+
+<style>
+  .sanctuary {
+    background: #1e1e1e;
+    color: #e8e8e8;
+  }
+</style>

@@ -55,13 +55,17 @@ import { siteConfig } from '@config/site';
   }
 
   .navbar-link {
-    color: var(--color-text-secondary);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-weight: 700;
     font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
     transition: color var(--transition-fast);
   }
 
   .navbar-link:hover {
-    color: var(--color-text);
+    color: var(--color-accent);
   }
 
   .navbar-toggle {

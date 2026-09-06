@@ -1,0 +1,124 @@
+---
+import { Image } from 'astro:assets';
+import SectionHeading from './SectionHeading.astro';
+import bigPhoto from '@assets/sanctuary/characters/all-characters-together.png';
+import g2 from '@assets/sanctuary/gallery/2.png';
+import g3 from '@assets/sanctuary/gallery/3.png';
+import g4 from '@assets/sanctuary/gallery/4.png';
+import g5 from '@assets/sanctuary/gallery/5.png';
+import g6 from '@assets/sanctuary/gallery/6.png';
+import g7 from '@assets/sanctuary/gallery/7.png';
+import g8 from '@assets/sanctuary/gallery/8.png';
+import g9 from '@assets/sanctuary/gallery/9.png';
+
+const gallery = [g2, g3, g4, g5, g6, g7, g8, g9];
+---
+
+<section class="contribution" id="contribution">
+  <SectionHeading title="Contribution" />
+
+  <div class="big-photo">
+    <Image src={bigPhoto} alt="Sanctuary — world overview" widths={[600, 1200, 1800]} sizes="100vw" loading="lazy" />
+  </div>
+
+  <div class="columns">
+    <div class="col">
+      <p class="label">MY ROLE</p>
+      <p>
+        World and visual language design
+        Character art, environment art, UI, Full-screen illustrations
+        Animation
+        Contributed to worldbuilding, quest writing, and UX
+        Assembled and staged assets in-scene handed off to programmers for integration and scripting
+      </p>
+    </div>
+    <div class="col">
+      <p class="label">CHALLENGE</p>
+      <p>
+        Sole designer and artist on a 3-person team
+        Create a visual language for the project
+        Establish a full world identity: environment, characters, UI, animation, and illustration
+        Required a visual system that could clearly distinguish two groups within one cohesive world
+        Large creative scope to cover within a tight 3-month production timeline
+      </p>
+    </div>
+  </div>
+
+  <div class="gallery-scroller">
+    {gallery.map((img, i) => (
+      <div class="gallery-item">
+        <Image src={img} alt={`Sanctuary gallery ${i + 2}`} widths={[300, 600]} sizes="300px" loading="lazy" />
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .contribution {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 4rem 2rem;
+  }
+
+  .big-photo {
+    margin-bottom: 3rem;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .big-photo :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    .columns {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .label {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #4361ee;
+  }
+
+  .col p:not(.label) {
+    margin: 0;
+    color: #c9c9c9;
+    line-height: 1.7;
+    white-space: pre-line;
+  }
+
+  .gallery-scroller {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .gallery-item {
+    flex: 0 0 auto;
+    width: 260px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .gallery-item :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+</style>

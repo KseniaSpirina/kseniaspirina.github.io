@@ -9,13 +9,13 @@
   --color-bg: #fafafa;
   --color-text: #1a1a1a;
   --color-text-secondary: #666666;
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
+  --color-accent: #4361ee;
+  --color-accent-hover: #2f47c9;
   --color-border: #e5e5e5;
   --color-surface: #ffffff;
 
   /* Typography */
-  --font-display: 'Inter', system-ui, sans-serif;
+  --font-display: 'Unbounded', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
@@ -43,8 +43,8 @@
     --color-bg: #0a0a0a;
     --color-text: #fafafa;
     --color-text-secondary: #a0a0a0;
-    --color-accent: #60a5fa;
-    --color-accent-hover: #93c5fd;
+    --color-accent: #6b83ff;
+    --color-accent-hover: #8fa1ff;
     --color-border: #262626;
     --color-surface: #141414;
   }

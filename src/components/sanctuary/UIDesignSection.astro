@@ -1,0 +1,111 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { Image } from 'astro:assets';
+import cursorRegular from '@assets/sanctuary/ui/cursor.png';
+
+const cursors = [
+  { label: 'Regular', video: null },
+  { label: 'NPC', video: '/sanctuary/ui/cursor-eye.webm' },
+  { label: 'Interactive Object', video: '/sanctuary/ui/cursor-talking.webm' },
+  { label: 'Walk', video: '/sanctuary/ui/cursor-walking.webm' },
+];
+---
+
+<section class="ui-design" id="ui-design">
+  <SectionHeading eyebrow="UI Design Approach" title="UI Design" />
+
+  <p class="intro">
+    A more minimalist style was chosen for the user interface, making the dialogue text easier to read
+    against the game's rich illustrations, while still echoing some of the game's visual elements.
+  </p>
+
+  <div class="block">
+    <h3>Cursor</h3>
+    <p class="body">
+      Thin corner frames echo the game's fine linework, and originated as a stylized rendering of water
+      ripples.
+    </p>
+    <div class="cursor-grid">
+      {cursors.map(c => (
+        <div class="cursor-card">
+          {c.video ? (
+            <video src={c.video} autoplay loop muted playsinline></video>
+          ) : (
+            <Image src={cursorRegular} alt="Regular cursor" widths={[200]} sizes="140px" loading="lazy" />
+          )}
+          <p>{c.label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="block">
+    <h3>Speech UI</h3>
+    <p class="body">
+      Black backgrounds tie the interface to black accents used in character and environment design —
+      the in-game dialogue typeface was chosen for readability and a literary tone matching the game's
+      lore.
+    </p>
+  </div>
+</section>
+
+<style>
+  .ui-design {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .intro {
+    max-width: 60ch;
+    color: #c9c9c9;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .block {
+    margin-bottom: 3rem;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    color: #e8e8e8;
+    font-size: 1.25rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .body {
+    color: #c9c9c9;
+    line-height: 1.7;
+    max-width: 60ch;
+    margin: 0 0 1.5rem;
+  }
+
+  .cursor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1.5rem;
+    max-width: 700px;
+  }
+
+  .cursor-card {
+    text-align: center;
+    background: #121212;
+    border-radius: 4px;
+    padding: 1.5rem 1rem;
+  }
+
+  .cursor-card video,
+  .cursor-card :global(img) {
+    width: 100%;
+    max-width: 80px;
+    margin-inline: auto;
+    display: block;
+  }
+
+  .cursor-card p {
+    margin: 0.75rem 0 0;
+    font-size: 0.75rem;
+    color: #9a9a9a;
+  }
+</style>

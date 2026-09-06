@@ -1,0 +1,63 @@
+---
+interface Props {
+  prevHref?: string;
+  nextHref?: string;
+}
+
+const { prevHref, nextHref } = Astro.props;
+---
+
+<div class="nav-arrows">
+  {prevHref && (
+    <a class="nav-arrow nav-arrow-prev" href={prevHref} aria-label="Previous project">
+      <span class="arrow">←</span>
+      <span class="label">Previous project</span>
+    </a>
+  )}
+  {nextHref && (
+    <a class="nav-arrow nav-arrow-next" href={nextHref} aria-label="Next project">
+      <span class="label">Next project</span>
+      <span class="arrow">→</span>
+    </a>
+  )}
+</div>
+
+<style>
+  .nav-arrows {
+    position: fixed;
+    top: calc(var(--nav-height) + 1.25rem);
+    right: 2rem;
+    z-index: 210;
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .nav-arrow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #9a9a9a;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: color 150ms ease;
+  }
+
+  .nav-arrow:hover {
+    color: #e8e8e8;
+  }
+
+  .arrow {
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 640px) {
+    .nav-arrows {
+      right: 1rem;
+    }
+    .label {
+      display: none;
+    }
+  }
+</style>

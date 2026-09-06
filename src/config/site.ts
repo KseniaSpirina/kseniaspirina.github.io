@@ -9,7 +9,7 @@ export const siteConfig = {
   
   // Navigation links
   nav: [
-    { label: 'Work', href: '/work' },
+    { label: 'Projects', href: '/work' },
     { label: 'About', href: '/about' },
   ],
 

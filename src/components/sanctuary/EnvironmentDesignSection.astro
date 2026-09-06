@@ -1,0 +1,190 @@
+---
+import LightboxImage from './LightboxImage.astro';
+import SectionHeading from './SectionHeading.astro';
+import { Image } from 'astro:assets';
+
+import hallFinal from '@assets/sanctuary/environment/hall-final.png';
+import archiveColor from '@assets/sanctuary/environment/archive-color-1.png';
+import galleryOfGoblets from '@assets/sanctuary/environment/gallery-2.png';
+import laboratory from '@assets/sanctuary/environment/fixing-room-all-together.png';
+import enteringRoom from '@assets/sanctuary/environment/tutorial-room-for-unity-1.png';
+import sketches1 from '@assets/sanctuary/environment/sketches-environment.jpg';
+import sketches2 from '@assets/sanctuary/environment/sketches-environment-1.jpg';
+import blockout from '@assets/sanctuary/environment/fixing-room-3d-blockout.jpg';
+import lineArt from '@assets/sanctuary/environment/fixing-room-line.jpg';
+import references from '@assets/sanctuary/environment/references-environment.png';
+---
+
+<section class="environment-design" id="environment-design">
+  <SectionHeading eyebrow="Environment Design Approach" title="Environment Design" />
+
+  <p class="intro">
+    Environment design faces the same core challenge as character design: dividing space stylistically
+    between the two factions, while resolving how those two spaces meet and collide. The central theme
+    is coexistence with nature versus its conquest and transformation.
+  </p>
+
+  <div class="hall">
+    <h3>Hall</h3>
+    <p class="body">
+      The heart of the Sanctuary, where Mind and Spirit styles blend and bleed into one another. Right
+      side leans toward Spirit, left side toward Mind — the center of the hall is designed like an
+      altar, underscoring its significance to the Sanctuary as a whole.
+    </p>
+    <LightboxImage src={hallFinal} alt="Hall of the Sanctuary" widths={[600, 1200, 1800]} sizes="100vw" />
+  </div>
+
+  <div class="rooms two-col">
+    <div>
+      <p class="label">Rooms · Spirit</p>
+      <div class="room">
+        <h4>Archive</h4>
+        <p class="body">
+          Made in synergy with nature. Walls and columns left largely unworked stone, decorated with
+          carved ornaments and drawings referencing ancient civilizations.
+        </p>
+        <LightboxImage src={archiveColor} alt="Archive room" />
+      </div>
+      <div class="room">
+        <h4>Hall of Goblets</h4>
+        <p class="body">Warm palette, softly lit by candlelight. Materials: stone, wood, glass.</p>
+        <LightboxImage src={galleryOfGoblets} alt="Hall of Goblets" />
+      </div>
+    </div>
+    <div>
+      <p class="label">Rooms · Mind</p>
+      <div class="room">
+        <h4>Laboratory</h4>
+        <p class="body">
+          Nature is absent — inspired by laboratories and manufacturing facilities, filled with
+          machinery and futuristic technology.
+        </p>
+        <LightboxImage src={laboratory} alt="Laboratory room" />
+      </div>
+      <div class="room">
+        <h4>Sanctuary Entering Room</h4>
+        <p class="body">
+          Cold blue-green palette, creating an alienating, uncomfortable atmosphere. Materials:
+          concrete, metal, tile, glass.
+        </p>
+        <LightboxImage src={enteringRoom} alt="Sanctuary entering room" />
+      </div>
+    </div>
+  </div>
+
+  <div class="process">
+    <h3>Process Breakdown</h3>
+    <div class="process-grid">
+      <div>
+        <p class="label">References</p>
+        <Image src={references} alt="Environment references" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
+      </div>
+      <div>
+        <p class="label">Sketches</p>
+        <Image src={sketches1} alt="Environment sketches" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
+      </div>
+      <div>
+        <p class="label">Sketches</p>
+        <Image src={sketches2} alt="Environment sketches" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
+      </div>
+      <div>
+        <p class="label">3D Blockout</p>
+        <Image src={blockout} alt="3D blockout" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
+      </div>
+      <div>
+        <p class="label">Final Line</p>
+        <Image src={lineArt} alt="Final line art" widths={[500, 900]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .environment-design {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 4rem 2rem;
+  }
+
+  .intro {
+    max-width: 60ch;
+    color: #c9c9c9;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    color: #e8e8e8;
+    font-size: 1.25rem;
+    margin: 0 0 0.75rem;
+  }
+
+  h4 {
+    font-family: var(--font-display);
+    color: #e8e8e8;
+    font-size: 1.05rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .body {
+    color: #c9c9c9;
+    line-height: 1.7;
+    margin: 0 0 1rem;
+    max-width: 60ch;
+  }
+
+  .hall {
+    margin-bottom: 3rem;
+  }
+
+  .hall :global(img) {
+    border-radius: 4px;
+  }
+
+  .rooms.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    .rooms.two-col {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .label {
+    margin: 0 0 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #4361ee;
+  }
+
+  .room {
+    margin-bottom: 2rem;
+  }
+
+  .room :global(img) {
+    border-radius: 4px;
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .process-grid .label {
+    color: #9a9a9a;
+    margin-bottom: 0.5rem;
+  }
+
+  .process-grid :global(img) {
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+  }
+</style>

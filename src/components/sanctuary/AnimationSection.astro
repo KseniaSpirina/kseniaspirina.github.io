@@ -1,0 +1,94 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+const walking = [
+  { name: 'Miren', src: '/sanctuary/characters/miren-walking.webm' },
+  { name: 'Medium Vivaki', src: '/sanctuary/characters/medium-vivaki-walking.webm' },
+  { name: 'MC', src: '/sanctuary/characters/mc-walking.webm' },
+  { name: 'Guard', src: '/sanctuary/characters/guard-1-walking.webm' },
+  { name: 'Engineer', src: '/sanctuary/characters/engineer-walking.webm' },
+  { name: 'Elder', src: '/sanctuary/characters/elder-walking.webm' },
+  { name: 'Builder', src: '/sanctuary/characters/builder-walking.webm' },
+];
+
+const idle = [
+  { name: 'Ill Vivaki', src: '/sanctuary/characters/ill-vivaki.webm' },
+  { name: 'MC', src: '/sanctuary/characters/mc-idle.webm' },
+  { name: 'Medium Vivaki', src: '/sanctuary/characters/medium-vivaki-idle.webm' },
+  { name: 'Small Vivaki', src: '/sanctuary/characters/small-vivaki.webm' },
+  { name: 'Guard', src: '/sanctuary/characters/guard-1-idle.webm' },
+  { name: 'Builder', src: '/sanctuary/characters/builder-idle.webm' },
+  { name: 'Miren', src: '/sanctuary/characters/miren-idle.webm' },
+  { name: 'Engineer', src: '/sanctuary/characters/engineer-idle.webm' },
+  { name: 'Elder', src: '/sanctuary/characters/elder-idle.webm' },
+];
+---
+
+<section class="animation" id="animation">
+  <SectionHeading eyebrow="Animation" title="Walking &amp; Idle" />
+
+  <h3>Walking</h3>
+  <div class="video-grid">
+    {walking.map(v => (
+      <div class="video-card">
+        <video src={v.src} autoplay loop muted playsinline></video>
+        <p>{v.name}</p>
+      </div>
+    ))}
+  </div>
+
+  <h3 class="second">Idle</h3>
+  <div class="video-grid">
+    {idle.map(v => (
+      <div class="video-card">
+        <video src={v.src} autoplay loop muted playsinline></video>
+        <p>{v.name}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .animation {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 4rem 2rem;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    color: #e8e8e8;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 1.5rem;
+  }
+
+  h3.second {
+    margin-top: 3rem;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .video-card {
+    text-align: center;
+  }
+
+  .video-card video {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    background: #121212;
+    border-radius: 4px;
+  }
+
+  .video-card p {
+    margin: 0.5rem 0 0;
+    font-size: 0.8rem;
+    color: #9a9a9a;
+  }
+</style>
