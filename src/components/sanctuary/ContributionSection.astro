@@ -47,8 +47,8 @@ const row2 = [g5, g6, g9];
           <LightboxImage
             src={img}
             alt={`Sanctuary gallery image ${i + 1}`}
-            widths={[300, 600, 900, 1200]}
-            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 282px"
+            widths={[400, 700, 1000, 1400, 1920]}
+            sizes="(max-width: 640px) 95vw, (max-width: 1024px) 50vw, 300px"
             group="contribution-gallery"
           />
         </div>
@@ -60,8 +60,8 @@ const row2 = [g5, g6, g9];
           <LightboxImage
             src={img}
             alt={`Sanctuary gallery image ${i + 5}`}
-            widths={[300, 600, 900, 1200]}
-            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 282px"
+            widths={[400, 700, 1000, 1400, 1920]}
+            sizes="(max-width: 640px) 95vw, (max-width: 1024px) 50vw, 300px"
             group="contribution-gallery"
           />
         </div>
@@ -120,6 +120,9 @@ const row2 = [g5, g6, g9];
     .gallery-row {
       grid-template-columns: repeat(2, 1fr);
     }
+    .gallery-row .span-2 {
+      grid-column: span 1;
+    }
   }
 
   @media (max-width: 640px) {
@@ -128,6 +131,9 @@ const row2 = [g5, g6, g9];
     }
     .gallery-row {
       grid-template-columns: 1fr;
+    }
+    .gallery-row .span-2 {
+      grid-column: 1 / -1;
     }
   }
 

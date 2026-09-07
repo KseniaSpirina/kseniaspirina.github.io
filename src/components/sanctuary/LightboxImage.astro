@@ -31,7 +31,7 @@ const full = await getImage({ src, width: Math.min(src.width, 1920), format: 'we
   data-lightbox-src={full.src}
   data-lightbox-group={group}
 >
-  <Image src={src} alt={alt} widths={widths} sizes={sizes} loading="lazy" />
+  <Image src={src} alt={alt} widths={widths} sizes={sizes} loading="lazy" quality={90} />
 </button>
 
 <style>
