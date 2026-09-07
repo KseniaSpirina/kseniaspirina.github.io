@@ -85,6 +85,12 @@
   .lightbox-nav[hidden] {
     display: none;
   }
+
+  @media (max-width: 640px) {
+    .lightbox-nav {
+      display: none;
+    }
+  }
 </style>
 
 <script>
@@ -157,6 +163,22 @@
       if (e.key === 'ArrowLeft') step(-1);
       if (e.key === 'ArrowRight') step(1);
     });
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    root!.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    root!.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        step(dx < 0 ? 1 : -1);
+      }
+    }, { passive: true });
   }
 
   if (document.readyState === 'loading') {
