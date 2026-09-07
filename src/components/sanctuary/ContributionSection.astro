@@ -44,14 +44,26 @@ const row2 = [g5, g6, g9];
     <div class="full gallery-row">
       {row1.map((img, i) => (
         <div class="span-2">
-          <LightboxImage src={img} alt={`Sanctuary gallery image ${i + 1}`} widths={[300, 560]} sizes="282px" />
+          <LightboxImage
+            src={img}
+            alt={`Sanctuary gallery image ${i + 1}`}
+            widths={[300, 600, 900, 1200]}
+            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 282px"
+            group="contribution-gallery"
+          />
         </div>
       ))}
     </div>
     <div class="full gallery-row">
       {row2.map((img, i) => (
         <div class="span-2">
-          <LightboxImage src={img} alt={`Sanctuary gallery image ${i + 5}`} widths={[300, 560]} sizes="282px" />
+          <LightboxImage
+            src={img}
+            alt={`Sanctuary gallery image ${i + 5}`}
+            widths={[300, 600, 900, 1200]}
+            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 282px"
+            group="contribution-gallery"
+          />
         </div>
       ))}
     </div>

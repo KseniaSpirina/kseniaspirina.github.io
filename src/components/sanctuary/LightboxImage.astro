@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
@@ -8,13 +8,30 @@ interface Props {
   widths?: number[];
   sizes?: string;
   class?: string;
+  group?: string;
 }
 
-const { src, alt, widths = [500, 900, 1400], sizes = '(max-width: 768px) 100vw, 50vw', class: className } = Astro.props;
+const {
+  src,
+  alt,
+  widths = [500, 900, 1400],
+  sizes = '(max-width: 768px) 100vw, 50vw',
+  class: className,
+  group,
+} = Astro.props;
+
+const full = await getImage({ src, width: Math.min(src.width, 1920), format: 'webp', quality: 82 });
 ---
 
-<button type="button" class:list={['lightbox-figure', className]} data-lightbox data-lightbox-alt={alt}>
-  <Image src={src} alt={alt} widths={widths} sizes={sizes} loading="lazy" data-lightbox-full />
+<button
+  type="button"
+  class:list={['lightbox-figure', className]}
+  data-lightbox
+  data-lightbox-alt={alt}
+  data-lightbox-src={full.src}
+  data-lightbox-group={group}
+>
+  <Image src={src} alt={alt} widths={widths} sizes={sizes} loading="lazy" />
 </button>
 
 <style>
