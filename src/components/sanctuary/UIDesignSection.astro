@@ -15,7 +15,7 @@ const cursors = [
   <SectionHeading title="UI Design" />
   <p class="caption">UI Design Approach</p>
 
-  <p class="running">
+  <p class="running narrow">
     A more minimalist style was chosen for the user interface, making the dialogue text easier to read
     against the game's rich illustrations, while still echoing some of the game's visual elements.
   </p>
@@ -52,7 +52,7 @@ const cursors = [
 
 <style>
   .ui-design {
-    padding: 4rem 0 6rem;
+    padding-block: 4rem 6rem;
   }
 
   .ui-design > :global(*) {
@@ -80,6 +80,17 @@ const cursors = [
     line-height: 1.7;
     max-width: 60ch;
     margin: 0 0 1.5rem;
+  }
+
+  .running.narrow {
+    grid-column: span 3;
+    max-width: 100%;
+  }
+
+  @media (max-width: 1024px) {
+    .running.narrow {
+      grid-column: 1 / -1;
+    }
   }
 
   .cursor-grid {
