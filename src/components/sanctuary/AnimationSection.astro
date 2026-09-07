@@ -6,26 +6,26 @@ import SectionHeading from './SectionHeading.astro';
 // percentage of its own canvas (content width 1200px, canvas height as noted).
 const IDLE_CANVAS_H = 1346;
 const idle = [
-  { name: 'Engineer', src: '/sanctuary/characters/engineer-idle.webm', x: 502, y: 0, w: 197.8, h: 464, mirror: true },
-  { name: 'Elder', src: '/sanctuary/characters/elder-idle.webm', x: 121, y: 39, w: 269, h: 400 },
-  { name: 'Miren', src: '/sanctuary/characters/miren-idle.webm', x: 763, y: 109, w: 171, h: 330 },
-  { name: 'Builder', src: '/sanctuary/characters/builder-idle.webm', x: 997, y: 90, w: 314, h: 349 },
-  { name: 'Guard', src: '/sanctuary/characters/guard-1-idle.webm', x: 147, y: 464, w: 263, h: 612 },
-  { name: 'MC', src: '/sanctuary/characters/mc-idle.webm', x: 502, y: 665, w: 315, h: 421 },
-  { name: 'Medium Vivaki', src: '/sanctuary/characters/medium-vivaki-idle.webm', x: 467, y: 1165, w: 190, h: 181 },
-  { name: 'Small Vivaki', src: '/sanctuary/characters/small-vivaki.webm', x: 322, y: 1225, w: 73, h: 74 },
-  { name: 'Ill Vivaki', src: '/sanctuary/characters/ill-vivaki.webm', x: 163, y: 1224, w: 78, h: 75 },
+  { name: 'Engineer', src: '/sanctuary/characters/engineer-idle.webm', x: 502, y: 0, w: 197.8, h: 464, mirror: true, row: 1 },
+  { name: 'Elder', src: '/sanctuary/characters/elder-idle.webm', x: 121, y: 39, w: 269, h: 400, row: 1 },
+  { name: 'Miren', src: '/sanctuary/characters/miren-idle.webm', x: 763, y: 109, w: 171, h: 330, row: 1 },
+  { name: 'Builder', src: '/sanctuary/characters/builder-idle.webm', x: 997, y: 90, w: 314, h: 349, row: 1 },
+  { name: 'Guard', src: '/sanctuary/characters/guard-1-idle.webm', x: 147, y: 464, w: 263, h: 612, row: 2 },
+  { name: 'MC', src: '/sanctuary/characters/mc-idle.webm', x: 502, y: 665, w: 315, h: 421, row: 2 },
+  { name: 'Medium Vivaki', src: '/sanctuary/characters/medium-vivaki-idle.webm', x: 467, y: 1165, w: 190, h: 181, row: 3 },
+  { name: 'Small Vivaki', src: '/sanctuary/characters/small-vivaki.webm', x: 322, y: 1225, w: 73, h: 74, row: 3 },
+  { name: 'Ill Vivaki', src: '/sanctuary/characters/ill-vivaki.webm', x: 163, y: 1224, w: 78, h: 75, row: 3 },
 ];
 
 const WALKING_CANVAS_H = 1549;
 const walking = [
-  { name: 'Miren', src: '/sanctuary/characters/miren-walking.webm', x: 984, y: 85, w: 243, h: 379 },
-  { name: 'Guard', src: '/sanctuary/characters/guard-1-walking.webm', x: 112, y: 588, w: 711, h: 421 },
-  { name: 'Elder', src: '/sanctuary/characters/elder-walking.webm', x: 130, y: 0, w: 337, h: 464 },
-  { name: 'Engineer', src: '/sanctuary/characters/engineer-walking.webm', x: 602, y: 28, w: 236, h: 480, mirror: true },
-  { name: 'MC', src: '/sanctuary/characters/mc-walking.webm', x: 188, y: 1134, w: 310, h: 415 },
-  { name: 'Medium Vivaki', src: '/sanctuary/characters/medium-vivaki-walking.webm', x: 1070, y: 1295, w: 193, h: 171 },
-  { name: 'Builder', src: '/sanctuary/characters/builder-walking.webm', x: 645, y: 1161, w: 339, h: 362 },
+  { name: 'Miren', src: '/sanctuary/characters/miren-walking.webm', x: 984, y: 85, w: 243, h: 379, row: 1 },
+  { name: 'Elder', src: '/sanctuary/characters/elder-walking.webm', x: 130, y: 0, w: 337, h: 464, row: 1 },
+  { name: 'Engineer', src: '/sanctuary/characters/engineer-walking.webm', x: 602, y: 28, w: 236, h: 480, mirror: true, row: 1 },
+  { name: 'Guard', src: '/sanctuary/characters/guard-1-walking.webm', x: 112, y: 588, w: 711, h: 421, row: 2 },
+  { name: 'MC', src: '/sanctuary/characters/mc-walking.webm', x: 188, y: 1134, w: 310, h: 415, row: 3 },
+  { name: 'Medium Vivaki', src: '/sanctuary/characters/medium-vivaki-walking.webm', x: 1070, y: 1295, w: 193, h: 171, row: 3 },
+  { name: 'Builder', src: '/sanctuary/characters/builder-walking.webm', x: 645, y: 1161, w: 339, h: 362, row: 3 },
 ];
 
 const CONTENT_W = 1200;
@@ -37,6 +37,25 @@ function pos(item: { x: number; y: number; w: number; h: number }, canvasH: numb
   const height = (item.h / canvasH) * 100;
   return `left:${left}%; top:${top}%; width:${width}%; height:${height}%;`;
 }
+
+function rowBottoms(items: { row: number; y: number; h: number }[]) {
+  const map: Record<number, number> = {};
+  for (const it of items) {
+    const bottom = it.y + it.h;
+    if (!(it.row in map) || bottom > map[it.row]) map[it.row] = bottom;
+  }
+  return map;
+}
+
+const idleRowBottoms = rowBottoms(idle);
+const walkingRowBottoms = rowBottoms(walking);
+
+function captionPos(item: { x: number; w: number; row: number }, canvasH: number, bottoms: Record<number, number>) {
+  const left = ((item.x - 120) / CONTENT_W) * 100;
+  const width = (item.w / CONTENT_W) * 100;
+  const top = (bottoms[item.row] / canvasH) * 100;
+  return `left:${left}%; width:${width}%; top:${top}%;`;
+}
 ---
 
 <section class="animation grid-1440" id="animation">
@@ -46,17 +65,19 @@ function pos(item: { x: number; y: number; w: number; h: number }, canvasH: numb
     <p class="caption">Idle</p>
     <div class="canvas" style={`aspect-ratio: ${CONTENT_W} / ${IDLE_CANVAS_H};`}>
       {idle.map(item => (
-        <div class="item" style={pos(item, IDLE_CANVAS_H)}>
-          <video
-            src={item.src}
-            autoplay
-            loop
-            muted
-            playsinline
-            class:list={[{ mirrored: item.mirror }]}
-          ></video>
-          <p class="name">{item.name}</p>
-        </div>
+        <>
+          <div class="item" style={pos(item, IDLE_CANVAS_H)}>
+            <video
+              src={item.src}
+              autoplay
+              loop
+              muted
+              playsinline
+              class:list={[{ mirrored: item.mirror }]}
+            ></video>
+          </div>
+          <p class="name" style={captionPos(item, IDLE_CANVAS_H, idleRowBottoms)}>{item.name}</p>
+        </>
       ))}
     </div>
   </div>
@@ -65,17 +86,19 @@ function pos(item: { x: number; y: number; w: number; h: number }, canvasH: numb
     <p class="caption">Walking</p>
     <div class="canvas" style={`aspect-ratio: ${CONTENT_W} / ${WALKING_CANVAS_H};`}>
       {walking.map(item => (
-        <div class="item" style={pos(item, WALKING_CANVAS_H)}>
-          <video
-            src={item.src}
-            autoplay
-            loop
-            muted
-            playsinline
-            class:list={[{ mirrored: item.mirror }]}
-          ></video>
-          <p class="name">{item.name}</p>
-        </div>
+        <>
+          <div class="item" style={pos(item, WALKING_CANVAS_H)}>
+            <video
+              src={item.src}
+              autoplay
+              loop
+              muted
+              playsinline
+              class:list={[{ mirrored: item.mirror }]}
+            ></video>
+          </div>
+          <p class="name" style={captionPos(item, WALKING_CANVAS_H, walkingRowBottoms)}>{item.name}</p>
+        </>
       ))}
     </div>
   </div>
@@ -107,9 +130,6 @@ function pos(item: { x: number; y: number; w: number; h: number }, canvasH: numb
 
   .item {
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 
   .item video {
@@ -122,7 +142,8 @@ function pos(item: { x: number; y: number; w: number; h: number }, canvasH: numb
     transform: scaleX(-1);
   }
 
-  .item .name {
+  .name {
+    position: absolute;
     margin: 0.4rem 0 0;
     font-family: var(--font-body);
     font-weight: 400;
