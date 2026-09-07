@@ -28,10 +28,14 @@ import finalColorRender from '@assets/sanctuary/environment/fixing-room-all-toge
   <p class="caption">Hall</p>
   <div class="row">
     <div class="c3-2">
-      <p class="running">The heart of the Sanctuary, where Mind and Spirit styles blend and bleed into one another</p>
+      <ul class="running list">
+        <li>The heart of the Sanctuary, where Mind and Spirit styles blend and bleed into one another</li>
+      </ul>
     </div>
     <div class="c5-2">
-      <p class="running">Right side leans toward Spirit, left side toward Mind — the center of the hall is designed like an altar, underscoring its significance to the Sanctuary as a whole</p>
+      <ul class="running list">
+        <li>Right side leans toward Spirit, left side toward Mind — the center of the hall is designed like an altar, underscoring its significance to the Sanctuary as a whole</li>
+      </ul>
     </div>
   </div>
   <div class="full media">
@@ -41,10 +45,17 @@ import finalColorRender from '@assets/sanctuary/environment/fixing-room-all-toge
   <p class="caption accent">Rooms · Spirit</p>
   <div class="row">
     <div class="c3-2">
-      <p class="running">Made in synergy with nature. Walls and columns left largely unworked stone. Decorated with carved ornaments and drawings referencing ancient civilizations.</p>
+      <ul class="running list">
+        <li>Made in synergy with nature</li>
+        <li>Walls and columns left largely unworked stone</li>
+        <li>Decorated with carved ornaments and drawings referencing ancient civilizations</li>
+      </ul>
     </div>
     <div class="c5-2">
-      <p class="running">Warm palette, softly lit by candlelight. Materials: stone, wood, glass.</p>
+      <ul class="running list">
+        <li>Warm palette, softly lit by candlelight</li>
+        <li>Materials: stone, wood, glass</li>
+      </ul>
     </div>
   </div>
 
@@ -61,10 +72,17 @@ import finalColorRender from '@assets/sanctuary/environment/fixing-room-all-toge
   <p class="caption accent">Rooms · Mind</p>
   <div class="row">
     <div class="c3-2">
-      <p class="running">Nature is absent. Inspired by laboratories and manufacturing facilities. Filled with machinery and futuristic technology.</p>
+      <ul class="running list">
+        <li>Nature is absent</li>
+        <li>Inspired by laboratories and manufacturing facilities</li>
+        <li>Filled with machinery and futuristic technology</li>
+      </ul>
     </div>
     <div class="c5-2">
-      <p class="running">Cold blue-green palette, creating an alienating, uncomfortable atmosphere. Materials: concrete, metal, tile, glass.</p>
+      <ul class="running list">
+        <li>Cold blue-green palette, creating an alienating, uncomfortable atmosphere</li>
+        <li>Materials: concrete, metal, tile, glass</li>
+      </ul>
     </div>
   </div>
 
@@ -218,6 +236,14 @@ import finalColorRender from '@assets/sanctuary/environment/fixing-room-all-toge
 
   .running.narrow {
     grid-column: span 3;
+  }
+
+  .running.list {
+    list-style: disc;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   @media (max-width: 1024px) {
