@@ -6,7 +6,7 @@ import '../../styles/buttons.css';
 ---
 
 <ProjectSection id="contact" title="Contact">
-  <h3 class="heading">Interested in working together?</h3>
+  <h3 class="heading">Let’s work together!</h3>
   <div class="buttons">
     <a class="btn btn--primary" href="mailto:kseniaspirina@gmail.com">
       <Fragment set:html={envelopeIcon} />
@@ -17,7 +17,35 @@ import '../../styles/buttons.css';
       <span>LinkedIn</span>
     </a>
   </div>
+  <div class="address">
+    <a class="address-link" href="mailto:kseniaspirina@gmail.com">kseniaspirina@gmail.com</a>
+    <button class="btn btn--secondary" type="button" data-copy="kseniaspirina@gmail.com" aria-live="polite">Copy</button>
+  </div>
 </ProjectSection>
+
+<script>
+  // Copy button: puts the e-mail address on the clipboard and says "Copied" for two seconds
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const value = btn.dataset.copy ?? '';
+      try {
+        await navigator.clipboard.writeText(value);
+      } catch {
+        const area = document.createElement('textarea');
+        area.value = value;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand('copy');
+        area.remove();
+      }
+      const label = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(() => {
+        btn.textContent = label;
+      }, 2000);
+    });
+  });
+</script>
 
 <style>
   .heading {
@@ -35,5 +63,31 @@ import '../../styles/buttons.css';
     flex-wrap: wrap;
     gap: 24px;
     margin-top: 32px;
+  }
+
+  /* buttons -> address 48px (button edge to the lowercase letters); same row as on the Contact page */
+  .address {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 32px;
+    /* row is 37px tall (Copy button), the 27px line is centred in it: lowercase letters start 15.17px below its top */
+    margin-top: 32.83px;
+  }
+
+  .address-link {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 27px;
+    color: #d6d6d6;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 150ms ease;
+  }
+
+  @media (hover: hover) {
+    .address-link:hover {
+      color: #4361ee;
+    }
   }
 </style>
