@@ -172,12 +172,16 @@ const embedSrc: string | null = null;
     transition: color 150ms ease, background-color 150ms ease;
   }
 
-  .cover:hover {
-    color: #4361ee;
+  @media (hover: hover) {
+    .cover:hover {
+      color: #4361ee;
+  }
   }
 
-  .cover:hover .play {
-    background: rgba(18, 18, 18, 0.8);
+  @media (hover: hover) {
+    .cover:hover .play {
+      background: rgba(18, 18, 18, 0.8);
+  }
   }
 
   .info {

@@ -179,12 +179,16 @@ const skills = [
     transition: opacity 150ms ease;
   }
 
-  .contact-btn:hover {
-    color: #4361ee;
+  @media (hover: hover) {
+    .contact-btn:hover {
+      color: #4361ee;
+  }
   }
 
-  .contact-btn:hover::after {
-    opacity: 1;
+  @media (hover: hover) {
+    .contact-btn:hover::after {
+      opacity: 1;
+  }
   }
 
   .bio {

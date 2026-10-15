@@ -74,8 +74,10 @@ import { siteConfig } from '@config/site';
     transition: color var(--transition-fast);
   }
 
-  .navbar-link:hover {
-    color: var(--color-accent);
+  @media (hover: hover) {
+    .navbar-link:hover {
+      color: var(--color-accent);
+  }
   }
 
   .navbar-toggle {

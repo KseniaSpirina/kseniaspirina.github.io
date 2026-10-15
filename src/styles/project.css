@@ -423,8 +423,10 @@
   flex: none;
 }
 
-.project-page .sound-btn:hover {
-  color: #4361ee;
+@media (hover: hover) {
+  .project-page .sound-btn:hover {
+    color: #4361ee;
+}
 }
 
 /* Line-end hygiene (project pages) */

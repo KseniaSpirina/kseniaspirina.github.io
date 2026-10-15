@@ -75,8 +75,10 @@ const {
     transition: background 150ms ease;
   }
 
-  .menu-icon:hover span {
-    background: #4361ee;
+  @media (hover: hover) {
+    .menu-icon:hover span {
+      background: #4361ee;
+  }
   }
 
   .side-menu {
@@ -133,8 +135,10 @@ const {
     transition: color 150ms ease;
   }
 
-  .side-menu a:hover {
-    color: #4361ee;
+  @media (hover: hover) {
+    .side-menu a:hover {
+      color: #4361ee;
+  }
   }
 
   @media (max-width: 1260px) {

@@ -39,8 +39,10 @@ const { prevHref, nextHref } = Astro.props;
     transition: color 150ms ease;
   }
 
-  .nav-arrow:hover {
-    color: #e8e8e8;
+  @media (hover: hover) {
+    .nav-arrow:hover {
+      color: #e8e8e8;
+  }
   }
 
   .nav-arrow-prev {

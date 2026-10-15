@@ -150,8 +150,10 @@ const firstInactive = projects.findIndex(project => !project.href);
     cursor: pointer;
   }
 
-  a.project-row:hover {
-    background-color: rgba(255, 255, 255, 0.04);
+  @media (hover: hover) {
+    a.project-row:hover {
+      background-color: rgba(255, 255, 255, 0.04);
+  }
   }
 
   .coming-soon {

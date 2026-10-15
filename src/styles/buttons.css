@@ -35,7 +35,12 @@
   flex: none;
 }
 
-.btn:hover,
+@media (hover: hover) {
+  .btn:hover {
+    color: #4361ee;
+  }
+}
+
 .btn:focus-visible {
   color: #4361ee;
 }
@@ -46,7 +51,14 @@
   color: #ffffff;
 }
 
-.btn--primary:hover,
+@media (hover: hover) {
+  .btn--primary:hover {
+    --line: #4361ee;
+    background: #fafafa;
+    color: #4361ee;
+  }
+}
+
 .btn--primary:focus-visible {
   --line: #4361ee;
   background: #fafafa;
@@ -62,7 +74,12 @@
   box-shadow: inset 0 0 0 0.1em var(--line);
 }
 
-.btn--secondary:hover,
+@media (hover: hover) {
+  .btn--secondary:hover {
+    color: #4361ee;
+  }
+}
+
 .btn--secondary:focus-visible {
   color: #4361ee;
 }
@@ -82,4 +99,15 @@
 
 .btn--primary svg path {
   stroke-width: 3.375px;
+}
+
+/* touch feedback while the finger is down (no sticky hover on touch screens: hover rules above are hover-capable devices only) */
+.btn:active {
+  color: #4361ee;
+}
+
+.btn--primary:active {
+  --line: #4361ee;
+  background: #fafafa;
+  color: #4361ee;
 }

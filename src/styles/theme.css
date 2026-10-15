@@ -93,6 +93,8 @@ a {
   transition: color var(--transition-fast);
 }
 
-a:hover {
-  color: var(--color-accent-hover);
+@media (hover: hover) {
+  a:hover {
+    color: var(--color-accent-hover);
+}
 }

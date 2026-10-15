@@ -57,7 +57,9 @@ const full = await getImage({ src, width: Math.min(src.width, 1920), format: 'we
     transition: transform 300ms ease;
   }
 
-  .lightbox-figure:hover :global(img) {
-    transform: scale(1.03);
+  @media (hover: hover) {
+    .lightbox-figure:hover :global(img) {
+      transform: scale(1.03);
+  }
   }
 </style>

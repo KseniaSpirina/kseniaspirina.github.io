@@ -38,8 +38,10 @@ const { prevHref, nextHref } = Astro.props;
     transition: color 150ms ease;
   }
 
-  a:hover {
-    color: #e8e8e8;
+  @media (hover: hover) {
+    a:hover {
+      color: #e8e8e8;
+  }
   }
 
   @media (max-width: 1260px) {

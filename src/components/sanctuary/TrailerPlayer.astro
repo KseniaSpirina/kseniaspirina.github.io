@@ -65,24 +65,32 @@ const { cover, src = null, title } = Astro.props;
     transition: color 150ms ease, background-color 150ms ease;
   }
 
-  .trailer-cover:hover {
-    color: #4361ee;
+  @media (hover: hover) {
+    .trailer-cover:hover {
+      color: #4361ee;
+  }
   }
 
-  .trailer-cover:hover .play {
-    background: rgba(18, 18, 18, 0.8);
+  @media (hover: hover) {
+    .trailer-cover:hover .play {
+      background: rgba(18, 18, 18, 0.8);
+  }
   }
 
   .trailer-cover.is-inactive {
     cursor: default;
   }
 
-  .trailer-cover.is-inactive:hover {
-    color: #e8e8e8;
+  @media (hover: hover) {
+    .trailer-cover.is-inactive:hover {
+      color: #e8e8e8;
+  }
   }
 
-  .trailer-cover.is-inactive:hover .play {
-    background: rgba(18, 18, 18, 0.55);
+  @media (hover: hover) {
+    .trailer-cover.is-inactive:hover .play {
+      background: rgba(18, 18, 18, 0.55);
+  }
   }
 </style>
 
