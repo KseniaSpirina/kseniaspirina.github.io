@@ -99,26 +99,31 @@ const firstInactive = projects.findIndex(project => !project.href);
     const Tag = project.href ? 'a' : 'div';
     return (
       <>
-      {index === firstInactive && <p class="coming-soon">Pages are under development</p>}
+      {index === firstInactive && <p class="p-subhead coming-soon">Pages are under development</p>}
       <Tag
         class:list={['project-row', { 'is-inactive': !project.href }]}
         href={project.href ?? undefined}
         aria-disabled={project.href ? undefined : 'true'}
       >
         <div class="project-image">
-          <Image src={project.image} alt={project.title} widths={[500, 900, 1400]} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 741px" loading="lazy" />
+          <Image src={project.image} alt={project.title} widths={[500, 900, 1400]} sizes="(max-width: 1260px) 100vw, 741px" loading="lazy" />
         </div>
         <div class="project-text">
           <div class="project-text-top">
-            <h2 class="project-title">{project.title}</h2>
+            <h2 class="p-subhead project-title">{project.title}</h2>
             {project.description.map(paragraph => (
-              <p class="project-description">{paragraph}</p>
+              <p class="p-text project-description">{paragraph}</p>
             ))}
           </div>
           {project.caption && (
-            <div class="project-caption">
-              {project.caption.map(line => <p>{line}</p>)}
-            </div>
+            <p class="p-caption project-caption">
+              {project.caption.map((line, i) => (
+                <>
+                  {i > 0 && <br />}
+                  {line}
+                </>
+              ))}
+            </p>
           )}
         </div>
       </Tag>
@@ -128,10 +133,13 @@ const firstInactive = projects.findIndex(project => !project.href);
 </div>
 
 <style>
+  /* Projects list in the new style: text, subhead and caption styles come from project.css (.p-text, .p-subhead,
+     .p-caption); distances are glyph to glyph. Card padding (24px) is the hover area, so it is subtracted
+     from the gaps: image -> image 96px. */
   .projects-list {
     display: flex;
     flex-direction: column;
-    row-gap: 64px;
+    row-gap: 48px;
   }
 
   .project-row {
@@ -153,17 +161,12 @@ const firstInactive = projects.findIndex(project => !project.href);
   @media (hover: hover) {
     a.project-row:hover {
       background-color: rgba(255, 255, 255, 0.04);
-  }
+    }
   }
 
+  /* notice: 96px under the previous image, 48px above the next one */
   .coming-soon {
-    margin: 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 1.25;
-    text-transform: uppercase;
-    color: #e8e8e8;
+    margin: 24px 0 -24px;
   }
 
   /* projects whose page is not ready yet */
@@ -194,41 +197,20 @@ const firstInactive = projects.findIndex(project => !project.href);
 
   .project-title {
     margin: 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.125rem;
-    text-transform: uppercase;
-    color: #e8e8e8;
   }
 
-  .project-description {
-    margin: 2rem 0 0;
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-size: 1.125rem;
-    line-height: 1.44;
-    color: #e8e8e8;
+  /* subhead -> text 48px, paragraph -> paragraph 34.2px (from project.css) */
+  .project-title + .project-description {
+    margin-top: 48px;
   }
 
-  .project-description + .project-description {
-    margin-top: 1rem;
+  /* grey caption at the bottom edge of the card: last baseline on the image edge */
+  .project-text :global(.project-caption.p-caption) {
+    margin: auto 0 0;
+    padding-top: 48px;
   }
 
-  .project-caption {
-    margin-top: auto;
-    padding-top: 2rem;
-  }
-
-  .project-caption p {
-    margin: 0;
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-size: 1.125rem;
-    line-height: 1.44;
-    color: #9a9a9a;
-  }
-
-  @media (max-width: 1024px) {
+  @media (max-width: 1260px) {
     .project-row {
       grid-template-columns: repeat(4, 1fr);
     }
@@ -239,11 +221,12 @@ const firstInactive = projects.findIndex(project => !project.href);
 
     .project-text {
       grid-column: 1 / -1;
-      margin-top: 1.5rem;
+      /* image -> subhead 48px */
+      margin-top: 48px;
     }
 
-    .project-caption {
-      margin-top: 1.5rem;
+    .project-text :global(.project-caption.p-caption) {
+      margin-top: 48px;
       padding-top: 0;
     }
   }

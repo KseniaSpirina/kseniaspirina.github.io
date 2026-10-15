@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import '../styles/grid.css';
+import '../styles/project.css';
 import ProjectsList from '@components/home/ProjectsList.astro';
 import { siteConfig } from '@config/site';
 ---
 
 <BaseLayout title={siteConfig.title} description={siteConfig.description}>
-  <div class="projects-page">
+  <div class="projects-page project-page text-v2">
     <section class="projects grid-1440">
       <h1 class="page-title">Projects</h1>
       <ProjectsList />
@@ -22,7 +23,8 @@ import { siteConfig } from '@config/site';
 
   .projects {
     padding-top: calc(128px - var(--nav-height));
-    padding-bottom: 4rem;
+    /* last card -> footer: the footer has its own 128px margin */
+    padding-bottom: 0;
   }
 
   .projects > :global(*) {
@@ -43,6 +45,13 @@ import { siteConfig } from '@config/site';
   @supports (text-box-trim: trim-both) {
     .page-title {
       text-box: trim-end cap alphabetic;
+    }
+  }
+
+  @media (max-width: 640px) {
+    /* grid gap is 16px here: 24 + 16 + 24px card padding = 64px to the first image */
+    .page-title {
+      margin-bottom: 24px;
     }
   }
 </style>
