@@ -1,0 +1,54 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import '../../styles/grid.css';
+import '../../styles/project.css';
+import Lightbox from '@components/sanctuary/Lightbox.astro';
+import ProjectNavArrows from '@components/sanctuary/ProjectNavArrows.astro';
+import ProjectPager from '@components/sanctuary/ProjectPager.astro';
+import HeroSection from '@components/imprisoned/HeroSection.astro';
+import ContributionSection from '@components/imprisoned/ContributionSection.astro';
+import EnvironmentSection from '@components/imprisoned/EnvironmentSection.astro';
+import VisualEffectsSection from '@components/imprisoned/VisualEffectsSection.astro';
+import UiSection from '@components/imprisoned/UiSection.astro';
+import CutscenesSection from '@components/imprisoned/CutscenesSection.astro';
+import ContactSection from '@components/project/ContactSection.astro';
+---
+
+<BaseLayout
+  title="Imprisoned — Ksenia Spirina"
+  description="Digital Game Project course. Environment design, UI, VFX and cutscenes for Imprisoned, a top-down action game."
+>
+  <div class="project-page text-v2">
+    <ProjectNavArrows prevHref="/projects/sanctuary" nextHref="/projects/mourn" />
+
+    <HeroSection />
+    <ContributionSection />
+    <EnvironmentSection />
+    <VisualEffectsSection />
+    <UiSection />
+    <CutscenesSection />
+
+    <ContactSection />
+
+    <ProjectPager prevHref="/projects/sanctuary" nextHref="/projects/mourn" />
+
+    <Lightbox />
+  </div>
+</BaseLayout>
+
+<style is:global>
+  body:has(.project-page) {
+    background-color: #121212;
+  }
+
+  body:has(.project-page) .navbar {
+    background-color: #121212;
+    backdrop-filter: none;
+    border-bottom-color: #121212;
+  }
+
+  body:has(.project-page) .footer {
+    background-color: #121212;
+    border-top-color: #121212;
+  }
+</style>

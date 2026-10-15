@@ -1,0 +1,21 @@
+---
+import ProjectSection from './ProjectSection.astro';
+import LazyVideo from './LazyVideo.astro';
+
+const scenes = [
+  { title: '1st lock opens up cutscene', src: 'cutscene-lvl-1-to-lvl-2' },
+  { title: '2nd lock opens up cutscene', src: 'cutscene-lvl-2-to-final' },
+  { title: 'Final screen cutscene', src: 'final-cutscene' },
+];
+---
+
+<ProjectSection id="cutscenes" title="Cutscenes">
+  {scenes.map(scene => (
+    <div class="block">
+      <h3 class="p-label">{scene.title}</h3>
+      <div class="media after-label">
+        <LazyVideo src={`/imprisoned/videos/${scene.src}.webm`} ratio="16 / 9" label={scene.title} />
+      </div>
+    </div>
+  ))}
+</ProjectSection>

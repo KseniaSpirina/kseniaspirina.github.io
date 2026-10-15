@@ -1,0 +1,27 @@
+---
+interface Props {
+  href: string;
+}
+const { href } = Astro.props;
+import itchLogo from '@assets/icons/itchio-logo.svg?raw';
+import '../../styles/buttons.css';
+---
+
+<div class="itch">
+  <a class="btn itch-btn" href={href} target="_blank" rel="noopener noreferrer" aria-label="Play on itch.io">
+    <span>Play on</span>
+    <Fragment set:html={itchLogo} />
+  </a>
+</div>
+
+<style>
+  /* credits text -> button: 32px (same as label -> content) */
+  .itch {
+    margin-top: 32px;
+  }
+
+  .itch-btn :global(svg) {
+    height: 40px; /* same height as the LinkedIn icon */
+    width: auto;
+  }
+</style>

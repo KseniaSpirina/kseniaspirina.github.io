@@ -47,7 +47,7 @@ import finalColorRender from '@assets/sanctuary/environment/fixing-room-all-toge
   <div class="row">
     <div class="c3-2">
       <ul class="running list">
-        <li>Made in synergy with nature</li>
+        <li>Made&nbsp;in&nbsp;synergy with nature</li>
         <li>Walls and columns left largely unworked stone</li>
         <li>Decorated with carved ornaments and drawings referencing ancient civilizations</li>
       </ul>
@@ -126,7 +126,25 @@ import finalColorRender from '@assets/sanctuary/environment/fixing-room-all-toge
 <style>
   .environment-design {
     padding-block: 4rem;
-    row-gap: 2.5rem;
+    row-gap: 0;
+  }
+
+  /* label -> content 32, text -> next 32, block -> block 96, subsection name -> content 48 */
+  .row + .media,
+  .row + .row {
+    margin-top: 32px;
+  }
+
+  .process-heading + .c1-2,
+  .process-heading + .c1-2 + .c5-4 {
+    margin-top: 0;
+  }
+
+  .c1-2,
+  .c1-3,
+  .c5-3,
+  .c5-4 {
+    margin-top: 96px;
   }
 
   .environment-design > :global(*) {
@@ -172,7 +190,16 @@ import finalColorRender from '@assets/sanctuary/environment/fixing-room-all-toge
     grid-column: 2 / span 6;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1260px) {
+    .row {
+      row-gap: 32px;
+    }
+
+    /* second item of the first process row now stands under the first one: 64px */
+    .process-heading + .c1-2 + .c5-4 {
+      margin-top: 64px;
+    }
+
     .c3-2,
     .c5-2,
     .c1-2,
@@ -206,15 +233,24 @@ import finalColorRender from '@assets/sanctuary/environment/fixing-room-all-toge
     font-size: 1.125rem;
     text-transform: uppercase;
     color: #e8e8e8;
-    margin: 0 0 0.75rem;
+    margin: 96px 0 32px;
+  }
+
+  :global(.section-heading) + .caption {
+    margin-top: 0;
   }
 
   .caption.small {
-    margin: 0 0 0.5rem;
+    margin: 0 0 32px;
   }
 
+  /* "Rooms · Spirit" / "Rooms · Mind": subsection name (Unbounded Bold caps 24px, #E8E8E8) */
   .caption.accent {
-    color: #4361ee;
+    font-family: var(--font-display);
+    font-size: 24px;
+    line-height: 1.25;
+    color: #e8e8e8;
+    margin: 96px 0 48px;
   }
 
   .process-heading {
@@ -223,15 +259,15 @@ import finalColorRender from '@assets/sanctuary/environment/fixing-room-all-toge
     font-size: 1.5rem;
     text-transform: uppercase;
     color: #e8e8e8;
-    margin: 0;
+    margin: 96px 0 48px;
   }
 
   .running {
     font-family: var(--font-body);
     font-weight: 400;
     font-size: 1.125rem;
-    color: #c9c9c9;
-    line-height: 1.7;
+    color: #d6d6d6;
+    line-height: 1.5;
     margin: 0;
   }
 
@@ -247,7 +283,7 @@ import finalColorRender from '@assets/sanctuary/environment/fixing-room-all-toge
     gap: 0.5rem;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1260px) {
     .running.narrow {
       grid-column: 1 / -1;
     }

@@ -1,0 +1,157 @@
+/* Sanctuary: new text style and the "distances measured by the letters" scheme.
+   Same rules as .text-v2 on the other project pages (see project.css and the rules document).
+
+   Every text element pulls its box back by the empty space of its line box above and below the
+   letters (--ft above, --fb below). After that the margins in the section files are the visible
+   distances: from the bottom of the letters to the top of the next letters (lowercase text) or
+   capitals (labels, subheads), and to the edge of pictures. */
+
+/* ---- line heights and the empty space above / below the letters ---- */
+
+/* labels: Inter Bold, capitals, 18px, 22px line */
+.sanctuary :is(.caption, .ui-label, .label):not(.accent) {
+  line-height: 22px;
+  --ft: 4.4px;
+  --fb: 4.5px;
+}
+
+/* subheads: Unbounded Bold, capitals, 24px, 30px line */
+.sanctuary :is(.process-heading, .ui-subhead, .caption.accent) {
+  line-height: 30px;
+  --ft: 6px;
+  --fb: 6px;
+}
+
+/* body text and lists: Inter 18px, 27px line, measured to the lowercase letters */
+.sanctuary :is(.running, .ui-text, .ui-list, .text) {
+  line-height: 27px;
+  --ft: 10.17px;
+  --fb: 7px;
+}
+
+/* grey captions: Inter 18px, 22px line, measured to the lowercase letters */
+.sanctuary :is(.ui-caption, .cursor-label) {
+  line-height: 22px;
+  --ft: 7.67px;
+  --fb: 4.5px;
+}
+
+/* section names: Unbounded Bold, capitals, 36px, 45px line */
+.sanctuary .section-heading h2 {
+  line-height: 45px;
+  --ft: 9px;
+  --fb: 9px;
+}
+
+/* ---- the trim itself ---- */
+.sanctuary :is(
+  .caption, .ui-label, .label,
+  .process-heading, .ui-subhead,
+  .running, .ui-text, .ui-list, .text,
+  .ui-caption, .cursor-label,
+  .section-heading h2
+) {
+  display: flow-root;
+}
+
+.sanctuary :is(
+  .caption, .ui-label, .label,
+  .process-heading, .ui-subhead,
+  .running, .ui-text, .ui-list, .text,
+  .ui-caption, .cursor-label,
+  .section-heading h2
+)::before {
+  content: '';
+  display: block;
+  height: 0;
+  margin-top: calc(var(--ft) * -1);
+}
+
+.sanctuary :is(
+  .caption, .ui-label, .label,
+  .process-heading, .ui-subhead,
+  .running, .ui-text, .ui-list, .text,
+  .ui-caption, .cursor-label,
+  .section-heading h2
+)::after {
+  content: '';
+  display: block;
+  height: 0;
+  margin-bottom: calc(var(--fb) * -1);
+}
+
+/* lists were flex columns with a gap; the pseudo elements would become flex items */
+.sanctuary .running.list {
+  display: flow-root !important;
+}
+
+.sanctuary .running.list > li + li {
+  margin-top: 13px;
+}
+
+/* ---- distances ---- */
+
+/* paragraph -> paragraph: one blank line */
+.sanctuary .text + .text,
+.sanctuary .running + .running {
+  margin-top: 34.2px;
+}
+
+/* picture -> caption (24px between the boxes in the design = 31.7px to the lowercase letters) */
+.sanctuary .ui-caption,
+.sanctuary .cursor-card p.cursor-label,
+.sanctuary .running.quote {
+  margin-top: 31.7px !important;
+}
+
+.sanctuary .ui-list li + li {
+  margin-top: 13px;
+}
+
+/* Line-end hygiene: no stranded words; long glued chunks may still wrap on tiny screens */
+.text, .ui-text, .ui-list li {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+.nw { white-space: nowrap; }
+
+/* lists: short items get evenly balanced lines */
+.ui-list li, .running.list li, .running li {
+  text-wrap: balance;
+}
+
+/* Narrow list columns: the text may run into the gutter by up to 12px (half of the 24px grid gap)
+   so that words don't strand on short lines.
+   Relies on: gutter = 24px, text has no border / background / right alignment.
+   If the grid changes, revisit this value (see "Typography rules for project pages - line breaks", 2.1). */
+@media (min-width: 1261px) {
+  .ui-list li, .running.list li, .running li, p.running.narrow {
+    margin-right: -12px;
+  }
+}
+
+/* Stacked layouts (≤1260px): text spans the whole column, which makes unreadable one-or-two-line "worms".
+   Cap the line length at 588px (4 grid columns, the widest body text on the 1440 layout), about 50-55 characters. */
+@media (max-width: 1260px) {
+  .text, .ui-text, .running, .ui-list {
+    max-width: 588px !important;
+  }
+}
+
+/* Names that should stay whole (nowrap). The university name may break only when the column is so narrow
+   that keeping it whole would not fit (container <= 380px). */
+.keep-host {
+  container-type: inline-size;
+}
+
+.keep-always,
+.keep-name {
+  white-space: nowrap;
+}
+
+@container (max-width: 380px) {
+  .keep-name {
+    white-space: normal;
+  }
+}

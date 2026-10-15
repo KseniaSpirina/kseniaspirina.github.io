@@ -1,11 +1,65 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import Hero from '@components/home/Hero.astro';
-import ProjectGrid from '@components/home/ProjectGrid.astro';
+import '../styles/grid.css';
+import ProjectsList from '@components/home/ProjectsList.astro';
 import { siteConfig } from '@config/site';
 ---
 
 <BaseLayout title={siteConfig.title} description={siteConfig.description}>
-  <Hero />
-  <ProjectGrid />
+  <div class="projects-page">
+    <section class="projects grid-1440">
+      <h1 class="page-title">Projects</h1>
+      <ProjectsList />
+    </section>
+  </div>
 </BaseLayout>
+
+<style>
+  .projects-page {
+    background: #121212;
+    color: #e8e8e8;
+  }
+
+  .projects {
+    padding-top: calc(128px - var(--nav-height));
+    padding-bottom: 4rem;
+  }
+
+  .projects > :global(*) {
+    grid-column: 1 / -1;
+  }
+
+  .page-title {
+    /* 64px to the first project image: 24px grid gap + 16px + 24px row padding */
+    margin: 0 0 16px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.25;
+    color: #4361ee;
+    text-transform: uppercase;
+  }
+
+  @supports (text-box-trim: trim-both) {
+    .page-title {
+      text-box: trim-end cap alphabetic;
+    }
+  }
+</style>
+
+<style is:global>
+  body:has(.projects-page) {
+    background-color: #121212;
+  }
+
+  body:has(.projects-page) .navbar {
+    background-color: #121212;
+    backdrop-filter: none;
+    border-bottom-color: #121212;
+  }
+
+  body:has(.projects-page) .footer {
+    background-color: #121212;
+    border-top-color: #121212;
+  }
+</style>

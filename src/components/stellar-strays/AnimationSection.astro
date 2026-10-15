@@ -1,0 +1,71 @@
+---
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+import LazyVideo from '../imprisoned/LazyVideo.astro';
+
+const v = (name: string) => `/stellar-strays/videos/${name}`;
+---
+
+<ProjectSection id="animation" title="Animation">
+  <div class="block">
+    <div class="cols">
+      <div class="gc-1-3">
+        <h3 class="p-label">Animation development approach</h3>
+        <p class="p-text after-label">
+          For this project, I created a set of animations in Spine 2D: idle, walk, jump, and a
+          gravity-shift jump. Through movement, I wanted to capture the astronaut’s personality:
+          confident, self-assured, and brave. At the same time, I slowed the motion down to convey
+          the pull of an alien atmosphere. The character’s scarf is rigged to the engine’s
+          physics, which adds an extra layer of dynamic movement.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Animation set</h3>
+    <div class="cols anim-pair after-label">
+      <div class="gc-1-2 v282">
+        <LazyVideo src={v('idle.webm')} ratio="786 / 905" label="Idle animation" />
+        <p class="p-caption">Idle</p>
+      </div>
+      <div class="gc-5-2 v282">
+        <LazyVideo src={v('walking.webm')} ratio="748 / 878" label="Walking animation" />
+        <p class="p-caption">Walking</p>
+      </div>
+    </div>
+    <div class="cols anim-pair block-gap">
+      <div class="gc-1-3 v435">
+        <LazyVideo src={v('regular-jump.webm')} ratio="1 / 1" label="Regular jump animation" />
+        <p class="p-caption">Regular jump</p>
+      </div>
+      <div class="gc-5-3 v435 mirror">
+        <LazyVideo src={v('gravity-turn.webm')} ratio="1 / 1" label="Gravity-shift jump animation" />
+        <p class="p-caption">Gravity-shift jump</p>
+      </div>
+    </div>
+  </div>
+</ProjectSection>
+
+<style>
+  /* stacked layouts: the videos keep their desktop size (282px / 435px) instead of stretching to the full column,
+     and stand side by side when they fit */
+  @media (max-width: 1260px) {
+    .anim-pair {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 64px 24px;
+    }
+
+    .v282 {
+      width: min(100%, 282px);
+    }
+
+    .v435 {
+      width: min(100%, 435px);
+    }
+  }
+
+  .mirror :global(video) {
+    transform: scaleX(-1);
+  }
+</style>

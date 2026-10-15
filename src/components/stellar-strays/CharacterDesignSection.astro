@@ -1,0 +1,128 @@
+---
+import { Image } from 'astro:assets';
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+
+import fermi from '@assets/stellar-strays/character/fermi-final-design.png';
+import sketches from '@assets/stellar-strays/character/sketches.jpg';
+import colorSearch from '@assets/stellar-strays/character/color-search.jpg';
+import flatColors from '@assets/stellar-strays/character/fermi-flat-colors.png';
+import ref3347 from '@assets/stellar-strays/character/ref-3347.jpg';
+import ref3348 from '@assets/stellar-strays/character/ref-3348.jpg';
+import ref3349 from '@assets/stellar-strays/character/ref-3349.jpg';
+import ref3350 from '@assets/stellar-strays/character/ref-3350.jpg';
+
+const pct = (v: number, t: number) => `${(v / t) * 100}%`;
+
+const features = [
+  'Large, distinctive ears as his signature feature',
+  'Pink as his main color, with yellow accents',
+  'A palette chosen to reflect his leadership qualities',
+];
+
+// Reference photos are placed by hand, as in the Figma file: x/y/w/h in px on a 435 x 434 canvas.
+const RW = 435;
+const RH = 434;
+const refs = [
+  { src: ref3347, x: 0, y: 0, w: 211, h: 256 },
+  { src: ref3348, x: 224, y: 0, w: 211, h: 211 },
+  { src: ref3350, x: 224, y: 223, w: 157, h: 211 },
+  { src: ref3349, x: 0, y: 268, w: 212, h: 166 },
+];
+---
+
+<ProjectSection id="character-design" title="Character design">
+  <div class="block">
+    <div class="cols fermi">
+      <div class="gc-1-3 approach">
+        <h3 class="p-label">Character design approach</h3>
+        <p class="p-text after-label">
+          For this project, I designed Fermi, an alien astronaut. Together with designer Maayan, I
+          set a shared visual direction for our characters: a stylized look that leans toward the
+          cute side. We experimented with a range of color combinations at first, and eventually
+          settled on giving each character one main color, so players can easily tell which
+          collectibles each character can pick up. Within this framework, my task was to make
+          Fermi’s profession clear while giving him an appearance that is unmistakably his own.
+        </p>
+      </div>
+      <div class="gc-1-2 features">
+        <h3 class="p-label">Final design features</h3>
+        <ul class="p-list after-label">
+          {features.map(item => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div class="gc-5-4 portrait">
+        <Image src={fermi} alt="Fermi, final character design" widths={[600, 1176]} sizes="(max-width: 1260px) 100vw, 588px" loading="eager" class="media-img mirrored" />
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-subhead">Process breakdown</h3>
+    <div class="cols after-subhead">
+      <div class="gc-1-3">
+        <h4 class="p-label">References</h4>
+        <div class="after-label">
+          <div class="offgrid keep" style={`--cw: ${RW}; --ch: ${RH};`}>
+            {refs.map(r => (
+              <div
+                class="og"
+                style={`--l: ${pct(r.x, RW)}; --t: ${pct(r.y, RH)}; --w: ${pct(r.w, RW)}; --h: ${pct(r.h, RH)};`}
+              >
+                <Image src={r.src} alt="Reference photo" widths={[300, 500]} sizes="211px" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="gc-5-3">
+        <h4 class="p-label">Sketches</h4>
+        <div class="after-label">
+          <Image src={sketches} alt="Sketches of Fermi" widths={[435, 870]} sizes="(max-width: 1260px) 100vw, 435px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-3">
+        <h4 class="p-label">Color search</h4>
+        <div class="after-label">
+          <Image src={colorSearch} alt="Color variations of Fermi" widths={[435, 870]} sizes="(max-width: 1260px) 100vw, 435px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+      <div class="gc-5-3">
+        <h4 class="p-label">Flat colors</h4>
+        <div class="after-label">
+          <Image src={flatColors} alt="Fermi in flat colors" widths={[435, 870]} sizes="(max-width: 1260px) 100vw, 435px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-3">
+        <h4 class="p-label">Final design</h4>
+        <div class="after-label">
+          <Image src={fermi} alt="Fermi, final design" widths={[435, 870]} sizes="(max-width: 1260px) 100vw, 435px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ProjectSection>
+
+<style>
+  .mirrored {
+    transform: scaleX(-1);
+  }
+
+  @media (min-width: 1261px) {
+    .fermi .approach {
+      grid-row: 1;
+    }
+
+    .fermi .features {
+      grid-row: 2;
+      margin-top: 72px;
+    }
+
+    .fermi .portrait {
+      grid-row: 1 / span 2;
+    }
+  }
+</style>

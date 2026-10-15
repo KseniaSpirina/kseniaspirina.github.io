@@ -1,0 +1,123 @@
+---
+interface Props {
+  src: string;
+  ratio?: string;
+  label?: string;
+  class?: string;
+  sound?: boolean;
+}
+
+const { src, ratio, label, class: className, sound = false } = Astro.props;
+---
+
+<video
+  class:list={['lazy-video', className]}
+  style={ratio ? `aspect-ratio: ${ratio};` : undefined}
+  data-lazy-src={src}
+  data-sound={sound ? '' : undefined}
+  muted
+  loop={!sound}
+  playsinline
+  preload="none"
+  disablepictureinpicture
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+></video>
+
+<style>
+  .lazy-video {
+    display: block;
+    width: 100%;
+  }
+</style>
+
+<script>
+  function initLazyVideos() {
+    const videos = document.querySelectorAll<HTMLVideoElement>('video[data-lazy-src]');
+    if (!videos.length) return;
+
+    const visible = new Set<HTMLVideoElement>();
+
+    function silenceOthers(video: HTMLVideoElement) {
+      videos.forEach(other => {
+        if (other !== video && other.hasAttribute('data-sound')) other.muted = true;
+      });
+    }
+
+    function play(video: HTMLVideoElement) {
+      video.muted = true;
+      video.play().catch(() => {});
+    }
+
+    function replayWithSound(video: HTMLVideoElement) {
+      if (!video.getAttribute('src')) video.src = video.dataset.lazySrc ?? '';
+      silenceOthers(video);
+      video.muted = false;
+      video.currentTime = 0;
+      video.play().catch(() => {
+        video.muted = true;
+        video.play().catch(() => {});
+      });
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('[data-replay-sound]').forEach(button => {
+      button.addEventListener('click', () => {
+        const target = Array.from(videos).find(v => v.dataset.lazySrc === button.dataset.replaySound);
+        if (target) replayWithSound(target);
+      });
+    });
+
+    function sync(video: HTMLVideoElement) {
+      if (visible.has(video) && !document.hidden) {
+        play(video);
+      } else {
+        video.pause();
+      }
+    }
+
+    const loader = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting && !video.getAttribute('src')) {
+            video.src = video.dataset.lazySrc ?? '';
+            loader.unobserve(video);
+          }
+        });
+      },
+      { rootMargin: '600px 0px' }
+    );
+
+    const player = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) visible.add(video);
+          else visible.delete(video);
+          sync(video);
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    videos.forEach(video => {
+      if (video.hasAttribute('data-sound')) {
+        video.addEventListener('ended', () => {
+          video.muted = true;
+          video.currentTime = 0;
+          sync(video);
+        });
+      }
+      loader.observe(video);
+      player.observe(video);
+    });
+
+    document.addEventListener('visibilitychange', () => videos.forEach(sync));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLazyVideos);
+  } else {
+    initLazyVideos();
+  }
+</script>

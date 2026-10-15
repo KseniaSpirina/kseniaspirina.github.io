@@ -1,0 +1,526 @@
+/* Shared rules for project pages — see "Design rules guide for project pages" */
+
+.project-page {
+  background: #121212;
+  color: #e8e8e8;
+}
+
+.project-page .p-label {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-transform: uppercase;
+  color: #e8e8e8;
+}
+
+.project-page .p-subhead {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: #e8e8e8;
+}
+
+.project-page .p-text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #e8e8e8;
+}
+
+.project-page .p-text + .p-text {
+  margin-top: 22px;
+}
+
+.project-page .p-text strong {
+  font-weight: 700;
+}
+
+/* New body text style: #D6D6D6, line spacing 1.5 x the text size.
+   Switched on per project with the .text-v2 class on the page wrapper.
+
+   All distances are measured the way they are in the design: from the bottom of the letters
+   (baseline) to the top of the next letters (x-height for lowercase text, cap height for caps
+   labels). Every line box has empty space above and below the letters, so each text element
+   pulls its box back by exactly that space (--ft above, --fb below, in px). After that the
+   margins in this file are the visible distances. Works in every browser; no text-box needed.
+
+   Empty space per element (Inter 18px unless stated):
+   label, bold caps, 22px line:      above the capitals 4.4,   below the baseline 4.5
+   text / list, 27px line:           above lowercase  10.17, below the baseline 7
+   grey caption, 22px line:          above lowercase   7.67, below the baseline 4.5
+   subhead, Unbounded 24px, 30px:    above the capitals 6,     below the baseline 6 */
+.project-page.text-v2 .p-text,
+.project-page.text-v2 .p-list {
+  color: #d6d6d6;
+  line-height: 1.5;
+}
+
+.project-page.text-v2 :is(.p-label, .p-subhead, .p-text, .p-list, .p-caption):not(.og) {
+  display: flow-root;
+}
+
+.project-page.text-v2 .p-label { --ft: 4.4px; --fb: 4.5px; }
+.project-page.text-v2 .p-subhead { --ft: 6px; --fb: 6px; }
+.project-page.text-v2 .p-text,
+.project-page.text-v2 .p-list { --ft: 10.17px; --fb: 7px; }
+.project-page.text-v2 .p-caption { --ft: 7.67px; --fb: 4.5px; }
+
+/* section names: Unbounded Bold, capitals, 36px, 45px line: 9px above the capitals, 9px below the baseline */
+.project-page.text-v2 .project-section h2 { --ft: 9px; --fb: 9px; display: flow-root; }
+
+.project-page.text-v2 .project-section h2::before {
+  content: '';
+  display: block;
+  height: 0;
+  margin-top: calc(var(--ft) * -1);
+}
+
+.project-page.text-v2 .project-section h2::after {
+  content: '';
+  display: block;
+  height: 0;
+  margin-bottom: calc(var(--fb) * -1);
+}
+
+.project-page.text-v2 :is(.p-label, .p-subhead, .p-text, .p-list, .p-caption):not(.og)::before {
+  content: '';
+  display: block;
+  height: 0;
+  margin-top: calc(var(--ft) * -1);
+}
+
+.project-page.text-v2 :is(.p-label, .p-subhead, .p-text, .p-list, .p-caption):not(.og)::after {
+  content: '';
+  display: block;
+  height: 0;
+  margin-bottom: calc(var(--fb) * -1);
+}
+
+/* one blank line between paragraphs (baseline to baseline 44px, as before) */
+.project-page.text-v2 .p-text + .p-text {
+  margin-top: 34.2px;
+}
+
+/* list item spacing: a little more than the old proportion (8 / 22 of the line = 9.82px);
+   loose lists keep the original 22px */
+.project-page.text-v2 .p-list li + li {
+  margin-top: 13px;
+}
+
+.project-page.text-v2 .p-list.loose li + li {
+  margin-top: 22px;
+}
+/* picture -> caption: 24px box gap in the design = 31.7px to the lowercase letters */
+.project-page.text-v2 .p-caption:not(.og) {
+  margin-top: 31.7px;
+}
+
+.project-page .p-caption {
+  margin: 24px 0 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #9a9a9a;
+}
+
+.project-page .p-list {
+  margin: 0;
+  padding: 0 0 0 27px;
+  list-style: disc;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #e8e8e8;
+}
+
+.project-page .p-list li + li {
+  margin-top: 8px;
+}
+
+.project-page .p-list.hang {
+  padding-left: 0;
+}
+
+.project-page .p-list.loose li + li {
+  margin-top: 22px;
+}
+
+/* label -> content */
+.project-page .after-label {
+  margin-top: 32px;
+}
+
+/* sits level with the content under a neighbouring label (label 22px + 32px gap) */
+@media (min-width: 1261px) {
+  .project-page .below-label {
+    margin-top: 54px;
+  }
+
+  /* new text style: level with the content that is 32px (to the lowercase letters) under a label:
+     label capitals-to-baseline 13.1px + 32px */
+  .project-page.text-v2 .below-label {
+    margin-top: 45.1px;
+  }
+}
+
+/* subsection name -> content */
+.project-page .after-subhead {
+  margin-top: 48px;
+}
+
+/* block -> next block */
+.project-page .block + .block,
+.project-page .block-gap {
+  margin-top: 96px;
+}
+
+.project-page .cols {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 24px;
+  align-items: start;
+}
+
+.project-page .gc-1-2 { grid-column: 1 / span 2; }
+.project-page .gc-1-3 { grid-column: 1 / span 3; }
+.project-page .gc-1-4 { grid-column: 1 / span 4; }
+.project-page .gc-1-5 { grid-column: 1 / span 5; }
+.project-page .gc-1-8 { grid-column: 1 / -1; }
+.project-page .gc-2-6 { grid-column: 2 / span 6; }
+.project-page .gc-3-2 { grid-column: 3 / span 2; }
+.project-page .gc-3-6 { grid-column: 3 / span 6; }
+.project-page .gc-4-2 { grid-column: 4 / span 2; }
+.project-page .gc-4-3 { grid-column: 4 / span 3; }
+.project-page .gc-4-4 { grid-column: 4 / span 4; }
+.project-page .gc-4-5 { grid-column: 4 / span 5; }
+.project-page .gc-5-2 { grid-column: 5 / span 2; }
+.project-page .gc-5-3 { grid-column: 5 / span 3; }
+.project-page .gc-5-4 { grid-column: 5 / span 4; }
+.project-page .gc-6-2 { grid-column: 6 / span 2; }
+.project-page .gc-3-4 { grid-column: 3 / span 4; }
+.project-page .gc-7-2 { grid-column: 7 / span 2; }
+
+.project-page .media {
+  display: block;
+  width: 100%;
+}
+
+.project-page .media img,
+.project-page .media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.project-page .media-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* elements placed by hand, outside the grid */
+.project-page .offgrid {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--cw) / var(--ch);
+}
+
+.project-page .og {
+  position: absolute;
+  left: var(--l);
+  top: var(--t);
+  width: var(--w);
+  height: var(--h, auto);
+}
+
+.project-page .offgrid.keep {
+  max-width: calc(var(--cw) * 1px);
+  container-type: inline-size;
+}
+
+.project-page .sheet-wrap {
+  container-type: inline-size;
+  --ovs: 2.01cqw;
+}
+
+.project-page .p-caption.og {
+  margin: 0;
+}
+
+.project-page .og img,
+.project-page .og video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.project-page .fig {
+  margin: 0;
+}
+
+.project-page .fig img,
+.project-page .fig .cover {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.project-page .fig .cover {
+  object-fit: cover;
+  object-position: top;
+}
+
+.project-page .ov-wrap {
+  position: relative;
+}
+
+.project-page .og.ov-wrap {
+  position: absolute;
+}
+
+.project-page .ov-wrap .ov {
+  position: absolute;
+  left: var(--cx);
+  top: var(--ty);
+  transform: translateX(-50%);
+  margin: 0;
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(10px, var(--ovs, 2cqw), 18px);
+  line-height: 1.25;
+  color: #121212;
+}
+
+@media (max-width: 1260px) {
+  .project-page .offgrid {
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  .project-page .og {
+    position: static;
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+  }
+
+  .project-page .og img,
+  .project-page .og video {
+    height: auto;
+  }
+
+  .project-page .og .p-caption,
+  .project-page .og.cap {
+    margin: 0;
+  }
+}
+
+@media (max-width: 1260px) {
+  .project-page .offgrid.keep {
+    display: block;
+    aspect-ratio: var(--cw) / var(--ch);
+    max-width: calc(var(--cw) * 1px);
+  }
+
+  .project-page .offgrid.keep .og {
+    position: absolute;
+    width: var(--w);
+    max-width: none;
+    height: var(--h, auto);
+  }
+
+  .project-page .offgrid.keep .og img,
+  .project-page .offgrid.keep .og video {
+    height: 100%;
+  }
+}
+
+@media (max-width: 1260px) {
+  .project-page .cols {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    /* columns that were side by side and now stand one under the other:
+       64px between the blocks (galleries of pictures only keep 24px, see below) */
+    row-gap: 64px;
+  }
+
+  .project-page .cols.gallery {
+    row-gap: 24px;
+  }
+
+  .project-page .cols > * {
+    grid-column: 1 / -1;
+  }
+
+  .project-page .cols.gallery > * {
+    grid-column: span 2;
+  }
+
+  .project-page .cols.pair > * {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .project-page .cols.gallery > *,
+  .project-page .cols.pair > * {
+    grid-column: 1 / -1;
+  }
+}
+
+.project-page .cols.sound-row {
+  align-items: stretch;
+}
+
+.project-page .sound-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-page .sound-col .p-list {
+  margin-bottom: 32px;
+}
+
+.project-page .sound-btn {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 12px;
+  margin-top: auto;
+  padding: 11px 24px 11px 20px;
+  border: 2px solid currentColor;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  color: #e8e8e8;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: color 150ms ease;
+}
+
+.project-page .sound-btn svg {
+  flex: none;
+}
+
+.project-page .sound-btn:hover {
+  color: #4361ee;
+}
+
+/* Line-end hygiene (project pages) */
+.project-page .p-text, .project-page .p-list li {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+.nw { white-space: nowrap; }
+
+/* Stacked layouts (≤1260px): cap the line length of body text at 588px (4 grid columns, the widest body text on the 1440 layout) */
+@media (max-width: 1260px) {
+  .project-page .p-text,
+  .project-page .p-list {
+    max-width: 588px;
+  }
+}
+
+/* Lists: short items get evenly balanced lines (see "Typography rules for project pages - line breaks") */
+.project-page .p-list li {
+  text-wrap: balance;
+}
+
+/* Narrow list columns: the text may run into the gutter by up to 12px (half of the 24px grid gap)
+   so that words don't strand on short lines.
+   Relies on: gutter = 24px, text has no border / background / right alignment.
+   If the grid changes, revisit this value. */
+@media (min-width: 1261px) {
+  .project-page .p-list li {
+    margin-right: -12px;
+  }
+}
+
+/* line breaks that only make sense on the wide layout */
+@media (max-width: 1260px) {
+  .project-page .br-wide {
+    display: none;
+  }
+}
+
+/* "Play with sound" rows on stacked layouts: text, then its video, then the button (end of block) */
+@media (max-width: 1260px) {
+  .project-page .cols.sound-row {
+    row-gap: 0;
+  }
+
+  .project-page .sound-col {
+    display: contents;
+  }
+
+  .project-page .sound-col .p-label {
+    order: 1;
+    grid-column: 1 / -1;
+  }
+
+  .project-page .sound-col .p-list {
+    order: 2;
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+
+  .project-page .sound-row > .gc-3-6 {
+    order: 3;
+    grid-column: 1 / -1;
+    margin-top: 64px;
+  }
+
+  .project-page .sound-col .sound-btn {
+    order: 4;
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-top: 32px;
+  }
+}
+
+/* Names that should stay whole (nowrap). The university name may break only when the column is so narrow
+   that keeping it whole would leave the year alone on the last line (container <= 380px). */
+.project-page .keep-host {
+  container-type: inline-size;
+}
+
+.project-page .keep-always,
+.project-page .keep-name,
+.project-page .keep-dept {
+  white-space: nowrap;
+}
+
+/* Department name: breaks only when it does not fit the column at all (container <= 320px) */
+@container (max-width: 320px) {
+  .project-page .keep-dept {
+    white-space: normal;
+  }
+}
+
+@container (max-width: 380px) {
+  .project-page .keep-name {
+    white-space: normal;
+  }
+}

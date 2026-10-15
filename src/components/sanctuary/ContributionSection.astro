@@ -21,16 +21,6 @@ const row2 = [g5, g6, g9];
     </div>
 
     <div class="span-2">
-      <p class="caption">My Role</p>
-      <ul class="running list">
-        <li>World and visual language design</li>
-        <li>Character art, environment art, UI, full-screen illustrations</li>
-        <li>Animation</li>
-        <li>Contributed to worldbuilding, quest writing, and UX</li>
-        <li>Assembled and staged assets in-scene, handed off to programmers for integration and scripting</li>
-      </ul>
-    </div>
-    <div class="span-2 challenge">
       <p class="caption">Challenge</p>
       <ul class="running list">
         <li>Sole designer and artist on a 3-person team</li>
@@ -38,6 +28,16 @@ const row2 = [g5, g6, g9];
         <li>Establish a full world identity: environment, characters, UI, animation, and illustration</li>
         <li>Required a visual system that could clearly distinguish two groups within one cohesive world</li>
         <li>Large creative scope to cover within a tight 3-month production timeline</li>
+      </ul>
+    </div>
+    <div class="span-2 challenge">
+      <p class="caption">My Role</p>
+      <ul class="running list">
+        <li>World&nbsp;and&nbsp;visual language design</li>
+        <li>Character art, environment art, UI, full-screen illustrations</li>
+        <li>Animation</li>
+        <li>Contributed to worldbuilding, quest writing, and UX</li>
+        <li>Assembled and staged assets in-scene, handed off to programmers for integration and scripting</li>
       </ul>
     </div>
 
@@ -48,7 +48,7 @@ const row2 = [g5, g6, g9];
             src={img}
             alt={`Sanctuary gallery image ${i + 1}`}
             widths={[400, 700, 1000, 1400, 1920]}
-            sizes="(max-width: 640px) 95vw, (max-width: 1024px) 50vw, 588px"
+            sizes="(max-width: 640px) 95vw, (max-width: 1260px) 50vw, 588px"
             group="contribution-gallery"
           />
         </div>
@@ -61,7 +61,7 @@ const row2 = [g5, g6, g9];
             src={img}
             alt={`Sanctuary gallery image ${i + 5}`}
             widths={[400, 700, 1000, 1400, 1920]}
-            sizes="(max-width: 640px) 95vw, (max-width: 1024px) 50vw, 588px"
+            sizes="(max-width: 640px) 95vw, (max-width: 1260px) 50vw, 588px"
             group="contribution-gallery"
           />
         </div>
@@ -76,7 +76,21 @@ const row2 = [g5, g6, g9];
   }
 
   .grid-1440 {
-    row-gap: 2.5rem;
+    row-gap: 0;
+  }
+
+  /* heading -> content 64, content -> gallery 96, gallery rows 24 apart */
+  .full:has(:global(.section-heading)) {
+    margin-bottom: 0;
+  }
+
+  .gallery-row {
+    margin-top: 24px;
+  }
+
+  .span-2 + .span-2 + .gallery-row,
+  .challenge + .gallery-row {
+    margin-top: 96px;
   }
 
   .full {
@@ -95,7 +109,7 @@ const row2 = [g5, g6, g9];
     grid-column: 5 / span 2;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1260px) {
     .challenge {
       grid-column: span 2;
     }
@@ -104,6 +118,8 @@ const row2 = [g5, g6, g9];
   @media (max-width: 640px) {
     .challenge {
       grid-column: 1 / -1;
+      /* stacked under the first list: 64px between the two blocks */
+      margin-top: 64px;
     }
   }
 
@@ -113,7 +129,7 @@ const row2 = [g5, g6, g9];
     gap: 24px;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1260px) {
     .span-4 {
       grid-column: span 4;
     }
@@ -138,7 +154,7 @@ const row2 = [g5, g6, g9];
   }
 
   .caption {
-    margin: 0 0 0.75rem;
+    margin: 0 0 32px;
     font-family: var(--font-body);
     font-weight: 700;
     font-size: 1.125rem;
@@ -151,8 +167,8 @@ const row2 = [g5, g6, g9];
     font-family: var(--font-body);
     font-weight: 400;
     font-size: 1.125rem;
-    color: #c9c9c9;
-    line-height: 1.7;
+    color: #d6d6d6;
+    line-height: 1.5;
   }
 
   .running.list {

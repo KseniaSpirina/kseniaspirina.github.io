@@ -1,58 +1,97 @@
 ---
 import SideMenu from './SideMenu.astro';
+import TrailerPlayer from './TrailerPlayer.astro';
+import cover from '@assets/projects/sanctuary-title-image.png';
 ---
 
 <section class="hero grid-1440" id="top">
   <SideMenu />
 
-  <div class="hero-content">
-    <p class="eyebrow">Graduation project. 2026</p>
-    <h1>SANCTUARY</h1>
-  </div>
+  <div class="inner">
+    <h1>Sanctuary</h1>
+    <p class="type">Team project · Graduation project · 2026</p>
 
-  <div class="trailer">
-    <iframe
-      src="https://www.youtube-nocookie.com/embed/7YBvlEBDXPg"
-      title="Sanctuary trailer"
-      loading="lazy"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-    ></iframe>
+    <div class="trailer">
+      <TrailerPlayer cover={cover} src="https://www.youtube-nocookie.com/embed/7YBvlEBDXPg" title="Sanctuary trailer" />
+    </div>
+
+    <div class="info">
+      <div class="info-description">
+        <h3 class="label">Project description</h3>
+        <div class="after-label">
+          <p class="text">
+            Sanctuary is a narrative game set in a <span class="nw">post-apocalyptic</span> science fiction world, where
+            civilization survives only through its coexistence with mysterious <span class="nw">water-based</span> beings.
+            <span class="nw">As an outsider</span> arriving from the world beyond, you enter one of the last remaining safe
+            settlements, meet its inhabitants, uncover their customs and hidden conflicts, and try
+            to earn the right to stay.
+          </p>
+          <p class="text">
+            Every resident has their own beliefs, priorities, and relationships, and your choices
+            influence how they perceive you and how the story unfolds. <span class="nw">An LLM-powered</span> dialogue
+            system allows <span class="nw">open-ended</span> conversations: instead of selecting from a few predefined
+            responses, players can express themselves naturally, build trust, challenge beliefs, or
+            create tensions.
+          </p>
+        </div>
+      </div>
+      <div class="info-credits">
+        <h3 class="label">Credits</h3>
+        <div class="after-label">
+          <p class="text keep-host">
+            Sanctuary was created as our graduation project at
+            <span class="keep-name"><span class="keep-always">Bezalel Academy of Arts and</span> Design,</span>
+            in collaboration with the Hebrew&nbsp;University.
+          </p>
+          <p class="text"><strong>Designer:</strong> Ksenia Spirina</p>
+          <p class="text"><strong>Programmers:</strong> Eden Avrahami,<br />David Deitch, Shir Seroussi</p>
+          <p class="text"><strong>Guidance:</strong> Dani Bacon, Shimrit Elkanati</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <style>
   .hero {
     position: relative;
-    padding-top: 9rem;
+    padding-top: calc(128px - var(--nav-height));
     padding-bottom: 4rem;
     scroll-margin-top: calc(var(--nav-height) + 1rem);
   }
 
-  .hero-content,
-  .trailer {
+  .inner {
     grid-column: 1 / -1;
-  }
-
-  .hero-content {
-    margin-bottom: 2rem;
-  }
-
-  .eyebrow {
-    margin: 0 0 0.5rem;
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-size: 1.5rem;
-    color: #9a9a9a;
   }
 
   h1 {
     margin: 0;
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    color: #4361ee;
+    font-size: 56px;
+    line-height: 1.25;
     text-transform: uppercase;
+    color: #4361ee;
+  }
+
+  .type {
+    margin: 12px 0 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.25;
+    color: #9a9a9a;
+  }
+
+  @supports (text-box-trim: trim-both) {
+    h1 {
+      text-box: trim-end cap alphabetic;
+    }
+
+    .type {
+      margin-top: 32px;
+      text-box: trim-start cap alphabetic;
+    }
   }
 
   .trailer {
@@ -60,6 +99,7 @@ import SideMenu from './SideMenu.astro';
     width: 100%;
     max-width: 894px;
     aspect-ratio: 16 / 9;
+    margin-top: 64px;
     background: #000;
     border-radius: 4px;
     overflow: hidden;
@@ -71,5 +111,76 @@ import SideMenu from './SideMenu.astro';
     width: 100%;
     height: 100%;
     border: none;
+  }
+
+  .info {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    column-gap: 24px;
+    row-gap: 32px;
+    align-items: start;
+    margin-top: 96px;
+  }
+
+  .info-description {
+    grid-column: 1 / span 3;
+  }
+
+  .info-credits {
+    grid-column: 5 / span 3;
+  }
+
+  .label {
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    text-transform: uppercase;
+    color: #e8e8e8;
+  }
+
+  .after-label {
+    margin-top: 32px;
+  }
+
+  .text {
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #d6d6d6;
+  }
+
+
+  .nw {
+    white-space: nowrap;
+  }
+
+  .text strong {
+    font-weight: 700;
+  }
+
+  @media (max-width: 1260px) {
+    .info {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      row-gap: 64px;
+    }
+
+    .info-description,
+    .info-credits {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: 2.25rem;
+    }
+
+    .type {
+      font-size: 1.25rem;
+    }
   }
 </style>

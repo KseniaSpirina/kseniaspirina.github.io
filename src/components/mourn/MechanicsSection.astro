@@ -1,0 +1,249 @@
+---
+import { Image } from 'astro:assets';
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+import LazyVideo from '../imprisoned/LazyVideo.astro';
+
+import meter1 from '@assets/mourn/mechanics/meter-1.jpg';
+import meter2 from '@assets/mourn/mechanics/meter-2.jpg';
+import meter3 from '@assets/mourn/mechanics/meter-3.jpg';
+import meter4 from '@assets/mourn/mechanics/meter-4.jpg';
+import dialogueBubble from '@assets/mourn/mechanics/dialogue-bubble.jpg';
+import notebook from '@assets/mourn/mechanics/therapist-notebook.jpg';
+import therapistDialogue from '@assets/mourn/mechanics/therapist-dialogue.jpg';
+
+const v = (name: string) => `/mourn/videos/${name}.webm`;
+const pct = (value: number, total: number) => `${(value / total) * 100}%`;
+
+// The four meter pictures are placed by hand, as in the Figma file: x/w in px on an 894 px wide canvas.
+const MW = 698 + 196;
+const meters = [
+  { src: meter1, x: 0, caption: '1st lvl of instability' },
+  { src: meter2, x: 234, caption: '2nd lvl of instability' },
+  { src: meter3, x: 464, caption: '3rd lvl of instability' },
+  { src: meter4, x: 698, caption: '4th lvl of instability' },
+];
+
+const levels = [
+  {
+    title: 'Level 1 (0-30%)',
+    src: 'lvl-1',
+    list: ['No screen or sound distortion', 'Meter at level 1'],
+  },
+  {
+    title: 'Level 2 (30-60%)',
+    src: 'lvl-2',
+    list: ['Light flickering appears', 'Meter moves to level 2'],
+  },
+  {
+    title: 'Level 3 (60-80%)',
+    src: 'lvl-3',
+    list: ['Lens distortion and chromatic aberration appear', 'Meter moves to level 3'],
+  },
+  {
+    title: 'Level 4 (80-100%)',
+    src: 'lvl-4',
+    list: [
+      'Lens distortion and chromatic aberration persist',
+      "Sound effects appear that reveal the protagonist's negative thoughts",
+      'Meter moves to level 4',
+    ],
+  },
+];
+
+const feedback = [
+  {
+    title: 'Instability increase',
+    src: 'instability-raises',
+    list: ['Negative sound', 'Painted-over face on the meter', 'Pencil effect around the dialogue'],
+  },
+  {
+    title: 'Instability decrease',
+    src: 'instability-lowers',
+    list: ['Positive sound', 'Smiling face on the meter', 'Light shimmer around the dialogue'],
+  },
+];
+---
+
+<ProjectSection id="mechanics-and-ui" title="Mechanics and UI">
+  <div class="block">
+    <div class="cols">
+      <div class="gc-1-3">
+        <h3 class="p-label">Mechanics approach</h3>
+        <p class="p-text after-label">
+          The mechanics were designed first of all to support the narrative. They make the player
+          feel the weight of working through trauma, build tension, and create a real choice: face
+          a memory or skip it. All of this is communicated to the player through the UI, visual
+          and sound effects.
+        </p>
+      </div>
+      <div class="gc-5-3">
+        <h3 class="p-label">Instability mechanic</h3>
+        <p class="p-text after-label">
+          Instability is the game's core mechanic and defines the protagonist's state. It is
+          expressed through a meter, screen effects, and sound. The higher it rises, the worse he
+          feels, and if it fills completely, the game ends.
+        </p>
+      </div>
+    </div>
+    <div class="cols block-gap merge-lists">
+      <div class="gc-5-2">
+        <ul class="p-list">
+          <li>Rises with every step the player takes</li>
+          <li>Rises several times during an encounter with a traumatic memory of the daughter, and only then</li>
+        </ul>
+      </div>
+      <div class="gc-7-2">
+        <ul class="p-list">
+          <li>Drops slightly after an encounter with an ordinary memory</li>
+          <li>Drops significantly if the player fully explores the traumatic memory, because it has been worked through with the therapist</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="cols">
+      <div class="gc-1-2">
+        <h3 class="p-label">Instability meter</h3>
+        <p class="p-text after-label">
+          The meter is the player's main tool for tracking the protagonist's condition, showing
+          whether his state is getting worse or improving.
+        </p>
+      </div>
+      <div class="gc-3-6">
+        <div class="meters offgrid" style={`--cw: ${MW}; --ch: 402;`}>
+          {meters.map(m => (
+            <figure class="og fig" style={`--l: ${pct(m.x, MW)}; --t: 0%; --w: ${pct(196, MW)};`}>
+              <Image src={m.src} alt={m.caption} widths={[200, 400]} sizes="196px" loading="lazy" style="aspect-ratio: 196 / 356;" />
+              <figcaption class="p-caption">{m.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-subhead">4 Instability levels</h3>
+    <div class="after-subhead">
+      {levels.map((level, i) => (
+        <div class:list={['cols', i > 0 && 'block-gap', level.src === 'lvl-4' && 'sound-row']}>
+          <div class:list={['gc-1-2', level.src === 'lvl-4' && 'sound-col']}>
+            <h4 class="p-label">{level.title}</h4>
+            <ul class="p-list after-label">
+              {level.list.map(item => <li>{item}</li>)}
+            </ul>
+            {level.src === 'lvl-4' && <button class="sound-btn" type="button" data-replay-sound={v(level.src)} aria-label={`Play ${level.title} from the start with sound`}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9.5v5h3.5L11 18.5v-13L6.5 9.5H3z" fill="currentColor"/><path d="M14.5 9a4 4 0 0 1 0 6M17 6.5a7.5 7.5 0 0 1 0 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <span>Play with sound</span>
+            </button>}
+          </div>
+          <div class="gc-3-6">
+            <div class="media"><LazyVideo src={v(level.src)} ratio="894 / 503" label={level.title} sound={level.src === 'lvl-4'} /></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-subhead">Memory feedback</h3>
+    <div class="after-subhead">
+      {feedback.map((item, i) => (
+        <div class:list={['cols sound-row', i > 0 && 'block-gap']}>
+          <div class="gc-1-2 sound-col">
+            <h4 class="p-label">{item.title}</h4>
+            <ul class="p-list after-label">
+              {item.list.map(li => <li>{li}</li>)}
+            </ul>
+            <button class="sound-btn" type="button" data-replay-sound={v(item.src)} aria-label={`Play ${item.title} from the start with sound`}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9.5v5h3.5L11 18.5v-13L6.5 9.5H3z" fill="currentColor"/><path d="M14.5 9a4 4 0 0 1 0 6M17 6.5a7.5 7.5 0 0 1 0 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <span>Play with sound</span>
+            </button>
+          </div>
+          <div class="gc-3-6">
+            <div class="media"><LazyVideo src={v(item.src)} ratio="894 / 503" label={item.title} sound /></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-subhead">Other UI</h3>
+    <div class="after-subhead">
+      <div class="cols">
+        <div class="gc-1-2">
+          <h4 class="p-label">Protagonist<br />dialogue bubble</h4>
+          <ul class="p-list after-label">
+            <li>Used for exposition</li>
+            <li>Set in a dedicated font reserved for the protagonist's lines</li>
+          </ul>
+        </div>
+        <div class="gc-3-6">
+          <Image src={dialogueBubble} alt="Protagonist dialogue bubble" widths={[700, 1200, 1800]} sizes="(max-width: 1440px) 75vw, 894px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+
+      <div class="cols block-gap">
+        <div class="gc-1-2">
+          <h4 class="p-label">Therapist's notebook</h4>
+          <ul class="p-list after-label">
+            <li>Appears when the protagonist works through a memory of his daughter</li>
+            <li>Marks an important moment for the player</li>
+          </ul>
+        </div>
+        <div class="gc-3-6">
+          <Image src={notebook} alt="Therapist's notebook" widths={[700, 1200, 1800]} sizes="(max-width: 1440px) 75vw, 892px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+
+      <div class="cols block-gap">
+        <div class="gc-1-2">
+          <h4 class="p-label">Dialogue with a therapist</h4>
+          <ul class="p-list after-label">
+            <li>Appears on contact with a memory</li>
+            <li>Set in two fonts: one for the protagonist, one for the therapist</li>
+            <li>The protagonist's font reflects instability and intimacy</li>
+            <li>The therapist's font conveys professionalism and stability</li>
+          </ul>
+        </div>
+        <div class="gc-3-6">
+          <Image src={therapistDialogue} alt="Dialogue with a therapist" widths={[700, 1200, 1800]} sizes="(max-width: 1440px) 75vw, 893px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ProjectSection>
+
+<style>
+  .meters {
+    max-width: 894px;
+  }
+
+  /* the two bullet lists next to each other become one list when stacked: normal gap between items */
+  @media (max-width: 1260px) {
+    .merge-lists {
+      row-gap: 0;
+    }
+
+    /* 13px item gap + the 10.17px / 7px that the text trim takes off the top and bottom of each list */
+    .merge-lists > :global(div + div) :global(.p-list) {
+      margin-top: calc(13px + 10.17px + 7px);
+    }
+  }
+
+  @media (max-width: 1260px) {
+    .meters.offgrid {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 40px 24px;
+      max-width: none;
+    }
+
+    .meters.offgrid .og {
+      width: calc((100% - 24px) / 2);
+      max-width: 196px;
+    }
+  }
+</style>

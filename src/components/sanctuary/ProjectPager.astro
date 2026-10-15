@@ -1,0 +1,50 @@
+---
+interface Props {
+  prevHref?: string;
+  nextHref?: string;
+}
+
+const { prevHref, nextHref } = Astro.props;
+---
+
+<nav class="pager grid-1440" aria-label="Projects">
+  <div class="inner">
+    {prevHref ? <a class="prev" href={prevHref}>&larr; Previous project</a> : <span></span>}
+    {nextHref ? <a class="next" href={nextHref}>Next project &rarr;</a> : <span></span>}
+  </div>
+</nav>
+
+<style>
+  .pager {
+    display: none;
+    padding-bottom: 96px;
+  }
+
+  .inner {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  a {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 32px;
+    text-transform: uppercase;
+    color: #9a9a9a;
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+
+  a:hover {
+    color: #e8e8e8;
+  }
+
+  @media (max-width: 1260px) {
+    .pager {
+      display: grid;
+    }
+  }
+</style>

@@ -1,0 +1,54 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import '../../styles/grid.css';
+import '../../styles/project.css';
+import Lightbox from '@components/sanctuary/Lightbox.astro';
+import ProjectNavArrows from '@components/sanctuary/ProjectNavArrows.astro';
+import ProjectPager from '@components/sanctuary/ProjectPager.astro';
+import HeroSection from '@components/mourn/HeroSection.astro';
+import ContributionSection from '@components/mourn/ContributionSection.astro';
+import StorySection from '@components/mourn/StorySection.astro';
+import CharactersSection from '@components/mourn/CharactersSection.astro';
+import EnvironmentSection from '@components/mourn/EnvironmentSection.astro';
+import MechanicsSection from '@components/mourn/MechanicsSection.astro';
+import ContactSection from '@components/project/ContactSection.astro';
+---
+
+<BaseLayout
+  title="Mourn — Ksenia Spirina"
+  description="Solo narrative game about grief, memory, and the regrets that remain after sudden loss. Made in the Indi Games course."
+>
+  <div class="project-page text-v2">
+    <ProjectNavArrows prevHref="/projects/imprisoned" nextHref="/projects/stellar-strays" />
+
+    <HeroSection />
+    <ContributionSection />
+    <StorySection />
+    <CharactersSection />
+    <EnvironmentSection />
+    <MechanicsSection />
+
+    <ContactSection />
+
+    <ProjectPager prevHref="/projects/imprisoned" nextHref="/projects/stellar-strays" />
+
+    <Lightbox />
+  </div>
+</BaseLayout>
+
+<style is:global>
+  body:has(.project-page) {
+    background-color: #121212;
+  }
+
+  body:has(.project-page) .navbar {
+    background-color: #121212;
+    backdrop-filter: none;
+    border-bottom-color: #121212;
+  }
+
+  body:has(.project-page) .footer {
+    background-color: #121212;
+    border-top-color: #121212;
+  }
+</style>

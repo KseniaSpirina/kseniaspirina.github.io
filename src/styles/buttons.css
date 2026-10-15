@@ -1,0 +1,85 @@
+/* Shared contact buttons (Contact page, Contact section on project pages).
+   .btn            outlined button, LinkedIn / Download CV
+   .btn--primary   "Email me": blue fill, pure white label and icon; on hover a negative (off-white fill, blue outline and label)
+   .btn--secondary small, quiet button (Copy)
+   Labels: Inter Bold, capitals, 0.5px letter spacing.
+   Outline = the stem thickness of Inter Bold capitals: 0.15em (2.7px at 18px). It is drawn as an inset shadow
+   because borders are snapped to whole device pixels and could not hold 2.7px.
+   Colours: #E8E8E8 outline, #4361EE accent, #FAFAFA off-white. */
+.btn {
+  --line: currentColor;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  min-height: 60px;
+  padding: 10px 26px 10px 22px;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 0.15em var(--line);
+  background: transparent;
+  color: #e8e8e8;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+}
+
+.btn svg {
+  display: block;
+  flex: none;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  color: #4361ee;
+}
+
+.btn--primary {
+  --line: #e8e8e8;
+  background: #4361ee;
+  color: #ffffff;
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  --line: #4361ee;
+  background: #fafafa;
+  color: #4361ee;
+}
+
+.btn--secondary {
+  min-height: 37px;
+  padding: 5px 15px;
+  color: #d6d6d6;
+  /* quiet: Inter Regular; outline = its stem thickness, 0.1em (1.8px at 18px) */
+  font-weight: 400;
+  box-shadow: inset 0 0 0 0.1em var(--line);
+}
+
+.btn--secondary:hover,
+.btn--secondary:focus-visible {
+  color: #4361ee;
+}
+
+/* Download CV: the icon sits on the text baseline (bottom edge of the capitals), not centred */
+.btn--download svg {
+  align-self: flex-start;
+  margin-top: var(--icon-top, 3.5px);
+}
+
+/* Email me: the envelope is 24px tall (between the original 30px and the 18px font size); its line stays 2.7px:
+   the icon is drawn on a 30px grid, so the stroke is 2.7 / (24 / 30) = 3.375 user units */
+.btn--primary svg {
+  height: 24px;
+  width: auto;
+}
+
+.btn--primary svg path {
+  stroke-width: 3.375px;
+}

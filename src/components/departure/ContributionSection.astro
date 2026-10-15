@@ -1,0 +1,34 @@
+---
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+
+const challenge = [
+  'Create a character design suited to a game, based on my existing character from an illustration',
+  "Show the character's personality through her animations",
+  'Combine 2D and 3D in one project',
+];
+
+const role = [
+  'Character design',
+  'Animation in Spine 2D',
+  'Environment design',
+  'Programming in Unity with visual scripting',
+  'Sound design',
+];
+---
+
+<ProjectSection id="contribution" title="Contribution">
+  <div class="cols">
+    <div class="gc-1-2">
+      <h3 class="p-label">Challenge</h3>
+      <ul class="p-list hang loose after-label">
+        {challenge.map(item => <li set:html={item} />)}
+      </ul>
+    </div>
+    <div class="gc-5-2">
+      <h3 class="p-label">My role</h3>
+      <ul class="p-list hang loose after-label">
+        {role.map(item => <li>{item}</li>)}
+      </ul>
+    </div>
+  </div>
+</ProjectSection>

@@ -1,0 +1,123 @@
+---
+import { Image } from 'astro:assets';
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+
+import startScreen from '@assets/mourn/story/start-screen.jpg';
+import lvl1 from '@assets/mourn/story/lvl-1.jpg';
+import lvl2 from '@assets/mourn/story/lvl-2.jpg';
+import lvl31 from '@assets/mourn/story/lvl-3-1.jpg';
+import lvl32 from '@assets/mourn/story/lvl-3-2.jpg';
+import endScreen from '@assets/mourn/story/end-screen.jpg';
+
+// Storyboards are placed by hand, as in the Figma file: x/y/w/h in px on the 1200 x 993 canvas.
+const CW = 1200;
+const CH = 1043;
+const boards = [
+  { src: startScreen, caption: 'Start of the game', x: 0, y: 0, w: 284, h: 534 },
+  { src: lvl1, caption: 'Home. Lvl 1', x: 308, y: 0, w: 430, h: 535 },
+  { src: lvl2, caption: 'Park. Lvl 2', x: 762, y: 0, w: 438, h: 424 },
+  { src: endScreen, caption: 'End of the game', x: 922, y: 647, w: 278, h: 350 },
+  { src: lvl31, caption: 'School road. Lvl 3.1', x: 0, y: 727, w: 435, h: 268, crop: true },
+  { src: lvl32, caption: 'School road. Lvl 3.2', x: 459, y: 727, w: 435, h: 270 },
+];
+const pct = (v: number, t: number) => `${(v / t) * 100}%`;
+---
+
+<ProjectSection id="story-development" title="Story development">
+  <div class="block">
+    <h3 class="p-label">Story development approach</h3>
+    <div class="cols after-label">
+      <div class="gc-1-3">
+        <p class="p-text">
+          The project began with its main theme. I wanted to explore loss and the confrontation
+          with trauma that follows it. The core of the story was set at the start and stayed
+          unchanged: a father loses his daughter in an accident and struggles to live with his
+          loss. He gave her little attention while she was alive, so after her death he is left
+          with guilt and regret over lost opportunities. The story was developed through
+          storyboards and by writing out all of the dialogue. Its context evolved over the course
+          of development, but the main plot remained.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="cols">
+      <div class="gc-1-2">
+        <h3 class="p-label">First version of the story</h3>
+        <ul class="p-list after-label">
+          <li>The father is an inventor who builds a time machine to save his daughter</li>
+          <li>He travels back and saves her, but this destroys the world in the present</li>
+        </ul>
+      </div>
+      <div class="gc-3-2">
+        <ul class="p-list list-offset">
+          <li>He returns to the past once more</li>
+          <li>Together with the player, he chooses: repeat the rescue, or accept her death and stop his past self from saving her</li>
+        </ul>
+      </div>
+      <div class="gc-6-2">
+        <h3 class="p-label">First storyboard</h3>
+        <ul class="p-list after-label">
+          <li>Given the short timeline of a solo project, I told the story through three locations</li>
+          <li>The father's attitude toward his daughter is conveyed through interactions with memories</li>
+          <li>Memories combined with the protagonist's lines tell of moments he lost</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="offgrid" style={`--cw: ${CW}; --ch: ${CH};`}>
+      {boards.map(b => (
+        <figure
+          class="og fig"
+          style={`--l: ${pct(b.x, CW)}; --t: ${pct(b.y, CH)}; --w: ${pct(b.w, CW)};`}
+        >
+          <Image
+            src={b.src}
+            alt={b.caption}
+            widths={[300, 600, 900]}
+            sizes="(max-width: 1260px) 440px, 440px"
+            loading="lazy"
+            class:list={[b.crop && 'cover']}
+            style={`aspect-ratio: ${b.w} / ${b.h};`}
+          />
+          <figcaption class="p-caption">{b.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="cols">
+      <div class="gc-1-2">
+        <h3 class="p-label">Final version of the story</h3>
+        <ul class="p-list after-label">
+          <li>The fantasy element is removed, and the game becomes more surreal</li>
+          <li>The game takes place within a single therapy session</li>
+          <li>The journey into the past is not literal but a work with memories</li>
+        </ul>
+      </div>
+      <div class="gc-3-2">
+        <ul class="p-list list-offset">
+          <li>The player chooses: face the traumas and overcome them with the therapist's guidance, or ignore them, leaving the protagonist's outlook on life distorted by the loss</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</ProjectSection>
+
+<style>
+  /* level with the first line of the list next to it: the label is 13.1px tall from the top of the
+     capitals to the baseline, plus 32px to the top of the lowercase letters */
+  .list-offset {
+    margin-top: 45.1px;
+  }
+
+  @media (max-width: 1260px) {
+    .list-offset {
+      margin-top: 0;
+    }
+  }
+</style>

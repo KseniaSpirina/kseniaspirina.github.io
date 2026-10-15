@@ -6,7 +6,12 @@ import { siteConfig } from '@config/site';
   <div class="container footer-inner">
     <div class="footer-links">
       {siteConfig.social.map(link => (
-        <a href={link.href} target="_blank" rel="noopener noreferrer" class="footer-link">
+        <a
+          href={link.href}
+          target={link.href.startsWith('mailto:') ? undefined : '_blank'}
+          rel={link.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+          class="footer-link"
+        >
           {link.label}
         </a>
       ))}

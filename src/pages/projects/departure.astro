@@ -1,0 +1,52 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import '../../styles/grid.css';
+import '../../styles/project.css';
+import Lightbox from '@components/sanctuary/Lightbox.astro';
+import ProjectNavArrows from '@components/sanctuary/ProjectNavArrows.astro';
+import ProjectPager from '@components/sanctuary/ProjectPager.astro';
+import HeroSection from '@components/departure/HeroSection.astro';
+import ContributionSection from '@components/departure/ContributionSection.astro';
+import AnimationSection from '@components/departure/AnimationSection.astro';
+import CharacterDesignSection from '@components/departure/CharacterDesignSection.astro';
+import EnvironmentSection from '@components/departure/EnvironmentSection.astro';
+import ContactSection from '@components/project/ContactSection.astro';
+---
+
+<BaseLayout
+  title="Departure — Ksenia Spirina"
+  description="Game Animation course project. A 2D character with a full Spine animation set in a stylized 3D environment."
+>
+  <div class="project-page text-v2">
+    <ProjectNavArrows prevHref="/projects/stellar-strays" nextHref="/" />
+
+    <HeroSection />
+    <ContributionSection />
+    <AnimationSection />
+    <CharacterDesignSection />
+    <EnvironmentSection />
+
+    <ContactSection />
+
+    <ProjectPager prevHref="/projects/stellar-strays" nextHref="/" />
+
+    <Lightbox />
+  </div>
+</BaseLayout>
+
+<style is:global>
+  body:has(.project-page) {
+    background-color: #121212;
+  }
+
+  body:has(.project-page) .navbar {
+    background-color: #121212;
+    backdrop-filter: none;
+    border-bottom-color: #121212;
+  }
+
+  body:has(.project-page) .footer {
+    background-color: #121212;
+    border-top-color: #121212;
+  }
+</style>

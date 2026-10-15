@@ -1,14 +1,17 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import '../../styles/grid.css';
+import '../../styles/sanctuary-text.css';
 import Lightbox from '@components/sanctuary/Lightbox.astro';
 import ProjectNavArrows from '@components/sanctuary/ProjectNavArrows.astro';
+import ProjectPager from '@components/sanctuary/ProjectPager.astro';
 import HeroSection from '@components/sanctuary/HeroSection.astro';
 import ContributionSection from '@components/sanctuary/ContributionSection.astro';
 import CharacterDesignSection from '@components/sanctuary/CharacterDesignSection.astro';
 import AnimationSection from '@components/sanctuary/AnimationSection.astro';
 import EnvironmentDesignSection from '@components/sanctuary/EnvironmentDesignSection.astro';
 import UIDesignSection from '@components/sanctuary/UIDesignSection.astro';
+import ContactSection from '@components/project/ContactSection.astro';
 ---
 
 <BaseLayout
@@ -16,7 +19,7 @@ import UIDesignSection from '@components/sanctuary/UIDesignSection.astro';
   description="Graduation project. World and visual language design for Sanctuary: character art, environment art, UI, and animation."
 >
   <div class="sanctuary">
-    <ProjectNavArrows nextHref="/work" prevHref="/work" />
+    <ProjectNavArrows nextHref="/projects/imprisoned" prevHref="/" />
 
     <HeroSection />
     <ContributionSection />
@@ -24,6 +27,10 @@ import UIDesignSection from '@components/sanctuary/UIDesignSection.astro';
     <AnimationSection />
     <EnvironmentDesignSection />
     <UIDesignSection />
+
+    <ContactSection />
+
+    <ProjectPager prevHref="/" nextHref="/projects/imprisoned" />
 
     <Lightbox />
   </div>

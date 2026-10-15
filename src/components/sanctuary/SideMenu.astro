@@ -1,11 +1,24 @@
 ---
-const links = [
-  { label: 'CONTRIBUTION', href: '#contribution' },
-  { label: 'CHARACTER DESIGN', href: '#character-design' },
-  { label: 'ANIMATION', href: '#animation' },
-  { label: 'ENVIRONMENT DESIGN', href: '#environment-design' },
-  { label: 'UI DESIGN', href: '#ui-design' },
-];
+interface Link {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  links?: Link[];
+}
+
+const {
+  links = [
+    { label: 'OVERVIEW', href: '#top' },
+    { label: 'CONTRIBUTION', href: '#contribution' },
+    { label: 'CHARACTER DESIGN', href: '#character-design' },
+    { label: 'ANIMATION', href: '#animation' },
+    { label: 'ENVIRONMENT DESIGN', href: '#environment-design' },
+    { label: 'UI DESIGN', href: '#ui-design' },
+    { label: 'CONTACT', href: '#contact' },
+  ],
+} = Astro.props;
 ---
 
 <button class="menu-icon" type="button" data-menu-toggle aria-label="Toggle contents menu" aria-expanded="false">
@@ -14,7 +27,7 @@ const links = [
   <span></span>
 </button>
 
-<span data-menu-sentinel></span>
+<span class="sentinel" data-menu-sentinel></span>
 
 <nav class="side-menu" data-side-menu aria-label="Page contents">
   <p class="side-menu-title">CONTENTS</p>
@@ -28,6 +41,15 @@ const links = [
 </nav>
 
 <style>
+  .sentinel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+  }
+
   .menu-icon {
     position: fixed;
     top: var(--menu-align-top, 19.7rem);
@@ -63,7 +85,7 @@ const links = [
     right: 7.5rem;
     z-index: 200;
     width: 282px;
-    padding: 1.5rem;
+    padding: 24px 24px 52px 27px;
     background: #121212;
     border-radius: 4px;
     transform-origin: top center;
@@ -83,9 +105,10 @@ const links = [
   }
 
   .side-menu-title {
-    margin: 0 0 1rem;
+    margin: 0 0 14px;
     font-family: var(--font-display);
     font-size: 2rem;
+    line-height: 40px;
     font-weight: 700;
     color: #4361ee;
   }
@@ -93,18 +116,18 @@ const links = [
   .side-menu ul {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 0 0 5px;
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 5px;
   }
 
   .side-menu a {
     display: block;
     font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 0.02em;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 32px;
     color: #e8e8e8;
     text-decoration: none;
     transition: color 150ms ease;
@@ -114,14 +137,27 @@ const links = [
     color: #4361ee;
   }
 
-  @media (max-width: 640px) {
-    .side-menu {
-      left: 1rem;
-      right: 1rem;
-      width: auto;
-    }
+  @media (max-width: 1260px) {
     .menu-icon {
-      right: 1rem;
+      display: none;
+    }
+
+    .side-menu,
+    .side-menu.is-collapsed,
+    .side-menu.is-open-forced {
+      position: static;
+      grid-column: 1 / -1;
+      order: 10;
+      width: auto;
+      margin-top: 72px;
+      padding: 0;
+      transform: none;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .side-menu ul {
+      padding-left: 0;
     }
   }
 </style>
@@ -159,7 +195,7 @@ const links = [
 
     menu.querySelectorAll('[data-menu-link]').forEach(link => {
       link.addEventListener('click', () => {
-        forcedOpen = false;
+        forcedOpen = true;
         render();
       });
     });

@@ -1,0 +1,107 @@
+---
+import ProjectSection from './ProjectSection.astro';
+import LazyVideo from './LazyVideo.astro';
+
+const v = (name: string) => `/imprisoned/videos/${name}.webm`;
+---
+
+<ProjectSection id="visual-effects-design" title="Visual effects design">
+  <div class="block">
+    <h3 class="p-label">Slime trail</h3>
+    <p class="p-text after-label">The trail shader was developed in collaboration with programmer Eden Avrahami.</p>
+
+    <div class="cols block-gap">
+      <div class="gc-1-2">
+        <p class="p-text">As the slime moves, it leaves a trail in its own color, reinforcing the narrative that the trail is a smeared part of its body</p>
+      </div>
+      <div class="gc-3-6">
+        <div class="media"><LazyVideo src={v('slime-trail')} ratio="16 / 9" label="Slime trail" /></div>
+        <p class="p-caption">Slime trail</p>
+      </div>
+    </div>
+
+    <div class="cols block-gap">
+      <div class="gc-1-2">
+        <p class="p-text">When the slime closes a loop, the enclosed area fills completely and changes color</p>
+        <p class="p-text">When an area is no longer active, it fades to gray</p>
+      </div>
+      <div class="gc-3-6">
+        <div class="media"><LazyVideo src={v('slime-closure')} ratio="16 / 9" label="Slime trail closure" /></div>
+        <p class="p-caption">Slime trail closure</p>
+      </div>
+    </div>
+
+    <div class="cols block-gap">
+      <div class="gc-1-2">
+        <p class="p-text">Older trail fades to gray gradually in the same way</p>
+      </div>
+      <div class="gc-3-6">
+        <div class="media"><LazyVideo src={v('trail-disappearance')} ratio="16 / 9" label="Trail disappearance" /></div>
+        <p class="p-caption">Trail disappearance</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Gameplay feedback</h3>
+    <div class="cols after-label">
+      <div class="gc-1-8">
+        <div class="media"><LazyVideo src={v('hit')} ratio="16 / 9" label="Hit screen effect" /></div>
+        <p class="p-caption">Hit screen effect</p>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-8">
+        <div class="media"><LazyVideo src={v('teleport')} ratio="16 / 9" label="Teleport effect" /></div>
+        <p class="p-caption">Teleport effect</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Slime Prime cast</h3>
+    <div class="cols pair after-label">
+      <div class="gc-1-2">
+        <ul class="p-list">
+          <li>Appears on the final level, where the player defends Slime Prime while he casts a spell to destroy the towers holding the prison's chains</li>
+          <li>The effect rises around the towers on the map over time</li>
+          <li>Its height works as a timer, showing how long the player still has to hold out</li>
+          <li>The height is synced with the timer fill in the UI</li>
+          <li>When Slime Prime is under attack, the effect turns red to warn the player of danger</li>
+        </ul>
+      </div>
+      <div class="gc-5-2">
+        <div class="media"><LazyVideo src={v('tower-no-danger')} ratio="1 / 1" label="Regular cast" /></div>
+        <p class="p-caption">Regular cast</p>
+      </div>
+      <div class="gc-7-2">
+        <div class="media"><LazyVideo src={v('tower-danger')} ratio="1 / 1" label="Slime Prime is in danger" /></div>
+        <p class="p-caption">Slime Prime is in danger</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Atmosphere effects</h3>
+    <div class="cols pair after-label">
+      <div class="gc-1-2">
+        <div class="media"><LazyVideo src={v('volcano')} ratio="1 / 1" label="Volcano particles" /></div>
+        <p class="p-caption">Volcano particles</p>
+      </div>
+      <div class="gc-5-2">
+        <div class="media"><LazyVideo src={v('lava')} ratio="1 / 1" label="Lava shader" /></div>
+        <p class="p-caption">Lava shader</p>
+      </div>
+    </div>
+
+    <div class="cols block-gap">
+      <div class="gc-1-2">
+        <p class="p-text">The final level ends with the prison's destruction: a flash completes the cast, and pieces of the chains fall.</p>
+      </div>
+      <div class="gc-3-6">
+        <div class="media"><LazyVideo src={v('chains-fall')} ratio="16 / 9" label="Chains falling" /></div>
+        <p class="p-caption">Chains falling</p>
+      </div>
+    </div>
+  </div>
+</ProjectSection>

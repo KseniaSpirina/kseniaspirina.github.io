@@ -57,16 +57,9 @@ const { prevHref, nextHref } = Astro.props;
     font-size: 0.75rem;
   }
 
-  @media (max-width: 640px) {
-    .nav-arrow-prev {
-      left: 1rem;
-    }
-    .nav-arrow-next {
-      right: 1rem;
-    }
-    .nav-arrow svg {
-      width: 24px;
-      height: 48px;
+  @media (max-width: 1260px) {
+    .nav-arrow {
+      display: none;
     }
   }
 </style>

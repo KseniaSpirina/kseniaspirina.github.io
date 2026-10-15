@@ -9,15 +9,16 @@ export const siteConfig = {
   
   // Navigation links
   nav: [
-    { label: 'Projects', href: '/work' },
+    { label: 'Projects', href: '/' },
     { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
   ],
 
   // Social links (add or remove as needed)
   social: [
-    { label: 'Email', href: 'mailto:hello@example.com' },
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/yourname' },
-    { label: 'Instagram', href: 'https://instagram.com/yourname' },
-    { label: 'Behance', href: 'https://behance.net/yourname' },
+    { label: 'Email', href: 'mailto:kseniaspirina@gmail.com' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ksenia-spirina-24b87b384/' },
+    { label: 'Instagram', href: 'https://instagram.com/morkespi' },
   ],
+
 };

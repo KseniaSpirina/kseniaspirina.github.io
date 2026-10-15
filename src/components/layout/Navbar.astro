@@ -32,6 +32,8 @@ import { siteConfig } from '@config/site';
   }
 
   .navbar-inner {
+    max-width: 1440px;
+    padding-inline: 120px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -41,25 +43,32 @@ import { siteConfig } from '@config/site';
   .navbar-logo {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1.125rem;
+    font-size: 24px;
     color: var(--color-text);
     text-decoration: none;
     text-transform: uppercase;
   }
 
+  /* PROJECTS / ABOUT / CONTACT: pushed to the right edge of the grid, 64px between the words */
   .navbar-links {
     display: flex;
-    gap: var(--space-lg);
-    list-style: none;
-    margin: 0;
+    flex: none;
+    gap: 64px;
+    margin: 0 0 0 auto;
     padding: 0;
+    list-style: none;
+  }
+
+  .navbar-links li:first-child {
+    flex: none;
   }
 
   .navbar-link {
     color: var(--color-text);
     font-family: var(--font-body);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 16px;
+    line-height: 19px;
     letter-spacing: 0.03em;
     text-transform: uppercase;
     transition: color var(--transition-fast);
@@ -97,13 +106,30 @@ import { siteConfig } from '@config/site';
   .hamburger::before { top: -6px; }
   .hamburger::after { top: 6px; }
 
+  @media (max-width: 1024px) {
+    .navbar-inner {
+      padding-inline: 48px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .navbar-inner {
+      padding-inline: 24px;
+    }
+  }
+
   /* Mobile */
   @media (max-width: 768px) {
     .navbar-toggle {
       display: block;
     }
 
+    .navbar-links li:first-child {
+      flex: none;
+    }
+
     .navbar-links {
+      flex: none;
       display: none;
       position: absolute;
       top: var(--nav-height);
@@ -112,7 +138,8 @@ import { siteConfig } from '@config/site';
       flex-direction: column;
       padding: var(--space-lg);
       background-color: var(--color-bg);
-      border-bottom: 1px solid var(--color-border);
+      border-bottom: none;
+      margin: 0;
       gap: var(--space-md);
     }
 

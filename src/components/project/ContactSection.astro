@@ -1,0 +1,39 @@
+---
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+import envelopeIcon from '@assets/icons/envelope.svg?raw';
+import linkedinIcon from '@assets/icons/linkedin.svg?raw';
+import '../../styles/buttons.css';
+---
+
+<ProjectSection id="contact" title="Contact">
+  <h3 class="heading">Interested in working together?</h3>
+  <div class="buttons">
+    <a class="btn btn--primary" href="mailto:kseniaspirina@gmail.com">
+      <Fragment set:html={envelopeIcon} />
+      <span>Email me</span>
+    </a>
+    <a class="btn" href="https://www.linkedin.com/in/ksenia-spirina-24b87b384/" target="_blank" rel="noopener noreferrer">
+      <Fragment set:html={linkedinIcon} />
+      <span>LinkedIn</span>
+    </a>
+  </div>
+</ProjectSection>
+
+<style>
+  .heading {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.25;
+    text-transform: uppercase;
+    color: #e8e8e8;
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 32px;
+  }
+</style>

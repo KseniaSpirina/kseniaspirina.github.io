@@ -1,0 +1,175 @@
+---
+import { Image } from 'astro:assets';
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+
+import wifePortrait from '@assets/mourn/characters/wife-portrait-1.jpg';
+import daughterPortrait from '@assets/mourn/characters/daighters-portrait-1.jpg';
+import mcPortrait from '@assets/mourn/characters/mc-portrait-1.jpg';
+import sheet from '@assets/mourn/characters/characters-sheet-1.jpg';
+import mcTurns from '@assets/mourn/characters/mc-all-turns.jpg';
+import daughterTurn from '@assets/mourn/characters/daugter-turnaround.jpg';
+import wifeTurn from '@assets/mourn/characters/wife-turnaround.jpg';
+import oldMc from '@assets/mourn/characters/old-mc-design.jpg';
+import ref3329 from '@assets/mourn/characters/ref-3329.jpg';
+import ref3328 from '@assets/mourn/characters/ref-3328.jpg';
+import ref3331 from '@assets/mourn/characters/ref-3331.jpg';
+import ref3330 from '@assets/mourn/characters/ref-3330.jpg';
+import faces from '@assets/mourn/characters/faces.jpg';
+import mcDesign from '@assets/mourn/characters/mc-design.jpg';
+
+const pct = (v: number, t: number) => `${(v / t) * 100}%`;
+
+// Portraits are placed by hand, as in the Figma file: x/y/w/h in px on a 588 x 231 canvas.
+const PW = 588;
+const PH = 231;
+const portraits = [
+  { src: wifePortrait, label: 'Wife Amalia', x: 0, w: 186, h: 231 },
+  { src: daughterPortrait, label: 'Daughter Lily', x: 202, w: 185, h: 230 },
+  { src: mcPortrait, label: 'Main Character', x: 402, w: 186, h: 230 },
+];
+
+// Lineup labels sit on the sheet: centre x / top y in px on the 895 x 591 image.
+const sheetLabels = [
+  { text: 'Wife Amalia', cx: 115, ty: 539 },
+  { text: 'Daughter Lily', cx: 321, ty: 539 },
+  { text: 'Cat', cx: 530, ty: 539 },
+  { text: 'Main Character', cx: 778, ty: 539 },
+];
+
+// Reference photos, hand-placed on a 282 x 475 canvas.
+const RW = 282;
+const RH = 475;
+const refs = [
+  { src: ref3329, x: 0, y: 0, w: 137, h: 194 },
+  { src: ref3328, x: 146, y: 47, w: 134, h: 194 },
+  { src: ref3331, x: 0, y: 202, w: 138, h: 270 },
+  { src: ref3330, x: 146, y: 249, w: 136, h: 224 },
+];
+---
+
+<ProjectSection id="characters-design" title="Characters design">
+  <div class="block">
+    <div class="cols">
+      <div class="gc-1-3">
+        <h3 class="p-label">Characters design approach</h3>
+        <p class="p-text after-label">
+          The game is seen through the protagonist's eyes. His trauma has distorted the way he
+          experiences the world, and everyone, himself included, appears grotesque and
+          unsettling.<br />
+          To reflect this, I designed two versions of every character: how they really look and
+          how he perceives them.
+        </p>
+      </div>
+      <div class="gc-5-4">
+        <h3 class="p-label">Real appearance</h3>
+        <div class="after-label">
+          <div class="offgrid keep" style={`--cw: ${PW}; --ch: ${PH}; --ovs: 3.06cqw;`}>
+            {portraits.map(p => (
+              <div
+                class="og ov-wrap"
+                style={`--l: ${pct(p.x, PW)}; --t: 0%; --w: ${pct(p.w, PW)}; --h: ${pct(p.h, PH)};`}
+              >
+                <Image src={p.src} alt={p.label} widths={[200, 400]} sizes="186px" loading="lazy" />
+                <p class="ov" style={`--cx: 50%; --ty: ${pct(194, p.h)};`}>{p.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Distorted perception</h3>
+    <div class="cols after-label">
+      <div class="gc-2-6">
+        <div class="ov-wrap sheet-wrap">
+          <Image src={sheet} alt="Character lineup: wife, daughter, cat and main character" widths={[600, 900, 1400]} sizes="(max-width: 1440px) 75vw, 895px" loading="lazy" class="media-img" />
+          {sheetLabels.map(l => (
+            <p class="ov" style={`--cx: ${pct(l.cx, 895)}; --ty: ${pct(l.ty, 591)};`}>{l.text}</p>
+          ))}
+        </div>
+        <p class="p-caption">Character Lineup</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Turnarounds</h3>
+    <div class="cols after-label">
+      <div class="gc-2-6">
+        <Image src={mcTurns} alt="Main character turnaround" widths={[700, 1200, 1800]} sizes="(max-width: 1440px) 75vw, 895px" loading="lazy" class="media-img" />
+        <p class="p-caption">Main character turnaround</p>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-3-4">
+        <Image src={daughterTurn} alt="Daughter turnaround" widths={[600, 1176]} sizes="588px" loading="lazy" class="media-img" />
+        <p class="p-caption">Daughter turnaround</p>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-3-4">
+        <div class="wife-turn">
+          <Image src={wifeTurn} alt="Wife turnaround" widths={[600, 1166]} sizes="583px" loading="lazy" class="media-img" />
+          <p class="p-caption">Wife turnaround</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-subhead">Process breakdown</h3>
+    <div class="cols after-subhead">
+      <div class="gc-1-2">
+        <h4 class="p-label">0. Old version</h4>
+        <div class="after-label">
+          <Image src={oldMc} alt="Old main character design" widths={[300, 564]} sizes="282px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+      <div class="gc-4-2">
+        <h4 class="p-label">References</h4>
+        <div class="after-label">
+          <div class="offgrid keep" style={`--cw: ${RW}; --ch: ${RH};`}>
+            {refs.map(r => (
+              <div
+                class="og"
+                style={`--l: ${pct(r.x, RW)}; --t: ${pct(r.y, RH)}; --w: ${pct(r.w, RW)}; --h: ${pct(r.h, RH)};`}
+              >
+                <Image src={r.src} alt="Reference photo" widths={[200, 400]} sizes="138px" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="gc-7-2">
+        <h4 class="p-label">Face search</h4>
+        <div class="after-label">
+          <Image src={faces} alt="Face search" widths={[300, 566]} sizes="283px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+
+    <div class="cols block-gap">
+      <div class="gc-1-2">
+        <h4 class="p-label">Final design</h4>
+        <div class="after-label">
+          <Image src={mcDesign} alt="Main character final design" widths={[300, 560]} sizes="280px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+      <div class="gc-4-5">
+        <h4 class="p-label">Turnaround</h4>
+        <div class="after-label">
+          <Image src={mcTurns} alt="Main character turnaround" widths={[600, 1200]} sizes="741px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ProjectSection>
+
+<style>
+  .wife-turn {
+    max-width: 583px;
+    margin-inline: auto;
+  }
+</style>

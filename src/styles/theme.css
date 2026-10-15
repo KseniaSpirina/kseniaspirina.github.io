@@ -5,14 +5,14 @@
    All components reference these variables. */
 
 :root {
-  /* Colors */
-  --color-bg: #fafafa;
-  --color-text: #1a1a1a;
-  --color-text-secondary: #666666;
-  --color-accent: #4361ee;
-  --color-accent-hover: #2f47c9;
-  --color-border: #e5e5e5;
-  --color-surface: #ffffff;
+  /* Colors: the site is dark on every page, whatever the system theme is */
+  --color-bg: #121212;
+  --color-text: #fafafa;
+  --color-text-secondary: #a0a0a0;
+  --color-accent: #6b83ff;
+  --color-accent-hover: #8fa1ff;
+  --color-border: #262626;
+  --color-surface: #141414;
 
   /* Typography */
   --font-display: 'Unbounded', system-ui, sans-serif;
@@ -35,19 +35,6 @@
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-normal: 300ms ease;
-}
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #0a0a0a;
-    --color-text: #fafafa;
-    --color-text-secondary: #a0a0a0;
-    --color-accent: #6b83ff;
-    --color-accent-hover: #8fa1ff;
-    --color-border: #262626;
-    --color-surface: #141414;
-  }
 }
 
 /* ===== BASE STYLES ===== */

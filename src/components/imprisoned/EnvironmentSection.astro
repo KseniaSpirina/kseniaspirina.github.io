@@ -1,0 +1,220 @@
+---
+import { Image } from 'astro:assets';
+import ProjectSection from './ProjectSection.astro';
+
+import l1shot from '@assets/imprisoned/environment/lvl-1-in-game-view.jpg';
+import l1map from '@assets/imprisoned/environment/lvl-1-map.jpg';
+import l2shot1 from '@assets/imprisoned/environment/lvl-2-in-game-view.jpg';
+import l2shot2 from '@assets/imprisoned/environment/lvl-2-in-game-view-2.jpg';
+import l2map from '@assets/imprisoned/environment/lvl-2-map.jpg';
+import l2noShaders from '@assets/imprisoned/environment/lvl-2-no-shaders.jpg';
+import l3shot1 from '@assets/imprisoned/environment/lvl-3-in-game-shot-1.jpg';
+import l3shot2 from '@assets/imprisoned/environment/lvl-3-in-game-shot-2.jpg';
+import l3map from '@assets/imprisoned/environment/lvl-3-map.jpg';
+import rocksAssets from '@assets/imprisoned/environment/rocks-assets.png';
+import plants1 from '@assets/imprisoned/environment/plants-assets-1.png';
+import plants2 from '@assets/imprisoned/environment/plants-assets-2.png';
+import plants3 from '@assets/imprisoned/environment/plants-assets-3.png';
+import treesAssets from '@assets/imprisoned/environment/trees-assets.png';
+import references from '@assets/imprisoned/environment/references-imprisoned.png';
+import mainForm from '@assets/imprisoned/environment/main-form.png';
+import rocksPlacement from '@assets/imprisoned/environment/rocks-placement.png';
+
+const fullSizes = '(max-width: 1440px) calc(100vw - 96px), 1200px';
+const fullWidths = [900, 1400, 2000, 2800];
+
+const levels = [
+  {
+    title: 'Swamp. Lvl 1',
+    shots: [{ src: l1shot, alt: 'Swamp level, in game view', caption: 'In game view' }],
+    list: [
+      'Light palette, dominated by pale green, conveys safety compared to later levels',
+      'Simplest map shape of the game, with open space to maneuver, helps the player learn the controls',
+      'Vegetation adds to the sense of comfort and security',
+      'Absence of dramatic visual effects keeps the scene calm',
+    ],
+    map: l1map,
+    mapAlt: 'Swamp level map overview',
+  },
+  {
+    title: 'Volcano. Lvl 2',
+    shots: [
+      { src: l2shot1, alt: 'Volcano level, in game view 1', caption: 'In game view. 1' },
+      { src: l2shot2, alt: 'Volcano level, in game view 2', caption: 'In game view. 2' },
+    ],
+    list: [
+      'Map is split into two small areas, complicating movement while letting the player focus on one area at a time',
+      'Stone stelae in the middle of each area obstruct movement and shelter a new enemy type',
+      'Red-gray palette signals heightened danger',
+      'Dramatic visual effects appear for the first time: lava and volcanic smoke',
+      'Mixed details: plants remain but look dead, while sharp crystals appear, their aggressive forms signaling danger',
+    ],
+    map: l2map,
+    mapAlt: 'Volcano level map overview',
+  },
+  {
+    title: 'Dark Mountains. Lvl 3',
+    shots: [
+      { src: l3shot2, alt: 'Dark Mountains level, in game view 1', caption: 'In game view. 1' },
+      { src: l3shot1, alt: 'Dark Mountains level, in game view 2', caption: 'In game view. 2' },
+    ],
+    list: [
+      'Unique mechanic: the player must defend Slime Prime from waves of enemies',
+      'Largest map of the game, simple in shape but with obstacles that block free movement',
+      "The map's scale and four enemy spawn points, never all visible at once, keep the player from controlling the situation and add tension",
+      "Dramatic effects from Slime Prime's casting build tension and signal when Slime Prime is under attack",
+      "Darkest, gloomiest palette matches the tutorial to link Slime Prime's prison with his escape",
+      'No vegetation, only crystals, chains, and wardens architecture conveys an oppressive atmosphere and the nearness of the exit to a new world',
+    ],
+    map: l3map,
+    mapAlt: 'Dark Mountains level map overview',
+  },
+];
+
+// Assets are placed by hand, as in the Figma file: x/y/w/h in px on the 1200 x 729 canvas.
+const CANVAS_W = 1200;
+const CANVAS_H = 729;
+const assets = [
+  { src: rocksAssets, alt: 'Rock models', x: 0, y: 0, w: 588, h: 331 },
+  { src: plants3, alt: 'Plant models', x: 695, y: 145, w: 397, h: 131 },
+  { src: plants1, alt: 'Plant models', x: 765, y: 364, w: 282, h: 148 },
+  { src: treesAssets, alt: 'Tree models', x: 0, y: 427, w: 591, h: 302 },
+  { src: plants2, alt: 'Plant models', x: 765, y: 625, w: 282, h: 103 },
+];
+const pct = (value: number, total: number) => `${(value / total) * 100}%`;
+---
+
+<ProjectSection id="environment-design" title="Environment design">
+  <div class="block">
+    <h3 class="p-label">Environment design approach</h3>
+    <div class="cols after-label">
+      <div class="gc-1-3">
+        <p class="p-text">
+          Environment design focused on making each level feel distinct, giving the player a clear
+          sense of progression. This was achieved through three biomes spread across four levels,
+          darkening in atmosphere as the game progresses. The tutorial and final level share a
+          similar visual identity, linking Slime Prime's island to the player's escape from the
+          prison as a whole.
+        </p>
+        <p class="p-text">
+          Given the tight timeline, I built a set of 3D models used across all biomes, some
+          recurring (like rocks) and others unique to define each biome's character.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {levels.map(level => (
+    <div class="block">
+      <h3 class="p-label">{level.title}</h3>
+      {level.shots.map((shot, i) => (
+        <div class:list={[i === 0 ? 'after-label' : 'block-gap']}>
+          <Image src={shot.src} alt={shot.alt} widths={fullWidths} sizes={fullSizes} quality={90} loading="lazy" class="media-img" />
+          <p class="p-caption">{shot.caption}</p>
+        </div>
+      ))}
+      <div class="cols block-gap">
+        <div class="gc-1-2">
+          <ul class="p-list">
+            {level.list.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="gc-4-5">
+          <Image src={level.map} alt={level.mapAlt} widths={[700, 1100, 1500]} sizes="(max-width: 1440px) 60vw, 741px" quality={90} loading="lazy" class="media-img" />
+          <p class="p-caption">Map overview</p>
+        </div>
+      </div>
+    </div>
+  ))}
+
+  <div class="assets" style={`--cw: ${CANVAS_W}; --ch: ${CANVAS_H};`}>
+    <div class="offgrid">
+      <h3 class="p-subhead og title" style={`--l: 0%; --t: ${pct(9, CANVAS_H)}; --w: auto;`}>Assets</h3>
+      {assets.map(item => (
+        <div
+          class="og"
+          style={`--l: ${pct(item.x, CANVAS_W)}; --t: ${pct(item.y, CANVAS_H)}; --w: ${pct(item.w, CANVAS_W)}; --h: ${pct(item.h, CANVAS_H)};`}
+        >
+          <Image src={item.src} alt={item.alt} widths={[400, 800, 1200]} sizes="(max-width: 1260px) 440px, 600px" loading="lazy" />
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="breakdown">
+    <h3 class="p-subhead">Process breakdown</h3>
+    <div class="cols after-subhead">
+      <div class="gc-1-3">
+        <h4 class="p-label">1. References</h4>
+        <div class="after-label ref">
+          <Image src={references} alt="Reference images" widths={[400, 756]} sizes="378px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+      <div class="gc-5-3">
+        <h4 class="p-label">2. Base form</h4>
+        <div class="after-label">
+          <Image src={mainForm} alt="Base form of the level" widths={[500, 870]} sizes="435px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+
+    <div class="cols block-gap">
+      <div class="gc-1-3">
+        <h4 class="p-label">3. Assemble. Cinema 4D</h4>
+        <div class="after-label">
+          <Image src={rocksPlacement} alt="Rock placement in Cinema 4D" widths={[500, 870]} sizes="435px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+      <div class="gc-5-4">
+        <h4 class="p-label">4. Materials. Unity</h4>
+        <div class="after-label">
+          <Image src={l2noShaders} alt="Level without shaders in Unity" widths={[600, 1176]} sizes="588px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+
+    <div class="cols block-gap">
+      <div class="gc-1-5">
+        <h4 class="p-label">5. Final. Unity</h4>
+        <div class="after-label">
+          <Image src={l2map} alt="Final level in Unity" widths={[700, 1482]} sizes="741px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ProjectSection>
+
+<style>
+  .assets {
+    margin-top: 77px;
+  }
+
+  .assets .title {
+    width: auto;
+    height: auto;
+    z-index: 1;
+  }
+
+  .breakdown {
+    margin-top: 181px;
+  }
+
+  .ref {
+    max-width: 378px;
+  }
+
+
+  @media (max-width: 1260px) {
+    .assets {
+      margin-top: 96px;
+    }
+
+    .assets .title {
+      position: static;
+    }
+
+    .breakdown {
+      margin-top: 96px;
+    }
+  }
+</style>

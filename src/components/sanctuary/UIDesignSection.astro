@@ -2,125 +2,702 @@
 import SectionHeading from './SectionHeading.astro';
 import { Image } from 'astro:assets';
 import cursorRegular from '@assets/sanctuary/ui/cursor.png';
+import LightboxImage from './LightboxImage.astro';
+import LazyVideo from '../imprisoned/LazyVideo.astro';
 
+import miren from '@assets/sanctuary/ui/miren-dialogue.jpg';
+import engineer from '@assets/sanctuary/ui/engineer-dialogue.jpg';
+import guard from '@assets/sanctuary/ui/guard-dialogue.jpg';
+import builder from '@assets/sanctuary/ui/builder-dialogue.jpg';
+import bubble1 from '@assets/sanctuary/ui/speech-bubble-1.jpg';
+import bubble2 from '@assets/sanctuary/ui/speech-bubble.jpg';
+import mirenBubble from '@assets/sanctuary/ui/miren-speech-bubble.jpg';
+import allIcons from '@assets/sanctuary/ui/journal-all-icons.jpg';
+import journalIcons from '@assets/sanctuary/ui/journal-icons.png';
+import iconsElder from '@assets/sanctuary/ui/icons-elder.png';
+import iconsEngineer from '@assets/sanctuary/ui/icons-engineer.png';
+import iconsBuilder from '@assets/sanctuary/ui/icons-builder.png';
+import iconsCollector from '@assets/sanctuary/ui/icons-collector.png';
+import questShort from '@assets/sanctuary/ui/quest-short.jpg';
+import questFinished from '@assets/sanctuary/ui/quest-finished.jpg';
+import questWithImage from '@assets/sanctuary/ui/quest-with-image.jpg';
+import powder from '@assets/sanctuary/ui/powder.jpg';
+import clock from '@assets/sanctuary/ui/clock.jpg';
+import spirit from '@assets/sanctuary/ui/spirit-ending.jpg';
+import mind from '@assets/sanctuary/ui/mind-ending.jpg';
+import exile from '@assets/sanctuary/ui/exile-ending.jpg';
+import binding from '@assets/sanctuary/ui/binding-ending.png';
+
+// Cursor videos are placed by hand, as on Page 6 of the Figma file (the video is shown 80 x 80 px, as it was
+// on the page before). The positions are fixed in px, so the labels never overlap when the window is resized. The horizontal pitch (181 px = 80 px picture + 101 px gap) is the
+// one the page had before; the NPC cursor sits 11 px higher than the others, as in the design.
+// `shift`: the NPC label is moved right so it stands under the speech bubble, the visual centre of that cursor.
+const CUR = 80;
 const cursors = [
-  { label: 'Regular', video: null },
-  { label: 'NPC', video: '/sanctuary/ui/cursor-eye.webm' },
-  { label: 'Interactive Object', video: '/sanctuary/ui/cursor-talking.webm' },
-  { label: 'Walk', video: '/sanctuary/ui/cursor-walking.webm' },
+  { label: 'Regular', video: null, x: 0, y: 11 },
+  { label: 'Interactive object', video: '/sanctuary/ui/cursor-eye.webm', x: 181, y: 11 },
+  { label: 'NPC', video: '/sanctuary/ui/cursor-talking.webm', x: 362, y: 0, shift: 14.7 },
+  { label: 'Walk', video: '/sanctuary/ui/cursor-walking.webm', x: 543, y: 11 },
 ];
+
+const video = (name: string) => `/sanctuary/ui/${name}.webm`;
+
+// Quest icons are placed by hand, as in the Figma file: x/y/width in px on a 1200 x 833 canvas.
+// --p / --w keep the same picture scale when the block stacks on narrow screens (437 px = widest strip),
+// --o is the reading order on narrow screens.
+const IW = 1200;
+const IH = 833;
+const at = (x: number, y: number, w: number, order: number) =>
+  `left: ${(x / IW) * 100}%; top: ${(y / IH) * 100}%; width: ${(w / IW) * 100}%; --p: ${(w / 437) * 100}%; --w: ${w}px; --o: ${order};`;
+
 ---
 
 <section class="ui-design grid-1440" id="ui-design">
   <SectionHeading title="UI Design" />
-  <p class="caption">UI Design Approach</p>
 
-  <p class="running narrow">
-    A more minimalist style was chosen for the user interface, making the dialogue text easier to read
-    against the game's rich illustrations, while still echoing some of the game's visual elements.
-  </p>
+  <!-- UI design approach: three text columns, as on Page 6 of the Figma file -->
+  <div class="ui-approach">
+    <p class="ui-label">UI Design Approach</p>
+    <div class="ui-cols after-label">
+      <div class="c-1-3">
+        <p class="ui-text">
+          A more minimalist style was chosen for the user interface, making the dialogue text easier
+          to read against the game's rich illustrations, while still echoing some of the game's
+          visual elements.
+        </p>
+      </div>
+      <div class="c-4-2">
+        <ul class="ui-list">
+          <li>Black backgrounds tie the interface to black accents in character and environment design</li>
+          <li>Baskerville Libre chosen for dialogue readability and a literary tone matching the game's lore</li>
+        </ul>
+      </div>
+      <div class="c-6-2">
+        <p class="ui-text">
+          Thin corner frames echo the game's fine linework, and originated as a stylized rendering of
+          water ripples.
+        </p>
+      </div>
+    </div>
+  </div>
 
-  <div class="block">
-    <p class="caption">Cursor</p>
-    <p class="running">
-      Thin corner frames echo the game's fine linework, and originated as a stylized rendering of water
-      ripples.
-    </p>
-    <div class="cursor-grid">
+  <!-- Cursor: the four cursor videos are placed freely (off the grid) -->
+  <div class="ui-block cursor-block">
+    <p class="ui-label">Cursor</p>
+    <div class="cursor-canvas after-label">
       {cursors.map(c => (
-        <div class="cursor-card">
-          {c.video ? (
-            <video src={c.video} autoplay loop muted playsinline></video>
-          ) : (
-            <Image src={cursorRegular} alt="Regular cursor" widths={[200]} sizes="140px" loading="lazy" />
-          )}
-          <p class="cursor-label">{c.label}</p>
+        <div class="cur" style={`left: ${c.x}px;`}>
+          <div class="cur-media" style={`top: ${c.y}px;`}>
+            {c.video ? (
+              <video src={c.video} autoplay loop muted playsinline aria-label={`${c.label} cursor`}></video>
+            ) : (
+              <Image src={cursorRegular} alt="Regular cursor" widths={[80, 160]} sizes="80px" loading="lazy" />
+            )}
+          </div>
+          <p class="cur-label" style={c.shift ? `left: calc(50% + ${c.shift}px);` : undefined}>{c.label}</p>
         </div>
       ))}
     </div>
   </div>
 
-  <div class="block">
-    <p class="caption">Speech UI</p>
-    <p class="running">
-      Black backgrounds tie the interface to black accents used in character and environment design —
-      the in-game dialogue typeface was chosen for readability and a literary tone matching the game's
-      lore.
-    </p>
+  <!-- Dialogue UI -->
+  <div class="ui-block first">
+    <p class="ui-label">Dialogue UI</p>
+    <div class="ui-cols after-label">
+      <div class="c-1-3">
+        <p class="ui-text">
+          The dialogue interface has two main parts: a portrait of the character the player is
+          talking to and a chat window. Each NPC in the game has its own signature color. Depending
+          on who the player is speaking with, both the portrait and the color of the name in the
+          chat change to match, so it's easy to tell the characters apart.
+        </p>
+      </div>
+    </div>
+
+    <div class="ui-cols gap-block">
+      <div class="c-1-8">
+        <LightboxImage src={miren} alt="Miren dialogue window" caption="Miren dialogue window" group="ui-dialogue" widths={[800, 1200, 1800]} sizes="(max-width: 1440px) 100vw, 1200px" />
+        <p class="ui-caption">Miren dialogue window</p>
+      </div>
+    </div>
+
+    <div class="ui-cols pair gap-block">
+      <div class="c-1-4">
+        <LightboxImage src={engineer} alt="Engineer dialogue window" caption="Engineer dialogue window" group="ui-dialogue" widths={[600, 1176, 1800]} sizes="(max-width: 1260px) 100vw, 588px" />
+        <p class="ui-caption">Engineer dialogue window</p>
+      </div>
+      <div class="c-5-4">
+        <LightboxImage src={guard} alt="Guard dialogue window" caption="Guard dialogue window" group="ui-dialogue" widths={[600, 1176, 1800]} sizes="(max-width: 1260px) 100vw, 588px" />
+        <p class="ui-caption">Guard dialogue window</p>
+      </div>
+    </div>
+
+    <div class="ui-cols pair gap-block">
+      <div class="c-1-4">
+        <LightboxImage src={builder} alt="Builder dialogue window" caption="Builder dialogue window" group="ui-dialogue" widths={[600, 1176, 1800]} sizes="(max-width: 1260px) 100vw, 588px" />
+        <p class="ui-caption">Builder dialogue window</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Speech bubble -->
+  <div class="ui-block">
+    <p class="ui-label">Speech bubble</p>
+    <div class="ui-cols after-label">
+      <div class="c-1-3">
+        <p class="ui-text">
+          The speech bubble has a fixed width and a set maximum number of lines; any longer text is
+          split across several bubbles. It follows the same visual style as the dialogue window: a
+          black background with a white border keeps the bubble’s edges clearly visible against any
+          background.
+        </p>
+      </div>
+      <div class="c-5-3 bubbles">
+        <Image src={bubble1} alt="Speech bubble with a long text" widths={[435, 870]} sizes="(max-width: 1260px) 100vw, 435px" loading="lazy" class="ui-img" />
+        <Image src={bubble2} alt="Speech bubble with a short text" widths={[435, 870]} sizes="(max-width: 1260px) 100vw, 435px" loading="lazy" class="ui-img" />
+      </div>
+    </div>
+    <div class="ui-cols gap-block">
+      <div class="c-1-8">
+        <Image src={mirenBubble} alt="Speech bubble in the game" widths={[800, 1200, 1800]} sizes="(max-width: 1440px) 100vw, 1200px" loading="lazy" class="ui-img" />
+        <p class="ui-caption">Speech bubble in game</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Journal screen -->
+  <div class="ui-block">
+    <p class="ui-label">Journal screen</p>
+    <div class="ui-cols after-label">
+      <div class="c-1-3">
+        <p class="ui-text">
+          In the game, the player’s Vivaka, a water companion, also serves as their quest journal:
+          quests appear directly on the creature’s surface. This water theme became the foundation
+          for the journal screen and sets it apart from the rest of the game’s UI.
+        </p>
+      </div>
+    </div>
+    <div class="ui-cols gap-block">
+      <div class="c-1-8">
+        <LazyVideo src={video('diary')} ratio="16 / 9" label="Journal screen" />
+      </div>
+    </div>
+    <div class="ui-cols pair gap-block">
+      <div class="c-1-2">
+        <ul class="ui-list">
+          <li>Water-colored background captures the image of the current location, creating a sense of transparency</li>
+          <li>Each questline is a ring, inspired by ripples from a drop in water</li>
+        </ul>
+      </div>
+      <div class="c-4-2">
+        <ul class="ui-list">
+          <li>Quests are split into stages, each shown as a bubble with a stylized icon</li>
+          <li>When a whole quest is complete, a line is drawn from it to the central bubble, which fills with water to show the player’s progress</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ui-cols gap-block">
+      <div class="c-1-8">
+        <Image src={allIcons} alt="Journal with all quest icons" widths={[800, 1200, 1800]} sizes="(max-width: 1440px) 100vw, 1200px" loading="lazy" class="ui-img" />
+        <p class="ui-caption">Journal with all icons</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quest icons: placed by hand, off the grid, as in the Figma file -->
+  <div class="ui-block">
+    <p class="ui-label">Quest icons</p>
+    <div class="icons-canvas after-label">
+      <div class="ic-text" style={at(0, 10, 282, 0)}>
+        <ul class="ui-list">
+          <li>If the player discovers a stage of a quest they haven’t received yet, its icon floats in the open space between the rings and joins its ring once the player reaches that stage</li>
+          <li>New icons have a soft glow</li>
+          <li>On hover, the icon turns black and opens a window with the quest description</li>
+          <li>If a stage of the quest was completed, the icon turns gray</li>
+        </ul>
+      </div>
+
+      <div class="ic-strip" style={at(612, 0, 437, 3)}>
+        <Image src={iconsElder} alt="Elder quest icons" widths={[437, 874]} sizes="437px" loading="lazy" />
+        <p class="ui-caption">Elder quest icons</p>
+      </div>
+
+      <div class="ic-strip" style={at(612, 231, 354, 4)}>
+        <Image src={iconsEngineer} alt="Engineer quest icons" widths={[354, 708]} sizes="354px" loading="lazy" />
+        <p class="ui-caption">Engineer quest icons</p>
+      </div>
+
+      <div class="ic-state ic-state-1" style={`${at(13, 427, 233, 1)} aspect-ratio: 233 / 174;`}>
+        <div class="state-crop left">
+          <Image src={journalIcons} alt="New and regular quest icons" widths={[600, 1026]} sizes="561px" loading="lazy" />
+        </div>
+        <span class="state-label" style="left: 18.9%; top: 87.4%;">New</span>
+        <span class="state-label" style="left: 63.1%; top: 87.4%;">Regular</span>
+      </div>
+
+      <div class="ic-strip" style={at(612, 463, 354, 5)}>
+        <Image src={iconsBuilder} alt="Builder quest icons" widths={[354, 708]} sizes="354px" loading="lazy" />
+        <p class="ui-caption">Builder quest icons</p>
+      </div>
+
+      <div class="ic-state" style={`${at(36, 665, 210, 2)} aspect-ratio: 210 / 168;`}>
+        <div class="state-crop right">
+          <Image src={journalIcons} alt="Hover and finished quest icons" widths={[600, 1026]} sizes="561px" loading="lazy" />
+        </div>
+        <span class="state-label" style="left: 8.6%; top: 86.9%;">Hover</span>
+        <span class="state-label" style="left: 58.6%; top: 86.9%;">Finished</span>
+      </div>
+
+      <div class="ic-strip" style={at(612, 694, 180, 6)}>
+        <Image src={iconsCollector} alt="Collector quest icons" widths={[180, 360]} sizes="180px" loading="lazy" />
+        <p class="ui-caption">Collector quest icons</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quest description window -->
+  <div class="ui-block">
+    <p class="ui-label">Quest description window</p>
+    <div class="ui-quest after-label">
+      <div class="q-text">
+        <ul class="ui-list">
+          <li>Appears on hover over an icon</li>
+          <li>Shares the visual style of the dialogue UI</li>
+          <li>Resizes to fit its content</li>
+          <li>Can include an image</li>
+          <li>Gets a “finished” label once the stage is complete</li>
+        </ul>
+      </div>
+      <div class="q-short">
+        <Image src={questShort} alt="Short quest window" widths={[282, 564]} sizes="(max-width: 1260px) 50vw, 282px" loading="lazy" class="ui-img" />
+        <p class="ui-caption">Short quest window</p>
+      </div>
+      <div class="q-finished">
+        <Image src={questFinished} alt="Finished quest window" widths={[282, 564]} sizes="(max-width: 1260px) 50vw, 282px" loading="lazy" class="ui-img" />
+        <p class="ui-caption">Finished quest window</p>
+      </div>
+      <div class="q-image">
+        <Image src={questWithImage} alt="Quest window with image" widths={[282, 564]} sizes="(max-width: 1260px) 50vw, 282px" loading="lazy" class="ui-img" />
+        <p class="ui-caption">Quest window with image</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional screens -->
+  <div class="ui-block">
+    <p class="ui-subhead">Additional screens</p>
+
+    <div class="after-subhead">
+      <p class="ui-label">Main menu</p>
+      <div class="ui-cols after-label">
+        <div class="c-1-8">
+          <LazyVideo src={video('main-menu')} ratio="16 / 9" label="Main menu" />
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-block">
+      <p class="ui-label">Mini game</p>
+      <div class="ui-cols after-label">
+        <div class="c-1-8">
+          <LazyVideo src={video('mini-game')} ratio="16 / 9" label="Mini game" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Object screens -->
+  <div class="ui-block">
+    <p class="ui-label">Object screens</p>
+    <div class="ui-cols after-label">
+      <div class="c-1-8">
+        <Image src={powder} alt="Object screen: powder" widths={[800, 1200, 1800]} sizes="(max-width: 1440px) 100vw, 1200px" loading="lazy" class="ui-img" />
+      </div>
+    </div>
+    <div class="ui-cols gap-block">
+      <div class="c-1-8">
+        <Image src={clock} alt="Object screen: clock" widths={[800, 1200, 1800]} sizes="(max-width: 1440px) 100vw, 1200px" loading="lazy" class="ui-img" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Final screens -->
+  <div class="ui-block">
+    <p class="ui-label">Final screens</p>
+    <div class="ui-cols after-label">
+      <div class="c-1-8">
+        <LightboxImage src={spirit} alt="Spirit ending" caption="Spirit ending" group="ui-final" widths={[800, 1200, 1800]} sizes="(max-width: 1440px) 100vw, 1200px" />
+        <p class="ui-caption">Spirit ending</p>
+      </div>
+    </div>
+    <div class="ui-cols pair gap-block">
+      <div class="c-1-4">
+        <LightboxImage src={mind} alt="Mind ending" caption="Mind ending" group="ui-final" widths={[600, 1176, 1800]} sizes="(max-width: 1260px) 100vw, 588px" />
+        <p class="ui-caption">Mind ending</p>
+      </div>
+      <div class="c-5-4">
+        <LightboxImage src={exile} alt="Exile ending" caption="Exile ending" group="ui-final" widths={[600, 1176, 1800]} sizes="(max-width: 1260px) 100vw, 588px" />
+        <p class="ui-caption">Exile ending</p>
+      </div>
+    </div>
+    <div class="ui-cols pair gap-block">
+      <div class="c-1-4">
+        <LightboxImage src={binding} alt="Binding ending" caption="Binding ending" group="ui-final" widths={[600, 1176, 1800]} sizes="(max-width: 1260px) 100vw, 588px" />
+        <p class="ui-caption">Binding ending</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <style>
   .ui-design {
-    padding-block: 4rem 6rem;
+    padding-block: 4rem 8rem;
+    row-gap: 0;
   }
 
   .ui-design > :global(*) {
     grid-column: 1 / -1;
   }
 
-  .block {
-    margin-bottom: 3rem;
+  /* ---- start of the section: approach texts and the cursor ---- */
+  .ui-approach {
+    margin-top: 0;
   }
 
-  .caption {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 1.125rem;
-    text-transform: uppercase;
-    color: #e8e8e8;
-    margin: 0 0 0.75rem;
+  .cursor-block {
+    margin-top: 96px;
   }
 
-  .running {
+  .cursor-canvas {
+    position: relative;
+    width: 100%;
+    height: 122px;
+  }
+
+  .cur {
+    position: absolute;
+    top: 0;
+    width: 80px;
+    height: 100%;
+  }
+
+  .cur-media {
+    position: absolute;
+    left: 0;
+    width: 80px;
+    height: 80px;
+  }
+
+  .cur-media :global(video),
+  .cur-media :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* label sits level in all four columns: 100px down the canvas */
+  .cur-label {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    white-space: nowrap;
     font-family: var(--font-body);
     font-weight: 400;
-    font-size: 1.125rem;
-    color: #c9c9c9;
-    line-height: 1.7;
-    max-width: 60ch;
-    margin: 0 0 1.5rem;
+    font-size: 18px;
+    line-height: 22px;
+    color: #9a9a9a;
   }
 
-  .running.narrow {
-    grid-column: span 3;
-    max-width: 100%;
-  }
+  /* narrow windows and phones: the four cursors go two per row. Every label stays centred under its
+     own video (the NPC label under its speech bubble), and the gap between the columns is wide
+     enough for the longest label, so the labels never touch each other */
+  @media (max-width: 720px) {
+    .cursor-canvas {
+      display: grid;
+      grid-template-columns: repeat(2, 80px);
+      column-gap: 96px;
+      /* 96px between the rows, like between blocks: measured from the bottom of the label letters
+         (4.5px above the label box) to the top of the next video */
+      row-gap: 91.5px;
+      height: auto;
+    }
 
-  @media (max-width: 1024px) {
-    .running.narrow {
-      grid-column: 1 / -1;
+    .cur {
+      position: relative;
+      width: 80px !important;
+      height: 126px;
+      left: auto !important;
+    }
+
+    .cur-media {
+      position: absolute;
+      top: 0 !important;
+    }
+
+    .cur-label {
+      top: 104px;
     }
   }
 
-  .cursor-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 1.5rem;
-    max-width: 700px;
+  /* ---- continuation from "Dialogue UI": rules from the project page guide ---- */
+  .ui-block {
+    margin-top: 96px;
   }
 
-  .cursor-card {
-    text-align: center;
-    background: #121212;
-    border-radius: 4px;
-    padding: 1.5rem 1rem;
+  .ui-block.first {
+    margin-top: 96px;
   }
 
-  .cursor-card video,
-  .cursor-card :global(img) {
-    width: 100%;
-    max-width: 80px;
-    margin-inline: auto;
-    display: block;
-  }
-
-  .cursor-card p.cursor-label {
-    margin: 0.75rem 0 0;
+  .ui-label {
+    margin: 0;
     font-family: var(--font-body);
     font-weight: 700;
-    font-size: 1.125rem;
+    font-size: 18px;
+    line-height: 22px;
     text-transform: uppercase;
     color: #e8e8e8;
+  }
+
+  .ui-subhead {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.25;
+    text-transform: uppercase;
+    color: #e8e8e8;
+  }
+
+  .ui-text,
+  .ui-list {
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #d6d6d6;
+  }
+
+  .ui-list {
+    padding: 0 0 0 27px;
+    list-style: disc;
+  }
+
+
+  .ui-caption {
+    margin: 24px 0 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #9a9a9a;
+  }
+
+  .after-label {
+    margin-top: 32px;
+  }
+
+  .after-subhead {
+    margin-top: 48px;
+  }
+
+  .gap-block {
+    margin-top: 96px;
+  }
+
+  .ui-cols {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    column-gap: 24px;
+    row-gap: 24px;
+    align-items: start;
+  }
+
+  .ui-cols > * {
+    min-width: 0;
+  }
+
+  .c-1-2 { grid-column: 1 / span 2; }
+  .c-4-2 { grid-column: 4 / span 2; }
+  .c-1-3 { grid-column: 1 / span 3; }
+  .c-5-3 { grid-column: 5 / span 3; }
+  .c-6-2 { grid-column: 6 / span 2; }
+  .c-1-4 { grid-column: 1 / span 4; }
+  .c-5-4 { grid-column: 5 / span 4; }
+  .c-1-8 { grid-column: 1 / -1; }
+
+  .ui-design :global(.ui-img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  /* the two speech bubble pictures sit level with the text, 32px apart */
+  .bubbles {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* quest icons: free placement on a 1200 x 833 canvas (Figma coordinates) */
+  .icons-canvas {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1200 / 833;
+  }
+
+  .icons-canvas > * {
+    position: absolute;
+  }
+
+  .ic-strip :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .ic-strip .ui-caption {
+    white-space: nowrap;
+  }
+
+  .state-crop {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 516 / 301;
+  }
+
+  .state-crop.right {
+    aspect-ratio: 465 / 301;
+  }
+
+  .state-crop :global(img) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 198.8%;
+    max-width: none;
+    height: auto;
+  }
+
+  .state-crop.right :global(img) {
+    left: -120.6%;
+    width: 220.6%;
+  }
+
+  .state-label {
+    position: absolute;
+    white-space: nowrap;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #9a9a9a;
+  }
+
+  /* narrow screens: journal states first, then the quest strips, all at one picture scale */
+  @media (max-width: 1280px) {
+    .icons-canvas {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 64px;
+      aspect-ratio: auto;
+    }
+
+    .icons-canvas > * {
+      position: static;
+      left: auto !important;
+      top: auto !important;
+      width: var(--p) !important;
+      max-width: var(--w);
+      order: var(--o);
+    }
+
+    .ic-text {
+      width: 100% !important;
+      max-width: 435px;
+    }
+
+    .icons-canvas > .ic-state {
+      position: relative;
+    }
+
+    /* Journal icons 2 slides left so its right edge lines up with Journal icons 3 */
+    .icons-canvas > .ic-state-1 {
+      margin-left: calc(-1 * (min(53.32%, 233px) - min(48.05%, 210px)));
+    }
+  }
+
+  /* quest description window */
+  .ui-quest {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    column-gap: 24px;
+    row-gap: 96px;
+    align-items: end;
+  }
+
+  .ui-quest > * {
+    min-width: 0;
+  }
+
+  .q-text { grid-column: 1 / span 2; grid-row: 1; align-self: start; }
+  .q-short { grid-column: 1 / span 2; grid-row: 2; }
+  .q-finished { grid-column: 3 / span 2; grid-row: 2; }
+  .q-image { grid-column: 5 / span 2; grid-row: 1 / span 2; }
+
+  @media (max-width: 1260px) {
+    .ui-cols {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      /* cells that were side by side stand one under the other: 64px between them */
+      row-gap: 64px;
+    }
+
+    .ui-cols > *,
+    .ui-cols.pair > .c-1-2,
+    .ui-cols.pair > .c-4-2 {
+      grid-column: 1 / -1;
+    }
+
+    .ui-cols.pair > .c-1-4,
+    .ui-cols.pair > .c-5-4 {
+      grid-column: span 2;
+    }
+
+    .ui-cols.pair > .c-1-2,
+    .ui-cols.pair > .c-4-2 {
+      grid-column: span 2;
+    }
+
+    .ui-quest {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 64px;
+    }
+
+    .ui-quest > * {
+      width: 100%;
+    }
+
+    .q-short,
+    .q-finished,
+    .q-image {
+      max-width: 282px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .ui-cols.pair > .c-1-4,
+    .ui-cols.pair > .c-5-4,
+    .ui-cols.pair > .c-1-2,
+    .ui-cols.pair > .c-4-2 {
+      grid-column: 1 / -1;
+    }
   }
 </style>

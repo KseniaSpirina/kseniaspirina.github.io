@@ -23,3 +23,19 @@
     gap: 16px;
   }
 }
+
+/* Project pages: stack into the 4-column layout earlier, so 2-column text never gets narrower than ~220px */
+@media (max-width: 1260px) {
+  :is(.project-page, .sanctuary) .grid-1440 {
+    padding-inline: 48px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  :is(.project-page, .sanctuary) .grid-1440 {
+    padding-inline: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}

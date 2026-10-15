@@ -1,0 +1,188 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import '../styles/grid.css';
+import '../styles/project.css';
+import '../styles/buttons.css';
+import envelopeIcon from '@assets/icons/envelope.svg?raw';
+import linkedinIcon from '@assets/icons/linkedin.svg?raw';
+import downloadIcon from '@assets/icons/download.svg?raw';
+
+const email = 'kseniaspirina@gmail.com';
+---
+
+<BaseLayout title="Contact — Ksenia Spirina" description="Get in touch with Ksenia Spirina: email, LinkedIn, CV.">
+  <div class="project-page text-v2 contact-page">
+    <section class="contact grid-1440">
+      <h1 class="contact-title">Contact</h1>
+
+      <h2 class="p-subhead">Let’s work together!</h2>
+
+      <p class="p-text intro">
+        Hello! I’m Ksenia Spirina<br />
+        I’m currently <strong>OPEN TO WORK</strong>
+      </p>
+
+      <div class="buttons">
+        <a class="btn btn--primary" href={`mailto:${email}`}>
+          <Fragment set:html={envelopeIcon} />
+          <span>Email me</span>
+        </a>
+        <a class="btn" href="https://www.linkedin.com/in/ksenia-spirina-24b87b384/" target="_blank" rel="noopener noreferrer">
+          <Fragment set:html={linkedinIcon} />
+          <span>LinkedIn</span>
+        </a>
+        <!-- CV file is not ready yet: the button is in place, the link is added when the PDF exists -->
+        <a class="btn btn--download" href="#" data-cv aria-disabled="true">
+          <Fragment set:html={downloadIcon} />
+          <span>Download CV</span>
+        </a>
+      </div>
+
+      <div class="address">
+        <a class="address-link" href={`mailto:${email}`}>{email}</a>
+        <button class="btn btn--secondary" type="button" data-copy={email} aria-live="polite">Copy</button>
+      </div>
+
+      <p class="p-text note">
+        Based in Israel (Jerusalem time)<br />
+        I usually reply within 1–2 business days
+      </p>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-copy]');
+  btn?.addEventListener('click', async () => {
+    const value = btn.dataset.copy ?? '';
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch {
+      const area = document.createElement('textarea');
+      area.value = value;
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand('copy');
+      area.remove();
+    }
+    const label = btn.textContent;
+    btn.textContent = 'Copied';
+    setTimeout(() => {
+      btn.textContent = label;
+    }, 2000);
+  });
+
+  // CV link is not available yet: do nothing on click
+  document.querySelector('[data-cv]')?.addEventListener('click', (e) => e.preventDefault());
+</script>
+
+<style>
+  .contact {
+    padding-top: calc(128px - var(--nav-height));
+    /* the footer brings its own 128px margin: last text baseline -> footer = 128px */
+    padding-bottom: 0;
+    row-gap: 0;
+  }
+
+  .contact > :global(*) {
+    grid-column: 1 / -1;
+  }
+
+  /* Unbounded: cap height 0.75em of a 1.234em line -> 0.242em empty below the capitals is trimmed */
+  .contact-title {
+    display: flow-root;
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    /* 64px / 79px on desktop; scales down so that the word fits a phone screen */
+    font-size: clamp(2.25rem, 11vw, 4rem);
+    line-height: 1.234375;
+    text-transform: uppercase;
+    color: #4361ee;
+  }
+
+  .contact-title::before,
+  .contact-title::after {
+    content: '';
+    display: block;
+    height: 0;
+  }
+
+  /* like the titles of About / Projects / project pages: the line box starts 128px from the top of the page
+     (only the empty space below the capitals is trimmed) */
+  .contact-title::after {
+    margin-bottom: -0.2421875em;
+  }
+
+  /* title -> subhead 64px (glyph to glyph) */
+  .contact :global(.p-subhead) {
+    margin: 64px 0 0;
+  }
+
+  /* subhead -> text 48px */
+  .intro {
+    margin: 48px 0 0;
+  }
+
+  /* "OPEN TO WORK": Unbounded, same colour as the subhead */
+  .intro :global(strong) {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: #e8e8e8;
+  }
+
+  /* text -> buttons 96px (to the button edge) */
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    margin-top: 96px;
+  }
+
+  /* buttons -> address 48px (button edge to the lowercase letters) */
+  .address {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 32px;
+    /* row is 37px tall (Copy button), the 27px line is centred in it: lowercase letters start 15.17px below the top */
+    margin-top: 32.83px;
+  }
+
+  .address-link {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 27px;
+    color: #d6d6d6;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 150ms ease;
+  }
+
+  .address-link:hover {
+    color: #4361ee;
+  }
+
+  /* copy button -> note 96px */
+  .note {
+    margin: 96px 0 0;
+  }
+</style>
+
+<style is:global>
+  body:has(.contact-page) {
+    background-color: #121212;
+  }
+
+  body:has(.contact-page) .navbar {
+    background-color: #121212;
+    backdrop-filter: none;
+    border-bottom-color: #121212;
+  }
+
+  body:has(.contact-page) .footer {
+    background-color: #121212;
+    border-top-color: #121212;
+  }
+</style>

@@ -1,0 +1,254 @@
+---
+import { Image } from 'astro:assets';
+
+import sanctuaryImg from '@assets/projects/sanctuary-title-image.png';
+import imprisonedImg from '@assets/projects/imprisned-title-picture.jpg';
+import mournImg from '@assets/projects/mourn-title-image.jpg';
+import stellarStraysImg from '@assets/projects/stellar-strays-title.jpg';
+import departureImg from '@assets/projects/departure-title-image.jpg';
+import frozenVoicesImg from '@assets/projects/Frozen-Voices-title-image.jpg';
+import galleryGrabberImg from '@assets/projects/gallery-grabber-title-image.jpg';
+import truthhornImg from '@assets/projects/Truthhorn-title-image.jpg';
+import otherProjectsImg from '@assets/projects/other-projects-title-image.jpg';
+
+const projects = [
+  {
+    slug: 'sanctuary',
+    href: '/projects/sanctuary',
+    image: sanctuaryImg,
+    title: 'Sanctuary',
+    description: ['An LLM-powered narrative sci-fi game about coexistence, belonging, and survival.'],
+    caption: ['Team project · Graduation project', 'Bezalel Academy of Arts and Design', 'Hebrew University · 2026'],
+  },
+  {
+    slug: 'imprisoned',
+    href: '/projects/imprisoned',
+    image: imprisonedImg,
+    title: 'Imprisoned',
+    description: ['Top-down action game where movement is both your weapon and your life.'],
+    caption: ['Team project · Digital Game Project course', 'Bezalel Academy of Arts and Design', 'Hebrew University · 2025'],
+  },
+  {
+    slug: 'mourn',
+    href: '/projects/mourn',
+    image: mournImg,
+    title: 'Mourn',
+    description: ['Narrative game about grief, memory, and the regrets left behind after sudden loss.'],
+    caption: ['Indi Games course', 'Bezalel Academy of Arts and Design · 2025'],
+  },
+  {
+    slug: 'stellar-strays',
+    href: '/projects/stellar-strays',
+    image: stellarStraysImg,
+    title: 'Stellar Strays',
+    description: ['Playful local co-op adventure where two astronauts explore a world of shifting gravity.'],
+    caption: ['Team project · Game Lab course', 'Bezalel Academy of Arts and Design', 'Hebrew University · 2025'],
+  },
+  {
+    slug: 'departure',
+    href: '/projects/departure',
+    image: departureImg,
+    title: 'Departure',
+    description: ['2D character design and animation created in Spine 2D, set within a stylized low-poly 3D environment.'],
+    caption: ['Game Animation course', 'Bezalel Academy of Arts and Design · 2025'],
+  },
+  {
+    slug: 'frozen-voices',
+    href: null,
+    image: frozenVoicesImg,
+    title: 'Frozen Voices',
+    description: ['Interactive atmospheric experience exploring isolation, loneliness, and the quiet erosion of individuality.'],
+    caption: ['Roaming in a Virtual Space course', 'Bezalel Academy of Arts and Design · 2024'],
+  },
+  {
+    slug: 'gallery-grabber',
+    href: null,
+    image: galleryGrabberImg,
+    title: 'Gallery Grabber',
+    description: ['Top-down stealth game about a museum janitor secretly stealing priceless artifacts to fund her dream vacation.'],
+    caption: ['Team project · Game Lab course', 'Bezalel Academy of Arts and Design', 'Hebrew University · 2025'],
+  },
+  {
+    slug: 'truthhorn',
+    href: null,
+    image: truthhornImg,
+    title: 'Truthhorn',
+    description: [
+      "A children's point-and-click detective game where players investigate rumors in a forest.",
+      'The game teaches children the SIFT method for identifying and evaluating fake news through play.',
+    ],
+    caption: ['Serious Games course', 'Bezalel Academy of Arts and Design · 2025'],
+  },
+  {
+    slug: 'other-projects',
+    href: null,
+    image: otherProjectsImg,
+    title: 'Other Projects',
+    description: ['A collection of smaller projects across different media.'],
+    caption: null,
+  },
+];
+
+// The "in development" notice sits right before the first project that has no page yet,
+// so it moves down by itself as soon as a project gets an href.
+const firstInactive = projects.findIndex(project => !project.href);
+---
+
+<div class="projects-list">
+  {projects.map((project, index) => {
+    const Tag = project.href ? 'a' : 'div';
+    return (
+      <>
+      {index === firstInactive && <p class="coming-soon">Pages are under development</p>}
+      <Tag
+        class:list={['project-row', { 'is-inactive': !project.href }]}
+        href={project.href ?? undefined}
+        aria-disabled={project.href ? undefined : 'true'}
+      >
+        <div class="project-image">
+          <Image src={project.image} alt={project.title} widths={[500, 900, 1400]} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 741px" loading="lazy" />
+        </div>
+        <div class="project-text">
+          <div class="project-text-top">
+            <h2 class="project-title">{project.title}</h2>
+            {project.description.map(paragraph => (
+              <p class="project-description">{paragraph}</p>
+            ))}
+          </div>
+          {project.caption && (
+            <div class="project-caption">
+              {project.caption.map(line => <p>{line}</p>)}
+            </div>
+          )}
+        </div>
+      </Tag>
+      </>
+    );
+  })}
+</div>
+
+<style>
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 64px;
+  }
+
+  .project-row {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    column-gap: 24px;
+    padding: 24px 0 24px 24px;
+    margin-left: -24px;
+    border-radius: 4px;
+    color: inherit;
+    text-decoration: none;
+    transition: background-color 150ms ease;
+  }
+
+  a.project-row {
+    cursor: pointer;
+  }
+
+  a.project-row:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+
+  .coming-soon {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.25;
+    text-transform: uppercase;
+    color: #e8e8e8;
+  }
+
+  /* projects whose page is not ready yet */
+  .project-row.is-inactive {
+    opacity: 0.4;
+    filter: grayscale(1);
+    cursor: default;
+    user-select: none;
+  }
+
+  .project-image {
+    grid-column: 1 / span 5;
+  }
+
+  .project-image :global(img) {
+    display: block;
+    width: 100%;
+    aspect-ratio: 741 / 417;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .project-text {
+    grid-column: 6 / span 3;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    color: #e8e8e8;
+  }
+
+  .project-description {
+    margin: 2rem 0 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.44;
+    color: #e8e8e8;
+  }
+
+  .project-description + .project-description {
+    margin-top: 1rem;
+  }
+
+  .project-caption {
+    margin-top: auto;
+    padding-top: 2rem;
+  }
+
+  .project-caption p {
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.44;
+    color: #9a9a9a;
+  }
+
+  @media (max-width: 1024px) {
+    .project-row {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .project-image {
+      grid-column: 1 / -1;
+    }
+
+    .project-text {
+      grid-column: 1 / -1;
+      margin-top: 1.5rem;
+    }
+
+    .project-caption {
+      margin-top: 1.5rem;
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .project-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

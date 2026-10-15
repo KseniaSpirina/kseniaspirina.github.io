@@ -1,0 +1,141 @@
+---
+import { Image } from 'astro:assets';
+import SideMenu from '../sanctuary/SideMenu.astro';
+import ItchButton from '../project/ItchButton.astro';
+import cover from '@assets/stellar-strays/cover.jpg';
+
+const menuLinks = [
+  { label: 'OVERVIEW', href: '#top' },
+  { label: 'CONTRIBUTION', href: '#contribution' },
+  { label: 'CHARACTER DESIGN', href: '#character-design' },
+  { label: 'ANIMATION', href: '#animation' },
+  { label: 'ASSETS DESIGN', href: '#assets-design' },
+  { label: 'CONTACT', href: '#contact' },
+];
+---
+
+<section class="hero grid-1440" id="top">
+  <SideMenu links={menuLinks} />
+
+  <div class="inner">
+    <h1>Stellar Strays</h1>
+    <p class="type">Team project · Game Lab course · 2025</p>
+
+    <div class="trailer">
+      <Image src={cover} alt="Fermi and Rumba in Stellar Strays" widths={[600, 900, 1400]} sizes="(max-width: 1440px) 70vw, 894px" loading="eager" />
+    </div>
+
+    <div class="cols info">
+      <div class="gc-1-3">
+        <h3 class="p-label">Project description</h3>
+        <div class="after-label">
+          <p class="p-text">
+            Stellar Strays is a local co-op platformer for two players. Astronaut Fermi and
+            repair-bot Rumba have crash-landed on one of two neighboring planets, and now they have
+            to find the parts of their ship, scattered across floating islands with gravity of
+            their own, to repair it and continue their journey.
+          </p>
+          <p class="p-text">
+            The players have to act together: many hard-to-reach places can only be reached by
+            coordinating their moves. The ship parts are divided between the two characters too.
+            Some can only be collected by Rumba, because their sound waves would hurt Fermi’s
+            sensitive ears, and others only by Fermi, because their electric field would short out
+            Rumba.
+          </p>
+        </div>
+        <ItchButton href="https://ksenia-spirina.itch.io/stellar-strays" />
+      </div>
+      <div class="gc-5-3">
+        <h3 class="p-label">Credits</h3>
+        <div class="after-label">
+          <p class="p-text keep-host">
+            Stellar Strays was created as an assignment in the course “Game&nbsp;Lab”, a
+            collaboration between the
+            <span class="keep-name">Visual <span class="keep-always">Communication Department</span></span> of
+            <span class="keep-name"><span class="keep-always">Bezalel Academy of Arts and</span> Design</span> and
+            Hebrew&nbsp;University, 2025.
+          </p>
+          <p class="p-text"><strong>Programming:</strong> Idan Baras, David Feldman, Roy Mor</p>
+          <p class="p-text"><strong>Art and Design:</strong> Maayan Berkovits, Ksenia Spirina</p>
+          <p class="p-text"><strong>Guidance:</strong> Yuval Markovich, Danielle Mossak, Omer Zadok</p>
+          <p class="p-text"><strong>Assistance:</strong> Sagie Levy</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-top: calc(128px - var(--nav-height));
+    padding-bottom: 128px;
+    scroll-margin-top: calc(var(--nav-height) + 1rem);
+  }
+
+  .inner {
+    grid-column: 1 / -1;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 1.25;
+    text-transform: uppercase;
+    color: #4361ee;
+  }
+
+  .type {
+    margin: 12px 0 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.25;
+    color: #9a9a9a;
+  }
+
+  @supports (text-box-trim: trim-both) {
+    h1 {
+      text-box: trim-end cap alphabetic;
+    }
+
+    .type {
+      margin-top: 32px;
+      text-box: trim-start cap alphabetic;
+    }
+  }
+
+  .trailer {
+    position: relative;
+    width: 100%;
+    max-width: 894px;
+    aspect-ratio: 894 / 503;
+    margin-top: 64px;
+    background: rgba(217, 217, 217, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .trailer :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .info {
+    margin-top: 96px;
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: 2.25rem;
+    }
+
+    .type {
+      font-size: 1.25rem;
+    }
+  }
+</style>

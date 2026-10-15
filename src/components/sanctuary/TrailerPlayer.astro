@@ -1,0 +1,111 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  cover: ImageMetadata;
+  src?: string | null;
+  title: string;
+}
+
+const { cover, src = null, title } = Astro.props;
+---
+
+<button
+  class:list={['trailer-cover', !src && 'is-inactive']}
+  type="button"
+  data-trailer-src={src ?? undefined}
+  data-trailer-title={title}
+  aria-label={src ? `Play ${title}` : `${title} (coming soon)`}
+  aria-disabled={src ? undefined : 'true'}
+  tabindex={src ? undefined : -1}
+>
+  <Image src={cover} alt="" widths={[600, 900, 1400]} sizes="(max-width: 1440px) 70vw, 894px" loading="eager" />
+  <span class="play" aria-hidden="true">
+    <svg width="28" height="32" viewBox="0 0 28 32" fill="currentColor"><path d="M2 2.5v27a1 1 0 0 0 1.5.9l23-13.5a1 1 0 0 0 0-1.8L3.5 1.6A1 1 0 0 0 2 2.5z" /></svg>
+  </span>
+</button>
+
+<style>
+  .trailer-cover {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    color: #e8e8e8;
+    cursor: pointer;
+  }
+
+  .trailer-cover :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 88px;
+    height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 6px;
+    transform: translate(-50%, -50%);
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    background: rgba(18, 18, 18, 0.55);
+    transition: color 150ms ease, background-color 150ms ease;
+  }
+
+  .trailer-cover:hover {
+    color: #4361ee;
+  }
+
+  .trailer-cover:hover .play {
+    background: rgba(18, 18, 18, 0.8);
+  }
+
+  .trailer-cover.is-inactive {
+    cursor: default;
+  }
+
+  .trailer-cover.is-inactive:hover {
+    color: #e8e8e8;
+  }
+
+  .trailer-cover.is-inactive:hover .play {
+    background: rgba(18, 18, 18, 0.55);
+  }
+</style>
+
+<script>
+  function initTrailers() {
+    document.querySelectorAll<HTMLButtonElement>('.trailer-cover[data-trailer-src]').forEach(button => {
+      button.addEventListener('click', () => {
+        const base = button.dataset.trailerSrc;
+        if (!base) return;
+        const frame = document.createElement('iframe');
+        frame.src = `${base}${base.includes('?') ? '&' : '?'}autoplay=1&rel=0`;
+        frame.title = button.dataset.trailerTitle ?? 'Trailer';
+        frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        frame.allowFullscreen = true;
+        frame.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;';
+        button.replaceWith(frame);
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTrailers);
+  } else {
+    initTrailers();
+  }
+</script>

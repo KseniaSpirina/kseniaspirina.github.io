@@ -1,0 +1,82 @@
+---
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+import LightboxImage from '../sanctuary/LightboxImage.astro';
+import g1 from '@assets/mourn/gallery/gallery-1.jpg';
+import g2 from '@assets/mourn/gallery/gallery-2.jpg';
+import g3 from '@assets/mourn/gallery/gallery-3.jpg';
+import g4 from '@assets/mourn/gallery/gallery-4.jpg';
+import g5 from '@assets/mourn/gallery/gallery-5.jpg';
+
+const challenge = [
+  'Tell a story about grief and sudden loss in a short, playable format',
+  'Let conversation and player choice carry the emotional weight of the story',
+  'Handle a sensitive subject, including a depiction of a fatal accident, with care',
+  'Take the project from idea to release alone: concept, visuals, and programming',
+  'Develop the full game within a 2-month production timeline',
+];
+
+const role = [
+  'Concept, story, and narrative design',
+  'Game design: conversation and choice',
+  'Visual design and art',
+  'Programming with visual scripting',
+  'Release on itch.io for Windows and macOS',
+];
+
+const gallery = [
+  { src: g1, start: 1 },
+  { src: g2, start: 5 },
+  { src: g3, start: 1 },
+  { src: g4, start: 5 },
+  { src: g5, start: 1 },
+];
+---
+
+<ProjectSection id="contribution" title="Contribution">
+  <div class="cols">
+    <div class="gc-1-2">
+      <h3 class="p-label">Challenge</h3>
+      <ul class="p-list hang loose after-label">
+        {challenge.map(item => <li set:html={item} />)}
+      </ul>
+    </div>
+    <div class="gc-5-2">
+      <h3 class="p-label">My role</h3>
+      <ul class="p-list hang loose after-label">
+        {role.map(item => <li>{item}</li>)}
+      </ul>
+    </div>
+  </div>
+
+  <div class="cols gallery block-gap">
+    {gallery.map((item, i) => (
+      <div class="cell" style={`--start: ${item.start};`}>
+        <LightboxImage
+          src={item.src}
+          alt={`Mourn gameplay screenshot ${i + 1}`}
+          widths={[400, 700, 1000, 1400, 1920]}
+          sizes="(max-width: 640px) 95vw, (max-width: 1260px) 50vw, 588px"
+          group="mourn-gallery"
+        />
+      </div>
+    ))}
+  </div>
+</ProjectSection>
+
+<style>
+  .cell {
+    grid-column: var(--start) / span 4;
+  }
+
+  @media (max-width: 1260px) {
+    .cell {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cell {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

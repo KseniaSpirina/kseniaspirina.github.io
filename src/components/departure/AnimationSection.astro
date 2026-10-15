@@ -1,0 +1,84 @@
+---
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+import LazyVideo from '../imprisoned/LazyVideo.astro';
+
+const v = (name: string) => `/departure/videos/${name}.webm`;
+---
+
+<ProjectSection id="animation" title="Animation">
+  <div class="block">
+    <div class="cols">
+      <div class="gc-1-3">
+        <h3 class="p-label">Animation development approach</h3>
+        <p class="p-text after-label">
+          For this project, I created a full animation set for the character: idle, walk, jump,
+          and ability use. I chose to work in Spine 2D because it let me link the tail on the
+          character’s head to the game’s physics engine, so it moves smoothly and naturally.
+        </p>
+      </div>
+      <div class="gc-4-3">
+        <p class="p-text below-label">
+          My main goal was to show the contrast at the heart of the character: a gentle nature
+          inside a powerful body. The idle poses are calm and closed, which conveys her meekness.
+          In motion, her strength comes through as the whole body works together, with the heavy
+          arms driving every step.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Animation set</h3>
+    <div class="cols after-label">
+      <div class="gc-1-4">
+        <LazyVideo src={v('idle')} ratio="16 / 9" label="Idle animation" />
+        <p class="p-caption">Idle</p>
+      </div>
+      <div class="gc-5-4">
+        <LazyVideo src={v('walking')} ratio="16 / 9" label="Walking animation" />
+        <p class="p-caption">Walking</p>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-8">
+        <LazyVideo src={v('jump')} ratio="16 / 9" label="Jump animation" />
+        <p class="p-caption">Jump</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Animation set with a lantern on</h3>
+    <div class="cols after-label">
+      <div class="gc-1-3">
+        <p class="p-text">
+          Because the character lives underground, I gave her a luminescent lantern on the tip of
+          her tail as a special ability, lighting her way through the dark. That’s why every
+          animation in the set exists in two versions: with the light on and with it off.
+        </p>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-4">
+        <LazyVideo src={v('idle-light')} ratio="16 / 9" label="Idle animation with a lantern" />
+        <p class="p-caption">Idle with lantern</p>
+      </div>
+      <div class="gc-5-4">
+        <LazyVideo src={v('walking-light')} ratio="16 / 9" label="Walking animation with a lantern" />
+        <p class="p-caption">Walking with lantern</p>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-4">
+        <LazyVideo src={v('lights-on-off')} ratio="16 / 9" label="Turning the lantern on and off" />
+        <p class="p-caption">Turning lantern on and off</p>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-8">
+        <LazyVideo src={v('jump-light')} ratio="16 / 9" label="Jump animation with a lantern" />
+        <p class="p-caption">Jump with lantern</p>
+      </div>
+    </div>
+  </div>
+</ProjectSection>

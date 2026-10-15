@@ -1,0 +1,107 @@
+---
+import { Image } from 'astro:assets';
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+
+import cave from '@assets/departure/in-game-cave.jpg';
+import ritual from '@assets/departure/in-game-ritual.jpg';
+import blender from '@assets/departure/blender-assets.jpg';
+import unity from '@assets/departure/unity-setup.jpg';
+import inGame from '@assets/departure/in-game.jpg';
+import ref3342 from '@assets/departure/ref-3342.jpg';
+import ref3344 from '@assets/departure/ref-3344.jpg';
+import ref3345 from '@assets/departure/ref-3345.jpg';
+import ref3346 from '@assets/departure/ref-3346.jpg';
+
+const pct = (v: number, t: number) => `${(v / t) * 100}%`;
+
+// Reference photos are placed by hand, as in the Figma file: x/y/w/h in px on a 282 x 316 canvas.
+const RW = 282;
+const RH = 316;
+const refs = [
+  { src: ref3342, x: 0, y: 0, w: 152, h: 190 },
+  { src: ref3346, x: 161, y: 46, w: 106, h: 71 },
+  { src: ref3344, x: 161, y: 125, w: 108, h: 191 },
+  { src: ref3345, x: 0, y: 198, w: 153, h: 118 },
+];
+---
+
+<ProjectSection id="environment-design" title="Environment design">
+  <div class="block">
+    <div class="cols">
+      <div class="gc-1-3">
+        <h3 class="p-label">Environment design approach</h3>
+        <p class="p-text after-label">
+          I placed the character in an underground cave environment. I wanted the space to feel
+          melancholic and slightly unsettling, a fitting home for a character who shares that same
+          quiet sadness and sense of otherness. So I chose a cave with an underground lake: damp
+          and cold, filled with mist, the sound of dripping water, and the rustle of bats’ wings.
+        </p>
+      </div>
+      <div class="gc-4-3">
+        <p class="p-text below-label">
+          The environment was built in 3D in a low-poly style, and I chose 3D for two reasons.
+          First, I wanted to try a new technique that brings 2D and 3D together in one project.
+          Second, 3D made it much easier to create a parallax effect than 2D would have, which
+          mattered given the project’s tight timeline. To keep the environment consistent with the
+          2D style of the character, I used flat colors and flat shading throughout.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="cols">
+      <div class="gc-1-8">
+        <Image src={cave} alt="Main part of the cave" widths={[800, 1200, 1800]} sizes="(max-width: 1440px) 100vw, 1200px" loading="lazy" class="media-img" />
+        <p class="p-caption">Main part of the cave</p>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-8">
+        <Image src={ritual} alt="Ritual at the end of the cave" widths={[800, 1200, 1800]} sizes="(max-width: 1440px) 100vw, 1200px" loading="lazy" class="media-img" />
+        <p class="p-caption">Ritual at the end of the cave</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-subhead">Process breakdown</h3>
+    <div class="cols after-subhead">
+      <div class="gc-1-2">
+        <h4 class="p-label">References</h4>
+        <div class="after-label">
+          <div class="offgrid keep" style={`--cw: ${RW}; --ch: ${RH};`}>
+            {refs.map(r => (
+              <div
+                class="og"
+                style={`--l: ${pct(r.x, RW)}; --t: ${pct(r.y, RH)}; --w: ${pct(r.w, RW)}; --h: ${pct(r.h, RH)};`}
+              >
+                <Image src={r.src} alt="Reference photo" widths={[200, 400]} sizes="153px" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="gc-4-4">
+        <h4 class="p-label">Blender model</h4>
+        <div class="after-label">
+          <Image src={blender} alt="Environment assets modeled in Blender" widths={[600, 1176]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-4">
+        <h4 class="p-label">Unity setup</h4>
+        <div class="after-label">
+          <Image src={unity} alt="Scene setup in Unity" widths={[600, 1176]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+      <div class="gc-5-4">
+        <h4 class="p-label">In game</h4>
+        <div class="after-label">
+          <Image src={inGame} alt="The environment in the game" widths={[600, 1176]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ProjectSection>

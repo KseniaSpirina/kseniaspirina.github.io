@@ -1,0 +1,83 @@
+---
+import ProjectSection from './ProjectSection.astro';
+import LightboxImage from '../sanctuary/LightboxImage.astro';
+import g3 from '@assets/imprisoned/gallery/gallery-3.png';
+import g4 from '@assets/imprisoned/gallery/gallery-4.png';
+import g5 from '@assets/imprisoned/gallery/gallery-5.png';
+import g6 from '@assets/imprisoned/gallery/gallery-6.png';
+import g7 from '@assets/imprisoned/gallery/gallery-7.png';
+
+const challenge = [
+  'Turn a single given word, "smear," into a playable core mechanic',
+  'Build a visual world and narrative around that mechanic',
+  'Choose a visual style light enough for the engine to support the smear-trail mechanic',
+  'Cover the full scope of visual language, environments, UI, VFX and character work with only two designers',
+  'Deliver the full scope within<br />a 3-month production timeline',
+];
+
+const role = [
+  'Environment design and level art',
+  'UI style design',
+  'VFX and environmental effects',
+  'Cutscene work, in collaboration with Ohad Lerman',
+  'Slime Prime character design, based on the main slime character',
+  'Mechanic and narrative brainstorming',
+];
+
+const gallery = [
+  { src: g3, start: 1 },
+  { src: g4, start: 5 },
+  { src: g5, start: 1 },
+  { src: g6, start: 5 },
+  { src: g7, start: 1 },
+];
+---
+
+<ProjectSection id="contribution" title="Contribution">
+  <div class="cols">
+    <div class="gc-1-2">
+      <h3 class="p-label">Challenge</h3>
+      <ul class="p-list hang loose after-label">
+        {challenge.map(item => <li set:html={item} />)}
+      </ul>
+    </div>
+    <div class="gc-5-2">
+      <h3 class="p-label">My role</h3>
+      <ul class="p-list hang loose after-label">
+        {role.map(item => <li>{item}</li>)}
+      </ul>
+    </div>
+  </div>
+
+  <div class="cols gallery block-gap">
+    {gallery.map((item, i) => (
+      <div class="cell" style={`--start: ${item.start};`}>
+        <LightboxImage
+          src={item.src}
+          alt={`Imprisoned gameplay screenshot ${i + 1}`}
+          widths={[400, 700, 1000, 1400, 1920]}
+          sizes="(max-width: 640px) 95vw, (max-width: 1260px) 50vw, 588px"
+          group="imprisoned-gallery"
+        />
+      </div>
+    ))}
+  </div>
+</ProjectSection>
+
+<style>
+  .cell {
+    grid-column: var(--start) / span 4;
+  }
+
+  @media (max-width: 1260px) {
+    .cell {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cell {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

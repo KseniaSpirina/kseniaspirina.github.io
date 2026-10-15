@@ -1,0 +1,150 @@
+---
+import { Image } from 'astro:assets';
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+
+import meteorPlatforms from '@assets/stellar-strays/assets/meteor-platforms.png';
+import jungleSpikes from '@assets/stellar-strays/assets/jungle-spikes.png';
+import meteorSpikes from '@assets/stellar-strays/assets/meteor-spikes.png';
+import movingSpikes from '@assets/stellar-strays/assets/moving-spikes.png';
+import jungleLevel from '@assets/stellar-strays/assets/jungle-level.png';
+import jungleDetail from '@assets/stellar-strays/assets/jungle-level-detail.png';
+import plants from '@assets/stellar-strays/assets/plants.png';
+import bigPlatform from '@assets/stellar-strays/assets/big-platform.png';
+import graybox from '@assets/stellar-strays/assets/graybox.jpg';
+import platformsInGame from '@assets/stellar-strays/assets/platforms-in-game.jpg';
+import baseColor from '@assets/stellar-strays/assets/base-color.png';
+import shading from '@assets/stellar-strays/assets/shading.png';
+import decoration from '@assets/stellar-strays/assets/decoration.png';
+import obstacles from '@assets/stellar-strays/assets/obstacles-placement.png';
+
+const pct = (v: number, t: number) => `${(v / t) * 100}%`;
+
+// The jungle pictures are placed by hand, as in the Figma file: x/y/w/h in px on a 1200 x 1135 canvas.
+const JW = 1200;
+const JH = 1135;
+const jungle = [
+  { src: jungleLevel, alt: 'Jungle level built from modular assets', x: 0, y: 0, w: 1200, h: 450 },
+  { src: jungleDetail, alt: 'Jungle level, close-up of the platforms', x: 83, y: 450, w: 1034, h: 264 },
+  { src: plants, alt: 'Jungle plants', x: 0, y: 755, w: 487, h: 314 },
+  { src: bigPlatform, alt: 'Large jungle platform', x: 554, y: 739, w: 647, h: 396 },
+];
+
+// The process breakdown is placed by hand, as in the Figma file: x/y/w/h in px on a 1200 x 685 canvas.
+// The pictures have empty space at the top, so each label sits over it.
+const BW = 1200;
+const BH = 685;
+const breakdown = [
+  { label: 'Base color', src: baseColor, x: 0, y: 11, w: 435, h: 283, labelY: 51 },
+  { label: 'Shading', src: shading, x: 612, y: 10, w: 436, h: 284, labelY: 51 },
+  { label: 'Decoration', src: decoration, x: 0, y: 402, w: 435, h: 283, labelY: 377 },
+  { label: 'Obstacles placement', src: obstacles, x: 612, y: 401, w: 436, h: 284, labelY: 373 },
+];
+---
+
+<ProjectSection id="assets-design" title="Assets design">
+  <div class="block">
+    <div class="cols">
+      <div class="gc-1-3">
+        <h3 class="p-label">Assets design approach</h3>
+        <p class="p-text after-label">
+          The asset design followed two main themes, jungle and meteor, each representing one of
+          the two neighboring planets the heroes leap between. I built a varied set of modular
+          elements, then used them to assemble the level design around the puzzle graybox provided
+          by the programmers.
+        </p>
+      </div>
+      <div class="gc-5-3">
+        <p class="p-text below-label">
+          To keep the planets visually distinct, each one got its own color palette: muted green
+          for the jungle and blue-gray for the meteor. The deadly obstacles and enemies were
+          another key type of asset. To make them stand out across the level, I gave them the most
+          saturated, high-contrast combination in the game: magenta paired with toxic green.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Meteor assets</h3>
+    <div class="cols after-label">
+      <div class="gc-1-8">
+        <Image src={meteorPlatforms} alt="Meteor platforms and assets" widths={[800, 1200, 1800]} sizes="(max-width: 1440px) 100vw, 1200px" loading="lazy" class="media-img" />
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Spikes assets</h3>
+    <div class="cols after-label">
+      <div class="gc-1-4">
+        <Image src={jungleSpikes} alt="Jungle spikes" widths={[600, 1176]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+        <p class="p-caption">Jungle spikes</p>
+      </div>
+      <div class="gc-5-4">
+        <Image src={meteorSpikes} alt="Meteor spikes" widths={[600, 1176]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+        <p class="p-caption">Meteor spikes</p>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-3">
+        <Image src={movingSpikes} alt="Moving spikes" widths={[435, 870]} sizes="(max-width: 1260px) 100vw, 435px" loading="lazy" class="media-img" />
+        <p class="p-caption">Moving spikes</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Jungle assets</h3>
+    <div class="after-label">
+      <div class="offgrid keep" style={`--cw: ${JW}; --ch: ${JH};`}>
+        {jungle.map(j => (
+          <div
+            class="og"
+            style={`--l: ${pct(j.x, JW)}; --t: ${pct(j.y, JH)}; --w: ${pct(j.w, JW)}; --h: ${pct(j.h, JH)};`}
+          >
+            <Image src={j.src} alt={j.alt} widths={[500, 900, 1400]} sizes="(max-width: 1440px) 100vw, 1200px" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Level placement</h3>
+    <div class="cols after-label">
+      <div class="gc-1-4">
+        <Image src={graybox} alt="Graybox of the level from the programmers" widths={[600, 1176]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+        <p class="p-caption">Graybox base from programmers</p>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-8">
+        <Image src={platformsInGame} alt="Assets placed according to the graybox" widths={[800, 1200, 1800]} sizes="(max-width: 1440px) 100vw, 1200px" loading="lazy" class="media-img" />
+        <p class="p-caption">Assets placement according to the graybox</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="offgrid" style={`--cw: ${BW}; --ch: ${BH};`}>
+      <h3
+        class="og p-subhead"
+        style={`--l: 0%; --t: 0%; --w: ${pct(356, BW)};`}
+      >Process breakdown</h3>
+      {breakdown.map(item => (
+        <>
+          <h4
+            class="og p-label lbl"
+            style={`--l: ${pct(item.x, BW)}; --t: ${pct(item.labelY, BH)}; --w: ${pct(282, BW)};`}
+          >{item.label}</h4>
+          <div
+            class="og"
+            style={`--l: ${pct(item.x, BW)}; --t: ${pct(item.y, BH)}; --w: ${pct(item.w, BW)}; --h: ${pct(item.h, BH)};`}
+          >
+            <Image src={item.src} alt={item.label} widths={[435, 870]} sizes="(max-width: 1260px) 100vw, 436px" loading="lazy" />
+          </div>
+        </>
+      ))}
+    </div>
+  </div>
+</ProjectSection>

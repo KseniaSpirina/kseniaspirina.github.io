@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import '../../styles/grid.css';
+import '../../styles/project.css';
+import Lightbox from '@components/sanctuary/Lightbox.astro';
+import ProjectNavArrows from '@components/sanctuary/ProjectNavArrows.astro';
+import ProjectPager from '@components/sanctuary/ProjectPager.astro';
+import HeroSection from '@components/stellar-strays/HeroSection.astro';
+import ContributionSection from '@components/stellar-strays/ContributionSection.astro';
+import CharacterDesignSection from '@components/stellar-strays/CharacterDesignSection.astro';
+import AnimationSection from '@components/stellar-strays/AnimationSection.astro';
+import AssetsSection from '@components/stellar-strays/AssetsSection.astro';
+import ContactSection from '@components/project/ContactSection.astro';
+---
+
+<BaseLayout
+  title="Stellar Strays — Ksenia Spirina"
+  description="Local co-op platformer about an astronaut and a repair-bot who crash-land among planets with shifting gravity. Made in the Game Lab course."
+>
+  <div class="project-page text-v2">
+    <ProjectNavArrows prevHref="/projects/mourn" nextHref="/projects/departure" />
+
+    <HeroSection />
+    <ContributionSection />
+    <CharacterDesignSection />
+    <AnimationSection />
+    <AssetsSection />
+    <ContactSection />
+
+    <ProjectPager prevHref="/projects/mourn" nextHref="/projects/departure" />
+
+    <Lightbox />
+  </div>
+</BaseLayout>
+
+<style is:global>
+  body:has(.project-page) {
+    background-color: #121212;
+  }
+
+  body:has(.project-page) .navbar {
+    background-color: #121212;
+    backdrop-filter: none;
+    border-bottom-color: #121212;
+  }
+
+  body:has(.project-page) .footer {
+    background-color: #121212;
+    border-top-color: #121212;
+  }
+</style>

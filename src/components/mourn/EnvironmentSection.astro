@@ -1,0 +1,162 @@
+---
+import { Image } from 'astro:assets';
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+import LightboxImage from '../sanctuary/LightboxImage.astro';
+
+import bg1 from '@assets/mourn/environment/bg-lvl-1.jpg';
+import bg2 from '@assets/mourn/environment/bg-lvl-2.jpg';
+import bg3 from '@assets/mourn/environment/bg-lvl-3.jpg';
+import game1 from '@assets/mourn/environment/lvl-1-in-game.jpg';
+import game21 from '@assets/mourn/environment/lvl-2-in-game-1.jpg';
+import game22 from '@assets/mourn/environment/lvl-2-in-game-2.jpg';
+import game31 from '@assets/mourn/environment/lvl-3-in-game-1.jpg';
+import game32 from '@assets/mourn/environment/lvl-3-in-game-2.jpg';
+import sketch from '@assets/mourn/environment/sketch.jpg';
+import baseColor from '@assets/mourn/environment/lvl-1-base-color.jpg';
+import details from '@assets/mourn/environment/lvl-1-details.jpg';
+import shadows from '@assets/mourn/environment/lvl-1-shadows.jpg';
+import finalDesign from '@assets/mourn/environment/lvl-1-in-game-final-design.jpg';
+import refD1 from '@assets/mourn/environment/ref-d1.jpg';
+import ref3334 from '@assets/mourn/environment/ref-3334.jpg';
+import ref7455 from '@assets/mourn/environment/ref-7455.jpg';
+import ref7454 from '@assets/mourn/environment/ref-7454.jpg';
+
+const fullWidths = [900, 1400, 2000];
+const fullSizes = '(max-width: 1440px) calc(100vw - 96px), 1200px';
+const halfWidths = [600, 900, 1400];
+const halfSizes = '(max-width: 1260px) 90vw, 588px';
+const group = 'mourn-environment';
+
+const locations = [
+  {
+    title: 'Family home',
+    bg: { src: bg1, alt: 'Family home background', caption: 'Final family home background' },
+    shots: [{ src: game1, alt: 'Family home in game', caption: 'Family home in game', full: true }],
+  },
+  {
+    title: 'Park',
+    bg: { src: bg2, alt: 'Park background', caption: 'Final park background' },
+    shots: [
+      { src: game21, alt: 'Park in game, view 1', caption: 'Park in game 1' },
+      { src: game22, alt: 'Park in game, view 2', caption: 'Park in game 2' },
+    ],
+  },
+  {
+    title: 'The road',
+    bg: { src: bg3, alt: 'Road background', caption: 'Final road background' },
+    shots: [
+      { src: game31, alt: 'Road in game, view 1', caption: 'Road in game 1' },
+      { src: game32, alt: 'Road in game, view 2', caption: 'Road in game 2' },
+    ],
+  },
+];
+
+// Reference photos are placed by hand, as in the Figma file: x/y/w/h in px on a 346 x 333 canvas.
+const RW = 346;
+const RH = 333;
+const refs = [
+  { src: refD1, x: 0, y: 0, w: 141, h: 141 },
+  { src: ref3334, x: 150, y: 29, w: 196, h: 148 },
+  { src: ref7455, x: 0, y: 150, w: 141, h: 183 },
+  { src: ref7454, x: 150, y: 186, w: 196, h: 147 },
+];
+const pct = (v: number, t: number) => `${(v / t) * 100}%`;
+---
+
+<ProjectSection id="environment-design" title="Environment design">
+  <div class="block">
+    <h3 class="p-label">Environment design approach</h3>
+    <div class="cols after-label">
+      <div class="gc-1-3">
+        <p class="p-text">
+          The locations had to tell the story of what happened and, at the same time, show how the
+          protagonist perceives the world. Moving through them retraces the route he took on the
+          day his daughter died. Since the trauma, the world has lost all its color and meaning
+          for him, so every location is drawn in monochrome.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {locations.map(loc => (
+    <div class="block">
+      <h3 class="p-label">{loc.title}</h3>
+      <div class="after-label">
+        <LightboxImage src={loc.bg.src} alt={loc.bg.alt} caption={loc.bg.caption} widths={fullWidths} sizes={fullSizes} group={group} />
+        <p class="p-caption">{loc.bg.caption}</p>
+      </div>
+      {loc.shots[0].full ? (
+        <div class="block-gap">
+          <LightboxImage src={loc.shots[0].src} alt={loc.shots[0].alt} caption={loc.shots[0].caption} widths={fullWidths} sizes={fullSizes} group={group} />
+          <p class="p-caption">{loc.shots[0].caption}</p>
+        </div>
+      ) : (
+        <div class="cols pair block-gap">
+          {loc.shots.map((shot, i) => (
+            <div class={i === 0 ? 'gc-1-4' : 'gc-5-4'}>
+              <LightboxImage src={shot.src} alt={shot.alt} caption={shot.caption} widths={halfWidths} sizes={halfSizes} group={group} />
+              <p class="p-caption">{shot.caption}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  ))}
+
+  <div class="block">
+    <h3 class="p-subhead">Process breakdown</h3>
+    <div class="cols after-subhead">
+      <div class="gc-1-3">
+        <h4 class="p-label">References</h4>
+        <div class="after-label">
+          <div class="offgrid keep" style={`--cw: ${RW}; --ch: ${RH};`}>
+            {refs.map(r => (
+              <div
+                class="og"
+                style={`--l: ${pct(r.x, RW)}; --t: ${pct(r.y, RH)}; --w: ${pct(r.w, RW)}; --h: ${pct(r.h, RH)};`}
+              >
+                <Image src={r.src} alt="Environment reference" widths={[200, 400]} sizes="196px" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="gc-5-4">
+        <h4 class="p-label">Sketch</h4>
+        <div class="after-label">
+          <Image src={sketch} alt="Environment sketch" widths={[600, 1172]} sizes="586px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+
+    <div class="cols block-gap">
+      <div class="gc-1-4">
+        <h4 class="p-label">Base colors</h4>
+        <div class="after-label">
+          <Image src={baseColor} alt="Base colors" widths={[600, 1178]} sizes="589px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+      <div class="gc-5-4">
+        <h4 class="p-label">Details</h4>
+        <div class="after-label">
+          <Image src={details} alt="Details" widths={[600, 1176]} sizes="588px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+
+    <div class="cols block-gap">
+      <div class="gc-1-4">
+        <h4 class="p-label">Shadows</h4>
+        <div class="after-label">
+          <Image src={shadows} alt="Shadows" widths={[600, 1176]} sizes="588px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+      <div class="gc-5-4">
+        <h4 class="p-label">Final</h4>
+        <div class="after-label">
+          <Image src={finalDesign} alt="Final location" widths={[600, 1172]} sizes="586px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ProjectSection>
