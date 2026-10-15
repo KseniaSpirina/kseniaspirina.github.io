@@ -5,7 +5,7 @@ export const siteConfig = {
   name: 'Ksenia Spirina',
   title: 'Ksenia Spirina — Portfolio',
   description: 'Design portfolio showcasing selected works.',
-  url: 'https://example.com',
+  url: 'https://kseniaspirina.github.io',
   
   // Navigation links
   nav: [
