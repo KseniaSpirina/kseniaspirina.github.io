@@ -199,9 +199,9 @@ const firstInactive = projects.findIndex(project => !project.href);
     margin: 0;
   }
 
-  /* subhead -> text 48px, paragraph -> paragraph 34.2px (from project.css) */
+  /* project name -> short description 32px, paragraph -> paragraph 34.2px (from project.css) */
   .project-title + .project-description {
-    margin-top: 48px;
+    margin-top: 32px;
   }
 
   /* grey caption at the bottom edge of the card: last baseline on the image edge */
@@ -221,7 +221,7 @@ const firstInactive = projects.findIndex(project => !project.href);
 
     .project-text {
       grid-column: 1 / -1;
-      /* image -> subhead 48px */
+      /* image -> project name 48px */
       margin-top: 48px;
     }
 
