@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import '../styles/grid.css';
+import '../styles/project.css';
 import AboutContent from '@components/about/AboutContent.astro';
 import { siteConfig } from '@config/site';
 ---
 
 <BaseLayout title={`About — ${siteConfig.name}`} description={`About ${siteConfig.name}`}>
-  <div class="about-page">
+  <div class="about-page project-page text-v2">
     <section class="about grid-1440">
       <AboutContent />
     </section>
@@ -21,7 +22,8 @@ import { siteConfig } from '@config/site';
 
   .about {
     padding-top: calc(128px - var(--nav-height));
-    padding-bottom: 6rem;
+    /* last element -> footer: 128px (the footer has its own 128px margin) */
+    padding-bottom: 0;
   }
 
   .about > :global(*) {

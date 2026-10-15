@@ -5,6 +5,7 @@ import portrait from '@assets/about/portrait.jpg';
 import envelopeIcon from '@assets/icons/envelope.svg?raw';
 import instagramIcon from '@assets/icons/instagram.svg?raw';
 import linkedinIcon from '@assets/icons/linkedin.svg?raw';
+import '../../styles/buttons.css';
 
 import photoshopIcon from '@assets/icons/photoshop.svg';
 import indesignIcon from '@assets/icons/indesign.svg';
@@ -31,17 +32,17 @@ const skills = [
   <div class="left-col">
     <Image class="portrait" src={portrait} alt="Ksenia Spirina" widths={[400, 700, 900]} sizes="(max-width: 768px) 100vw, 435px" />
 
-    <h2 class="cta-title">Let's Work Together!</h2>
+    <h2 class="p-subhead cta-title">Let’s work together!</h2>
     <div class="contact-buttons">
-      <a class="contact-btn" href="mailto:kseniaspirina@gmail.com">
+      <a class="btn btn--primary" href="mailto:kseniaspirina@gmail.com">
         <Fragment set:html={envelopeIcon} />
         <span>Email me</span>
       </a>
-      <a class="contact-btn" href="https://instagram.com/morkespi" target="_blank" rel="noopener noreferrer">
+      <a class="btn" href="https://instagram.com/morkespi" target="_blank" rel="noopener noreferrer">
         <Fragment set:html={instagramIcon} />
         <span>Instagram</span>
       </a>
-      <a class="contact-btn" href="https://www.linkedin.com/in/ksenia-spirina-24b87b384/" target="_blank" rel="noopener noreferrer">
+      <a class="btn" href="https://www.linkedin.com/in/ksenia-spirina-24b87b384/" target="_blank" rel="noopener noreferrer">
         <Fragment set:html={linkedinIcon} />
         <span>LinkedIn</span>
       </a>
@@ -49,33 +50,33 @@ const skills = [
   </div>
 
   <div class="right-col">
-    <p class="bio">
-      <strong class="display">HELLO!</strong> I'm <strong class="accent">Ksenia Spirina</strong>, a visual designer
+    <p class="p-text">
+      <strong class="display">HELLO!</strong> I’m <strong class="accent">Ksenia Spirina</strong>, a visual designer
       focused on game development. I create idea-driven experiences where art serves as a
       storytelling tool.
     </p>
-    <p class="bio">
-      Every project starts with an idea, whether it's from a story, a mechanic, or a meaning, an
+    <p class="p-text">
+      Every project starts with an idea, whether it’s from a story, a mechanic, or a meaning, an
       experience I want the player to come away with. From there, I research how to translate the
       idea into design. I study references, visual tropes, and how others have communicated
       something similar. Only then do I define the visual direction.
     </p>
-    <p class="bio">
+    <p class="p-text">
       My work spans
       <strong class="accent">interaction design, concept art, environment design, 2D animation, illustration, UI, VFX, and worldbuilding</strong>.
       I develop projects both independently and as part of a team, creating experiences that
       engage players and leave them with something to reflect on.
     </p>
 
-    <h3 class="section-label">Education</h3>
-    <p class="edu-text">
+    <h3 class="p-label block-label">Education</h3>
+    <p class="p-text after-label">
       Bachelor of Arts (B.A.) in Visual Communication<br />
       Bezalel Academy of Arts and Design<br />
       2022-2026
     </p>
 
-    <h3 class="section-label software-label">Software</h3>
-    <div class="skills">
+    <h3 class="p-label block-label">Software</h3>
+    <div class="skills after-label">
       {skills.map(skill => (
         <div class="skill-row">
           <span class="skill-name">{skill.label}</span>
@@ -91,8 +92,10 @@ const skills = [
 </div>
 
 <style>
+  /* About page in the new style: body text and labels come from project.css (.p-text, .p-label, .p-subhead),
+     buttons from buttons.css. Distances are measured glyph to glyph (see the typography rules). */
   .page-title {
-    /* 64px to the portrait: 24px grid gap + 40px */
+    /* title -> portrait / first text: 64px (24px grid gap + 40px) */
     margin: 0 0 40px;
     font-family: var(--font-display);
     font-weight: 700;
@@ -120,7 +123,12 @@ const skills = [
 
   .right-col {
     grid-column: 5 / span 3;
-    margin-top: -8px;
+  }
+
+  /* Instagram icon: same height as the LinkedIn icon used to have (40px), so the button stays 60px tall */
+  .contact-buttons :global(.btn svg[width='41']) {
+    height: 40px;
+    width: auto;
   }
 
   .portrait {
@@ -131,114 +139,41 @@ const skills = [
     border-radius: 4px;
   }
 
+  /* portrait -> subhead 96px, subhead -> buttons 48px */
   .cta-title {
-    margin: 59px 0 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.125rem;
-    color: #e8e8e8;
-    text-transform: uppercase;
+    margin: 96px 0 0;
   }
 
   .contact-buttons {
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
-    gap: 24px;
-    margin-top: 26px;
-  }
-
-  .contact-btn {
-    position: relative;
-    display: inline-flex;
     align-items: center;
-    gap: 9px;
-    color: #e8e8e8;
-    text-decoration: none;
-    font-family: var(--font-body);
-    font-size: 1.125rem;
-    line-height: 26px;
-    transition: color 150ms ease;
+    gap: 24px;
+    margin-top: 48px;
   }
 
-  .contact-btn :global(svg) {
-    display: block;
-    flex-shrink: 0;
-  }
-
-  .contact-btn::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -6px;
-    height: 2px;
-    border-radius: 1px;
-    background: currentColor;
-    opacity: 0;
-    transition: opacity 150ms ease;
-  }
-
-  @media (hover: hover) {
-    .contact-btn:hover {
-      color: #4361ee;
-  }
-  }
-
-  @media (hover: hover) {
-    .contact-btn:hover::after {
-      opacity: 1;
-  }
-  }
-
-  .bio {
-    margin: 0;
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-size: 1.125rem;
-    line-height: 26px;
-    color: #e8e8e8;
-  }
-
-  .bio + .bio {
-    margin-top: 26px;
-  }
-
-  .bio strong {
-    font-weight: 700;
-  }
-
-  .bio strong.accent {
-    color: #4361ee;
-  }
-
-  .bio strong.display {
-    font-family: var(--font-display);
-  }
-
-  .section-label {
-    margin: 53px 0 0;
+  /* HELLO!: Unbounded, same colour as the subheads */
+  .right-col :global(strong.display) {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1.125rem;
     color: #e8e8e8;
-    text-transform: uppercase;
   }
 
-  .edu-text {
-    margin: 18px 0 0;
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-size: 1.125rem;
-    line-height: 26px;
-    color: #e8e8e8;
+  /* blue highlight inside the text: Inter Bold #5E77E8 */
+  .right-col :global(strong.accent) {
+    font-weight: 700;
+    color: #5e77e8;
+  }
+
+  /* text -> label 96px */
+  .block-label {
+    margin: 96px 0 0;
   }
 
   .skills {
     display: flex;
     flex-direction: column;
     row-gap: 24px;
-    margin-top: 41px;
   }
 
   .skill-row {
@@ -250,8 +185,9 @@ const skills = [
     flex: 0 0 153px;
     font-family: var(--font-body);
     font-weight: 400;
-    font-size: 1.125rem;
-    color: #e8e8e8;
+    font-size: 18px;
+    line-height: 27px;
+    color: #d6d6d6;
   }
 
   .skill-icons {
@@ -266,10 +202,11 @@ const skills = [
     height: 53px;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1260px) {
     .about-grid {
       grid-template-columns: repeat(4, 1fr);
-      row-gap: 3rem;
+      /* columns that stood side by side and are now stacked: 64px */
+      row-gap: 64px;
     }
 
     .left-col {
@@ -278,11 +215,15 @@ const skills = [
 
     .right-col {
       grid-column: 1 / -1;
-      margin-top: 0;
     }
   }
 
   @media (max-width: 640px) {
+    /* the grid gap is 16px here: 48 + 16 = 64px to the portrait */
+    .page-title {
+      margin-bottom: 48px;
+    }
+
     .about-grid {
       grid-template-columns: 1fr;
     }
@@ -299,7 +240,7 @@ const skills = [
     .skill-row {
       align-items: flex-start;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 12px;
     }
 
     .skill-name {
