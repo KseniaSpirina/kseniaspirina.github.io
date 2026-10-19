@@ -1,0 +1,33 @@
+---
+import SkillPage from '@components/skills/SkillPage.astro';
+import SanctuaryAnimation from '@components/sanctuary/AnimationSection.astro';
+import StellarStraysAnimation from '@components/stellar-strays/AnimationSection.astro';
+import DepartureAnimation from '@components/departure/AnimationSection.astro';
+
+// The "Animation" section of every project that has one, in the order of the projects page.
+// Imprisoned and Mourn have no such section and are skipped. Each section carries the project name instead of
+// the section name, with a grey line (project type and year) under it.
+---
+
+<SkillPage title="Animation" description="Animation across projects: Sanctuary, Stellar Strays, Departure.">
+  <div class="sanctuary">
+    <SanctuaryAnimation id="sanctuary-animation" title="Sanctuary" subtitle="Team project · Graduation project · 2026" />
+  </div>
+  <StellarStraysAnimation id="stellar-strays-animation" title="Stellar Strays" subtitle="Team project · Game Lab course · 2025" />
+  <DepartureAnimation id="departure-animation" title="Departure" subtitle="Solo project · Game Animation course · 2025" />
+</SkillPage>
+
+<style>
+  /* The captions under the last row of videos hang below the Sanctuary canvas (margin 0.4rem + one line of the
+     caption font); add that to the section padding so that the visual gap to the next section stays 128px. */
+  :global(.skill-page .sanctuary > section.animation) {
+    padding-bottom: calc(128px + 0.4rem + 1.2 * clamp(0.625rem, 2.7vw, 1.125rem));
+  }
+
+  /* on narrow screens (below ~880px) the caption of the last Medium Vivaki wraps into two lines */
+  @media (max-width: 880px) {
+    :global(.skill-page .sanctuary > section.animation) {
+      padding-bottom: calc(128px + 0.4rem + 2.4 * clamp(0.625rem, 2.7vw, 1.125rem));
+    }
+  }
+</style>

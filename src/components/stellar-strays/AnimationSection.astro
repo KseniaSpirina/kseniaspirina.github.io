@@ -3,9 +3,11 @@ import ProjectSection from '../imprisoned/ProjectSection.astro';
 import LazyVideo from '../imprisoned/LazyVideo.astro';
 
 const v = (name: string) => `/stellar-strays/videos/${name}`;
+
+const { id = 'animation', title = 'Animation', subtitle } = Astro.props;
 ---
 
-<ProjectSection id="animation" title="Animation">
+<ProjectSection {id} {title} {subtitle}>
   <div class="block">
     <div class="cols">
       <div class="gc-1-3">

@@ -60,10 +60,12 @@ function captionPos(item: { x: number; w: number; row: number }, canvasH: number
   const top = (bottoms[item.row] / canvasH) * 100;
   return `left:${left}%; width:${width}%; top:${top}%;`;
 }
+
+const { id = 'animation', title = 'Animation', subtitle } = Astro.props;
 ---
 
-<section class="animation grid-1440" id="animation">
-  <SectionHeading title="Animation" />
+<section class="animation grid-1440" {id}>
+  <SectionHeading {title} {subtitle} />
 
   <div class="full">
     <p class="caption">Idle</p>
