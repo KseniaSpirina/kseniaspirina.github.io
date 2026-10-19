@@ -15,12 +15,14 @@ import finalSketch from '@assets/sanctuary/characters/final-sketch-web.jpg';
 import finalLine from '@assets/sanctuary/characters/final-line.png';
 import mcColorVariation from '@assets/sanctuary/characters/mc-color-variation.png';
 import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
+
+const { id = 'character-design', title = 'Character Design', subtitle } = Astro.props;
 ---
 
-<section class="character-design" id="character-design">
+<section class="character-design" {id}>
   <div class="grid-1440">
     <div class="full">
-      <SectionHeading title="Character Design" />
+      <SectionHeading {title} {subtitle} />
     </div>
 
     <div class="full banner">

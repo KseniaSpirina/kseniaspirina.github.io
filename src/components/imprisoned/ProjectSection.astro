@@ -2,15 +2,18 @@
 interface Props {
   id: string;
   title: string;
+  /** optional grey line under the section name (used on the Skills pages: project type and year) */
+  subtitle?: string;
 }
 
-const { id, title } = Astro.props;
+const { id, title, subtitle } = Astro.props;
 ---
 
 <section class="project-section grid-1440" id={id}>
   <div class="inner">
     <span class="divider"></span>
     <h2>{title}</h2>
+    {subtitle && <p class="subtitle">{subtitle}</p>}
     <div class="body"><slot /></div>
   </div>
 </section>
@@ -41,6 +44,33 @@ const { id, title } = Astro.props;
     line-height: 1.25;
     text-transform: uppercase;
     color: #4361ee;
+  }
+
+  /* grey line under the section name: name -> line 32px, line -> content 64px (glyph to glyph).
+     Inter 24px on a 30px line: 6.28px empty above the capitals, 6.27px below the baseline. */
+  .subtitle {
+    display: flow-root;
+    margin: 32px 0 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    color: #9a9a9a;
+  }
+
+  .subtitle::before,
+  .subtitle::after {
+    content: '';
+    display: block;
+    height: 0;
+  }
+
+  .subtitle::before {
+    margin-top: -6.28px;
+  }
+
+  .subtitle::after {
+    margin-bottom: -6.27px;
   }
 
   .body {

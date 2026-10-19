@@ -45,9 +45,11 @@ const refs = [
   { src: ref3331, x: 0, y: 202, w: 138, h: 270 },
   { src: ref3330, x: 146, y: 249, w: 136, h: 224 },
 ];
+
+const { id = 'characters-design', title = 'Characters design', subtitle } = Astro.props;
 ---
 
-<ProjectSection id="characters-design" title="Characters design">
+<ProjectSection {id} {title} {subtitle}>
   <div class="block">
     <div class="cols">
       <div class="gc-1-3">

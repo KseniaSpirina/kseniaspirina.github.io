@@ -45,9 +45,11 @@ const final = [
 ];
 
 const draftCols = ['gc-1-2', 'gc-4-2', 'gc-7-2'];
+
+const { id = 'character-design', title = 'Character design', subtitle } = Astro.props;
 ---
 
-<ProjectSection id="character-design" title="Character design">
+<ProjectSection {id} {title} {subtitle}>
   <div class="block">
     <div class="cols">
       <div class="gc-1-3">

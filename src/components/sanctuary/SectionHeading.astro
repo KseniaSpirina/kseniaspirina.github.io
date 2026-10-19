@@ -1,14 +1,17 @@
 ---
 interface Props {
   title: string;
+  /** optional grey line under the section name (used on the Skills pages: project type and year) */
+  subtitle?: string;
 }
 
-const { title } = Astro.props;
+const { title, subtitle } = Astro.props;
 ---
 
 <div class="section-heading">
   <span class="rule"></span>
   <h2>{title}</h2>
+  {subtitle && <p class="subtitle">{subtitle}</p>}
 </div>
 
 <style>
@@ -24,6 +27,32 @@ const { title } = Astro.props;
     height: 0;
     border-top: 4px solid #4361ee;
     margin-bottom: 32px;
+  }
+
+  /* grey line under the section name: name -> line 32px, line -> content 64px (glyph to glyph) */
+  .subtitle {
+    display: flow-root;
+    margin: 32px 0 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    color: #9a9a9a;
+  }
+
+  .subtitle::before,
+  .subtitle::after {
+    content: '';
+    display: block;
+    height: 0;
+  }
+
+  .subtitle::before {
+    margin-top: -6.28px;
+  }
+
+  .subtitle::after {
+    margin-bottom: -6.27px;
   }
 
   h2 {
