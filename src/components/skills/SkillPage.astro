@@ -1,0 +1,96 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import '../../styles/grid.css';
+import '../../styles/project.css';
+import '../../styles/sanctuary-text.css';
+import Lightbox from '../sanctuary/Lightbox.astro';
+
+interface Props {
+  /** page heading and <title>, e.g. "Environment Design" */
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!-- A Skills detail page: the heading, then the same section of several projects one after another.
+     Put every Sanctuary section inside <div class="sanctuary"> (its text styles need that wrapper). -->
+<BaseLayout title={`${title} — Ksenia Spirina`} {description}>
+  <div class="skill-page project-page text-v2">
+    <section class="skill-hero grid-1440">
+      <h1 class="skill-title">{title}</h1>
+    </section>
+
+    <div class="skill-body">
+      <slot />
+    </div>
+
+    <Lightbox />
+  </div>
+</BaseLayout>
+
+<style>
+  .skill-page {
+    background: #121212;
+    color: #e8e8e8;
+  }
+
+  .skill-hero {
+    padding-top: calc(128px - var(--nav-height));
+    /* page title -> first section: 64px */
+    padding-bottom: 64px;
+  }
+
+  .skill-hero > :global(*) {
+    grid-column: 1 / -1;
+  }
+
+  /* Sanctuary sections bring their own 64px above and below: here sections are 128px apart, like on the project pages */
+  :global(.skill-page .sanctuary > section) {
+    padding-top: 0;
+    padding-bottom: 128px;
+  }
+
+  /* last section -> footer: 128px (the footer has its own 128px margin) */
+  :global(.skill-body > :last-child),
+  :global(.skill-body > :last-child > section) {
+    padding-bottom: 0 !important;
+  }
+
+  /* Unbounded: the line box starts 128px from the top of the page, the empty space below the capitals is trimmed */
+  .skill-title {
+    display: flow-root;
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.25rem, 9vw, 3.5rem);
+    line-height: 1.25;
+    text-transform: uppercase;
+    color: #4361ee;
+  }
+
+  .skill-title::after {
+    content: '';
+    display: block;
+    height: 0;
+    margin-bottom: -0.25em;
+  }
+</style>
+
+<style is:global>
+  body:has(.skill-page) {
+    background-color: #121212;
+  }
+
+  body:has(.skill-page) .navbar {
+    background-color: #121212;
+    backdrop-filter: none;
+    border-bottom-color: #121212;
+  }
+
+  body:has(.skill-page) .footer {
+    background-color: #121212;
+    border-top-color: #121212;
+  }
+</style>

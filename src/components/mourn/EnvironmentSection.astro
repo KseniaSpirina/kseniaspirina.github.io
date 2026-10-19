@@ -61,9 +61,11 @@ const refs = [
   { src: ref7454, x: 150, y: 186, w: 196, h: 147 },
 ];
 const pct = (v: number, t: number) => `${(v / t) * 100}%`;
+
+const { id = 'environment-design', title = 'Environment design', subtitle } = Astro.props;
 ---
 
-<ProjectSection id="environment-design" title="Environment design">
+<ProjectSection {id} {title} {subtitle}>
   <div class="block">
     <h3 class="p-label">Environment design approach</h3>
     <div class="cols after-label">

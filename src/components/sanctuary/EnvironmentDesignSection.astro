@@ -13,10 +13,12 @@ import blockout from '@assets/sanctuary/environment/fixing-room-3d-blockout.jpg'
 import lineArt from '@assets/sanctuary/environment/fixing-room-line.jpg';
 import references from '@assets/sanctuary/environment/references-environment.png';
 import finalColorRender from '@assets/sanctuary/environment/fixing-room-all-together.png';
+
+const { id = 'environment-design', title = 'Environment Design', subtitle } = Astro.props;
 ---
 
-<section class="environment-design grid-1440" id="environment-design">
-  <SectionHeading title="Environment Design" />
+<section class="environment-design grid-1440" {id}>
+  <SectionHeading {title} {subtitle} />
   <p class="caption">Environment Design Approach</p>
 
   <p class="running narrow">

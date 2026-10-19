@@ -1,0 +1,20 @@
+---
+import SkillPage from '@components/skills/SkillPage.astro';
+import SanctuaryEnvironment from '@components/sanctuary/EnvironmentDesignSection.astro';
+import ImprisonedEnvironment from '@components/imprisoned/EnvironmentSection.astro';
+import MournEnvironment from '@components/mourn/EnvironmentSection.astro';
+import DepartureEnvironment from '@components/departure/EnvironmentSection.astro';
+
+// The "Environment design" section of every project that has one, in the order of the projects page.
+// Stellar Strays has "Assets design" instead and is skipped. Each section carries the project name instead
+// of the section name, with a grey line (project type and year) under it.
+---
+
+<SkillPage title="Environment Design" description="Environment design across projects: Sanctuary, Imprisoned, Mourn, Departure.">
+  <div class="sanctuary">
+    <SanctuaryEnvironment id="sanctuary-environment-design" title="Sanctuary" subtitle="Team project · Graduation project · 2026" />
+  </div>
+  <ImprisonedEnvironment id="imprisoned-environment-design" title="Imprisoned" subtitle="Team project · Digital Game Project course · 2025" />
+  <MournEnvironment id="mourn-environment-design" title="Mourn" subtitle="Solo project · Indi Games course · 2025" />
+  <DepartureEnvironment id="departure-environment-design" title="Departure" subtitle="Solo project · Game Animation course · 2025" />
+</SkillPage>

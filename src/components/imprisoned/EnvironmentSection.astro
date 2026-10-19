@@ -82,9 +82,11 @@ const assets = [
   { src: plants2, alt: 'Plant models', x: 765, y: 625, w: 282, h: 103 },
 ];
 const pct = (value: number, total: number) => `${(value / total) * 100}%`;
+
+const { id = 'environment-design', title = 'Environment design', subtitle } = Astro.props;
 ---
 
-<ProjectSection id="environment-design" title="Environment design">
+<ProjectSection {id} {title} {subtitle}>
   <div class="block">
     <h3 class="p-label">Environment design approach</h3>
     <div class="cols after-label">

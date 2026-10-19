@@ -23,9 +23,11 @@ const refs = [
   { src: ref3344, x: 161, y: 125, w: 108, h: 191 },
   { src: ref3345, x: 0, y: 198, w: 153, h: 118 },
 ];
+
+const { id = 'environment-design', title = 'Environment design', subtitle } = Astro.props;
 ---
 
-<ProjectSection id="environment-design" title="Environment design">
+<ProjectSection {id} {title} {subtitle}>
   <div class="block">
     <div class="cols">
       <div class="gc-1-3">
