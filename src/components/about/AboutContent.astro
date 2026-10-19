@@ -202,19 +202,39 @@ const skills = [
     height: 53px;
   }
 
+  /* stacked layout: portrait, then the text, Education, Software, and only then "Let's work together!" with the buttons */
   @media (max-width: 1260px) {
     .about-grid {
       grid-template-columns: repeat(4, 1fr);
-      /* columns that stood side by side and are now stacked: 64px */
-      row-gap: 64px;
+      row-gap: 0;
     }
 
     .left-col {
+      display: contents;
+    }
+
+    .portrait {
       grid-column: 1 / span 2;
+      order: 1;
     }
 
     .right-col {
       grid-column: 1 / -1;
+      order: 2;
+      /* portrait -> text 64px */
+      margin-top: 64px;
+    }
+
+    /* Software icons -> subhead 96px, subhead -> buttons 48px */
+    .cta-title {
+      grid-column: 1 / -1;
+      order: 3;
+      margin-top: 96px;
+    }
+
+    .contact-buttons {
+      grid-column: 1 / -1;
+      order: 4;
     }
   }
 
@@ -234,6 +254,7 @@ const skills = [
     }
 
     .portrait {
+      grid-column: 1 / -1;
       max-width: 320px;
     }
 
