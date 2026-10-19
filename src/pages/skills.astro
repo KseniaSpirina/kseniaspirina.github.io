@@ -1,0 +1,74 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import '../styles/grid.css';
+import '../styles/project.css';
+import SkillsList from '@components/skills/SkillsList.astro';
+import { siteConfig } from '@config/site';
+---
+
+<BaseLayout title={`Skills — ${siteConfig.name}`} description={`Skills of ${siteConfig.name}: character design, environment design, animation, UI design.`}>
+  <div class="skills-page project-page text-v2">
+    <section class="skills grid-1440">
+      <h1 class="page-title">Skills</h1>
+      <SkillsList />
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .skills-page {
+    background: #121212;
+    color: #e8e8e8;
+  }
+
+  .skills {
+    padding-top: calc(128px - var(--nav-height));
+    /* last card -> footer: the footer has its own 128px margin */
+    padding-bottom: 0;
+  }
+
+  .skills > :global(*) {
+    grid-column: 1 / -1;
+  }
+
+  .page-title {
+    /* 64px to the first project image: 24px grid gap + 16px + 24px row padding */
+    margin: 0 0 16px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.25;
+    color: #4361ee;
+    text-transform: uppercase;
+  }
+
+  @supports (text-box-trim: trim-both) {
+    .page-title {
+      text-box: trim-end cap alphabetic;
+    }
+  }
+
+  @media (max-width: 640px) {
+    /* grid gap is 16px here: 24 + 16 + 24px card padding = 64px to the first image */
+    .page-title {
+      margin-bottom: 24px;
+    }
+  }
+</style>
+
+<style is:global>
+  body:has(.skills-page) {
+    background-color: #121212;
+  }
+
+  body:has(.skills-page) .navbar {
+    background-color: #121212;
+    backdrop-filter: none;
+    border-bottom-color: #121212;
+  }
+
+  body:has(.skills-page) .footer {
+    background-color: #121212;
+    border-top-color: #121212;
+  }
+</style>

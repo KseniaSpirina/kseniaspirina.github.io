@@ -1,0 +1,149 @@
+---
+import { Image } from 'astro:assets';
+import characterImg from '@assets/skills/character-design.jpg';
+import environmentImg from '@assets/skills/environment-design.jpg';
+import animationImg from '@assets/skills/animation-placeholder.svg';
+import uiImg from '@assets/skills/ui-design.jpg';
+
+// "plannedHref" is where each card will lead once its page exists: move it to "href" then.
+// Cards without "href" are shown as inactive, with the "in development" notice above the first one.
+const skills = [
+  { slug: 'character-design', href: null, plannedHref: '/skills/character-design', image: characterImg, title: 'Character Design' },
+  { slug: 'environment-design', href: null, plannedHref: '/skills/environment-design', image: environmentImg, title: 'Environment Design' },
+  { slug: 'animation', href: null, plannedHref: '/skills/animation', image: animationImg, title: 'Animation' },
+  { slug: 'ui-design', href: null, plannedHref: '/skills/ui-design', image: uiImg, title: 'UI Design' },
+];
+
+const firstInactive = skills.findIndex(skill => !skill.href);
+---
+
+<div class="projects-list">
+  {skills.map((skill, index) => {
+    const Tag = skill.href ? 'a' : 'div';
+    return (
+      <>
+      {index === firstInactive && <p class="p-subhead coming-soon">Pages are under development</p>}
+      <Tag
+        class:list={['project-row', { 'is-inactive': !skill.href }]}
+        href={skill.href ?? undefined}
+        aria-disabled={skill.href ? undefined : 'true'}
+      >
+        <div class="project-image">
+          <Image src={skill.image} alt={skill.title} widths={[500, 900, 1400]} sizes="(max-width: 1260px) 100vw, 741px" loading="lazy" />
+        </div>
+        <div class="project-text">
+          <div class="project-text-top">
+            <h2 class="p-subhead project-title">{skill.title}</h2>
+          </div>
+        </div>
+      </Tag>
+      </>
+    );
+  })}
+</div>
+
+<style>
+  /* Projects list in the new style: text, subhead and caption styles come from project.css (.p-text, .p-subhead,
+     .p-caption); distances are glyph to glyph. Card padding (24px) is the hover area, so it is subtracted
+     from the gaps: image -> image 96px. */
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 48px;
+  }
+
+  .project-row {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    column-gap: 24px;
+    padding: 24px 0 24px 24px;
+    margin-left: -24px;
+    border-radius: 4px;
+    color: inherit;
+    text-decoration: none;
+    transition: background-color 150ms ease;
+  }
+
+  a.project-row {
+    cursor: pointer;
+  }
+
+  @media (hover: hover) {
+    a.project-row:hover {
+      background-color: rgba(255, 255, 255, 0.04);
+    }
+  }
+
+  /* notice: 96px under the previous image, 48px above the next one */
+  .coming-soon {
+    margin: 24px 0 -24px;
+  }
+
+  /* projects whose page is not ready yet */
+  .project-row.is-inactive {
+    opacity: 0.4;
+    filter: grayscale(1);
+    cursor: default;
+    user-select: none;
+  }
+
+  .project-image {
+    grid-column: 1 / span 5;
+  }
+
+  .project-image :global(img) {
+    display: block;
+    width: 100%;
+    aspect-ratio: 741 / 417;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .project-text {
+    grid-column: 6 / span 3;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-title {
+    margin: 0;
+  }
+
+  /* project name -> short description 32px, paragraph -> paragraph 34.2px (from project.css) */
+  .project-title + .project-description {
+    margin-top: 32px;
+  }
+
+  /* grey caption at the bottom edge of the card: last baseline on the image edge */
+  .project-text :global(.project-caption.p-caption) {
+    margin: auto 0 0;
+    padding-top: 48px;
+  }
+
+  @media (max-width: 1260px) {
+    .project-row {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .project-image {
+      grid-column: 1 / -1;
+    }
+
+    .project-text {
+      grid-column: 1 / -1;
+      /* image -> project name 48px */
+      margin-top: 48px;
+    }
+
+    .project-text :global(.project-caption.p-caption) {
+      margin-top: 48px;
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .project-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
