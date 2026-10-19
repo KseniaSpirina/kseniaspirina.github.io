@@ -31,8 +31,7 @@ const email = 'kseniaspirina@gmail.com';
           <Fragment set:html={linkedinIcon} />
           <span>LinkedIn</span>
         </a>
-        <!-- CV file is not ready yet: the button is in place, the link is added when the PDF exists -->
-        <a class="btn btn--download" href="#" data-cv aria-disabled="true">
+        <a class="btn btn--download" href="/Ksenia-Spirina-CV.pdf" download="KSENIA SPIRINA CV.pdf">
           <Fragment set:html={downloadIcon} />
           <span>Download CV</span>
         </a>
@@ -71,9 +70,6 @@ const email = 'kseniaspirina@gmail.com';
       btn.textContent = label;
     }, 2000);
   });
-
-  // CV link is not available yet: do nothing on click
-  document.querySelector('[data-cv]')?.addEventListener('click', (e) => e.preventDefault());
 </script>
 
 <style>
