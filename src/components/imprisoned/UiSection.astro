@@ -24,9 +24,11 @@ const timerH = 698;
 
 const pos = (x: number, y: number, w: number, h: number | null, ch: number) =>
   `--l: ${pct(x, CW)}; --t: ${pct(y, ch)}; --w: ${pct(w, CW)};${h ? ` --h: ${pct(h, ch)};` : ''}`;
+
+const { id = 'ui-design', title = 'UI design', subtitle } = Astro.props;
 ---
 
-<ProjectSection id="ui-design" title="UI design">
+<ProjectSection {id} {title} {subtitle}>
   <div class="block">
     <h3 class="p-label">UI design approach</h3>
     <div class="cols after-label">

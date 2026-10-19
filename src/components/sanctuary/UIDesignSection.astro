@@ -50,10 +50,12 @@ const IH = 833;
 const at = (x: number, y: number, w: number, order: number) =>
   `left: ${(x / IW) * 100}%; top: ${(y / IH) * 100}%; width: ${(w / IW) * 100}%; --p: ${(w / 437) * 100}%; --w: ${w}px; --o: ${order};`;
 
+
+const { id = 'ui-design', title = 'UI Design', subtitle } = Astro.props;
 ---
 
-<section class="ui-design grid-1440" id="ui-design">
-  <SectionHeading title="UI Design" />
+<section class="ui-design grid-1440" {id}>
+  <SectionHeading {title} {subtitle} />
 
   <!-- UI design approach: three text columns, as on Page 6 of the Figma file -->
   <div class="ui-approach">
