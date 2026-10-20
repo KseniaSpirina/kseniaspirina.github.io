@@ -8,6 +8,7 @@ const { id = 'animation', title = 'Animation', subtitle } = Astro.props;
 ---
 
 <ProjectSection {id} {title} {subtitle}>
+  <slot name="intro" />
   <div class="block">
     <div class="cols">
       <div class="gc-1-3">

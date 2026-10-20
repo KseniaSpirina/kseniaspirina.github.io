@@ -1,0 +1,63 @@
+---
+import SanctuaryCredits from '../credits/SanctuaryCredits.astro';
+import ImprisonedCredits from '../credits/ImprisonedCredits.astro';
+import MournCredits from '../credits/MournCredits.astro';
+import StellarStraysCredits from '../credits/StellarStraysCredits.astro';
+import DepartureCredits from '../credits/DepartureCredits.astro';
+
+type ProjectKey = 'sanctuary' | 'imprisoned' | 'mourn' | 'stellar-strays' | 'departure';
+
+interface Props {
+  project: ProjectKey;
+}
+
+const { project } = Astro.props;
+
+// Short project descriptions for the Skills pages; credits are the same components that the project pages use.
+const descriptions: Record<ProjectKey, string[]> = {
+  sanctuary: [
+    'A narrative sci-fi game set in a post-apocalyptic world, where survival depends on coexisting with mysterious water beings. As an outsider seeking a place in one of the last safe settlements, the player earns the residents’ trust through open-ended conversations powered by an LLM dialogue system.',
+  ],
+  imprisoned: [
+    'A top-down action game about a newborn slime on a mission to free its creator. Every move leaves a deadly trail that destroys enemies, but it also drains the slime’s own body, so movement is both its weapon and its life.',
+  ],
+  mourn: [
+    'A short narrative game about grief, memory, and the regrets that remain after a sudden loss. Through conversation and choice, the player relives a single day and finds the strength to face the pain.',
+    '<strong>Content warning:</strong> themes of grief and trauma, including a fatal accident.',
+  ],
+  'stellar-strays': [
+    'A local co-op platformer for two players. Astronaut Fermi and repair-bot Rumba crash-land on an alien planet and must work together to recover their scattered ship parts, each of which only one of them can safely collect.',
+  ],
+  departure: [
+    'A game animation project that combines a 2D character with a stylized 3D environment. A gentle giant, shy by nature yet remarkably strong, moves through mysterious caverns with a full set of Spine 2D animations, playable in Unity.',
+  ],
+};
+
+const credits = {
+  sanctuary: SanctuaryCredits,
+  imprisoned: ImprisonedCredits,
+  mourn: MournCredits,
+  'stellar-strays': StellarStraysCredits,
+  departure: DepartureCredits,
+};
+const Credits = credits[project];
+---
+
+<!-- Project description (3 columns) and Credits (3 columns, one column gap) right under the project name and its grey line.
+     Same layout as the top of a project page. -->
+<div class="block skill-intro">
+  <div class="cols">
+    <div class="gc-1-3">
+      <h3 class="p-label">Project description</h3>
+      <div class="after-label">
+        {descriptions[project].map((paragraph) => <p class="p-text" set:html={paragraph} />)}
+      </div>
+    </div>
+    <div class="gc-5-3">
+      <h3 class="p-label">Credits</h3>
+      <div class="after-label">
+        <Credits cls="p-text" />
+      </div>
+    </div>
+  </div>
+</div>

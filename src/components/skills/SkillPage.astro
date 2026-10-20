@@ -72,6 +72,16 @@ const nextLabel = next?.title;
     padding-bottom: 128px;
   }
 
+  /* project description + credits right under the project name: in the Sanctuary sections it spans the whole grid,
+     and the content that follows it needs its 96px (those sections do not add the gap themselves) */
+  :global(.skill-page .sanctuary .skill-intro) {
+    grid-column: 1 / -1;
+  }
+
+  :global(.skill-page .sanctuary :is(.character-design, .ui-design, .animation) .skill-intro) {
+    margin-bottom: 96px;
+  }
+
   /* Contact (the last section) -> footer: 128px (the footer has its own 128px margin) */
   :global(.skill-body > #contact) {
     padding-bottom: 0;

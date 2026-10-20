@@ -1,0 +1,19 @@
+---
+interface Props {
+  /** class of the paragraphs: 'text' on the Sanctuary page, 'p-text' elsewhere */
+  cls?: string;
+}
+const { cls = 'p-text' } = Astro.props;
+---
+
+  <p class:list={[cls, 'keep-host']}>
+    Stellar Strays was created as an assignment in the course “Game&nbsp;Lab”, a
+    collaboration between the
+    <span class="keep-name">Visual <span class="keep-always">Communication Department</span></span> of
+    <span class="keep-name"><span class="keep-always">Bezalel Academy of Arts and</span> Design</span> and
+    Hebrew&nbsp;University, 2025.
+  </p>
+  <p class={cls}><strong>Programming:</strong> Idan Baras, David Feldman, Roy Mor</p>
+  <p class={cls}><strong>Art and Design:</strong> Maayan Berkovits, Ksenia Spirina</p>
+  <p class={cls}><strong>Guidance:</strong> Yuval Markovich, Danielle Mossak, Omer Zadok</p>
+  <p class={cls}><strong>Assistance:</strong> Sagie Levy</p>

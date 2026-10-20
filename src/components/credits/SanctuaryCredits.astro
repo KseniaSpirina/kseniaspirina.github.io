@@ -1,0 +1,16 @@
+---
+interface Props {
+  /** class of the paragraphs: 'text' on the Sanctuary page, 'p-text' elsewhere */
+  cls?: string;
+}
+const { cls = 'text' } = Astro.props;
+---
+
+  <p class:list={[cls, 'keep-host']}>
+    Sanctuary was created as our graduation project at
+    <span class="keep-name"><span class="keep-always">Bezalel Academy of Arts and</span> Design,</span>
+    in collaboration with the Hebrew&nbsp;University.
+  </p>
+  <p class={cls}><strong>Designer:</strong> Ksenia Spirina</p>
+  <p class={cls}><strong>Programmers:</strong> Eden Avrahami,<br />David Deitch, Shir Seroussi</p>
+  <p class={cls}><strong>Guidance:</strong> Dani Bacon, Shimrit Elkanati</p>

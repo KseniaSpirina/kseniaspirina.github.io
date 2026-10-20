@@ -1,0 +1,15 @@
+---
+interface Props {
+  /** class of the paragraphs: 'text' on the Sanctuary page, 'p-text' elsewhere */
+  cls?: string;
+}
+const { cls = 'p-text' } = Astro.props;
+---
+
+  <p class:list={[cls, 'keep-host']}>
+    Departure was created as part of the “Game Animation” course at the
+    <span class="keep-name">Visual <span class="keep-always">Communication Department,</span></span>
+    <span class="keep-name"><span class="keep-always">Bezalel Academy of Arts and</span> Design,</span> 2025.
+  </p>
+  <p class={cls}><strong>Author:</strong> Ksenia Spirina</p>
+  <p class={cls}><strong>Guidance:</strong> Eran Hilleli</p>

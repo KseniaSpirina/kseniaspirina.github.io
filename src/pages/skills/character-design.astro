@@ -1,5 +1,6 @@
 ---
 import SkillPage from '@components/skills/SkillPage.astro';
+import ProjectIntro from '@components/skills/ProjectIntro.astro';
 import SanctuaryCharacters from '@components/sanctuary/CharacterDesignSection.astro';
 import MournCharacters from '@components/mourn/CharactersSection.astro';
 import StellarStraysCharacters from '@components/stellar-strays/CharacterDesignSection.astro';
@@ -16,10 +17,17 @@ import DepartureCharacters from '@components/departure/CharacterDesignSection.as
       id="sanctuary-character-design"
       title="Sanctuary"
       subtitle="Team project · Graduation project · 2026"
-      intro="Sanctuary features three groups of characters: two settlements shaped by opposing values, and an outsider protagonist. The core challenge was to make each group read as clearly distinct at a glance, while keeping all three firmly rooted in the same visual world."
-    />
+      intro="Sanctuary features three groups of characters: two settlements shaped by opposing values, and an outsider protagonist. The core challenge was to make each group read as clearly distinct at a glance, while keeping all three firmly rooted in the same visual world.">
+    <ProjectIntro slot="intro" project="sanctuary" />
+  </SanctuaryCharacters>
   </div>
-  <MournCharacters id="mourn-character-design" title="Mourn" subtitle="Solo project · Indi Games course · 2025" />
-  <StellarStraysCharacters id="stellar-strays-character-design" title="Stellar Strays" subtitle="Team project · Game Lab course · 2025" />
-  <DepartureCharacters id="departure-character-design" title="Departure" subtitle="Solo project · Game Animation course · 2025" />
+  <MournCharacters id="mourn-character-design" title="Mourn" subtitle="Solo project · Indi Games course · 2025">
+    <ProjectIntro slot="intro" project="mourn" />
+  </MournCharacters>
+  <StellarStraysCharacters id="stellar-strays-character-design" title="Stellar Strays" subtitle="Team project · Game Lab course · 2025">
+    <ProjectIntro slot="intro" project="stellar-strays" />
+  </StellarStraysCharacters>
+  <DepartureCharacters id="departure-character-design" title="Departure" subtitle="Solo project · Game Animation course · 2025">
+    <ProjectIntro slot="intro" project="departure" />
+  </DepartureCharacters>
 </SkillPage>

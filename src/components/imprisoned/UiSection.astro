@@ -29,6 +29,7 @@ const { id = 'ui-design', title = 'UI design', subtitle } = Astro.props;
 ---
 
 <ProjectSection {id} {title} {subtitle}>
+  <slot name="intro" />
   <div class="block">
     <h3 class="p-label">UI design approach</h3>
     <div class="cols after-label">

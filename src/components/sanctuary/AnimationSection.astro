@@ -68,6 +68,7 @@ const { id = 'animation', title = 'Animation', subtitle, intro, riggingTitle, ri
 
 <section class="animation grid-1440" {id}>
   <SectionHeading {title} {subtitle} />
+  <slot name="intro" />
 
   {intro && (
     <div class="full">

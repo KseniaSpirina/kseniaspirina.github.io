@@ -1,5 +1,6 @@
 ---
 import SkillPage from '@components/skills/SkillPage.astro';
+import ProjectIntro from '@components/skills/ProjectIntro.astro';
 import SanctuaryEnvironment from '@components/sanctuary/EnvironmentDesignSection.astro';
 import ImprisonedEnvironment from '@components/imprisoned/EnvironmentSection.astro';
 import MournEnvironment from '@components/mourn/EnvironmentSection.astro';
@@ -16,20 +17,25 @@ import DepartureEnvironment from '@components/departure/EnvironmentSection.astro
       id="sanctuary-environment-design"
       title="Sanctuary"
       subtitle="Team project · Graduation project · 2026"
-      intro="The Sanctuary is divided between two factions with opposing attitudes toward nature: one seeks to coexist with it, the other to conquer and transform it. The core challenge of the environment design was to give each faction a distinct visual space style, while also resolving how those two styles meet and collide."
-    />
+      intro="The Sanctuary is divided between two factions with opposing attitudes toward nature: one seeks to coexist with it, the other to conquer and transform it. The core challenge of the environment design was to give each faction a distinct visual space style, while also resolving how those two styles meet and collide.">
+    <ProjectIntro slot="intro" project="sanctuary" />
+  </SanctuaryEnvironment>
   </div>
-  <ImprisonedEnvironment id="imprisoned-environment-design" title="Imprisoned" subtitle="Team project · Digital Game Project course · 2025" />
+  <ImprisonedEnvironment id="imprisoned-environment-design" title="Imprisoned" subtitle="Team project · Digital Game Project course · 2025">
+    <ProjectIntro slot="intro" project="imprisoned" />
+  </ImprisonedEnvironment>
   <MournEnvironment
     id="mourn-environment-design"
     title="Mourn"
     subtitle="Solo project · Indi Games course · 2025"
-    intro="Mourn takes place inside the protagonist’s memories of a single day, the day his daughter died. Each location had to show what really happened and, at the same time, reflect how he sees the world. As players move through the locations, they retrace his steps. Since the tragedy, the world has lost all its color and meaning for him, which is why every location is drawn in monochrome."
-  />
+    intro="Mourn takes place inside the protagonist’s memories of a single day, the day his daughter died. Each location had to show what really happened and, at the same time, reflect how he sees the world. As players move through the locations, they retrace his steps. Since the tragedy, the world has lost all its color and meaning for him, which is why every location is drawn in monochrome.">
+    <ProjectIntro slot="intro" project="mourn" />
+  </MournEnvironment>
   <DepartureEnvironment
     id="departure-environment-design"
     title="Departure"
     subtitle="Solo project · Game Animation course · 2025"
-    intro="In Departure, the brief called for an environment that would support the character’s personality and design. Early in the design process, I had already decided that the character lives underground, so a cave was the natural setting. I wanted the space to feel melancholic and slightly unsettling, a fitting home for a character who shares that same quiet sadness and sense of otherness. To create that mood, I built the cave around an underground lake and made it damp and cold, filled with mist, the sound of dripping water, and the rustle of bats’ wings."
-  />
+    intro="In Departure, the brief called for an environment that would support the character’s personality and design. Early in the design process, I had already decided that the character lives underground, so a cave was the natural setting. I wanted the space to feel melancholic and slightly unsettling, a fitting home for a character who shares that same quiet sadness and sense of otherness. To create that mood, I built the cave around an underground lake and made it damp and cold, filled with mist, the sound of dripping water, and the rustle of bats’ wings.">
+    <ProjectIntro slot="intro" project="departure" />
+  </DepartureEnvironment>
 </SkillPage>

@@ -1,4 +1,5 @@
 ---
+import MournCredits from '../credits/MournCredits.astro';
 import { Image } from 'astro:assets';
 import SideMenu from '../sanctuary/SideMenu.astro';
 import ItchButton from '../project/ItchButton.astro';
@@ -66,14 +67,7 @@ const embedSrc: string | null = null;
       <div class="gc-5-3">
         <h3 class="p-label">Credits</h3>
         <div class="after-label">
-          <p class="p-text keep-host">
-            Mourn was created as an assignment in the course "Indi Games",
-            <span class="keep-dept">Visual <span class="keep-always">Communication Department,</span></span>
-            <span class="keep-name"><span class="keep-always">Bezalel Academy of Arts and</span> Design,</span> 2025.
-          </p>
-          <p class="p-text"><strong>Author:</strong> Ksenia Spirina</p>
-          <p class="p-text"><strong>Guidance:</strong> Dani Bacon</p>
-          <p class="p-text"><strong>Assistance:</strong> Yotam Mano and Lila Egoz</p>
+          <MournCredits cls="p-text" />
         </div>
       </div>
     </div>

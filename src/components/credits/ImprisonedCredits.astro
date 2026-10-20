@@ -1,0 +1,17 @@
+---
+interface Props {
+  /** class of the paragraphs: 'text' on the Sanctuary page, 'p-text' elsewhere */
+  cls?: string;
+}
+const { cls = 'p-text' } = Astro.props;
+---
+
+  <p class={cls}>
+    Imprisoned was created for a Digital Game Project course, a collaboration between<br />
+    Bezalel Academy of Arts and Design and<br />
+    Hebrew University, 2026.
+  </p>
+  <p class={cls}><strong>Programming:</strong> Shir Seroussi,<br />Eden Avrahami, David Deitch</p>
+  <p class={cls}><strong>Art and Design:</strong> Ksenia Spirina, Ohad Lerman</p>
+  <p class={cls}><strong>Guidance:</strong> Idan Rooze, Eli Babajanov, Dani Bacon</p>
+  <p class={cls}><strong>Assistance:</strong> Noa Dveyrin</p>

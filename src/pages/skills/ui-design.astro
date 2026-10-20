@@ -1,5 +1,6 @@
 ---
 import SkillPage from '@components/skills/SkillPage.astro';
+import ProjectIntro from '@components/skills/ProjectIntro.astro';
 import SanctuaryUI from '@components/sanctuary/UIDesignSection.astro';
 import ImprisonedUI from '@components/imprisoned/UiSection.astro';
 import MournMechanics from '@components/mourn/MechanicsSection.astro';
@@ -11,9 +12,13 @@ import MournMechanics from '@components/mourn/MechanicsSection.astro';
 
 <SkillPage slug="ui-design" title="UI Design" description="UI design across projects: Sanctuary, Imprisoned, Mourn.">
   <div class="sanctuary">
-    <SanctuaryUI id="sanctuary-ui-design" title="Sanctuary" subtitle="Team project · Graduation project · 2026" />
+    <SanctuaryUI id="sanctuary-ui-design" title="Sanctuary" subtitle="Team project · Graduation project · 2026">
+    <ProjectIntro slot="intro" project="sanctuary" />
+  </SanctuaryUI>
   </div>
-  <ImprisonedUI id="imprisoned-ui-design" title="Imprisoned" subtitle="Team project · Digital Game Project course · 2025" />
+  <ImprisonedUI id="imprisoned-ui-design" title="Imprisoned" subtitle="Team project · Digital Game Project course · 2025">
+    <ProjectIntro slot="intro" project="imprisoned" />
+  </ImprisonedUI>
   <MournMechanics
     id="mourn-mechanics-and-ui"
     title="Mourn"
@@ -22,6 +27,7 @@ import MournMechanics from '@components/mourn/MechanicsSection.astro';
     approachText="The UI was designed first and foremost to support the narrative. Together with visual and sound effects, it makes the player feel the weight of working through trauma, builds tension, and frames a real choice between facing a memory and skipping it."
     mechanicLabel="Instability"
     mechanicText="Instability is the game’s core mechanic and reflects the protagonist’s state. In the UI it takes the form of a meter, reinforced by screen effects and sound."
-    hideMechanicLists
-  />
+    hideMechanicLists>
+    <ProjectIntro slot="intro" project="mourn" />
+  </MournMechanics>
 </SkillPage>

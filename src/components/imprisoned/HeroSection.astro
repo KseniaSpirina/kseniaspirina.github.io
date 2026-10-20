@@ -1,4 +1,5 @@
 ---
+import ImprisonedCredits from '../credits/ImprisonedCredits.astro';
 import SideMenu from '../sanctuary/SideMenu.astro';
 import ItchButton from '../project/ItchButton.astro';
 import TrailerPlayer from '../sanctuary/TrailerPlayer.astro';
@@ -44,15 +45,7 @@ const trailerSrc = 'https://www.youtube-nocookie.com/embed/QRraN709p1I';
       <div class="gc-5-3">
         <h3 class="p-label">Credits</h3>
         <div class="after-label">
-          <p class="p-text">
-            Imprisoned was created for a Digital Game Project course, a collaboration between<br />
-            Bezalel Academy of Arts and Design and<br />
-            Hebrew University, 2026.
-          </p>
-          <p class="p-text"><strong>Programming:</strong> Shir Seroussi,<br />Eden Avrahami, David Deitch</p>
-          <p class="p-text"><strong>Art and Design:</strong> Ksenia Spirina, Ohad Lerman</p>
-          <p class="p-text"><strong>Guidance:</strong> Idan Rooze, Eli Babajanov, Dani Bacon</p>
-          <p class="p-text"><strong>Assistance:</strong> Noa Dveyrin</p>
+          <ImprisonedCredits cls="p-text" />
         </div>
       </div>
     </div>

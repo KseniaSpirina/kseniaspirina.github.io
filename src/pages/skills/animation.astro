@@ -1,5 +1,6 @@
 ---
 import SkillPage from '@components/skills/SkillPage.astro';
+import ProjectIntro from '@components/skills/ProjectIntro.astro';
 import SanctuaryAnimation from '@components/sanctuary/AnimationSection.astro';
 import StellarStraysAnimation from '@components/stellar-strays/AnimationSection.astro';
 import DepartureAnimation from '@components/departure/AnimationSection.astro';
@@ -26,16 +27,20 @@ import DepartureAnimation from '@components/departure/AnimationSection.astro';
           'The Vivaka combines physics constraints on the body with hand-drawn, frame-by-frame animation of its bubbles and wings.',
           'The two guards share a single skeleton and animation set, and skins are used to tell them apart.',
         ],
-      ]}
-    />
+      ]}>
+    <ProjectIntro slot="intro" project="sanctuary" />
+  </SanctuaryAnimation>
   </div>
   <StellarStraysAnimation
     id="stellar-strays-animation"
     title="Stellar Strays"
     subtitle="Team project · Game Lab course · 2025"
-    intro="For this project, I created a set of animations for Fermi, an alien astronaut, in Spine 2D: idle, walk, jump, and a gravity-shift jump. Through movement, I wanted to capture his personality: confident, self-assured, and brave. At the same time, I slowed the motion down to convey the pull of an alien atmosphere. His scarf is rigged to the engine’s physics, which adds an extra layer of dynamic movement."
-  />
-  <DepartureAnimation id="departure-animation" title="Departure" subtitle="Solo project · Game Animation course · 2025" />
+    intro="For this project, I created a set of animations for Fermi, an alien astronaut, in Spine 2D: idle, walk, jump, and a gravity-shift jump. Through movement, I wanted to capture his personality: confident, self-assured, and brave. At the same time, I slowed the motion down to convey the pull of an alien atmosphere. His scarf is rigged to the engine’s physics, which adds an extra layer of dynamic movement.">
+    <ProjectIntro slot="intro" project="stellar-strays" />
+  </StellarStraysAnimation>
+  <DepartureAnimation id="departure-animation" title="Departure" subtitle="Solo project · Game Animation course · 2025">
+    <ProjectIntro slot="intro" project="departure" />
+  </DepartureAnimation>
 </SkillPage>
 
 <style>
