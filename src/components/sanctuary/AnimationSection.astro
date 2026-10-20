@@ -61,11 +61,35 @@ function captionPos(item: { x: number; w: number; row: number }, canvasH: number
   return `left:${left}%; width:${width}%; top:${top}%;`;
 }
 
-const { id = 'animation', title = 'Animation', subtitle } = Astro.props;
+// Optional intro (used on the Skills page): a text, a subhead and two bullet lists that stand side by side
+// (2 columns each) and merge into one list on narrow screens.
+const { id = 'animation', title = 'Animation', subtitle, intro, riggingTitle, riggingLists = [] } = Astro.props;
 ---
 
 <section class="animation grid-1440" {id}>
   <SectionHeading {title} {subtitle} />
+
+  {intro && (
+    <div class="full">
+      <p class="running intro-text">{intro}</p>
+    </div>
+  )}
+
+  {riggingTitle && (
+    <div class="full">
+      <p class="process-heading">{riggingTitle}</p>
+    </div>
+  )}
+
+  {riggingLists.length > 0 && (
+    <div class="full rig-lists">
+      {riggingLists.map((list: string[]) => (
+        <ul class="running list rig-list">
+          {list.map((item) => <li>{item}</li>)}
+        </ul>
+      ))}
+    </div>
+  )}
 
   <div class="full">
     <p class="caption">Idle</p>
@@ -138,6 +162,72 @@ const { id = 'animation', title = 'Animation', subtitle } = Astro.props;
     text-transform: uppercase;
     color: #e8e8e8;
     margin: 0 0 32px;
+  }
+
+  /* intro text: 3 columns wide (the 8-column grid is 24px apart) */
+  .intro-text {
+    max-width: calc(3 * (100% - 7 * 24px) / 8 + 2 * 24px);
+  }
+
+  /* subhead -> lists 48px */
+  .full:has(> .process-heading) {
+    margin-bottom: 48px;
+  }
+
+  .full + .rig-lists {
+    margin-top: 0;
+  }
+
+  .process-heading {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: #e8e8e8;
+    margin: 0;
+  }
+
+  .running {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 1.125rem;
+    color: #d6d6d6;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* two lists, 2 columns each, side by side */
+  .rig-lists {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    column-gap: 24px;
+    align-items: start;
+  }
+
+  .rig-list {
+    grid-column: span 2;
+    list-style: disc;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    /* (the global ".running + .running" paragraph gap must not apply between the two lists) */
+    margin: 0 !important;
+  }
+
+  /* stacked layouts: the two lists become one list (normal gap between items, 13px) */
+  @media (max-width: 1260px) {
+    .rig-lists {
+      grid-template-columns: 1fr;
+    }
+
+    .rig-list {
+      grid-column: 1 / -1;
+    }
+
+    .rig-list + .rig-list {
+      /* 13px item gap + the 10.17px / 7px that the text trim takes off the top and bottom of each list */
+      margin-top: calc(13px + 10.17px + 7px) !important;
+    }
   }
 
   .canvas {

@@ -11,7 +11,23 @@ import DepartureAnimation from '@components/departure/AnimationSection.astro';
 
 <SkillPage slug="animation" title="Animation" description="Animation across projects: Sanctuary, Stellar Strays, Departure.">
   <div class="sanctuary">
-    <SanctuaryAnimation id="sanctuary-animation" title="Sanctuary" subtitle="Team project · Graduation project · 2026" />
+    <SanctuaryAnimation
+      id="sanctuary-animation"
+      title="Sanctuary"
+      subtitle="Team project · Graduation project · 2026"
+      intro="In Sanctuary, each character has a set of two animations: idle and walk. Through these animations, I wanted to capture each character’s personality and distinctive traits. All animations were created in Spine 2D, with meshes used for every character."
+      riggingTitle="Used rigging tools"
+      riggingLists={[
+        [
+          'Physics constraints add secondary motion, for example on the protagonist, including the ribbons on his shoulder pads.',
+          'For the Engineer and the Builder, I used paths and path constraints.',
+        ],
+        [
+          'The Vivaka combines physics constraints on the body with hand-drawn, frame-by-frame animation of its bubbles and wings.',
+          'The two guards share a single skeleton and animation set, and skins are used to tell them apart.',
+        ],
+      ]}
+    />
   </div>
   <StellarStraysAnimation
     id="stellar-strays-animation"
