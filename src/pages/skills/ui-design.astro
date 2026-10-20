@@ -2,15 +2,26 @@
 import SkillPage from '@components/skills/SkillPage.astro';
 import SanctuaryUI from '@components/sanctuary/UIDesignSection.astro';
 import ImprisonedUI from '@components/imprisoned/UiSection.astro';
+import MournMechanics from '@components/mourn/MechanicsSection.astro';
 
 // The "UI design" section of every project that has one, in the order of the projects page.
-// Mourn ("Mechanics and UI"), Stellar Strays and Departure have no section with this name and are skipped.
+// Mourn contributes its "Mechanics and UI" section (with new texts); Stellar Strays and Departure have no UI section and are skipped.
 // Each section carries the project name instead of the section name, with a grey line (project type and year) under it.
 ---
 
-<SkillPage slug="ui-design" title="UI Design" description="UI design across projects: Sanctuary and Imprisoned.">
+<SkillPage slug="ui-design" title="UI Design" description="UI design across projects: Sanctuary, Imprisoned, Mourn.">
   <div class="sanctuary">
     <SanctuaryUI id="sanctuary-ui-design" title="Sanctuary" subtitle="Team project · Graduation project · 2026" />
   </div>
   <ImprisonedUI id="imprisoned-ui-design" title="Imprisoned" subtitle="Team project · Digital Game Project course · 2025" />
+  <MournMechanics
+    id="mourn-mechanics-and-ui"
+    title="Mourn"
+    subtitle="Solo project · Indi Games course · 2025"
+    approachLabel="UI approach"
+    approachText="The UI was designed first and foremost to support the narrative. Together with visual and sound effects, it makes the player feel the weight of working through trauma, builds tension, and frames a real choice between facing a memory and skipping it."
+    mechanicLabel="Instability"
+    mechanicText="Instability is the game’s core mechanic and reflects the protagonist’s state. In the UI it takes the form of a meter, reinforced by screen effects and sound."
+    hideMechanicLists
+  />
 </SkillPage>

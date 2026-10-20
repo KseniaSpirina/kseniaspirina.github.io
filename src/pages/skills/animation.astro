@@ -1,29 +1,18 @@
 ---
 import SkillPage from '@components/skills/SkillPage.astro';
 import SanctuaryAnimation from '@components/sanctuary/AnimationSection.astro';
-import MournMechanics from '@components/mourn/MechanicsSection.astro';
 import StellarStraysAnimation from '@components/stellar-strays/AnimationSection.astro';
 import DepartureAnimation from '@components/departure/AnimationSection.astro';
 
 // The "Animation" section of every project that has one, in the order of the projects page.
-// Imprisoned has no such section and is skipped. Mourn contributes its "Mechanics and UI" section.
+// Imprisoned and Mourn have no such section and are skipped.
 // Each section carries the project name instead of the section name, with a grey line (project type and year) under it.
 ---
 
-<SkillPage slug="animation" title="Animation" description="Animation across projects: Sanctuary, Mourn, Stellar Strays, Departure.">
+<SkillPage slug="animation" title="Animation" description="Animation across projects: Sanctuary, Stellar Strays, Departure.">
   <div class="sanctuary">
     <SanctuaryAnimation id="sanctuary-animation" title="Sanctuary" subtitle="Team project · Graduation project · 2026" />
   </div>
-  <MournMechanics
-    id="mourn-mechanics-and-ui"
-    title="Mourn"
-    subtitle="Solo project · Indi Games course · 2025"
-    approachLabel="UI approach"
-    approachText="The UI was designed first and foremost to support the narrative. Together with visual and sound effects, it makes the player feel the weight of working through trauma, builds tension, and frames a real choice between facing a memory and skipping it."
-    mechanicLabel="Instability"
-    mechanicText="Instability is the game’s core mechanic and reflects the protagonist’s state. In the UI it takes the form of a meter, reinforced by screen effects and sound."
-    hideMechanicLists
-  />
   <StellarStraysAnimation
     id="stellar-strays-animation"
     title="Stellar Strays"
