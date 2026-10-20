@@ -62,7 +62,8 @@ const refs = [
 ];
 const pct = (v: number, t: number) => `${(v / t) * 100}%`;
 
-const { id = 'environment-design', title = 'Environment design', subtitle } = Astro.props;
+/** `intro` replaces the first text (used on the Skills page, where the section is shown on its own) */
+const { id = 'environment-design', title = 'Environment design', subtitle, intro } = Astro.props;
 ---
 
 <ProjectSection {id} {title} {subtitle}>
@@ -71,10 +72,14 @@ const { id = 'environment-design', title = 'Environment design', subtitle } = As
     <div class="cols after-label">
       <div class="gc-1-3">
         <p class="p-text">
-          The locations had to tell the story of what happened and, at the same time, show how the
-          protagonist perceives the world. Moving through them retraces the route he took on the
-          day his daughter died. Since the trauma, the world has lost all its color and meaning
-          for him, so every location is drawn in monochrome.
+          {intro ?? (
+            <Fragment>
+              The locations had to tell the story of what happened and, at the same time, show how the
+              protagonist perceives the world. Moving through them retraces the route he took on the
+              day his daughter died. Since the trauma, the world has lost all its color and meaning
+              for him, so every location is drawn in monochrome.
+            </Fragment>
+          )}
         </p>
       </div>
     </div>
