@@ -24,7 +24,8 @@ const refs = [
   { src: ref3345, x: 0, y: 198, w: 153, h: 118 },
 ];
 
-const { id = 'environment-design', title = 'Environment design', subtitle } = Astro.props;
+/** `intro` replaces the first (left) text (used on the Skills page, where the section is shown on its own) */
+const { id = 'environment-design', title = 'Environment design', subtitle, intro } = Astro.props;
 ---
 
 <ProjectSection {id} {title} {subtitle}>
@@ -33,10 +34,14 @@ const { id = 'environment-design', title = 'Environment design', subtitle } = As
       <div class="gc-1-3">
         <h3 class="p-label">Environment design approach</h3>
         <p class="p-text after-label">
-          I placed the character in an underground cave environment. I wanted the space to feel
-          melancholic and slightly unsettling, a fitting home for a character who shares that same
-          quiet sadness and sense of otherness. So I chose a cave with an underground lake: damp
-          and cold, filled with mist, the sound of dripping water, and the rustle of bats’ wings.
+          {intro ?? (
+            <Fragment>
+              I placed the character in an underground cave environment. I wanted the space to feel
+              melancholic and slightly unsettling, a fitting home for a character who shares that same
+              quiet sadness and sense of otherness. So I chose a cave with an underground lake: damp
+              and cold, filled with mist, the sound of dripping water, and the rustle of bats’ wings.
+            </Fragment>
+          )}
         </p>
       </div>
       <div class="gc-4-3">
