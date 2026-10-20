@@ -16,7 +16,8 @@ import finalLine from '@assets/sanctuary/characters/final-line.png';
 import mcColorVariation from '@assets/sanctuary/characters/mc-color-variation.png';
 import mcFinal from '@assets/sanctuary/characters/mc-final-design.jpg';
 
-const { id = 'character-design', title = 'Character Design', subtitle } = Astro.props;
+/** `intro` replaces the first text (used on the Skills page, where the section is shown on its own) */
+const { id = 'character-design', title = 'Character Design', subtitle, intro } = Astro.props;
 ---
 
 <section class="character-design" {id}>
@@ -33,10 +34,14 @@ const { id = 'character-design', title = 'Character Design', subtitle } = Astro.
       <p class="caption">Character Design Approach</p>
     </div>
     <p class="running narrow">
-      The core challenge was designing three distinct character identities: two settlement groups
-      shaped by different values, and an outsider protagonist. Each needed to read as clearly
-      different at a glance. At the same time, all three had to feel like they belong to the same
-      visual world.
+      {intro ?? (
+        <Fragment>
+          The core challenge was designing three distinct character identities: two settlement groups
+          shaped by different values, and an outsider protagonist. Each needed to read as clearly
+          different at a glance. At the same time, all three had to feel like they belong to the same
+          visual world.
+        </Fragment>
+      )}
     </p>
 
     <div class="full">
