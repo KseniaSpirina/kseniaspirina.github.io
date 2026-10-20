@@ -8,10 +8,10 @@ import uiImg from '@assets/skills/ui-design.jpg';
 // "plannedHref" is where each card will lead once its page exists: move it to "href" then.
 // Cards without "href" are shown as inactive, with the "in development" notice above the first one.
 const skills = [
-  { slug: 'character-design', href: '/skills/character-design', plannedHref: '/skills/character-design', image: characterImg, title: 'Character Design' },
-  { slug: 'environment-design', href: '/skills/environment-design', plannedHref: '/skills/environment-design', image: environmentImg, title: 'Environment Design' },
-  { slug: 'animation', href: '/skills/animation', plannedHref: '/skills/animation', image: animationImg, title: 'Animation' },
-  { slug: 'ui-design', href: '/skills/ui-design', plannedHref: '/skills/ui-design', image: uiImg, title: 'UI Design' },
+  { slug: 'character-design', href: '/skills/character-design', plannedHref: '/skills/character-design', image: characterImg, title: 'Character Design', description: 'A collection of character designs from different projects, covering a range of personalities, roles, and styles, with breakdowns of the full design pipeline' },
+  { slug: 'environment-design', href: '/skills/environment-design', plannedHref: '/skills/environment-design', image: environmentImg, title: 'Environment Design', description: 'A collection of environments from different projects, built in 2D and 3D across a range of settings and moods. With breakdowns of the full design pipeline and assets' },
+  { slug: 'animation', href: '/skills/animation', plannedHref: '/skills/animation', image: animationImg, title: 'Animation', description: 'Spine 2D animation sets from different projects that bring out each character’s personality through movement. Together they show a range of skills, from core animation principles to meshes and a variety of Spine constraints' },
+  { slug: 'ui-design', href: '/skills/ui-design', plannedHref: '/skills/ui-design', image: uiImg, title: 'UI Design', description: 'UI elements from different projects, including cursors, dialogue windows, a quest journal, meters, title screens, mini-games, full-screen effects, and more' },
 ];
 
 const firstInactive = skills.findIndex(skill => !skill.href);
@@ -34,6 +34,7 @@ const firstInactive = skills.findIndex(skill => !skill.href);
         <div class="project-text">
           <div class="project-text-top">
             <h2 class="p-subhead project-title">{skill.title}</h2>
+            {skill.description && <p class="p-text project-description">{skill.description}</p>}
           </div>
         </div>
       </Tag>
