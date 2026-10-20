@@ -4,6 +4,7 @@ import '../../styles/grid.css';
 import '../../styles/project.css';
 import '../../styles/sanctuary-text.css';
 import Lightbox from '../sanctuary/Lightbox.astro';
+import ContactSection from '../project/ContactSection.astro';
 
 interface Props {
   /** page heading and <title>, e.g. "Environment Design" */
@@ -14,7 +15,7 @@ interface Props {
 const { title, description } = Astro.props;
 ---
 
-<!-- A Skills detail page: the heading, then the same section of several projects one after another.
+<!-- A Skills detail page: the heading, then the same section of several projects one after another, then Contact.
      Put every Sanctuary section inside <div class="sanctuary"> (its text styles need that wrapper). -->
 <BaseLayout title={`${title} — Ksenia Spirina`} {description}>
   <div class="skill-page project-page text-v2">
@@ -24,6 +25,7 @@ const { title, description } = Astro.props;
 
     <div class="skill-body">
       <slot />
+      <ContactSection />
     </div>
 
     <Lightbox />
@@ -52,10 +54,9 @@ const { title, description } = Astro.props;
     padding-bottom: 128px;
   }
 
-  /* last section -> footer: 128px (the footer has its own 128px margin) */
-  :global(.skill-body > :last-child),
-  :global(.skill-body > :last-child > section) {
-    padding-bottom: 0 !important;
+  /* Contact (the last section) -> footer: 128px (the footer has its own 128px margin) */
+  :global(.skill-body > #contact) {
+    padding-bottom: 0;
   }
 
   /* Unbounded: the line box starts 128px from the top of the page, the empty space below the capitals is trimmed */
