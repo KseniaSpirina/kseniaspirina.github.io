@@ -7,11 +7,50 @@ import DepartureCredits from '../credits/DepartureCredits.astro';
 
 type ProjectKey = 'sanctuary' | 'imprisoned' | 'mourn' | 'stellar-strays' | 'departure';
 
+type SkillKey = 'character-design' | 'environment-design' | 'animation' | 'ui-design';
+
 interface Props {
   project: ProjectKey;
+  /** the skill page this section stands on: it gives the "MY ROLE IN ..." subhead and text */
+  skill: SkillKey;
 }
 
-const { project } = Astro.props;
+const { project, skill } = Astro.props;
+
+const skillNames: Record<SkillKey, string> = {
+  'character-design': 'character design',
+  'environment-design': 'environment design',
+  animation: 'animation',
+  'ui-design': 'UI design',
+};
+
+// "My role" texts: what I did on each project, for each skill.
+const roles: Record<SkillKey, Partial<Record<ProjectKey, string>>> = {
+  animation: {
+    sanctuary: '2D animation, rigging (Spine 2D), animator setup (Unity)',
+    'stellar-strays': '2D animation, rigging (Spine 2D)',
+    departure: '2D animation, rigging (Spine 2D), animator setup (Unity), visual scripting (Unity)',
+  },
+  'character-design': {
+    sanctuary: 'Visual style development, character design',
+    mourn: 'Visual style development, character design',
+    'stellar-strays': 'Visual style development (with Maayan Berkovits), character design (Fermi character)',
+    departure: 'Visual style development, character design',
+  },
+  'environment-design': {
+    sanctuary: 'Visual style development, environment design and art, asset preparation and integration (Unity)',
+    imprisoned:
+      'Visual style development and materials (with Ohad Lerman), environment design (3 levels, solo), 3D asset design and modeling (Cinema 4D), shaders (Shader Graph), asset integration (Unity)',
+    mourn: 'Visual style development, environment design and art, asset preparation and integration (Unity)',
+    departure: 'Visual style development, environment design and art, asset preparation and integration (Unity)',
+  },
+  'ui-design': {
+    sanctuary: 'UI style development, UI design, UI animation, animator setup (Unity)',
+    imprisoned: 'UI style development, UI animation (with programmers), UI shaders (Shader Graph), UI asset integration (Unity)',
+    mourn: 'UI style development, UI design, UI animation, animator setup (Unity), visual scripting (Unity)',
+  },
+};
+const role = roles[skill][project];
 
 // Short project descriptions for the Skills pages; credits are the same components that the project pages use.
 const descriptions: Record<ProjectKey, string[]> = {
@@ -52,6 +91,12 @@ const Credits = credits[project];
       <div class="after-label">
         {descriptions[project].map((paragraph) => <p class="p-text" set:html={paragraph} />)}
       </div>
+      {role && (
+        <>
+          <h3 class="p-label role-label">My role in {skillNames[skill]}</h3>
+          <p class="p-text after-label">{role}</p>
+        </>
+      )}
     </div>
     <div class="gc-5-3">
       <h3 class="p-label">Credits</h3>
@@ -61,3 +106,10 @@ const Credits = credits[project];
     </div>
   </div>
 </div>
+
+<style>
+  /* description -> "MY ROLE IN ..." 96px (block to block) */
+  .role-label {
+    margin-top: 96px;
+  }
+</style>
