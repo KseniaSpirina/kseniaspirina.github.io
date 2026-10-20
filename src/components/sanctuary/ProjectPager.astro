@@ -2,15 +2,19 @@
 interface Props {
   prevHref?: string;
   nextHref?: string;
+  /** link texts (default: "Previous project" / "Next project"; Skills pages name the skill) */
+  prevLabel?: string;
+  nextLabel?: string;
+  ariaLabel?: string;
 }
 
-const { prevHref, nextHref } = Astro.props;
+const { prevHref, nextHref, prevLabel = 'Previous project', nextLabel = 'Next project', ariaLabel = 'Projects' } = Astro.props;
 ---
 
-<nav class="pager grid-1440" aria-label="Projects">
+<nav class="pager grid-1440" aria-label={ariaLabel}>
   <div class="inner">
-    {prevHref ? <a class="prev" href={prevHref}>&larr; Previous project</a> : <span></span>}
-    {nextHref ? <a class="next" href={nextHref}>Next project &rarr;</a> : <span></span>}
+    {prevHref ? <a class="prev" href={prevHref}>&larr; {prevLabel}</a> : <span></span>}
+    {nextHref ? <a class="next" href={nextHref}>{nextLabel} &rarr;</a> : <span></span>}
   </div>
 </nav>
 

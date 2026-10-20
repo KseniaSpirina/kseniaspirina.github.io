@@ -5,20 +5,36 @@ import '../../styles/project.css';
 import '../../styles/sanctuary-text.css';
 import Lightbox from '../sanctuary/Lightbox.astro';
 import ContactSection from '../project/ContactSection.astro';
+import ProjectNavArrows from '../sanctuary/ProjectNavArrows.astro';
+import ProjectPager from '../sanctuary/ProjectPager.astro';
+import { skillPages } from '../../config/skills';
 
 interface Props {
   /** page heading and <title>, e.g. "Environment Design" */
   title: string;
   description: string;
+  /** slug of this skill: the previous / next arrows are taken from the order in config/skills.ts */
+  slug: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, slug } = Astro.props;
+
+// The first page's "previous" and the last page's "next" lead back to the Skills page (like the projects do).
+const index = skillPages.findIndex((skill) => skill.slug === slug);
+const prev = skillPages[index - 1];
+const next = skillPages[index + 1];
+const prevHref = prev ? `/skills/${prev.slug}` : '/skills';
+const prevLabel = prev ? prev.title : 'Skills';
+const nextHref = next ? `/skills/${next.slug}` : '/skills';
+const nextLabel = next ? next.title : 'Skills';
 ---
 
 <!-- A Skills detail page: the heading, then the same section of several projects one after another, then Contact.
      Put every Sanctuary section inside <div class="sanctuary"> (its text styles need that wrapper). -->
 <BaseLayout title={`${title} — Ksenia Spirina`} {description}>
   <div class="skill-page project-page text-v2">
+    <ProjectNavArrows {prevHref} {nextHref} {prevLabel} {nextLabel} />
+
     <section class="skill-hero grid-1440">
       <h1 class="skill-title">{title}</h1>
     </section>
@@ -27,6 +43,8 @@ const { title, description } = Astro.props;
       <slot />
       <ContactSection />
     </div>
+
+    <ProjectPager {prevHref} {nextHref} {prevLabel} {nextLabel} ariaLabel="Skills" />
 
     <Lightbox />
   </div>
@@ -56,6 +74,13 @@ const { title, description } = Astro.props;
 
   /* Contact (the last section) -> footer: 128px (the footer has its own 128px margin) */
   :global(.skill-body > #contact) {
+    padding-bottom: 0;
+  }
+
+  /* the "previous / next" row (shown below 1260px, where the side arrows are hidden): 128px under Contact and
+     128px (the footer's margin) above the footer */
+  :global(.skill-page nav.pager) {
+    margin-top: 128px;
     padding-bottom: 0;
   }
 

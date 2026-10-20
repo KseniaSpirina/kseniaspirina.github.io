@@ -2,26 +2,29 @@
 interface Props {
   prevHref?: string;
   nextHref?: string;
+  /** text under the arrows (default: "Previous project" / "Next project"; Skills pages name the skill) */
+  prevLabel?: string;
+  nextLabel?: string;
 }
 
-const { prevHref, nextHref } = Astro.props;
+const { prevHref, nextHref, prevLabel = 'Previous project', nextLabel = 'Next project' } = Astro.props;
 ---
 
 {prevHref && (
-  <a class="nav-arrow nav-arrow-prev" href={prevHref} aria-label="Previous project">
+  <a class="nav-arrow nav-arrow-prev" href={prevHref} aria-label={prevLabel}>
     <svg width="40" height="80" viewBox="0 0 40 80" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M32 4 L8 40 L32 76" stroke="currentColor" stroke-width="2" />
     </svg>
-    <span class="label">Previous project</span>
+    <span class="label">{prevLabel}</span>
   </a>
 )}
 
 {nextHref && (
-  <a class="nav-arrow nav-arrow-next" href={nextHref} aria-label="Next project">
+  <a class="nav-arrow nav-arrow-next" href={nextHref} aria-label={nextLabel}>
     <svg width="40" height="80" viewBox="0 0 40 80" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M8 4 L32 40 L8 76" stroke="currentColor" stroke-width="2" />
     </svg>
-    <span class="label">Next project</span>
+    <span class="label">{nextLabel}</span>
   </a>
 )}
 
@@ -54,6 +57,8 @@ const { prevHref, nextHref } = Astro.props;
   }
 
   .label {
+    max-width: 5.5rem;
+    text-align: center;
     font-family: var(--font-body);
     font-weight: 700;
     font-size: 0.75rem;
