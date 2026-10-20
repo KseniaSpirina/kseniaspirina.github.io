@@ -19,14 +19,14 @@ interface Props {
 
 const { title, description, slug } = Astro.props;
 
-// The first page's "previous" and the last page's "next" lead back to the Skills page (like the projects do).
+// The first page has no "previous" arrow and the last page has no "next" arrow.
 const index = skillPages.findIndex((skill) => skill.slug === slug);
 const prev = skillPages[index - 1];
 const next = skillPages[index + 1];
-const prevHref = prev ? `/skills/${prev.slug}` : '/skills';
-const prevLabel = prev ? prev.title : 'Skills';
-const nextHref = next ? `/skills/${next.slug}` : '/skills';
-const nextLabel = next ? next.title : 'Skills';
+const prevHref = prev ? `/skills/${prev.slug}` : undefined;
+const prevLabel = prev?.title;
+const nextHref = next ? `/skills/${next.slug}` : undefined;
+const nextLabel = next?.title;
 ---
 
 <!-- A Skills detail page: the heading, then the same section of several projects one after another, then Contact.
