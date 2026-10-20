@@ -62,9 +62,11 @@ const feedback = [
     list: ['Positive sound', 'Smiling face on the meter', 'Light shimmer around the dialogue'],
   },
 ];
+
+const { id = 'mechanics-and-ui', title = 'Mechanics and UI', subtitle } = Astro.props;
 ---
 
-<ProjectSection id="mechanics-and-ui" title="Mechanics and UI">
+<ProjectSection {id} {title} {subtitle}>
   <div class="block">
     <div class="cols">
       <div class="gc-1-3">
