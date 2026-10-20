@@ -4,7 +4,8 @@ import LazyVideo from '../imprisoned/LazyVideo.astro';
 
 const v = (name: string) => `/stellar-strays/videos/${name}`;
 
-const { id = 'animation', title = 'Animation', subtitle } = Astro.props;
+/** `intro` replaces the first text (used on the Skills page, where the section is shown on its own) */
+const { id = 'animation', title = 'Animation', subtitle, intro } = Astro.props;
 ---
 
 <ProjectSection {id} {title} {subtitle}>
@@ -13,11 +14,15 @@ const { id = 'animation', title = 'Animation', subtitle } = Astro.props;
       <div class="gc-1-3">
         <h3 class="p-label">Animation development approach</h3>
         <p class="p-text after-label">
-          For this project, I created a set of animations in Spine 2D: idle, walk, jump, and a
-          gravity-shift jump. Through movement, I wanted to capture the astronaut’s personality:
-          confident, self-assured, and brave. At the same time, I slowed the motion down to convey
-          the pull of an alien atmosphere. The character’s scarf is rigged to the engine’s
-          physics, which adds an extra layer of dynamic movement.
+          {intro ?? (
+            <Fragment>
+              For this project, I created a set of animations in Spine 2D: idle, walk, jump, and a
+              gravity-shift jump. Through movement, I wanted to capture the astronaut’s personality:
+              confident, self-assured, and brave. At the same time, I slowed the motion down to convey
+              the pull of an alien atmosphere. The character’s scarf is rigged to the engine’s
+              physics, which adds an extra layer of dynamic movement.
+            </Fragment>
+          )}
         </p>
       </div>
     </div>
