@@ -77,7 +77,7 @@ const { id = 'animation', title = 'Animation', subtitle, intro, riggingTitle, ri
 
   {riggingTitle && (
     <div class="full">
-      <p class="process-heading">{riggingTitle}</p>
+      <p class="caption">{riggingTitle}</p>
     </div>
   )}
 
@@ -169,22 +169,9 @@ const { id = 'animation', title = 'Animation', subtitle, intro, riggingTitle, ri
     max-width: calc(3 * (100% - 7 * 24px) / 8 + 2 * 24px);
   }
 
-  /* subhead -> lists 48px */
-  .full:has(> .process-heading) {
-    margin-bottom: 48px;
-  }
-
+  /* label -> lists 32px: the label is a .caption (same style as IDLE), the lists follow right after it */
   .full + .rig-lists {
     margin-top: 0;
-  }
-
-  .process-heading {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    color: #e8e8e8;
-    margin: 0;
   }
 
   .running {
