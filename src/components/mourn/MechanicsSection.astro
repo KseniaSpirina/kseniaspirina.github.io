@@ -63,30 +63,50 @@ const feedback = [
   },
 ];
 
-const { id = 'mechanics-and-ui', title = 'Mechanics and UI', subtitle } = Astro.props;
+// Optional overrides (used on the Skills page, where the section is shown on its own):
+// the two first labels and texts, and the two bullet lists under them.
+const {
+  id = 'mechanics-and-ui',
+  title = 'Mechanics and UI',
+  subtitle,
+  approachLabel,
+  approachText,
+  mechanicLabel,
+  mechanicText,
+  hideMechanicLists = false,
+} = Astro.props;
 ---
 
 <ProjectSection {id} {title} {subtitle}>
   <div class="block">
     <div class="cols">
       <div class="gc-1-3">
-        <h3 class="p-label">Mechanics approach</h3>
+        <h3 class="p-label">{approachLabel ?? 'Mechanics approach'}</h3>
         <p class="p-text after-label">
-          The mechanics were designed first of all to support the narrative. They make the player
-          feel the weight of working through trauma, build tension, and create a real choice: face
-          a memory or skip it. All of this is communicated to the player through the UI, visual
-          and sound effects.
+          {approachText ?? (
+            <Fragment>
+              The mechanics were designed first of all to support the narrative. They make the player
+              feel the weight of working through trauma, build tension, and create a real choice: face
+              a memory or skip it. All of this is communicated to the player through the UI, visual
+              and sound effects.
+            </Fragment>
+          )}
         </p>
       </div>
       <div class="gc-5-3">
-        <h3 class="p-label">Instability mechanic</h3>
+        <h3 class="p-label">{mechanicLabel ?? 'Instability mechanic'}</h3>
         <p class="p-text after-label">
-          Instability is the game's core mechanic and defines the protagonist's state. It is
-          expressed through a meter, screen effects, and sound. The higher it rises, the worse he
-          feels, and if it fills completely, the game ends.
+          {mechanicText ?? (
+            <Fragment>
+              Instability is the game's core mechanic and defines the protagonist's state. It is
+              expressed through a meter, screen effects, and sound. The higher it rises, the worse he
+              feels, and if it fills completely, the game ends.
+            </Fragment>
+          )}
         </p>
       </div>
     </div>
+    {!hideMechanicLists && (
     <div class="cols block-gap merge-lists">
       <div class="gc-5-2">
         <ul class="p-list">
@@ -101,6 +121,7 @@ const { id = 'mechanics-and-ui', title = 'Mechanics and UI', subtitle } = Astro.
         </ul>
       </div>
     </div>
+    )}
   </div>
 
   <div class="block">
