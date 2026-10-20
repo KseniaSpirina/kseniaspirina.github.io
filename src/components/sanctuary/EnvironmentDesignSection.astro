@@ -14,7 +14,8 @@ import lineArt from '@assets/sanctuary/environment/fixing-room-line.jpg';
 import references from '@assets/sanctuary/environment/references-environment.png';
 import finalColorRender from '@assets/sanctuary/environment/fixing-room-all-together.png';
 
-const { id = 'environment-design', title = 'Environment Design', subtitle } = Astro.props;
+/** `intro` replaces the first text (used on the Skills page, where the section is shown on its own) */
+const { id = 'environment-design', title = 'Environment Design', subtitle, intro } = Astro.props;
 ---
 
 <section class="environment-design grid-1440" {id}>
@@ -22,9 +23,13 @@ const { id = 'environment-design', title = 'Environment Design', subtitle } = As
   <p class="caption">Environment Design Approach</p>
 
   <p class="running narrow">
-    Environment design faces the same core challenge as character design: dividing space stylistically
-    between the two factions, while resolving how those two spaces meet and collide. The central theme
-    is coexistence with nature versus its conquest and transformation.
+    {intro ?? (
+      <Fragment>
+        Environment design faces the same core challenge as character design: dividing space stylistically
+        between the two factions, while resolving how those two spaces meet and collide. The central theme
+        is coexistence with nature versus its conquest and transformation.
+      </Fragment>
+    )}
   </p>
 
   <p class="caption">Hall</p>
