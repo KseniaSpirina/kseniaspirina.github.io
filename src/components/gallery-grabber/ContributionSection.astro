@@ -1,0 +1,79 @@
+---
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+import LightboxImage from '../sanctuary/LightboxImage.astro';
+import g1 from '@assets/gallery-grabber/gallery-1.jpg';
+import g2 from '@assets/gallery-grabber/gallery-2.jpg';
+import g3 from '@assets/gallery-grabber/gallery-3.jpg';
+import g4 from '@assets/gallery-grabber/gallery-4.jpg';
+
+const challenge = [
+  'Create a visual language that combines the elite atmosphere of a museum with the grotesque, and the tension of a stealth game with comedy',
+  'Make it clear to the player when they are being watched',
+  'Complete the project in a short time frame of one month',
+];
+
+const role = [
+  'Creating the visual language of the project',
+  'Design and animation of the female guards',
+  'Room design together with Maya Bell',
+  'UI and UX design',
+  'Fully illustrated screens for some of the endings',
+  'Design of the itch.io page',
+];
+
+const gallery = [
+  { src: g1, start: 1 },
+  { src: g2, start: 5 },
+  { src: g3, start: 1 },
+  { src: g4, start: 5 },
+];
+---
+
+<ProjectSection id="contribution" title="Contribution">
+  <div class="cols">
+    <div class="gc-1-2">
+      <h3 class="p-label">Challenge</h3>
+      <ul class="p-list hang loose after-label">
+        {challenge.map(item => <li>{item}</li>)}
+      </ul>
+    </div>
+    <div class="gc-5-2">
+      <h3 class="p-label">My role</h3>
+      <ul class="p-list hang loose after-label">
+        {role.map(item => <li>{item}</li>)}
+      </ul>
+    </div>
+  </div>
+
+  <div class="cols gallery block-gap">
+    {gallery.map((item, i) => (
+      <div class="cell" style={`--start: ${item.start};`}>
+        <LightboxImage
+          src={item.src}
+          alt={`Gallery Grabber gameplay screenshot ${i + 1}`}
+          widths={[400, 700, 1000, 1400, 1920]}
+          sizes="(max-width: 640px) 95vw, (max-width: 1260px) 50vw, 588px"
+          group="gallery-grabber-gallery"
+        />
+      </div>
+    ))}
+  </div>
+</ProjectSection>
+
+<style>
+  .cell {
+    grid-column: var(--start) / span 4;
+  }
+
+  @media (max-width: 1260px) {
+    .cell {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cell {
+      grid-column: 1 / -1;
+    }
+  }
+</style>
