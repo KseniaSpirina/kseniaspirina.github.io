@@ -6,12 +6,12 @@ interface Props {
 const { cls = 'p-text' } = Astro.props;
 ---
 
-  <p class={cls}><strong>Programming:</strong> Shir Seroussi, Eden Avrahami, Yonatan Sheffer</p>
-  <p class={cls}><strong>Art and Design:</strong> Ksenia Spirina, Maya Bell</p>
-  <p class={cls}><strong>Guidance:</strong> Yuval Markovich, Danielle Mossak, Omer Zadok</p>
-  <p class={cls}><strong>Assistance:</strong> Sagie Levy</p>
   <p class:list={[cls, 'keep-host']}>
     The game was created as an assignment in course “Game&nbsp;Lab” of the
     <span class="keep-name">Visual <span class="keep-always">Communication Department</span></span> of
     <span class="keep-name"><span class="keep-always">Bezalel Academy of Arts and</span> Design</span> 2025.
   </p>
+  <p class={cls}><strong>Programming:</strong> Shir Seroussi, Eden Avrahami, Yonatan Sheffer</p>
+  <p class={cls}><strong>Art and Design:</strong> Ksenia Spirina, Maya Bell</p>
+  <p class={cls}><strong>Guidance:</strong> Yuval Markovich, Danielle Mossak, Omer Zadok</p>
+  <p class={cls}><strong>Assistance:</strong> Sagie Levy</p>
