@@ -1,0 +1,134 @@
+---
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+import LazyVideo from '../imprisoned/LazyVideo.astro';
+
+const pct = (v: number, t: number) => `${(v / t) * 100}%`;
+const video = (name: string) => `/gallery-grabber/videos/${name}.webm`;
+
+// The animations are placed by hand, as in the Figma file (Page 3): x/y/w/h in px on a 1200 x 1201.5 canvas.
+// Origin: x = 120 (left page margin), y = top of the highest video (430 on the Figma page).
+// The pictures have empty space around the character, so the caption sits inside the picture area.
+// The bottom of the canvas is the bottom of the last caption letters: 128px to the next section.
+// Stacking order as in Figma: the Idle row is on top, Alarmed at the bottom; in a row back > side > front.
+const AW = 1200;
+const AH = 1201.5;
+
+const rows = [
+  {
+    caption: { text: 'Idle', x: 0, y: 258 },
+    videos: [
+      { name: 'idle-back', label: 'Idle animation, back view', ratio: '553 / 554', x: 0, y: 20, w: 282, h: 282 },
+      { name: 'idle-side', label: 'Idle animation, side view', ratio: '508 / 523', x: 306, y: 29, w: 257, h: 264 },
+      { name: 'idle-front', label: 'Idle animation, front view', ratio: '553 / 582', x: 587, y: 0, w: 281, h: 296 },
+    ],
+  },
+  {
+    caption: { text: 'Walking', x: 0, y: 568 },
+    videos: [
+      { name: 'walking-back', label: 'Walking animation, back view', ratio: '572 / 576', x: -6, y: 336, w: 294, h: 296 },
+      { name: 'walking-side', label: 'Walking animation, side view', ratio: '528 / 528', x: 276, y: 326, w: 284, h: 284 },
+      { name: 'walking-front', label: 'Walking animation, front view', ratio: '572 / 576', x: 571, y: 312, w: 295.93, h: 298 },
+    ],
+  },
+  {
+    caption: { text: 'Running', x: 0, y: 882 },
+    videos: [
+      { name: 'running-back', label: 'Running animation, back view', ratio: '618 / 630', x: -8, y: 634, w: 307, h: 313 },
+      { name: 'running-side', label: 'Running animation, side view', ratio: '517 / 540', x: 295, y: 642, w: 266.16, h: 278 },
+      { name: 'running-front', label: 'Running animation, front view', ratio: '617 / 646', x: 552, y: 584, w: 336, h: 352 },
+    ],
+  },
+  {
+    caption: { text: 'Alarmed', x: 0, y: 1184 },
+    videos: [
+      { name: 'alarmed-back', label: 'Alarmed animation, back view', ratio: '756 / 741', x: -3, y: 846, w: 382, h: 374 },
+      { name: 'alarmed-side', label: 'Alarmed animation, side view', ratio: '505 / 539', x: 303, y: 943, w: 255, h: 273 },
+      { name: 'alarmed-front', label: 'Alarmed animation, front view', ratio: '660 / 671', x: 534, y: 872, w: 360, h: 365 },
+    ],
+  },
+];
+
+const place = (x: number, y: number, w: number | string, h?: number) =>
+  `--l: ${pct(x, AW)}; --t: ${pct(y, AH)}; --w: ${typeof w === 'number' ? pct(w, AW) : w};${h ? ` --h: ${pct(h, AH)};` : ''}`;
+
+const { id = 'animation', title = 'Animation', subtitle } = Astro.props;
+---
+
+<ProjectSection {id} {title} {subtitle}>
+  <slot name="intro" />
+  <div class="block">
+    <div class="cols">
+      <div class="gc-1-3">
+        <h3 class="p-label">Animation development approach</h3>
+        <p class="p-text after-label">
+          For the guards, I created a set of animations in Spine 2D for each of the three views:
+          side, front, and back. The set includes idle, walk, run, and alert. In these animations, I
+          combined heavy, weighty movements that match the guards’ build with quick, comedic bursts
+          of motion. This contrast reflects the game’s overall mood, which blends tension with
+          humor.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block anim-block">
+    <div class="offgrid anim" style={`--cw: ${AW}; --ch: ${AH};`}>
+      <h3 class="og p-label lbl" style={place(0, 19, 'max-content')}>Animation set</h3>
+      {rows.map((row, r) => (
+        <div class="arow">
+          {row.videos.map((v, i) => (
+            <div class="og v" style={`${place(v.x, v.y, v.w, v.h)} --px: ${v.w}; z-index: ${(3 - r) * 10 + (3 - i)};`}>
+              <LazyVideo src={video(v.name)} ratio={v.ratio} label={v.label} />
+            </div>
+          ))}
+          <p class="og p-caption cap" style={`${place(row.caption.x, row.caption.y, 'max-content')} z-index: ${(3 - r) * 10};`}>{row.caption.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</ProjectSection>
+
+<style>
+  .arow {
+    display: contents;
+  }
+
+  :global(.project-page) .og.lbl,
+  :global(.project-page) .og.cap {
+    white-space: nowrap;
+  }
+
+  /* wide screens: the label "Animation set" sits 96px under the text (to the letters). The canvas starts
+     19px above the label, as the highest video does in Figma, so the margin is 96px minus label offset
+     (19px + 4.4px of empty space above the capitals = 1.95% of the canvas width; it scales with the canvas) */
+  @media (min-width: 1261px) {
+    :global(.project-page) .block.anim-block {
+      margin-top: calc(96px - 1.95%);
+    }
+  }
+
+  /* stacked layout: label, then every row as a group: videos keep their desktop size and stand side by
+     side where they fit, the caption under them (24px between boxes = 31.7px to the letters) */
+  @media (max-width: 1260px) {
+    .arow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 24px;
+    }
+
+    :global(.project-page) .arow .og.v {
+      width: min(100%, calc(var(--px) * 1px));
+    }
+
+    :global(.project-page) .arow .og.cap {
+      width: auto;
+      flex-basis: 100%;
+    }
+
+    /* label -> content: 32px to the letters (box gap 32 - 4.5) instead of the 64px between blocks */
+    :global(.project-page) .og.lbl {
+      margin-bottom: -36.5px;
+    }
+  }
+</style>

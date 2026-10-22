@@ -1,0 +1,88 @@
+---
+import { Image } from 'astro:assets';
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+
+import turnaround1 from '@assets/gallery-grabber/character/turnaround-1.jpg';
+import turnaround2 from '@assets/gallery-grabber/character/turnaround-2.jpg';
+import sketch from '@assets/gallery-grabber/character/sketch.jpg';
+import lineArt from '@assets/gallery-grabber/character/line-art.jpg';
+import flatColors from '@assets/gallery-grabber/character/flat-colors.jpg';
+import finalDesign from '@assets/gallery-grabber/character/final-design.jpg';
+
+const { id = 'character-design', title = 'Character design', subtitle } = Astro.props;
+---
+
+<ProjectSection {id} {title} {subtitle}>
+  <slot name="intro" />
+  <div class="block">
+    <div class="cols">
+      <div class="gc-1-3">
+        <h3 class="p-label">Character design approach</h3>
+        <p class="p-text after-label">
+          For this project, I developed the overall character style and designed the museum’s two
+          female guards. The style follows a classic game approach: lineart combined with clean flat
+          colors and simple shading. This combination keeps the characters easy to read against the
+          more detailed backgrounds of the museum rooms.
+        </p>
+      </div>
+      <div class="gc-5-3">
+        <p class="p-text below-label">
+          For the guards, I created my own take on the stereotypical heavyset, world-weary security
+          guard. This image fit naturally with the more grotesque side of the project. The second
+          guard works as a skin for the first, so the two share the same body and differ only in
+          their faces. Yet each woman has a quirky charm of her own that sets her apart from the
+          stereotype: one hides a sweet, childlike side behind a pink hair tie, while the other
+          channels a touch of Marilyn Monroe.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Final design turnaround</h3>
+    <div class="cols after-label">
+      <div class="gc-1-8">
+        <Image src={turnaround1} alt="Turnaround of the first guard" widths={[800, 1200, 1800]} sizes="(max-width: 1440px) 100vw, 1200px" loading="lazy" class="media-img" />
+        <p class="p-caption">Guard 1</p>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-8">
+        <Image src={turnaround2} alt="Turnaround of the second guard" widths={[800, 1200, 1800]} sizes="(max-width: 1440px) 100vw, 1200px" loading="lazy" class="media-img" />
+        <p class="p-caption">Guard 2</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-subhead">Process breakdown</h3>
+    <div class="cols after-subhead">
+      <div class="gc-1-3">
+        <h4 class="p-label">Sketch</h4>
+        <div class="after-label">
+          <Image src={sketch} alt="Sketch of the guard" widths={[435, 500]} sizes="(max-width: 1260px) 100vw, 435px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+      <div class="gc-5-3">
+        <h4 class="p-label">Line art</h4>
+        <div class="after-label">
+          <Image src={lineArt} alt="Line art of the guard" widths={[435, 500]} sizes="(max-width: 1260px) 100vw, 435px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-3">
+        <h4 class="p-label">Flat colors</h4>
+        <div class="after-label">
+          <Image src={flatColors} alt="The guard in flat colors" widths={[435, 500]} sizes="(max-width: 1260px) 100vw, 435px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+      <div class="gc-5-3">
+        <h4 class="p-label">Final design</h4>
+        <div class="after-label">
+          <Image src={finalDesign} alt="Final design of the guard" widths={[435, 500]} sizes="(max-width: 1260px) 100vw, 435px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ProjectSection>

@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+
+import exhibits from '@assets/gallery-grabber/assets/exhibits.png';
+import artifacts from '@assets/gallery-grabber/assets/interactive-artifacts.png';
+import walls from '@assets/gallery-grabber/assets/walls.png';
+
+const { id = 'assets-design', title = 'Assets design', subtitle } = Astro.props;
+---
+
+<ProjectSection {id} {title} {subtitle}>
+  <slot name="intro" />
+  <div class="block">
+    <div class="cols">
+      <div class="gc-1-3">
+        <h3 class="p-label">Assets development approach</h3>
+        <p class="p-text after-label">
+          The project had a tight deadline, so the approach was to reuse assets wherever possible
+          without losing the richness of the visual language. The walls are built from just a few
+          elements that tile to any length, and after final assembly, each panel was given its own
+          subtle variations in texture detail. The artifacts, on the other hand, never repeat. Each
+          one is unique, recreating the sense of variety and abundance a visitor feels in a real
+          museum, and all of them are based on real objects from museum collections around the
+          world.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Exhibits</h3>
+    <div class="cols after-label">
+      <div class="gc-1-7">
+        <Image src={exhibits} alt="Exhibits of the museum" widths={[800, 1047]} sizes="(max-width: 1260px) 100vw, 1047px" loading="lazy" class="media-img" />
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Interactive artifacts</h3>
+    <div class="cols after-label">
+      <div class="gc-1-2 narrow">
+        <Image src={artifacts} alt="Interactive artifacts" widths={[282, 413]} sizes="(max-width: 1260px) 100vw, 282px" loading="lazy" class="media-img" />
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="p-label">Walls</h3>
+    <div class="cols after-label">
+      <div class="gc-1-6">
+        <Image src={walls} alt="Wall elements" widths={[600, 894]} sizes="(max-width: 1260px) 100vw, 894px" loading="lazy" class="media-img" />
+      </div>
+    </div>
+  </div>
+</ProjectSection>
+
+<style>
+  /* the artifacts picture keeps its 282px width when the columns stack */
+  @media (max-width: 1260px) {
+    .narrow {
+      max-width: 282px;
+    }
+  }
+</style>

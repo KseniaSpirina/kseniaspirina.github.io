@@ -1,0 +1,152 @@
+---
+import { Image } from 'astro:assets';
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+
+import finalRoom from '@assets/gallery-grabber/environment/final.png';
+import plan from '@assets/gallery-grabber/environment/plan.jpg';
+import walls from '@assets/gallery-grabber/environment/walls.png';
+import noObjects from '@assets/gallery-grabber/environment/no-objects.png';
+import flatColors from '@assets/gallery-grabber/environment/flat-colors.png';
+
+const pct = (v: number, t: number) => `${(v / t) * 100}%`;
+
+// The pictures are placed by hand, as in the Figma file (Page 5): x/y/w/h in px on a 1200 x 2415.4 canvas.
+// Origin: x = 120 (left page margin), y = top of the first picture (462 on the Figma page).
+// The room pictures are PNG with empty space around the room, so their frames go beyond the grid:
+// the visible rooms line up with the grid, as designed. Everything from "Base plan" down is 16.6px lower than
+// in Figma, so the first labels are 48px under the subhead (to the letters), as the design rules say;
+// the pictures keep their place relative to their labels. The bottom of the canvas is the bottom of the
+// last room (not of its empty frame): 128px to the next section.
+const CW = 1200;
+const CH = 2415.4;
+const OY = 462;
+const SHIFT = 16.6;
+const fy = (y: number) => y - OY + (y >= 1381 ? SHIFT : 0);
+
+// visible area of the picture (px of the source file): used to crop the empty frame on narrow screens
+const crop = (w: number, h: number, l: number, t: number, r: number, b: number) => {
+  const vw = w - l - r;
+  const vh = h - t - b;
+  return `--vr: ${vw} / ${vh}; --iw: ${(w / vw) * 100}%; --il: ${(-l / vw) * 100}%; --it: ${(-t / vh) * 100}%;`;
+};
+const roomCrop = crop(2673, 2642, 24, 25, 33, 478);
+const finalCrop = crop(2673, 2642, 98, 91, 33, 478);
+
+// x and y are given as on the Figma page (left margin 120)
+const place = (x: number, y: number, w: number | string, h?: number) =>
+  `--l: ${pct(x - 120, CW)}; --t: ${pct(fy(y), CH)}; --w: ${typeof w === 'number' ? pct(w, CW) : w};${h ? ` --h: ${pct(h, CH)};` : ''}`;
+
+const { id = 'environment-design', title = 'Environment design', subtitle } = Astro.props;
+---
+
+<ProjectSection {id} {title} {subtitle}>
+  <slot name="intro" />
+  <div class="block">
+    <div class="cols">
+      <div class="gc-1-3">
+        <h3 class="p-label">Environment design approach</h3>
+        <p class="p-text after-label">
+          For this project, I defined the core style of the environment. I chose a dark blue
+          monochrome palette for the whole space. It conveys the feeling of night, and it makes
+          interactive objects stand out clearly, since they are the only elements painted outside
+          the blue range.
+        </p>
+      </div>
+      <div class="gc-4-3">
+        <p class="p-text below-label">
+          The environment is rendered in a fairly detailed style that captures the intricate
+          artifacts and museum rooms. Each room of the museum is dedicated to a different era and
+          region, such as Ancient Greece. The rooms and artifacts were created together with Maya
+          Bell. I fully illustrated the Ancient Greece hall, including its walls and artifacts, and
+          also created the wall assets for the Royal Room.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block env-block">
+    <div class="offgrid env" style={`--cw: ${CW}; --ch: ${CH};`}>
+      <div class="og pic" style={`${place(233, 462, 962, 951)} ${finalCrop}`}>
+        <Image src={finalRoom} alt="The Ancient Greece room, final render" widths={[800, 1200, 1800]} sizes="(max-width: 1260px) 100vw, 962px" loading="lazy" />
+      </div>
+      <p class="og p-caption cap under" style={place(273, 1048, 'max-content')}>Ancient Greece Room</p>
+
+      <h3 class="og p-subhead sub" style={place(120, 1330, pct(356, CW))}>Process breakdown</h3>
+
+      <h4 class="og p-label lbl" style={place(120, 1381, 'max-content')}>Base plan</h4>
+      <div class="og pic plain" style={place(120, 1431, 435, 430)}>
+        <Image src={plan} alt="Base plan of the room" widths={[435, 870]} sizes="(max-width: 1260px) 100vw, 435px" loading="lazy" />
+      </div>
+
+      <h4 class="og p-label lbl" style={place(732, 1381, 'max-content')}>Walls and floor</h4>
+      <div class="og pic" style={`${place(712, 1413, 465, 459)} ${roomCrop}`}>
+        <Image src={walls} alt="The room with walls and floor" widths={[465, 930]} sizes="(max-width: 1260px) 100vw, 465px" loading="lazy" />
+      </div>
+
+      <h4 class="og p-label lbl" style={place(120, 1952, 'max-content')}>Furniture</h4>
+      <div class="og pic" style={`${place(102, 1984, 465, 460)} ${roomCrop}`}>
+        <Image src={noObjects} alt="The room with furniture, without the artifacts" widths={[465, 930]} sizes="(max-width: 1260px) 100vw, 465px" loading="lazy" />
+      </div>
+
+      <h4 class="og p-label lbl" style={place(732, 1952, 'max-content')}>Details</h4>
+      <div class="og pic" style={`${place(714, 1984, 465, 460)} ${roomCrop}`}>
+        <Image src={flatColors} alt="The room in flat colors with details" widths={[465, 930]} sizes="(max-width: 1260px) 100vw, 465px" loading="lazy" />
+      </div>
+
+      <h4 class="og p-label lbl" style={place(120, 2452, 'max-content')}>Final</h4>
+      <div class="og pic" style={`${place(102, 2484, 465, 460)} ${finalCrop}`}>
+        <Image src={finalRoom} alt="The room, final render" widths={[465, 930]} sizes="(max-width: 1260px) 100vw, 465px" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</ProjectSection>
+
+<style>
+  :global(.project-page) .og.lbl,
+  :global(.project-page) .og.cap {
+    white-space: nowrap;
+  }
+
+  /* wide screens: the first picture's frame starts 63px under the text (to the letters), so that the room
+     itself (33px of empty space at the top of the picture) is 96px under it; the margin scales with the canvas
+     (5.25% of the canvas width = 63px at 1200px) */
+  @media (min-width: 1261px) {
+    :global(.project-page) .block.env-block {
+      margin-top: 5.25%;
+    }
+  }
+
+  /* stacked layout: every room is cropped to its visible area, so the empty frame does not add space */
+  @media (max-width: 1260px) {
+    :global(.project-page) .og.pic:not(.plain) {
+      position: relative;
+      left: auto;
+      top: auto;
+      overflow: hidden;
+      aspect-ratio: var(--vr);
+    }
+
+    :global(.project-page) .og.pic:not(.plain) :global(img) {
+      position: absolute;
+      left: var(--il);
+      top: var(--it);
+      width: var(--iw);
+      max-width: none;
+      height: auto;
+    }
+
+    /* caption under its picture: 24px between boxes (31.7px to the letters) instead of 64px */
+    :global(.project-page) .og.cap.under {
+      margin-top: -40px;
+    }
+
+    /* label -> picture: 32px to the letters, subhead -> label: 48px, instead of 64px between blocks */
+    :global(.project-page) .og.lbl {
+      margin-bottom: -36.5px;
+    }
+
+    :global(.project-page) .og.sub {
+      margin-bottom: -26.4px;
+    }
+  }
+</style>
