@@ -7,7 +7,8 @@ const video = (name: string) => `/gallery-grabber/videos/${name}.webm`;
 
 // The animations are placed by hand, as in the Figma file (Page 3): x/y/w/h in px on a 1200 x 1201.5 canvas.
 // Origin: x = 120 (left page margin), y = top of the highest video (430 on the Figma page).
-// The pictures have empty space around the character, so the caption sits inside the picture area.
+// The videos are trimmed to the character (npm run videos:trim), so each box is the character itself: the boxes
+// below are the Figma boxes cut down to it, the characters stand exactly where they stand in Figma.
 // The bottom of the canvas is the bottom of the last caption letters: 128px to the next section.
 // Stacking order as in Figma: the Idle row is on top, Alarmed at the bottom; in a row back > side > front.
 const AW = 1200;
@@ -17,33 +18,33 @@ const rows = [
   {
     caption: { text: 'Idle', x: 0, y: 258 },
     videos: [
-      { name: 'idle-back', label: 'Idle animation, back view', ratio: '553 / 554', x: 0, y: 20, w: 282, h: 282 },
-      { name: 'idle-side', label: 'Idle animation, side view', ratio: '508 / 523', x: 306, y: 29, w: 257, h: 264 },
-      { name: 'idle-front', label: 'Idle animation, front view', ratio: '553 / 582', x: 587, y: 0, w: 281, h: 296 },
+      { name: 'idle-back', label: 'Idle animation, back view', ratio: '380 / 315', x: 63.23, y: 65.9, w: 193.78, h: 160.63 },
+      { name: 'idle-side', label: 'Idle animation, side view', ratio: '417 / 330', x: 326.24, y: 62.9, w: 210.96, h: 166.95 },
+      { name: 'idle-front', label: 'Idle animation, front view', ratio: '389 / 317', x: 618, y: 66.06, w: 197.67, h: 161.08 },
     ],
   },
   {
     caption: { text: 'Walking', x: 0, y: 568 },
     videos: [
-      { name: 'walking-back', label: 'Walking animation, back view', ratio: '572 / 576', x: -6, y: 336, w: 294, h: 296 },
-      { name: 'walking-side', label: 'Walking animation, side view', ratio: '528 / 528', x: 276, y: 326, w: 284, h: 284 },
-      { name: 'walking-front', label: 'Walking animation, front view', ratio: '572 / 576', x: 571, y: 312, w: 295.93, h: 298 },
+      { name: 'walking-back', label: 'Walking animation, back view', ratio: '400 / 341', x: 51.57, y: 366.84, w: 205.59, h: 175.27 },
+      { name: 'walking-side', label: 'Walking animation, side view', ratio: '477 / 345', x: 276, y: 359.35, w: 256.57, h: 185.57 },
+      { name: 'walking-front', label: 'Walking animation, front view', ratio: '398 / 341', x: 607.22, y: 368.39, w: 205.91, h: 176.42 },
     ],
   },
   {
     caption: { text: 'Running', x: 0, y: 882 },
     videos: [
-      { name: 'running-back', label: 'Running animation, back view', ratio: '618 / 630', x: -8, y: 634, w: 307, h: 313 },
-      { name: 'running-side', label: 'Running animation, side view', ratio: '517 / 540', x: 295, y: 642, w: 266.16, h: 278 },
-      { name: 'running-front', label: 'Running animation, front view', ratio: '617 / 646', x: 552, y: 584, w: 336, h: 352 },
+      { name: 'running-back', label: 'Running animation, back view', ratio: '390 / 341', x: 62.04, y: 674.24, w: 193.74, h: 169.4 },
+      { name: 'running-side', label: 'Running animation, side view', ratio: '468 / 357', x: 295.51, y: 673.4, w: 240.93, h: 183.79 },
+      { name: 'running-front', label: 'Running animation, front view', ratio: '403 / 340', x: 603.73, y: 674.4, w: 219.46, h: 185.15 },
     ],
   },
   {
     caption: { text: 'Alarmed', x: 0, y: 1184 },
     videos: [
-      { name: 'alarmed-back', label: 'Alarmed animation, back view', ratio: '756 / 741', x: -3, y: 846, w: 382, h: 374 },
-      { name: 'alarmed-side', label: 'Alarmed animation, side view', ratio: '505 / 539', x: 303, y: 943, w: 255, h: 273 },
-      { name: 'alarmed-front', label: 'Alarmed animation, front view', ratio: '660 / 671', x: 534, y: 872, w: 360, h: 365 },
+      { name: 'alarmed-back', label: 'Alarmed animation, back view', ratio: '380 / 361', x: 63.19, y: 980.41, w: 192.01, h: 182.41 },
+      { name: 'alarmed-side', label: 'Alarmed animation, side view', ratio: '434 / 380', x: 314.61, y: 968.25, w: 219.15, h: 191.88 },
+      { name: 'alarmed-front', label: 'Alarmed animation, front view', ratio: '406 / 360', x: 604.36, y: 978.91, w: 221.45, h: 196.36 },
     ],
   },
 ];
@@ -113,7 +114,8 @@ const { id = 'animation', title = 'Animation', subtitle } = Astro.props;
     .arow {
       display: flex;
       flex-wrap: wrap;
-      align-items: flex-end;
+      align-items: flex-end; /* the feet of the characters stand on one line */
+      justify-content: center;
       gap: 24px;
     }
 
@@ -124,6 +126,7 @@ const { id = 'animation', title = 'Animation', subtitle } = Astro.props;
     :global(.project-page) .arow .og.cap {
       width: auto;
       flex-basis: 100%;
+      text-align: center;
     }
 
     /* label -> content: 32px to the letters (box gap 32 - 4.5) instead of the 64px between blocks */
