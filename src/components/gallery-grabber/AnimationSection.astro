@@ -115,8 +115,13 @@ const { id = 'animation', title = 'Animation', subtitle } = Astro.props;
       display: flex;
       flex-wrap: wrap;
       align-items: flex-end; /* the feet of the characters stand on one line */
-      justify-content: center;
       gap: 24px;
+      /* the group is as wide as its content (and centred) when all three fit in one line; when one wraps
+         to the next line the group takes the whole width, so the third video stands under the first,
+         at the left edge */
+      width: fit-content;
+      max-width: 100%;
+      margin-inline: auto;
     }
 
     :global(.project-page) .arow .og.v {
@@ -125,8 +130,8 @@ const { id = 'animation', title = 'Animation', subtitle } = Astro.props;
 
     :global(.project-page) .arow .og.cap {
       width: auto;
+      max-width: none; /* the general stacked rule caps it at 440px, then it would fit beside a video */
       flex-basis: 100%;
-      text-align: center;
     }
 
     /* label -> content: 32px to the letters (box gap 32 - 4.5) instead of the 64px between blocks */
