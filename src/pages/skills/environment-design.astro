@@ -5,13 +5,14 @@ import SanctuaryEnvironment from '@components/sanctuary/EnvironmentDesignSection
 import ImprisonedEnvironment from '@components/imprisoned/EnvironmentSection.astro';
 import MournEnvironment from '@components/mourn/EnvironmentSection.astro';
 import DepartureEnvironment from '@components/departure/EnvironmentSection.astro';
+import GalleryGrabberEnvironment from '@components/gallery-grabber/EnvironmentSection.astro';
 
 // The "Environment design" section of every project that has one, in the order of the projects page.
-// Stellar Strays has "Assets design" instead and is skipped. Each section carries the project name instead
+// Stellar Strays and Gallery Grabber have "Assets design" next to (or instead of) it, which belongs to no skill page. Each section carries the project name instead
 // of the section name, with a grey line (project type and year) under it.
 ---
 
-<SkillPage slug="environment-design" title="Environment Design" description="Environment design across projects: Sanctuary, Imprisoned, Mourn, Departure.">
+<SkillPage slug="environment-design" title="Environment Design" description="Environment design across projects: Sanctuary, Imprisoned, Mourn, Departure, Gallery Grabber.">
   <div class="sanctuary">
     <SanctuaryEnvironment
       id="sanctuary-environment-design"
@@ -38,4 +39,7 @@ import DepartureEnvironment from '@components/departure/EnvironmentSection.astro
     intro="In Departure, the brief called for an environment that would support the character’s personality and design. Early in the design process, I had already decided that the character lives underground, so a cave was the natural setting. I wanted the space to feel melancholic and slightly unsettling, a fitting home for a character who shares that same quiet sadness and sense of otherness. To create that mood, I built the cave around an underground lake and made it damp and cold, filled with mist, the sound of dripping water, and the rustle of bats’ wings.">
     <ProjectIntro slot="intro" project="departure" skill="environment-design" />
   </DepartureEnvironment>
+  <GalleryGrabberEnvironment id="gallery-grabber-environment-design" title="Gallery Grabber" subtitle="Team project · Game Lab course · 2025">
+    <ProjectIntro slot="intro" project="gallery-grabber" skill="environment-design" />
+  </GalleryGrabberEnvironment>
 </SkillPage>

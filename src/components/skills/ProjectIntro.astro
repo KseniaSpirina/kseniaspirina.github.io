@@ -4,8 +4,9 @@ import ImprisonedCredits from '../credits/ImprisonedCredits.astro';
 import MournCredits from '../credits/MournCredits.astro';
 import StellarStraysCredits from '../credits/StellarStraysCredits.astro';
 import DepartureCredits from '../credits/DepartureCredits.astro';
+import GalleryGrabberCredits from '../credits/GalleryGrabberCredits.astro';
 
-type ProjectKey = 'sanctuary' | 'imprisoned' | 'mourn' | 'stellar-strays' | 'departure';
+type ProjectKey = 'sanctuary' | 'imprisoned' | 'mourn' | 'stellar-strays' | 'departure' | 'gallery-grabber';
 
 type SkillKey = 'character-design' | 'environment-design' | 'animation' | 'ui-design';
 
@@ -30,12 +31,14 @@ const roles: Record<SkillKey, Partial<Record<ProjectKey, string>>> = {
     sanctuary: '2D animation, rigging (Spine 2D), animator setup (Unity)',
     'stellar-strays': '2D animation, rigging (Spine 2D)',
     departure: '2D animation, rigging (Spine 2D), animator setup (Unity), visual scripting (Unity)',
+    'gallery-grabber': '2D animation (Spine 2D)',
   },
   'character-design': {
     sanctuary: 'Visual style development, character design',
     mourn: 'Visual style development, character design',
     'stellar-strays': 'Visual style development (with Maayan Berkovits), character design (Fermi character)',
     departure: 'Visual style development, character design',
+    'gallery-grabber': 'Visual style development, character design (the two female guards)',
   },
   'environment-design': {
     sanctuary: 'Visual style development, environment design and art, asset preparation and integration (Unity)',
@@ -43,6 +46,7 @@ const roles: Record<SkillKey, Partial<Record<ProjectKey, string>>> = {
       'Visual style development and materials (with Ohad Lerman), environment design (3 levels, solo), 3D asset design and modeling (Cinema 4D), shaders (Shader Graph), asset integration (Unity)',
     mourn: 'Visual style development, environment design and art, asset preparation and integration (Unity)',
     departure: 'Visual style development, environment design and art, asset preparation and integration (Unity)',
+    'gallery-grabber': 'Visual style development, environment design and art (rooms together with Maya Bell)',
   },
   'ui-design': {
     sanctuary: 'UI style development, UI design, UI animation, animator setup (Unity)',
@@ -67,6 +71,9 @@ const descriptions: Record<ProjectKey, string[]> = {
   'stellar-strays': [
     'A local co-op platformer for two players. Astronaut Fermi and repair-bot Rumba crash-land on an alien planet and must work together to recover their scattered ship parts, each of which only one of them can safely collect.',
   ],
+  'gallery-grabber': [
+    'A top-down stealth game with a comedic, slightly grotesque edge. The player takes on the role of Rose, a museum janitor who has decided to change her life: leave for warmer shores and live in luxury. To fund her escape, she plans to steal artifacts from the museum where she works.',
+  ],
   departure: [
     'A game animation project that combines a 2D character with a stylized 3D environment. A gentle giant, shy by nature yet remarkably strong, moves through mysterious caverns with a full set of Spine 2D animations, playable in Unity.',
   ],
@@ -78,6 +85,7 @@ const credits = {
   mourn: MournCredits,
   'stellar-strays': StellarStraysCredits,
   departure: DepartureCredits,
+  'gallery-grabber': GalleryGrabberCredits,
 };
 const Credits = credits[project];
 ---

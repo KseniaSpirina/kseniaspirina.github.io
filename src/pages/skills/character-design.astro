@@ -5,13 +5,14 @@ import SanctuaryCharacters from '@components/sanctuary/CharacterDesignSection.as
 import MournCharacters from '@components/mourn/CharactersSection.astro';
 import StellarStraysCharacters from '@components/stellar-strays/CharacterDesignSection.astro';
 import DepartureCharacters from '@components/departure/CharacterDesignSection.astro';
+import GalleryGrabberCharacters from '@components/gallery-grabber/CharacterDesignSection.astro';
 
 // The "Character design" section of every project that has one, in the order of the projects page.
 // Imprisoned has no such section and is skipped. Each section carries the project name instead of the
 // section name, with a grey line (project type and year) under it.
 ---
 
-<SkillPage slug="character-design" title="Character Design" description="Character design across projects: Sanctuary, Mourn, Stellar Strays, Departure.">
+<SkillPage slug="character-design" title="Character Design" description="Character design across projects: Sanctuary, Mourn, Stellar Strays, Departure, Gallery Grabber.">
   <div class="sanctuary">
     <SanctuaryCharacters
       id="sanctuary-character-design"
@@ -30,4 +31,7 @@ import DepartureCharacters from '@components/departure/CharacterDesignSection.as
   <DepartureCharacters id="departure-character-design" title="Departure" subtitle="Solo project · Game Animation course · 2025">
     <ProjectIntro slot="intro" project="departure" skill="character-design" />
   </DepartureCharacters>
+  <GalleryGrabberCharacters id="gallery-grabber-character-design" title="Gallery Grabber" subtitle="Team project · Game Lab course · 2025">
+    <ProjectIntro slot="intro" project="gallery-grabber" skill="character-design" />
+  </GalleryGrabberCharacters>
 </SkillPage>
