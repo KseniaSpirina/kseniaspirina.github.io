@@ -9,6 +9,7 @@ const video = (name: string) => `/gallery-grabber/videos/${name}.webm`;
 // Origin: x = 120 (left page margin), y = top of the highest video (430 on the Figma page).
 // The videos are trimmed to the character (npm run videos:trim), so each box is the character itself: the boxes
 // below are the Figma boxes cut down to it, the characters stand exactly where they stand in Figma.
+// Walking, side view is moved 9px to the right of its Figma place: the back and side views were only 18.8px apart.
 // The bottom of the canvas is the bottom of the last caption letters: 128px to the next section.
 // Stacking order as in Figma: the Idle row is on top, Alarmed at the bottom; in a row back > side > front.
 const AW = 1200;
@@ -27,7 +28,7 @@ const rows = [
     caption: { text: 'Walking', x: 0, y: 568 },
     videos: [
       { name: 'walking-back', label: 'Walking animation, back view', ratio: '400 / 341', x: 51.57, y: 366.84, w: 205.59, h: 175.27 },
-      { name: 'walking-side', label: 'Walking animation, side view', ratio: '477 / 345', x: 276, y: 359.35, w: 256.57, h: 185.57 },
+      { name: 'walking-side', label: 'Walking animation, side view', ratio: '477 / 345', x: 285, y: 359.35, w: 256.57, h: 185.57 },
       { name: 'walking-front', label: 'Walking animation, front view', ratio: '398 / 341', x: 607.22, y: 368.39, w: 205.91, h: 176.42 },
     ],
   },
@@ -115,7 +116,7 @@ const { id = 'animation', title = 'Animation', subtitle } = Astro.props;
       display: flex;
       flex-wrap: wrap;
       align-items: flex-end; /* the feet of the characters stand on one line */
-      gap: 24px;
+      gap: 36px; /* 1.5 times the former 24px: the videos are trimmed to the characters, so they need room */
       /* the group is as wide as its content (and centred) when all three fit in one line; when one wraps
          to the next line the group takes the whole width, so the third video stands under the first,
          at the left edge */
@@ -132,6 +133,7 @@ const { id = 'animation', title = 'Animation', subtitle } = Astro.props;
       width: auto;
       max-width: none; /* the general stacked rule caps it at 440px, then it would fit beside a video */
       flex-basis: 100%;
+      margin-top: -12px; /* the caption stays 24px under the videos, not 36px */
     }
 
     /* label -> content: 32px to the letters (box gap 32 - 4.5) instead of the 64px between blocks */
