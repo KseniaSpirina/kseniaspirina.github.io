@@ -13,16 +13,17 @@ interface Props {
   /** page heading and <title>, e.g. "Environment Design" */
   title: string;
   description: string;
-  /** slug of this skill: the previous / next arrows are taken from the order in config/skills.ts */
-  slug: string;
+  /** slug of this skill: the previous / next arrows are taken from the order in config/skills.ts.
+   *  Without it (the "Other projects" page) the page has no arrows. */
+  slug?: string;
 }
 
 const { title, description, slug } = Astro.props;
 
 // The first page has no "previous" arrow and the last page has no "next" arrow.
-const index = skillPages.findIndex((skill) => skill.slug === slug);
-const prev = skillPages[index - 1];
-const next = skillPages[index + 1];
+const index = slug ? skillPages.findIndex((skill) => skill.slug === slug) : -1;
+const prev = index >= 0 ? skillPages[index - 1] : undefined;
+const next = index >= 0 ? skillPages[index + 1] : undefined;
 const prevHref = prev ? `/skills/${prev.slug}` : undefined;
 const prevLabel = prev?.title;
 const nextHref = next ? `/skills/${next.slug}` : undefined;

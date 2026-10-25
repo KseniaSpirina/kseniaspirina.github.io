@@ -1,6 +1,7 @@
 ---
 interface Props {
   id: string;
+  /** section name; a line break (\n) in it starts a new line */
   title: string;
   /** optional grey line under the section name (used on the Skills pages: project type and year) */
   subtitle?: string;
@@ -12,7 +13,7 @@ const { id, title, subtitle } = Astro.props;
 <section class="project-section grid-1440" id={id}>
   <div class="inner">
     <span class="divider"></span>
-    <h2>{title}</h2>
+    <h2>{title.split('\n').map((line, i) => <>{i > 0 && <br />}{line}</>)}</h2>
     {subtitle && <p class="subtitle">{subtitle}</p>}
     <div class="body"><slot /></div>
   </div>
