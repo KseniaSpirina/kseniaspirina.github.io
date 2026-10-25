@@ -1,0 +1,132 @@
+---
+import { Image } from 'astro:assets';
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+import LazyVideo from '../imprisoned/LazyVideo.astro';
+import ProjectIntro from './ProjectIntro.astro';
+import TemplesCredits from '../credits/TemplesCredits.astro';
+
+import sur from '@assets/other-projects/temples/sur.jpg';
+import sava from '@assets/other-projects/temples/sava.jpg';
+import vira from '@assets/other-projects/temples/vira.jpg';
+import surSketch from '@assets/other-projects/temples/sur-sketch.jpg';
+import surBlockout from '@assets/other-projects/temples/sur-blockout.jpg';
+import surBlenderSetup from '@assets/other-projects/temples/sur-blender-setup.jpg';
+
+// Under every temple: the goddess (3 columns), then two lists of the details of the statue and the temple
+// (2 columns each, columns 4-5 and 6-7), as on Page 4 of the Figma file.
+const temples = [
+  {
+    name: 'Sur',
+    image: sur,
+    alt: 'Temple of Sur: sunlit hall with floating bookshelves and the statue of the goddess',
+    text: 'Sur is the goddess of knowledge, order, and light. Her temple is filled with sunlight and endless floating bookshelves, and her statue, with neat braids and a symmetrical pose, embodies the rule of reason.',
+    statue: ['Three long braids mark her wisdom', 'The braiding reflects her love of order'],
+    temple: ['A golden sun disc rises behind the statue', 'Her symmetrical pose shows reason ruling over instinct'],
+  },
+  {
+    name: 'Sava',
+    image: sava,
+    alt: 'Temple of Sava: dark primal hall with the reclining statue of the goddess',
+    text: 'Sava is the goddess of nature, fertility, and abundance. Her dark, primal temple resembles the inside of an egg, and her reclining statue draws on the oldest mother-goddess figures in human history.',
+    statue: ['The nude, reclining statue expresses her openness and allure', 'Long, loose hair reflects her free spirit'],
+    temple: ['Her full figure draws on ancient fertility symbols like the Venus of Willendorf'],
+  },
+  {
+    name: 'Vira',
+    image: vira,
+    alt: 'Temple of Vira: crossroads lined with facing mirrors and the statue of the goddess',
+    text: 'The goddess of boundaries, guarding the border between the living and the dead. Her temple is built around a crossroads lined with facing mirrors, where a single candle’s endless reflections stand for the souls who have crossed over.',
+    statue: [
+      'The temple centers on a crossroads, which folklore has long seen as a meeting point of worlds',
+      'Facing mirrors line the paths, another symbol of the border between worlds',
+      'Robes cover almost the entire statue, conveying protection and a barrier',
+    ],
+    temple: [
+      'Her four arms echo the crossroads',
+      'A candle before the statue symbolizes fragile human life',
+      'Its endless reflections represent the souls who have crossed over',
+    ],
+  },
+];
+
+const { id = 'temples-of-the-three-goddesses' } = Astro.props;
+---
+
+<ProjectSection
+  {id}
+  title={'Temples of the\nThree Goddesses'}
+  subtitle="Solo project · Imagemaking in 3D course · 2026">
+  <ProjectIntro
+    description={[
+      'Temples of the Three Goddesses is a series of three temple interiors, each dedicated to a goddess from my D&D world. At the center of every piece stands the goddess’s statue. Each statue and interior was designed to reflect its goddess’s domain, character, and values through composition, color, atmosphere, and symbolic details.',
+    ]}
+    role="Idea, environment design, modeling, rendering">
+    <TemplesCredits cls="p-text" />
+  </ProjectIntro>
+
+  {temples.map(t => (
+    <div class="block">
+      <h3 class="p-label">Temple of {t.name}</h3>
+      <div class="cols after-label">
+        <div class="gc-1-8">
+          <Image src={t.image} alt={t.alt} widths={[800, 1200, 1800]} sizes="(max-width: 1440px) 100vw, 1200px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+      <div class="cols block-gap">
+        <div class="gc-1-3">
+          <p class="p-text">{t.text}</p>
+        </div>
+        <div class="gc-4-2">
+          <ul class="p-list">
+            {t.statue.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="gc-6-2">
+          <ul class="p-list">
+            {t.temple.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  ))}
+
+  <div class="block">
+    <h3 class="p-subhead">Process breakdown</h3>
+    <div class="cols after-subhead">
+      <div class="gc-1-4">
+        <h4 class="p-label">Sketch</h4>
+        <div class="after-label">
+          <Image src={surSketch} alt="Sketch of the temple of Sur" widths={[588, 937]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+      <div class="gc-5-4">
+        <h4 class="p-label">Block out</h4>
+        <div class="after-label">
+          <Image src={surBlockout} alt="Block out of the temple of Sur" widths={[600, 1176, 1800]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-4">
+        <h4 class="p-label">Statue model · Nomad</h4>
+        <div class="after-label">
+          <LazyVideo src="/other-projects/temples/sur-turnaround.webm" ratio="1920 / 1322" label="Turnaround of the statue of Sur" />
+        </div>
+      </div>
+      <div class="gc-5-4">
+        <h4 class="p-label">Setup · Blender</h4>
+        <div class="after-label">
+          <Image src={surBlenderSetup} alt="The temple of Sur in the Blender setup" widths={[600, 1176, 1800]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-4">
+        <h4 class="p-label">Final</h4>
+        <div class="after-label">
+          <Image src={sur} alt="The temple of Sur, final render" widths={[600, 1176, 1800]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ProjectSection>

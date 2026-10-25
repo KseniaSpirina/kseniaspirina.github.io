@@ -1,24 +1,11 @@
 ---
 import SkillPage from '@components/skills/SkillPage.astro';
-import ProjectSection from '@components/imprisoned/ProjectSection.astro';
-import ProjectIntro from '@components/other-projects/ProjectIntro.astro';
-import TemplesCredits from '@components/credits/TemplesCredits.astro';
+import TemplesSection from '@components/other-projects/TemplesSection.astro';
 
 // "Other projects" is built like a Skills page: every section is a separate project, with the project name as the
 // section name and a grey line (project type and year) under it. The page is not linked from the projects list yet.
 ---
 
 <SkillPage title="Other Projects" description="Smaller projects across different media, including Temples of the Three Goddesses.">
-  <ProjectSection
-    id="temples-of-the-three-goddesses"
-    title={'Temples of the\nThree Goddesses'}
-    subtitle="Solo project · Imagemaking in 3D course · 2026">
-    <ProjectIntro
-      description={[
-        'Temples of the Three Goddesses is a series of three temple interiors, each dedicated to a goddess from my D&D world. At the center of every piece stands the goddess’s statue. Each statue and interior was designed to reflect its goddess’s domain, character, and values through composition, color, atmosphere, and symbolic details.',
-      ]}
-      role="Idea, environment design, modeling, rendering">
-      <TemplesCredits cls="p-text" />
-    </ProjectIntro>
-  </ProjectSection>
+  <TemplesSection />
 </SkillPage>
