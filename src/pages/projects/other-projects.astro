@@ -3,9 +3,9 @@ import SkillPage from '@components/skills/SkillPage.astro';
 import TemplesSection from '@components/other-projects/TemplesSection.astro';
 
 // "Other projects" is built like a Skills page: every section is a separate project, with the project name as the
-// section name and a grey line (project type and year) under it. The page is not linked from the projects list yet.
+// section name and a grey line (project type and year) under it. The previous project is Gallery Grabber.
 ---
 
-<SkillPage title="Other Projects" description="Smaller projects across different media, including Temples of the Three Goddesses.">
+<SkillPage title="Other Projects" prevHref="/projects/gallery-grabber" prevLabel="Previous project" description="Smaller projects across different media, including Temples of the Three Goddesses.">
   <TemplesSection />
 </SkillPage>
