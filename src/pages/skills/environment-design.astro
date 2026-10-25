@@ -6,13 +6,15 @@ import ImprisonedEnvironment from '@components/imprisoned/EnvironmentSection.ast
 import MournEnvironment from '@components/mourn/EnvironmentSection.astro';
 import DepartureEnvironment from '@components/departure/EnvironmentSection.astro';
 import GalleryGrabberEnvironment from '@components/gallery-grabber/EnvironmentSection.astro';
+import TemplesSection from '@components/other-projects/TemplesSection.astro';
 
 // The "Environment design" section of every project that has one, in the order of the projects page.
+// Temples of the Three Goddesses (from "Other projects") is the whole project, shown in full.
 // Stellar Strays and Gallery Grabber have "Assets design" next to (or instead of) it, which belongs to no skill page. Each section carries the project name instead
 // of the section name, with a grey line (project type and year) under it.
 ---
 
-<SkillPage slug="environment-design" title="Environment Design" description="Environment design across projects: Sanctuary, Imprisoned, Mourn, Departure, Gallery Grabber.">
+<SkillPage slug="environment-design" title="Environment Design" description="Environment design across projects: Sanctuary, Imprisoned, Mourn, Departure, Gallery Grabber, Temples of the Three Goddesses.">
   <div class="sanctuary">
     <SanctuaryEnvironment
       id="sanctuary-environment-design"
@@ -42,4 +44,5 @@ import GalleryGrabberEnvironment from '@components/gallery-grabber/EnvironmentSe
   <GalleryGrabberEnvironment id="gallery-grabber-environment-design" title="Gallery Grabber" subtitle="Team project · Game Lab course · 2025">
     <ProjectIntro slot="intro" project="gallery-grabber" skill="environment-design" />
   </GalleryGrabberEnvironment>
+  <TemplesSection id="temples-environment-design" roleLabel="My role in environment design" />
 </SkillPage>

@@ -49,7 +49,7 @@ const temples = [
   },
 ];
 
-const { id = 'temples-of-the-three-goddesses' } = Astro.props;
+const { id = 'temples-of-the-three-goddesses', roleLabel } = Astro.props;
 ---
 
 <ProjectSection
@@ -60,7 +60,8 @@ const { id = 'temples-of-the-three-goddesses' } = Astro.props;
     description={[
       'Temples of the Three Goddesses is a series of three temple interiors, each dedicated to a goddess from my D&D world. At the center of every piece stands the goddess’s statue. Each statue and interior was designed to reflect its goddess’s domain, character, and values through composition, color, atmosphere, and symbolic details.',
     ]}
-    role="Idea, environment design, modeling, rendering">
+    role="Idea, environment design, modeling, rendering"
+    {roleLabel}>
     <TemplesCredits cls="p-text" />
   </ProjectIntro>
 

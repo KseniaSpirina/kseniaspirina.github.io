@@ -4,9 +4,11 @@ interface Props {
   description: string[];
   /** what I did on the project */
   role: string;
+  /** subhead over the role text (the Skills pages name the skill: "My role in environment design") */
+  roleLabel?: string;
 }
 
-const { description, role } = Astro.props;
+const { description, role, roleLabel = 'My role' } = Astro.props;
 ---
 
 <!-- Project description (3 columns) and Credits (3 columns, one column gap) right under the project name and its grey line,
@@ -18,7 +20,7 @@ const { description, role } = Astro.props;
       <div class="after-label">
         {description.map((paragraph) => <p class="p-text">{paragraph}</p>)}
       </div>
-      <h3 class="p-label role-label">My role</h3>
+      <h3 class="p-label role-label">{roleLabel}</h3>
       <p class="p-text after-label">{role}</p>
     </div>
     <div class="gc-5-3">
