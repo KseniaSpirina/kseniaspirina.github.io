@@ -26,9 +26,10 @@ const { projects } = Astro.props;
   .overview {
     display: grid;
     grid-template-columns: repeat(8, minmax(0, 1fr));
-    /* 24px between the columns; 64px between the rows = the plates (32px above and under every picture) touch */
+    /* 24px between the columns = the plates (12px at each side of a picture) touch; 48px between the rows = the plates
+       (24px above and under every picture) touch */
     column-gap: 24px;
-    row-gap: 64px;
+    row-gap: 48px;
     /* page title -> the layout: 64px; the hero grid already puts its row gap (24px, 16px on phones) between them */
     margin-top: 40px;
   }
@@ -39,13 +40,13 @@ const { projects } = Astro.props;
     }
   }
 
-  /* the plate, as behind the projects in the list of projects: a gutter (24px) at the sides, 32px above and under the
+  /* the plate, as behind the projects in the list of projects: 12px at the sides, 24px above and under the
      picture; the picture keeps its place (padding and the same negative margin) */
   .tile {
     grid-column: span 2;
     display: block;
-    padding: 32px 24px;
-    margin: -32px -24px;
+    padding: 24px 12px;
+    margin: -24px -12px;
     border-radius: 4px;
     transition: background-color 150ms ease;
   }
@@ -99,19 +100,34 @@ const { projects } = Astro.props;
   }
 </style>
 
+<style is:global>
+  /* the menu item of the hovered picture: the blue of the menu hover */
+  [data-side-menu] a[data-menu-link].is-lit {
+    color: #4361ee !important;
+  }
+</style>
+
 <script>
-  // Menu -> layout: the plate appears behind the picture of the project while its name is hovered (or focused) in the menu
+  // Menu <-> layout: while a project name is hovered (or focused) in the menu, the plate appears behind its picture;
+  // while a picture is hovered (or focused), its name in the menu lights up in blue
   function initHighlight() {
     document.querySelectorAll<HTMLAnchorElement>('[data-side-menu] a[data-menu-link]').forEach(link => {
       const id = link.getAttribute('href')?.slice(1);
       const tile = id ? document.querySelector<HTMLElement>(`.overview [data-project="${id}"]`) : null;
       if (!tile) return;
-      const on = () => tile.classList.add('is-highlighted');
-      const off = () => tile.classList.remove('is-highlighted');
-      link.addEventListener('mouseenter', on);
-      link.addEventListener('mouseleave', off);
-      link.addEventListener('focus', on);
-      link.addEventListener('blur', off);
+      const plateOn = () => tile.classList.add('is-highlighted');
+      const plateOff = () => tile.classList.remove('is-highlighted');
+      link.addEventListener('mouseenter', plateOn);
+      link.addEventListener('mouseleave', plateOff);
+      link.addEventListener('focus', plateOn);
+      link.addEventListener('blur', plateOff);
+
+      const litOn = () => link.classList.add('is-lit');
+      const litOff = () => link.classList.remove('is-lit');
+      tile.addEventListener('mouseenter', litOn);
+      tile.addEventListener('mouseleave', litOff);
+      tile.addEventListener('focus', litOn);
+      tile.addEventListener('blur', litOff);
     });
   }
 
