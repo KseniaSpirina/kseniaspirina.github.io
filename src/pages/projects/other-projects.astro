@@ -1,11 +1,25 @@
 ---
 import SkillPage from '@components/skills/SkillPage.astro';
+import ProjectsLayout from '@components/other-projects/ProjectsLayout.astro';
 import TemplesSection from '@components/other-projects/TemplesSection.astro';
+import templesCover from '@assets/other-projects/temples/sur.jpg';
 
 // "Other projects" is built like a Skills page: every section is a separate project, with the project name as the
 // section name and a grey line (project type and year) under it. The previous project is Gallery Grabber.
+//
+// New project: add it here (the order is the order of the sections), then add its section below:
+//   the id is the id of the section, the cover is the picture shown in the overview under the page title.
+const projects = [
+  { id: 'temples-of-the-three-goddesses', title: 'Temples of the Three Goddesses', cover: templesCover },
+];
 ---
 
-<SkillPage title="Other Projects" prevHref="/projects/gallery-grabber" prevLabel="Previous project" description="Smaller projects across different media, including Temples of the Three Goddesses.">
+<SkillPage
+  title="Other Projects"
+  prevHref="/projects/gallery-grabber"
+  prevLabel="Previous project"
+  description="Smaller projects across different media, including Temples of the Three Goddesses."
+  menu={projects.map(project => ({ label: project.title.toUpperCase(), href: `#${project.id}` }))}>
+  <ProjectsLayout slot="hero" {projects} />
   <TemplesSection />
 </SkillPage>

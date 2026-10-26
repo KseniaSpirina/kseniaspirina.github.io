@@ -7,6 +7,7 @@ import Lightbox from '../sanctuary/Lightbox.astro';
 import ContactSection from '../project/ContactSection.astro';
 import ProjectNavArrows from '../sanctuary/ProjectNavArrows.astro';
 import ProjectPager from '../sanctuary/ProjectPager.astro';
+import SideMenu from '../sanctuary/SideMenu.astro';
 import { skillPages } from '../../config/skills';
 
 interface Props {
@@ -19,9 +20,12 @@ interface Props {
   /** explicit arrows (the "Other projects" page links to the previous project instead of a skill) */
   prevHref?: string;
   prevLabel?: string;
+  /** the "Contents" menu of a project page (OVERVIEW and CONTACT are added): one link per section.
+   *  The content under the title goes in the "hero" slot, in the place of a trailer. */
+  menu?: { label: string; href: string }[];
 }
 
-const { title, description, slug, prevHref: ownPrevHref, prevLabel: ownPrevLabel } = Astro.props;
+const { title, description, slug, prevHref: ownPrevHref, prevLabel: ownPrevLabel, menu } = Astro.props;
 
 // The first page has no "previous" arrow and the last page has no "next" arrow.
 const index = slug ? skillPages.findIndex((skill) => skill.slug === slug) : -1;
@@ -39,8 +43,10 @@ const nextLabel = next?.title;
   <div class="skill-page project-page text-v2">
     <ProjectNavArrows {prevHref} {nextHref} {prevLabel} {nextLabel} />
 
-    <section class="skill-hero grid-1440">
+    <section class:list={['skill-hero', 'grid-1440', { 'has-menu': menu }]} id={menu ? 'top' : undefined}>
+      {menu && <SideMenu links={[{ label: 'OVERVIEW', href: '#top' }, ...menu, { label: 'CONTACT', href: '#contact' }]} />}
       <h1 class="skill-title">{title}</h1>
+      <slot name="hero" />
     </section>
 
     <div class="skill-body">
@@ -68,6 +74,14 @@ const nextLabel = next?.title;
 
   .skill-hero > :global(*) {
     grid-column: 1 / -1;
+  }
+
+  /* with the Contents menu the top is as on a project page: the content under the title in the place of the
+     trailer (64px under the title), 128px to the first section */
+  .skill-hero.has-menu {
+    position: relative;
+    padding-bottom: 128px;
+    scroll-margin-top: calc(var(--nav-height) + 1rem);
   }
 
   /* Sanctuary sections bring their own 64px above and below: here sections are 128px apart, like on the project pages */
