@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets';
+import ProjectSection from '../imprisoned/ProjectSection.astro';
+
+import posterFinal from '@assets/other-projects/apocalypses/poster-final.jpg';
+import mobileFinal from '@assets/other-projects/apocalypses/mobile-final.jpg';
+import sketch from '@assets/other-projects/apocalypses/sketch.jpg';
+import lineArt from '@assets/other-projects/apocalypses/line-art.jpg';
+import finalIllustration from '@assets/other-projects/apocalypses/final-illustration.jpg';
+
+const { id = 'apocalypses-game-night-poster' } = Astro.props;
+---
+
+<ProjectSection {id} title={'Apocalypses\nGame Night Poster'}>
+  <!-- project description and my role (3 columns), the mobile poster (4 columns) on the right; this project has no credits -->
+  <div class="block skill-intro">
+    <div class="cols">
+      <div class="gc-1-3">
+        <h3 class="p-label">Project description</h3>
+        <div class="after-label">
+          <p class="p-text">
+            I created a poster for an <span class="nw">apocalypse-themed</span> board game night at Bezalel, in two
+            formats: a desktop version and a mobile version for social media. The concept is built on a collision
+            between two of the most familiar visions of the end of the world: the nuclear apocalypse and the biblical
+            one.
+          </p>
+        </div>
+        <h3 class="p-label role-label">My role</h3>
+        <p class="p-text after-label">Concept, illustration, typography</p>
+      </div>
+      <div class="gc-5-4 mobile-poster">
+        <Image src={mobileFinal} alt="The mobile version of the poster: a nuclear shelter, a devil and a dragon above the wasteland" widths={[600, 900, 1176]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <Image src={posterFinal} alt="The poster for the apocalypse-themed board game night" widths={[800, 1200, 1800]} sizes="(max-width: 1440px) calc(100vw - 96px), 1200px" loading="lazy" class="media-img" />
+  </div>
+
+  <div class="block">
+    <h3 class="p-subhead">Process breakdown</h3>
+    <div class="cols after-subhead">
+      <div class="gc-1-4">
+        <h4 class="p-label">Sketch</h4>
+        <div class="after-label">
+          <Image src={sketch} alt="Sketch of the poster" widths={[600, 1176, 1800]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+      <div class="gc-5-4">
+        <h4 class="p-label">Line art</h4>
+        <div class="after-label">
+          <Image src={lineArt} alt="Line art of the poster" widths={[600, 1176, 1800]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-4">
+        <h4 class="p-label">Final illustration</h4>
+        <div class="after-label">
+          <Image src={finalIllustration} alt="The final illustration without the text" widths={[600, 1176, 1800]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+    <div class="cols block-gap">
+      <div class="gc-1-4">
+        <h4 class="p-label">Final</h4>
+        <div class="after-label">
+          <Image src={posterFinal} alt="The final poster" widths={[600, 1176, 1800]} sizes="(max-width: 1260px) 100vw, 588px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+      <div class="gc-6-2 phone">
+        <h4 class="p-label">Final · Mobile</h4>
+        <div class="after-label">
+          <Image src={mobileFinal} alt="The final mobile poster" widths={[282, 564]} sizes="(max-width: 1260px) 282px, 282px" loading="lazy" class="media-img" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ProjectSection>
+
+<style>
+  /* description -> "MY ROLE" 96px (block to block) */
+  .role-label {
+    margin-top: 96px;
+  }
+
+  /* stacked layouts: the pictures keep their size (4 columns = 588px, the narrow mobile one 2 columns = 282px) */
+  @media (max-width: 1260px) {
+    .mobile-poster {
+      max-width: 588px;
+    }
+
+    .phone {
+      max-width: 282px;
+    }
+  }
+</style>
