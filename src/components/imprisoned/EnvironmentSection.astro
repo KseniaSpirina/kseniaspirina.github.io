@@ -94,17 +94,19 @@ const { id = 'environment-design', title = 'Environment design', subtitle } = As
     <Image src={header} alt="Environment of Imprisoned: stone towers with glowing eyes, chains and crystals" widths={fullWidths} sizes={fullSizes} quality={90} loading="eager" class="media-img" />
   </div>
   <div class="block">
-    <h3 class="p-label">Environment design approach</h3>
-    <div class="cols after-label">
+    <div class="cols">
       <div class="gc-1-3">
-        <p class="p-text">
+        <h3 class="p-label">Environment design approach</h3>
+        <p class="p-text after-label">
           Environment design focused on making each level feel distinct, giving the player a clear
           sense of progression. This was achieved through three biomes spread across four levels,
           darkening in atmosphere as the game progresses. The tutorial and final level share a
           similar visual identity, linking Slime Prime's island to the player's escape from the
           prison as a whole.
         </p>
-        <p class="p-text">
+      </div>
+      <div class="gc-5-3 approach-2">
+        <p class="p-text below-label">
           Given the tight timeline, I built a set of 3D models used across all biomes, some
           recurring (like rocks) and others unique to define each biome's character.
         </p>
@@ -193,6 +195,15 @@ const { id = 'environment-design', title = 'Environment design', subtitle } = As
 </ProjectSection>
 
 <style>
+  /* the second paragraph of the approach stands in the right column on wide screens; below 1260px it follows the
+     first one as the next paragraph of the same text: 34.2px between paragraphs instead of the 64px between
+     stacked columns (row gap 64px - 29.8px) */
+  @media (max-width: 1260px) {
+    :global(.project-page) .approach-2 {
+      margin-top: -29.8px;
+    }
+  }
+
   .assets {
     margin-top: 77px;
   }
