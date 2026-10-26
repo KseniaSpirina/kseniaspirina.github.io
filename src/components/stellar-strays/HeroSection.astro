@@ -3,7 +3,21 @@ import StellarStraysCredits from '../credits/StellarStraysCredits.astro';
 import { Image } from 'astro:assets';
 import SideMenu from '../sanctuary/SideMenu.astro';
 import ItchButton from '../project/ItchButton.astro';
+import LightboxImage from '../sanctuary/LightboxImage.astro';
+import g1 from '@assets/stellar-strays/gallery-1.jpg';
+import g3 from '@assets/stellar-strays/gallery-3.jpg';
+import g5 from '@assets/stellar-strays/gallery-5.jpg';
+import g7 from '@assets/stellar-strays/gallery-7.jpg';
 import cover from '@assets/stellar-strays/cover.jpg';
+
+// Gallery under the project description and credits (it used to be in the Contribution section):
+// two pictures per row, each 4 of the 8 columns wide
+const gallery = [
+  { src: g1, start: 1 },
+  { src: g3, start: 5 },
+  { src: g5, start: 1 },
+  { src: g7, start: 5 },
+];
 
 const menuLinks = [
   { label: 'OVERVIEW', href: '#top' },
@@ -53,10 +67,40 @@ const menuLinks = [
         </div>
       </div>
     </div>
+
+    <div class="cols gallery block-gap">
+      {gallery.map((item, i) => (
+        <div class="cell" style={`--start: ${item.start};`}>
+          <LightboxImage
+            src={item.src}
+            alt={`Stellar Strays gameplay screenshot ${i + 1}`}
+            widths={[400, 700, 1000, 1400, 1920]}
+            sizes="(max-width: 640px) 95vw, (max-width: 1260px) 50vw, 588px"
+            group="stellar-strays-gallery"
+          />
+        </div>
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
+  .cell {
+    grid-column: var(--start) / span 4;
+  }
+
+  @media (max-width: 1260px) {
+    .cell {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cell {
+      grid-column: 1 / -1;
+    }
+  }
+
   .hero {
     position: relative;
     padding-top: calc(128px - var(--nav-height));

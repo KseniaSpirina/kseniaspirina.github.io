@@ -1,10 +1,5 @@
 ---
 import ProjectSection from '../imprisoned/ProjectSection.astro';
-import LightboxImage from '../sanctuary/LightboxImage.astro';
-import g1 from '@assets/stellar-strays/gallery-1.jpg';
-import g3 from '@assets/stellar-strays/gallery-3.jpg';
-import g5 from '@assets/stellar-strays/gallery-5.jpg';
-import g7 from '@assets/stellar-strays/gallery-7.jpg';
 
 const challenge = [
   'Develop assets that can be combined modularly to fill large level spaces',
@@ -21,12 +16,6 @@ const role = [
   'Design of the itch.io page',
 ];
 
-const gallery = [
-  { src: g1, start: 1 },
-  { src: g3, start: 5 },
-  { src: g5, start: 1 },
-  { src: g7, start: 5 },
-];
 ---
 
 <ProjectSection id="contribution" title="Contribution">
@@ -44,36 +33,4 @@ const gallery = [
       </ul>
     </div>
   </div>
-
-  <div class="cols gallery block-gap">
-    {gallery.map((item, i) => (
-      <div class="cell" style={`--start: ${item.start};`}>
-        <LightboxImage
-          src={item.src}
-          alt={`Stellar Strays gameplay screenshot ${i + 1}`}
-          widths={[400, 700, 1000, 1400, 1920]}
-          sizes="(max-width: 640px) 95vw, (max-width: 1260px) 50vw, 588px"
-          group="stellar-strays-gallery"
-        />
-      </div>
-    ))}
-  </div>
 </ProjectSection>
-
-<style>
-  .cell {
-    grid-column: var(--start) / span 4;
-  }
-
-  @media (max-width: 1260px) {
-    .cell {
-      grid-column: span 2;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .cell {
-      grid-column: 1 / -1;
-    }
-  }
-</style>
