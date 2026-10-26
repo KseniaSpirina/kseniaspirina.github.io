@@ -12,7 +12,7 @@ const { projects } = Astro.props;
 
 <!-- The overview of the projects, in the place of a trailer: the picture of every project is 2 columns wide, in the
      order of the sections. The class "trailer" is what the Contents menu aligns its top to. Hovering a project name in
-     the menu enlarges its picture (script below). -->
+     the menu highlights its picture with a plate (script below). -->
 <div class="trailer overview">
   {projects.map(project => (
     <a class="tile" href={`#${project.id}`} data-project={project.id} aria-label={project.title}>
@@ -26,7 +26,9 @@ const { projects } = Astro.props;
   .overview {
     display: grid;
     grid-template-columns: repeat(8, minmax(0, 1fr));
-    gap: 24px;
+    /* 24px between the columns; 64px between the rows = the plates (32px above and under every picture) touch */
+    column-gap: 24px;
+    row-gap: 64px;
     /* page title -> the layout: 64px; the hero grid already puts its row gap (24px, 16px on phones) between them */
     margin-top: 40px;
   }
@@ -37,11 +39,15 @@ const { projects } = Astro.props;
     }
   }
 
+  /* the plate, as behind the projects in the list of projects: a gutter (24px) at the sides, 32px above and under the
+     picture; the picture keeps its place (padding and the same negative margin) */
   .tile {
     grid-column: span 2;
     display: block;
+    padding: 32px 24px;
+    margin: -32px -24px;
     border-radius: 4px;
-    transition: transform 250ms ease, box-shadow 250ms ease;
+    transition: background-color 150ms ease;
   }
 
   .tile:nth-child(3n + 2) {
@@ -62,12 +68,15 @@ const { projects } = Astro.props;
     border-radius: 4px;
   }
 
-  /* the picture of the project whose name is under the cursor in the menu */
+  /* the project whose name is under the cursor in the menu, or the picture under the cursor */
   .tile.is-highlighted {
-    position: relative;
-    z-index: 2;
-    transform: scale(1.4);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+
+  @media (hover: hover) {
+    .tile:hover {
+      background-color: rgba(255, 255, 255, 0.04);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -91,7 +100,7 @@ const { projects } = Astro.props;
 </style>
 
 <script>
-  // Menu -> layout: the picture of the project grows while its name is hovered (or focused) in the menu
+  // Menu -> layout: the plate appears behind the picture of the project while its name is hovered (or focused) in the menu
   function initHighlight() {
     document.querySelectorAll<HTMLAnchorElement>('[data-side-menu] a[data-menu-link]').forEach(link => {
       const id = link.getAttribute('href')?.slice(1);
