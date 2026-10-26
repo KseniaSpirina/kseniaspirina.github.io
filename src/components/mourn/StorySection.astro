@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import ProjectSection from '../imprisoned/ProjectSection.astro';
 
+import header from '@assets/mourn/story/story-header.jpg';
 import startScreen from '@assets/mourn/story/start-screen.jpg';
 import lvl1 from '@assets/mourn/story/lvl-1.jpg';
 import lvl2 from '@assets/mourn/story/lvl-2.jpg';
@@ -21,9 +22,16 @@ const boards = [
   { src: lvl32, caption: 'School road. Lvl 3.2', x: 459, y: 727, w: 435, h: 270 },
 ];
 const pct = (v: number, t: number) => `${(v / t) * 100}%`;
+const fullWidths = [900, 1400, 2000, 2800];
+const fullSizes = '(max-width: 1440px) calc(100vw - 96px), 1200px';
 ---
 
 <ProjectSection id="story-development" title="Story development">
+  <!-- header picture: the first block of the section, before the approach text -->
+  <div class="block">
+    <Image src={header} alt="Mourn: the opening screen with the game's content notice, the lonely figure on a chair and the father in profile" widths={fullWidths} sizes={fullSizes} quality={90} loading="eager" class="media-img" />
+  </div>
+
   <div class="block">
     <h3 class="p-label">Story development approach</h3>
     <div class="cols after-label">
