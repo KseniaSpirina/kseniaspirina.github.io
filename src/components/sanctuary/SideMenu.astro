@@ -129,7 +129,10 @@ const {
     font-family: var(--font-body);
     font-weight: 700;
     font-size: 18px;
-    line-height: 32px;
+    /* a name of two lines: the lines stand closer (22px) than the items (the single-line item is still 32px high:
+       22px + 5px above and under, so the distance between the items has not changed) */
+    line-height: 22px;
+    padding: 5px 0;
     color: #e8e8e8;
     text-decoration: none;
     transition: color 150ms ease;
