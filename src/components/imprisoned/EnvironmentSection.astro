@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import ProjectSection from './ProjectSection.astro';
 
+import header from '@assets/imprisoned/environment/environment-header.jpg';
 import l1shot from '@assets/imprisoned/environment/lvl-1-in-game-view.jpg';
 import l1map from '@assets/imprisoned/environment/lvl-1-map.jpg';
 import l2shot1 from '@assets/imprisoned/environment/lvl-2-in-game-view.jpg';
@@ -88,6 +89,10 @@ const { id = 'environment-design', title = 'Environment design', subtitle } = As
 
 <ProjectSection {id} {title} {subtitle}>
   <slot name="intro" />
+  <!-- header picture: the first block of the section, before the approach text -->
+  <div class="block">
+    <Image src={header} alt="Environment of Imprisoned: stone towers with glowing eyes, chains and crystals" widths={fullWidths} sizes={fullSizes} quality={90} loading="eager" class="media-img" />
+  </div>
   <div class="block">
     <h3 class="p-label">Environment design approach</h3>
     <div class="cols after-label">
