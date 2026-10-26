@@ -1,17 +1,6 @@
 ---
-import LightboxImage from './LightboxImage.astro';
 import SectionHeading from './SectionHeading.astro';
-import g3 from '@assets/sanctuary/gallery/3.png';
-import g4 from '@assets/sanctuary/gallery/4.png';
-import g5 from '@assets/sanctuary/gallery/5.png';
-import g6 from '@assets/sanctuary/gallery/6.png';
-import g7 from '@assets/sanctuary/gallery/7.png';
-import g8 from '@assets/sanctuary/gallery/8.png';
-import g9 from '@assets/sanctuary/gallery/9.png';
 
-// Verified layout from Figma (Page 2): row1 = 8,4,3,7 / row2 = 5,6,9
-const row1 = [g8, g4, g3, g7];
-const row2 = [g5, g6, g9];
 ---
 
 <section class="contribution" id="contribution">
@@ -40,33 +29,6 @@ const row2 = [g5, g6, g9];
         <li>Assembled and staged assets in-scene, handed off to programmers for integration and scripting</li>
       </ul>
     </div>
-
-    <div class="full gallery-row">
-      {row1.map((img, i) => (
-        <div class="span-2">
-          <LightboxImage
-            src={img}
-            alt={`Sanctuary gallery image ${i + 1}`}
-            widths={[400, 700, 1000, 1400, 1920]}
-            sizes="(max-width: 640px) 95vw, (max-width: 1260px) 50vw, 588px"
-            group="contribution-gallery"
-          />
-        </div>
-      ))}
-    </div>
-    <div class="full gallery-row">
-      {row2.map((img, i) => (
-        <div class="span-2">
-          <LightboxImage
-            src={img}
-            alt={`Sanctuary gallery image ${i + 5}`}
-            widths={[400, 700, 1000, 1400, 1920]}
-            sizes="(max-width: 640px) 95vw, (max-width: 1260px) 50vw, 588px"
-            group="contribution-gallery"
-          />
-        </div>
-      ))}
-    </div>
   </div>
 </section>
 
@@ -79,18 +41,9 @@ const row2 = [g5, g6, g9];
     row-gap: 0;
   }
 
-  /* heading -> content 64, content -> gallery 96, gallery rows 24 apart */
+  /* heading -> content 64 */
   .full:has(:global(.section-heading)) {
     margin-bottom: 0;
-  }
-
-  .gallery-row {
-    margin-top: 24px;
-  }
-
-  .span-2 + .span-2 + .gallery-row,
-  .challenge + .gallery-row {
-    margin-top: 96px;
   }
 
   .full {
@@ -123,32 +76,14 @@ const row2 = [g5, g6, g9];
     }
   }
 
-  .gallery-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-  }
-
   @media (max-width: 1260px) {
     .span-4 {
       grid-column: span 4;
-    }
-    .gallery-row {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .gallery-row .span-2 {
-      grid-column: span 1;
     }
   }
 
   @media (max-width: 640px) {
     .span-4 {
-      grid-column: 1 / -1;
-    }
-    .gallery-row {
-      grid-template-columns: 1fr;
-    }
-    .gallery-row .span-2 {
       grid-column: 1 / -1;
     }
   }
@@ -179,11 +114,4 @@ const row2 = [g5, g6, g9];
     gap: 0.5rem;
   }
 
-  .gallery-row :global(img) {
-    width: 100%;
-    aspect-ratio: 282 / 159;
-    object-fit: cover;
-    border-radius: 4px;
-    display: block;
-  }
 </style>

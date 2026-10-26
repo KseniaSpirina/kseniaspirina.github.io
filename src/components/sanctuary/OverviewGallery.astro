@@ -1,0 +1,70 @@
+---
+import LightboxImage from './LightboxImage.astro';
+import g3 from '@assets/sanctuary/gallery/3.png';
+import g4 from '@assets/sanctuary/gallery/4.png';
+import g5 from '@assets/sanctuary/gallery/5.png';
+import g6 from '@assets/sanctuary/gallery/6.png';
+import g7 from '@assets/sanctuary/gallery/7.png';
+import g8 from '@assets/sanctuary/gallery/8.png';
+import g9 from '@assets/sanctuary/gallery/9.png';
+
+// Verified layout from Figma (Page 2): row1 = 8,4,3,7 / row2 = 5,6,9
+const row1 = [g8, g4, g3, g7];
+const row2 = [g5, g6, g9];
+---
+
+<!-- Gallery under the project description and credits (Overview); it used to be in the Contribution section -->
+<div class="overview-gallery">
+  {[row1, row2].map((row, r) => (
+    <div class="gallery-row">
+      {row.map((img, i) => (
+        <div>
+          <LightboxImage
+            src={img}
+            alt={`Sanctuary gallery image ${r * 4 + i + 1}`}
+            widths={[400, 700, 1000, 1400, 1920]}
+            sizes="(max-width: 640px) 95vw, (max-width: 1260px) 50vw, 588px"
+            group="overview-gallery"
+          />
+        </div>
+      ))}
+    </div>
+  ))}
+</div>
+
+<style>
+  /* description and credits -> gallery 96px, gallery rows 24px apart */
+  .overview-gallery {
+    margin-top: 96px;
+  }
+
+  .gallery-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .gallery-row + .gallery-row {
+    margin-top: 24px;
+  }
+
+  @media (max-width: 1260px) {
+    .gallery-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .gallery-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .gallery-row :global(img) {
+    width: 100%;
+    aspect-ratio: 282 / 159;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+  }
+</style>
