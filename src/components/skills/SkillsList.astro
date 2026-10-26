@@ -1,8 +1,8 @@
 ---
 import { Image } from 'astro:assets';
+import LazyVideo from '../imprisoned/LazyVideo.astro';
 import characterImg from '@assets/skills/character-design-title.jpg';
 import environmentImg from '@assets/skills/environment-design-sur.jpg';
-import animationImg from '@assets/skills/animation-skill-title-image.jpg';
 import uiImg from '@assets/skills/ui-design.jpg';
 
 // "plannedHref" is where each card will lead once its page exists: move it to "href" then.
@@ -10,7 +10,7 @@ import uiImg from '@assets/skills/ui-design.jpg';
 const skills = [
   { slug: 'character-design', href: '/skills/character-design', plannedHref: '/skills/character-design', image: characterImg, title: 'Character Design', description: 'A collection of character designs from different projects, covering a range of personalities, roles, and styles, with breakdowns of the full design pipeline' },
   { slug: 'environment-design', href: '/skills/environment-design', plannedHref: '/skills/environment-design', image: environmentImg, title: 'Environment Design', description: 'A collection of environments from different projects, built in 2D and 3D across a range of settings and moods. With breakdowns of the full design pipeline and assets' },
-  { slug: 'animation', href: '/skills/animation', plannedHref: '/skills/animation', image: animationImg, title: 'Animation', description: 'Spine 2D animation sets from different projects that bring out each character’s personality through movement. Together they show a range of skills, from core animation principles to meshes and a variety of Spine constraints' },
+  { slug: 'animation', href: '/skills/animation', plannedHref: '/skills/animation', image: null, video: '/departure/videos/walking-light.webm', title: 'Animation', description: 'Spine 2D animation sets from different projects that bring out each character’s personality through movement. Together they show a range of skills, from core animation principles to meshes and a variety of Spine constraints' },
   { slug: 'ui-design', href: '/skills/ui-design', plannedHref: '/skills/ui-design', image: uiImg, title: 'UI Design', description: 'UI elements from different projects, including cursors, dialogue windows, a quest journal, meters, title screens, mini-games, full-screen effects, and more' },
 ];
 
@@ -29,7 +29,11 @@ const firstInactive = skills.findIndex(skill => !skill.href);
         aria-disabled={skill.href ? undefined : 'true'}
       >
         <div class="project-image">
-          <Image src={skill.image} alt={skill.title} widths={[500, 900, 1400]} sizes="(max-width: 1260px) 100vw, 741px" loading="lazy" />
+          {skill.video ? (
+            <LazyVideo src={skill.video} ratio="741 / 417" label={`${skill.title}: Walking with lantern, Departure`} />
+          ) : (
+            <Image src={skill.image} alt={skill.title} widths={[500, 900, 1400]} sizes="(max-width: 1260px) 100vw, 741px" loading="lazy" />
+          )}
         </div>
         <div class="project-text">
           <div class="project-text-top">
@@ -92,12 +96,18 @@ const firstInactive = skills.findIndex(skill => !skill.href);
     grid-column: 1 / span 5;
   }
 
-  .project-image :global(img) {
+  .project-image :global(img),
+  .project-image :global(video) {
     display: block;
     width: 100%;
     aspect-ratio: 741 / 417;
     object-fit: cover;
     border-radius: 4px;
+  }
+
+  /* the card of Animation shows a video (Walking with lantern, from Departure) instead of a still picture */
+  .project-image :global(video) {
+    background: rgba(217, 217, 217, 0.1);
   }
 
   .project-text {
